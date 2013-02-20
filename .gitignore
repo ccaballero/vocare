@@ -1,0 +1,12 @@
+syntax: glob
+*~
+*.swp
+*.tmp.
+*.bak
+*.log
+*.aux
+*.out
+
+config/databases.yml
+config/doctrine/schema.yml
+data/fixtures/fixtures.yml
