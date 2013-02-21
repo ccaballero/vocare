@@ -15,19 +15,27 @@ abstract class BaseConvocatoriaForm extends BaseFormDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'id'         => new sfWidgetFormInputHidden(),
-      'nombre'     => new sfWidgetFormInputText(),
-      'estado'     => new sfWidgetFormChoice(array('choices' => array('borrador' => 'borrador', 'emitido' => 'emitido', 'anulado' => 'anulado', 'vigente' => 'vigente', 'finalizado' => 'finalizado', 'eliminado' => 'eliminado'))),
-      'created_at' => new sfWidgetFormDateTime(),
-      'updated_at' => new sfWidgetFormDateTime(),
+      'id'                  => new sfWidgetFormInputHidden(),
+      'nombre'              => new sfWidgetFormInputText(),
+      'estado'              => new sfWidgetFormChoice(array('choices' => array('borrador' => 'borrador', 'emitido' => 'emitido', 'anulado' => 'anulado', 'vigente' => 'vigente', 'finalizado' => 'finalizado', 'eliminado' => 'eliminado'))),
+      'created_at'          => new sfWidgetFormDateTime(),
+      'updated_at'          => new sfWidgetFormDateTime(),
+      'requerimientos_list' => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Requerimiento')),
+      'requisitos_list'     => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Requisito')),
+      'documentos_list'     => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Documento')),
+      'eventos_list'        => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Evento')),
     ));
 
     $this->setValidators(array(
-      'id'         => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
-      'nombre'     => new sfValidatorString(array('max_length' => 255)),
-      'estado'     => new sfValidatorChoice(array('choices' => array(0 => 'borrador', 1 => 'emitido', 2 => 'anulado', 3 => 'vigente', 4 => 'finalizado', 5 => 'eliminado'), 'required' => false)),
-      'created_at' => new sfValidatorDateTime(),
-      'updated_at' => new sfValidatorDateTime(),
+      'id'                  => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
+      'nombre'              => new sfValidatorString(array('max_length' => 255)),
+      'estado'              => new sfValidatorChoice(array('choices' => array(0 => 'borrador', 1 => 'emitido', 2 => 'anulado', 3 => 'vigente', 4 => 'finalizado', 5 => 'eliminado'), 'required' => false)),
+      'created_at'          => new sfValidatorDateTime(),
+      'updated_at'          => new sfValidatorDateTime(),
+      'requerimientos_list' => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Requerimiento', 'required' => false)),
+      'requisitos_list'     => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Requisito', 'required' => false)),
+      'documentos_list'     => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Documento', 'required' => false)),
+      'eventos_list'        => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Evento', 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('convocatoria[%s]');
@@ -42,6 +50,194 @@ abstract class BaseConvocatoriaForm extends BaseFormDoctrine
   public function getModelName()
   {
     return 'Convocatoria';
+  }
+
+  public function updateDefaultsFromObject()
+  {
+    parent::updateDefaultsFromObject();
+
+    if (isset($this->widgetSchema['requerimientos_list']))
+    {
+      $this->setDefault('requerimientos_list', $this->object->Requerimientos->getPrimaryKeys());
+    }
+
+    if (isset($this->widgetSchema['requisitos_list']))
+    {
+      $this->setDefault('requisitos_list', $this->object->Requisitos->getPrimaryKeys());
+    }
+
+    if (isset($this->widgetSchema['documentos_list']))
+    {
+      $this->setDefault('documentos_list', $this->object->Documentos->getPrimaryKeys());
+    }
+
+    if (isset($this->widgetSchema['eventos_list']))
+    {
+      $this->setDefault('eventos_list', $this->object->Eventos->getPrimaryKeys());
+    }
+
+  }
+
+  protected function doSave($con = null)
+  {
+    $this->saveRequerimientosList($con);
+    $this->saveRequisitosList($con);
+    $this->saveDocumentosList($con);
+    $this->saveEventosList($con);
+
+    parent::doSave($con);
+  }
+
+  public function saveRequerimientosList($con = null)
+  {
+    if (!$this->isValid())
+    {
+      throw $this->getErrorSchema();
+    }
+
+    if (!isset($this->widgetSchema['requerimientos_list']))
+    {
+      // somebody has unset this widget
+      return;
+    }
+
+    if (null === $con)
+    {
+      $con = $this->getConnection();
+    }
+
+    $existing = $this->object->Requerimientos->getPrimaryKeys();
+    $values = $this->getValue('requerimientos_list');
+    if (!is_array($values))
+    {
+      $values = array();
+    }
+
+    $unlink = array_diff($existing, $values);
+    if (count($unlink))
+    {
+      $this->object->unlink('Requerimientos', array_values($unlink));
+    }
+
+    $link = array_diff($values, $existing);
+    if (count($link))
+    {
+      $this->object->link('Requerimientos', array_values($link));
+    }
+  }
+
+  public function saveRequisitosList($con = null)
+  {
+    if (!$this->isValid())
+    {
+      throw $this->getErrorSchema();
+    }
+
+    if (!isset($this->widgetSchema['requisitos_list']))
+    {
+      // somebody has unset this widget
+      return;
+    }
+
+    if (null === $con)
+    {
+      $con = $this->getConnection();
+    }
+
+    $existing = $this->object->Requisitos->getPrimaryKeys();
+    $values = $this->getValue('requisitos_list');
+    if (!is_array($values))
+    {
+      $values = array();
+    }
+
+    $unlink = array_diff($existing, $values);
+    if (count($unlink))
+    {
+      $this->object->unlink('Requisitos', array_values($unlink));
+    }
+
+    $link = array_diff($values, $existing);
+    if (count($link))
+    {
+      $this->object->link('Requisitos', array_values($link));
+    }
+  }
+
+  public function saveDocumentosList($con = null)
+  {
+    if (!$this->isValid())
+    {
+      throw $this->getErrorSchema();
+    }
+
+    if (!isset($this->widgetSchema['documentos_list']))
+    {
+      // somebody has unset this widget
+      return;
+    }
+
+    if (null === $con)
+    {
+      $con = $this->getConnection();
+    }
+
+    $existing = $this->object->Documentos->getPrimaryKeys();
+    $values = $this->getValue('documentos_list');
+    if (!is_array($values))
+    {
+      $values = array();
+    }
+
+    $unlink = array_diff($existing, $values);
+    if (count($unlink))
+    {
+      $this->object->unlink('Documentos', array_values($unlink));
+    }
+
+    $link = array_diff($values, $existing);
+    if (count($link))
+    {
+      $this->object->link('Documentos', array_values($link));
+    }
+  }
+
+  public function saveEventosList($con = null)
+  {
+    if (!$this->isValid())
+    {
+      throw $this->getErrorSchema();
+    }
+
+    if (!isset($this->widgetSchema['eventos_list']))
+    {
+      // somebody has unset this widget
+      return;
+    }
+
+    if (null === $con)
+    {
+      $con = $this->getConnection();
+    }
+
+    $existing = $this->object->Eventos->getPrimaryKeys();
+    $values = $this->getValue('eventos_list');
+    if (!is_array($values))
+    {
+      $values = array();
+    }
+
+    $unlink = array_diff($existing, $values);
+    if (count($unlink))
+    {
+      $this->object->unlink('Eventos', array_values($unlink));
+    }
+
+    $link = array_diff($values, $existing);
+    if (count($link))
+    {
+      $this->object->link('Eventos', array_values($link));
+    }
   }
 
 }

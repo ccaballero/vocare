@@ -10,13 +10,43 @@ Doctrine_Manager::getInstance()->bindComponent('Convocatoria', 'doctrine');
  * @property integer $id
  * @property string $nombre
  * @property enum $estado
+ * @property Doctrine_Collection $Requerimientos
+ * @property Doctrine_Collection $Requisitos
+ * @property Doctrine_Collection $Documentos
+ * @property Doctrine_Collection $Eventos
+ * @property Doctrine_Collection $ConvocatoriaRequerimientos
+ * @property Doctrine_Collection $ConvocatoriaRequisitos
+ * @property Doctrine_Collection $ConvocatoriaDocumentos
+ * @property Doctrine_Collection $ConvocatoriaEventos
+ * @property Doctrine_Collection $ConvocatoriaEvaluaciones
+ * @property Doctrine_Collection $ConvocatoriaRequerimientoEvaluaciones
  * 
- * @method integer      getId()     Returns the current record's "id" value
- * @method string       getNombre() Returns the current record's "nombre" value
- * @method enum         getEstado() Returns the current record's "estado" value
- * @method Convocatoria setId()     Sets the current record's "id" value
- * @method Convocatoria setNombre() Sets the current record's "nombre" value
- * @method Convocatoria setEstado() Sets the current record's "estado" value
+ * @method integer             getId()                                    Returns the current record's "id" value
+ * @method string              getNombre()                                Returns the current record's "nombre" value
+ * @method enum                getEstado()                                Returns the current record's "estado" value
+ * @method Doctrine_Collection getRequerimientos()                        Returns the current record's "Requerimientos" collection
+ * @method Doctrine_Collection getRequisitos()                            Returns the current record's "Requisitos" collection
+ * @method Doctrine_Collection getDocumentos()                            Returns the current record's "Documentos" collection
+ * @method Doctrine_Collection getEventos()                               Returns the current record's "Eventos" collection
+ * @method Doctrine_Collection getConvocatoriaRequerimientos()            Returns the current record's "ConvocatoriaRequerimientos" collection
+ * @method Doctrine_Collection getConvocatoriaRequisitos()                Returns the current record's "ConvocatoriaRequisitos" collection
+ * @method Doctrine_Collection getConvocatoriaDocumentos()                Returns the current record's "ConvocatoriaDocumentos" collection
+ * @method Doctrine_Collection getConvocatoriaEventos()                   Returns the current record's "ConvocatoriaEventos" collection
+ * @method Doctrine_Collection getConvocatoriaEvaluaciones()              Returns the current record's "ConvocatoriaEvaluaciones" collection
+ * @method Doctrine_Collection getConvocatoriaRequerimientoEvaluaciones() Returns the current record's "ConvocatoriaRequerimientoEvaluaciones" collection
+ * @method Convocatoria        setId()                                    Sets the current record's "id" value
+ * @method Convocatoria        setNombre()                                Sets the current record's "nombre" value
+ * @method Convocatoria        setEstado()                                Sets the current record's "estado" value
+ * @method Convocatoria        setRequerimientos()                        Sets the current record's "Requerimientos" collection
+ * @method Convocatoria        setRequisitos()                            Sets the current record's "Requisitos" collection
+ * @method Convocatoria        setDocumentos()                            Sets the current record's "Documentos" collection
+ * @method Convocatoria        setEventos()                               Sets the current record's "Eventos" collection
+ * @method Convocatoria        setConvocatoriaRequerimientos()            Sets the current record's "ConvocatoriaRequerimientos" collection
+ * @method Convocatoria        setConvocatoriaRequisitos()                Sets the current record's "ConvocatoriaRequisitos" collection
+ * @method Convocatoria        setConvocatoriaDocumentos()                Sets the current record's "ConvocatoriaDocumentos" collection
+ * @method Convocatoria        setConvocatoriaEventos()                   Sets the current record's "ConvocatoriaEventos" collection
+ * @method Convocatoria        setConvocatoriaEvaluaciones()              Sets the current record's "ConvocatoriaEvaluaciones" collection
+ * @method Convocatoria        setConvocatoriaRequerimientoEvaluaciones() Sets the current record's "ConvocatoriaRequerimientoEvaluaciones" collection
  * 
  * @package    .
  * @subpackage model
@@ -63,6 +93,50 @@ abstract class BaseConvocatoria extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
+        $this->hasMany('Requerimiento as Requerimientos', array(
+             'refClass' => 'ConvocatoriaRequerimiento',
+             'local' => 'convocatoria_id',
+             'foreign' => 'requerimiento_id'));
+
+        $this->hasMany('Requisito as Requisitos', array(
+             'refClass' => 'ConvocatoriaRequisito',
+             'local' => 'convocatoria_id',
+             'foreign' => 'requisito_id'));
+
+        $this->hasMany('Documento as Documentos', array(
+             'refClass' => 'ConvocatoriaDocumento',
+             'local' => 'convocatoria_id',
+             'foreign' => 'documento_id'));
+
+        $this->hasMany('Evento as Eventos', array(
+             'refClass' => 'ConvocatoriaEvento',
+             'local' => 'convocatoria_id',
+             'foreign' => 'evento_id'));
+
+        $this->hasMany('ConvocatoriaRequerimiento as ConvocatoriaRequerimientos', array(
+             'local' => 'id',
+             'foreign' => 'convocatoria_id'));
+
+        $this->hasMany('ConvocatoriaRequisito as ConvocatoriaRequisitos', array(
+             'local' => 'id',
+             'foreign' => 'convocatoria_id'));
+
+        $this->hasMany('ConvocatoriaDocumento as ConvocatoriaDocumentos', array(
+             'local' => 'id',
+             'foreign' => 'convocatoria_id'));
+
+        $this->hasMany('ConvocatoriaEvento as ConvocatoriaEventos', array(
+             'local' => 'id',
+             'foreign' => 'convocatoria_id'));
+
+        $this->hasMany('ConvocatoriaEvaluacion as ConvocatoriaEvaluaciones', array(
+             'local' => 'id',
+             'foreign' => 'convocatoria_id'));
+
+        $this->hasMany('ConvocatoriaRequerimientoEvaluacion as ConvocatoriaRequerimientoEvaluaciones', array(
+             'local' => 'id',
+             'foreign' => 'convocatoria_id'));
+
         $timestampable0 = new Doctrine_Template_Timestampable(array(
              ));
         $this->actAs($timestampable0);

@@ -1,0 +1,189 @@
+Convocatoria:
+  actAs: [Timestampable]
+  connection: doctrine
+  tableName: convocatoria
+  columns:
+    id:
+      type: integer(4)
+      fixed: false
+      unsigned: true
+      primary: true
+      autoincrement: true
+    nombre:
+      type: string(255)
+      fixed: false
+      notnull: true
+    estado:
+      type: enum(10)
+      fixed: false
+      values:
+        - borrador
+        - emitido
+        - anulado
+        - vigente
+        - finalizado
+        - eliminado
+      default: borrador
+      notnull: true
+  relations:
+    Requerimientos:
+      class: Requerimiento
+      refClass: ConvocatoriaRequerimiento
+      foreignAlias: Convocatorias
+    Requisitos:
+      class: Requisito
+      refClass: ConvocatoriaRequisito
+      foreignAlias: Convocatorias
+    Documentos:
+      class: Documento
+      refClass: ConvocatoriaDocumento
+      foreignAlias: Convocatorias
+    Eventos:
+      class: Evento
+      refClass: ConvocatoriaEvento
+      foreignAlias: Convocatorias
+    Evaluaciones:
+      class: Evaluacion
+      refClass: ConvocatoriaEvaluacion
+      foreignAlias: Convocatorias
+
+ConvocatoriaRequerimiento:
+  connection: doctrine
+  tableName: convocatoria_requerimiento
+  columns:
+    convocatoria_id:
+      type: integer(4)
+      fixed: false
+      unsigned: true
+      primary: true
+    requerimiento_id:
+      type: integer(4)
+      fixed: false
+      unsigned: true
+      primary: true
+    numero_item:
+      type: integer(4)
+      fixed: false
+      unsigned: true
+      notnull: true
+    cantidad_requerida:
+      type: integer(4)
+      fixed: false
+      unsigned: true
+      notnull: true
+  relations:
+    Convocatoria:
+      foreignAlias: ConvocatoriaRequerimientos
+    Requerimiento:
+      foreignAlias: ConvocatoriaRequerimientos
+
+ConvocatoriaRequisito:
+  connection: doctrine
+  tableName: convocatoria_requisito
+  columns:
+    convocatoria_id:
+      type: integer(4)
+      fixed: false
+      unsigned: true
+      primary: true
+    requisito_id:
+      type: integer(4)
+      fixed: false
+      unsigned: true
+      primary: true
+  relations:
+    Convocatoria:
+      foreignAlias: ConvocatoriaRequisitos
+    Requisito:
+      foreignAlias: ConvocatoriaRequisitos
+
+ConvocatoriaDocumento:
+  connection: doctrine
+  tableName: convocatoria_documento
+  columns:
+    convocatoria_id:
+      type: integer(4)
+      fixed: false
+      unsigned: true
+      primary: true
+    documento_id:
+      type: integer(4)
+      fixed: false
+      unsigned: true
+      primary: true
+  relations:
+    Convocatoria:
+      foreignAlias: ConvocatoriaDocumentos
+    Documento:
+      foreignAlias: ConvocatoriaDocumentos
+
+ConvocatoriaEvento:
+  connection: doctrine
+  tableName: convocatoria_evento
+  columns:
+    convocatoria_id:
+      type: integer(4)
+      fixed: false
+      unsigned: true
+      primary: true
+    evento_id:
+      type: integer(4)
+      fixed: false
+      unsigned: true
+      primary: true
+    fecha:
+      type: timestamp(25)
+      fixed: false
+      notnull: true
+  relations:
+    Convocatoria:
+      foreignAlias: ConvocatoriaEventos
+    Evento:
+      foreignAlias: ConvocatoriaEventos
+
+ConvocatoriaEvaluacion:
+  connection: doctrine
+  tableName: convocatoria_evaluacion
+  columns:
+    convocatoria_id:
+      type: integer(4)
+      fixed: false
+      unsigned: true
+      primary: true
+    evaluacion_id:
+      type: integer(4)
+      fixed: false
+      unsigned: true
+      primary: true
+  relations:
+    Convocatoria:
+      foreignAlias: ConvocatoriaEvaluaciones
+    Evaluacion:
+      foreignAlias: ConvocatoriaEvaluaciones
+
+ConvocatoriaRequerimientoEvaluacion:
+  connection: doctrine
+  tableName: convocatoria_requerimiento_evaluacion
+  columns:
+    convocatoria_id:
+      type: integer(4)
+      fixed: false
+      unsigned: true
+      primary: true
+    requerimiento_id:
+      type: integer(4)
+      fixed: false
+      unsigned: true
+      primary: true
+    evaluacion_id:
+      type: integer(4)
+      fixed: false
+      unsigned: true
+      primary: true
+  relations:
+    Convocatoria:
+      foreignAlias: ConvocatoriaRequerimientoEvaluaciones
+    Requerimiento:
+      foreignAlias: ConvocatoriaRequerimientoEvaluaciones
+    Evaluacion:
+      foreignAlias: ConvocatoriaRequerimientoEvaluaciones

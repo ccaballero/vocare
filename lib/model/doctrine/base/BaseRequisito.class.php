@@ -9,11 +9,17 @@ Doctrine_Manager::getInstance()->bindComponent('Requisito', 'doctrine');
  * 
  * @property integer $id
  * @property string $texto
+ * @property Doctrine_Collection $Convocatorias
+ * @property Doctrine_Collection $ConvocatoriaRequisitos
  * 
- * @method integer   getId()    Returns the current record's "id" value
- * @method string    getTexto() Returns the current record's "texto" value
- * @method Requisito setId()    Sets the current record's "id" value
- * @method Requisito setTexto() Sets the current record's "texto" value
+ * @method integer             getId()                     Returns the current record's "id" value
+ * @method string              getTexto()                  Returns the current record's "texto" value
+ * @method Doctrine_Collection getConvocatorias()          Returns the current record's "Convocatorias" collection
+ * @method Doctrine_Collection getConvocatoriaRequisitos() Returns the current record's "ConvocatoriaRequisitos" collection
+ * @method Requisito           setId()                     Sets the current record's "id" value
+ * @method Requisito           setTexto()                  Sets the current record's "texto" value
+ * @method Requisito           setConvocatorias()          Sets the current record's "Convocatorias" collection
+ * @method Requisito           setConvocatoriaRequisitos() Sets the current record's "ConvocatoriaRequisitos" collection
  * 
  * @package    .
  * @subpackage model
@@ -44,6 +50,15 @@ abstract class BaseRequisito extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
+        $this->hasMany('Convocatoria as Convocatorias', array(
+             'refClass' => 'ConvocatoriaRequisito',
+             'local' => 'requisito_id',
+             'foreign' => 'convocatoria_id'));
+
+        $this->hasMany('ConvocatoriaRequisito as ConvocatoriaRequisitos', array(
+             'local' => 'id',
+             'foreign' => 'requisito_id'));
+
         $timestampable0 = new Doctrine_Template_Timestampable(array(
              ));
         $this->actAs($timestampable0);

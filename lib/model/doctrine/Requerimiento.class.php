@@ -12,4 +12,7 @@
  */
 class Requerimiento extends BaseRequerimiento
 {
+    public function __toString() {
+        return '[' . $this->getCodigo() . '] ' . $this->getNombre();
+    }
 }

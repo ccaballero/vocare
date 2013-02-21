@@ -12,4 +12,7 @@
  */
 class Requisito extends BaseRequisito
 {
+    public function __toString() {
+        return $this->getTexto();
+    }
 }

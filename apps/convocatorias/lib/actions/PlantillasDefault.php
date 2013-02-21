@@ -19,7 +19,7 @@ class PlantillasDefault extends sfActions
         $this->form = $this->processForm(
             $request,
             new $this->_form(),
-            $this->_message['flash']['new']
+            $this->_messages['flash']['new']
         );
 
         $this->setTemplate('form');

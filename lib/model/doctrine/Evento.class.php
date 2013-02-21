@@ -12,4 +12,7 @@
  */
 class Evento extends BaseEvento
 {
+    public function __toString() {
+        return $this->getDescripcion();
+    }
 }

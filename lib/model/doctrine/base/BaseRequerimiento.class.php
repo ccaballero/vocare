@@ -12,17 +12,26 @@ Doctrine_Manager::getInstance()->bindComponent('Requerimiento', 'doctrine');
  * @property string $nombre
  * @property string $texto
  * @property integer $horas_academicas
+ * @property Doctrine_Collection $Convocatorias
+ * @property Doctrine_Collection $ConvocatoriaRequerimientos
+ * @property Doctrine_Collection $ConvocatoriaRequerimientoEvaluaciones
  * 
- * @method integer       getId()               Returns the current record's "id" value
- * @method string        getCodigo()           Returns the current record's "codigo" value
- * @method string        getNombre()           Returns the current record's "nombre" value
- * @method string        getTexto()            Returns the current record's "texto" value
- * @method integer       getHorasAcademicas()  Returns the current record's "horas_academicas" value
- * @method Requerimiento setId()               Sets the current record's "id" value
- * @method Requerimiento setCodigo()           Sets the current record's "codigo" value
- * @method Requerimiento setNombre()           Sets the current record's "nombre" value
- * @method Requerimiento setTexto()            Sets the current record's "texto" value
- * @method Requerimiento setHorasAcademicas()  Sets the current record's "horas_academicas" value
+ * @method integer             getId()                                    Returns the current record's "id" value
+ * @method string              getCodigo()                                Returns the current record's "codigo" value
+ * @method string              getNombre()                                Returns the current record's "nombre" value
+ * @method string              getTexto()                                 Returns the current record's "texto" value
+ * @method integer             getHorasAcademicas()                       Returns the current record's "horas_academicas" value
+ * @method Doctrine_Collection getConvocatorias()                         Returns the current record's "Convocatorias" collection
+ * @method Doctrine_Collection getConvocatoriaRequerimientos()            Returns the current record's "ConvocatoriaRequerimientos" collection
+ * @method Doctrine_Collection getConvocatoriaRequerimientoEvaluaciones() Returns the current record's "ConvocatoriaRequerimientoEvaluaciones" collection
+ * @method Requerimiento       setId()                                    Sets the current record's "id" value
+ * @method Requerimiento       setCodigo()                                Sets the current record's "codigo" value
+ * @method Requerimiento       setNombre()                                Sets the current record's "nombre" value
+ * @method Requerimiento       setTexto()                                 Sets the current record's "texto" value
+ * @method Requerimiento       setHorasAcademicas()                       Sets the current record's "horas_academicas" value
+ * @method Requerimiento       setConvocatorias()                         Sets the current record's "Convocatorias" collection
+ * @method Requerimiento       setConvocatoriaRequerimientos()            Sets the current record's "ConvocatoriaRequerimientos" collection
+ * @method Requerimiento       setConvocatoriaRequerimientoEvaluaciones() Sets the current record's "ConvocatoriaRequerimientoEvaluaciones" collection
  * 
  * @package    .
  * @subpackage model
@@ -72,6 +81,19 @@ abstract class BaseRequerimiento extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
+        $this->hasMany('Convocatoria as Convocatorias', array(
+             'refClass' => 'ConvocatoriaRequerimiento',
+             'local' => 'requerimiento_id',
+             'foreign' => 'convocatoria_id'));
+
+        $this->hasMany('ConvocatoriaRequerimiento as ConvocatoriaRequerimientos', array(
+             'local' => 'id',
+             'foreign' => 'requerimiento_id'));
+
+        $this->hasMany('ConvocatoriaRequerimientoEvaluacion as ConvocatoriaRequerimientoEvaluaciones', array(
+             'local' => 'id',
+             'foreign' => 'requerimiento_id'));
+
         $timestampable0 = new Doctrine_Template_Timestampable(array(
              ));
         $this->actAs($timestampable0);
