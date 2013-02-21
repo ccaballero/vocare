@@ -1,6 +1,6 @@
 * {
     font-family: "Lucida Sans","Lucida Grande","Lucida Sans Unicode",sans-serif;
-    font-size: 11px;
+    font-size: 12px;
     padding: 0pt;
     margin: 0pt;
     outline: medium none;
@@ -20,19 +20,6 @@ a {
 .text-right { text-align: right; }
 
 .bold { font-weight: bold; }
-
-/* Propiedades para la barra de navegacion y usuario */
-/*#toolbar {
-    padding: 0.1em 0.4em;
-    background-color: #b3b3b3;
-    text-align: right;
-    font-size: 12px;
-}*/
-
-/*#toolbar a {
-    color: #162D50;
-    font-size: inherit;
-}*/
 
 /* Propiedades para la barra de principal de enlaces */
 #menu {
@@ -60,7 +47,6 @@ a {
     float: left;
     width: 100%;
     background-color: #b3b3b3;
-    border-radius: 7px;
 }
 
 #footer ul {
@@ -74,9 +60,10 @@ a {
 
 #footer ul li a {
     float: left;
-    padding: 8px 10px 5px 10px;
+    padding: 8px 10px;
     color: #162D50;
-    font-size: 9px;
+    font-size: 10px;
+    font-weight: normal;
 }
 
 /* Propiedades del contenido principal */
@@ -86,14 +73,19 @@ a {
 }
 
 #main {
-    padding: 10px 0px;
+    padding: 10px 5px;
 }
 
 #main p {
-    font-size: 11px;
+    font-size: 12px;
     line-height: 16px;
     text-align: justify;
-    padding-bottom: 11px;
+}
+
+#main a {
+    margin: 0px;
+    padding: 0px 5px;
+    color: #162D50;
 }
 
 #main h1, #main h2, #main h3 {
@@ -101,24 +93,25 @@ a {
 }
 
 #main h1 {
-    font-size: 25px;
+    font-size: 32px;
 }
 
 #main h2 {
-    font-size: 22px;
+    font-size: 26px;
     margin-top: 10px;
     
 }
 
 #main h3 {
-    font-size: 19px;
+    font-size: 20px;
     margin-top: 10px;
 }
 
-/*#main table {
+/* tablas en el contenido principal */
+#main table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 2em;
+    margin-bottom: 10px;
 }
 
 #main table .header {
@@ -147,56 +140,69 @@ a {
     display: inline;
 }
 
-#main dl dt, #main dl dd {
-    padding: 0.2em 0em;
+#main div.tasks {
+    margin: 0px 10px 10px 10px;
 }
 
+#main dl {
+    margin: 10px 0px;
+}
+
+#main dl dt a {
+    padding: 0px;
+    font-size: 13px;
+}
+
+#main dl dd {
+    padding: 4px 0px 16px 8px;
+}
+
+/* estilos para los formularios */
 #main form p {
-    margin: 0.2em 0em;
+    margin: 8px 0px;
 }
 
 #main form p label {
     float: left;
-    width: 20.0em;
+    width: 200px;
     text-align: right;
-    margin-right: 0.4em;
+    margin-right: 10px;
 }
 
 #main form p table tr td label {
     text-align: left;
-    width: 30.0em;
+    width: 200px;
 }
 
 #main form p input[type="text"],
 #main form p textarea {
-    width: 25.0em;
+    width: 360px;
 }
 
 #main form p textarea {
-    height: 15.0em;
+    height: 180px;
 }
 
 #main form p.submit {
-    margin-left: 20em;
+    margin-top: 20px;
+    margin-left: 210px;
+}
+
+#main form p.submit input[type="submit"] {
+    border: none;
+    background-color: #1A243B;
+    color: #ffffff;
+    padding: 2px 10px;
+    font-weight: bold;
 }
 
 .message {
     border: 1px dashed #707070;
-    margin: 1.0em 2.0em 0em 2.0em;
-    padding: 0.2em 1.0em;
+    margin: 10px 10px 10px 10px;
+    padding: 4px 10px;
 }
 
-.task {
-    margin: 0em 1.0em 1.0em 1.0em;
-}
-
-#main a {
-    margin: 0em;
-    padding: 0em 0.5em;
-    color: #162D50;
-}
-
-#tabContainer {
+/*#tabContainer {
 	background: #f0f0f0;
 	border: 1px solid #fff;
 	position: relative;

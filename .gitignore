@@ -7,6 +7,8 @@ syntax: glob
 *.aux
 *.out
 
+cache/
 config/databases.yml
 config/doctrine/schema.yml
 data/fixtures/fixtures.yml
+data/sql/schema.sql

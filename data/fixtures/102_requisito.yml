@@ -1,0 +1,27 @@
+Requisito:
+  requisito_1:
+    texto: |
+      Ser estudiante de las carreras de Lic. o Ing. en Informática o
+      Licenciatura en Ingeniería de Sistemas y/o afín, que cursa
+      regularmente en la universidad.
+  requisito_2:
+    texto: |
+      O haber concluido el plan de estudios (ser egresado), pudiendo
+      postular a la Auxiliatura Universitaria dentro del siguiente
+      periodo académico (dos años o cuatro semestres), a partir de la
+      fecha de conclusión de su plan de materias. Este periodo de dos
+      años no podrán ampliarse bajo circunstancia alguna, aun en caso
+      de encontrarse cursando otra carrera.
+  requisito_3:
+    texto: No tener deudas de libros en la biblioteca de la FCyT.
+  requisito_4:
+    texto: |
+      No tener deudas de libros en la biblioteca del Centro de
+      Estudiantes de la carrera correspondiente.
+  requisito_5:
+    texto: |
+      Haber aprobado la totalidad de materias hasta quinto semestre.
+  requisito_6:
+    texto: |
+      Participar y aprobar el concurso de meritos y proceso de prueba
+      de selección.

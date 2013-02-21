@@ -1,0 +1,29 @@
+Requerimiento:
+  requerimiento_1:
+    codigo: LCO-ADM
+    nombre: Administrador de Laboratorio de Cómputo
+    horas_academicas: 80
+  requerimiento_2:
+    codigo: LDS-ADM
+    nombre: Administrador de Laboratorio de Desarrollo
+    horas_academicas: 80
+  requerimiento_3:
+    codigo: LDS-AUX
+    nombre: Auxiliar de Laboratorio de Desarrollo
+    horas_academicas: 56
+  requerimiento_4:
+    codigo: LM-ADM-SW
+    nombre: Administrador de Laboratorio de Mantenimiento de Software
+    horas_academicas: 80
+  requerimiento_5:
+    codigo: LM-AUX-SW
+    nombre: Auxiliar de Laboratorio de Mantenimiento de Software y Hardware
+    horas_academicas: 32
+  requerimiento_6:
+    codigo: LM-ADM-HW
+    nombre: Administrador de Laboratorio de Mantenimiento de Hardware
+    horas_academicas: 80
+  requerimiento_7:
+    codigo: LM-AUX-HW
+    horas_academicas: 32
+    nombre: Auxiliar de Laboratorio de Mantenimiento de Hardware

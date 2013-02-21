@@ -1,0 +1,16 @@
+Evento:
+  actAs: [Timestampable]
+  connection: doctrine
+  tableName: evento
+  columns:
+    id:
+      type: integer(4)
+      fixed: false
+      unsigned: true
+      primary: true
+      autoincrement: true
+    descripcion:
+      type: string()
+      fixed: false
+      notnull: true
+      

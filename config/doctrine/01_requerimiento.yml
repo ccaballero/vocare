@@ -1,0 +1,28 @@
+Requerimiento:
+  actAs: [Timestampable]
+  connection: doctrine
+  tableName: requerimiento
+  columns:
+    id:
+      type: integer(4)
+      fixed: false
+      unsigned: true
+      primary: true
+      autoincrement: true
+    codigo:
+      type: string(32)
+      fixed: false
+      notnull: true
+    nombre:
+      type: string(128)
+      fixed: false
+      notnull: true
+    texto:
+      type: string()
+      fixed: false
+      notnull: true
+    horas_academicas:
+      type: integer(4)
+      fixed: false
+      unsigned: true
+      notnull: true

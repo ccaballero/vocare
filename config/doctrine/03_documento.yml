@@ -1,0 +1,16 @@
+Documento:
+  actAs: [Timestampable]
+  connection: doctrine
+  tableName: documento
+  columns:
+    id:
+      type: integer(4)
+      fixed: false
+      unsigned: true
+      primary: true
+      autoincrement: true
+    texto:
+      type: string()
+      fixed: false
+      notnull: true
+      

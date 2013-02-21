@@ -1,0 +1,46 @@
+Documento:
+  documento_1:
+    texto: |
+      Presentar Solicitud escrita para cada auxiliatura especificando
+      claramente la auxiliatura a la que se postula:\n
+       - Código de auxiliatura.\n
+       - Nombre de la auxiliatura, dirigida a la Jefatura
+      de Departamento.
+  documento_2:
+    texto: |
+      Kardex actualizado gestión 2011, expedido por registros e
+      inscripciones de la Facultad. (Oficina de Kardex en la Facultad).
+  documento_3:
+    texto: |
+      Fotocopia del carnet de identidad.
+  documento_4:
+    texto: |
+      Certificado de la Biblioteca de la FCyT donde se evidencia que no
+      tiene pendiente deuda de libros prestados.
+  documento_5:
+    texto: |
+      Presentar resumen de currículum Vitae de acuerdo a formato
+      publicado en la página: http://www.cs.umss.edu.bo, sección
+      convocatorias.
+  documento_6:
+    texto: |
+      Presentar documentación que respalde el currículum vitae,
+      ORGANIZADO Y SEPARADO de acuerdo a la tabla de calificación de
+      meritos.
+  documento_7:
+    texto: |
+      Presentar solicitud escrita dirigida a la Jefatura de Departamento
+      de Informatica y Sistemas especificando claramente la(s)
+      auxiliatura(s) a la(s) que se postula:\n
+       - Código de auxiliatura.
+       - Nombre de la auxiliatura.
+  documento_8:
+    texto: |
+      Kardex actualizado a la gestión 2012 (periodos cumplidos a la
+      fecha), expedido por Oficina de Kardex de la Facultad de Ciencias
+      y Tecnología.
+  documento_9:
+    texto: |
+      Presentar certificado de condición de estudiante expedido por el
+      Departamento de Registros e Inscripciones.
+      

@@ -1,0 +1,9 @@
+Evento:
+  evento_1:
+    descripcion: Publicación de convocatoria.
+  evento_2:
+    descripcion: Presentación de documentos.
+  evento_3:
+    descripcion: Publicación de rol de pruebas practicas y de conocimientos.
+  evento_4:
+    descripcion: Publicación de resultados.

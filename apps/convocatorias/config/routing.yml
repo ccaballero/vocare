@@ -11,6 +11,22 @@ convocatorias:
     object_actions:
       toggle: [put]
 
+requerimientos:
+  class: sfDoctrineRouteCollection
+  options: { model: Requerimiento }
+
+requisitos:
+  class: sfDoctrineRouteCollection
+  options: { model: Requisito }
+
+documentos:
+  class: sfDoctrineRouteCollection
+  options: { model: Documento }
+
+eventos:
+  class: sfDoctrineRouteCollection
+  options: { model: Evento }
+
 # default rules
 homepage:
   url:   /
