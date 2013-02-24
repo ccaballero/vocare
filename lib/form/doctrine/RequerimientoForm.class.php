@@ -16,6 +16,8 @@ class RequerimientoForm extends BaseRequerimientoForm
             'horas_academicas', 'Horas Academicas (hrs/mes):',
         ));
 
+        $this->widgetSchema['codigo']->setAttribute('class', 'focus');
+
   	$decorator = new FormDecoratorDefault($this->getWidgetSchema());
   	$this->widgetSchema->addFormFormatter('custom', $decorator);
   	$this->widgetSchema->setFormFormatterName('custom');

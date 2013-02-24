@@ -12,17 +12,20 @@ Doctrine_Manager::getInstance()->bindComponent('ConvocatoriaRequerimientoEvaluac
  * @property integer $evaluacion_id
  * @property Convocatoria $Convocatoria
  * @property Requerimiento $Requerimiento
+ * @property Evaluacion $Evaluacion
  * 
  * @method integer                             getConvocatoriaId()   Returns the current record's "convocatoria_id" value
  * @method integer                             getRequerimientoId()  Returns the current record's "requerimiento_id" value
  * @method integer                             getEvaluacionId()     Returns the current record's "evaluacion_id" value
  * @method Convocatoria                        getConvocatoria()     Returns the current record's "Convocatoria" value
  * @method Requerimiento                       getRequerimiento()    Returns the current record's "Requerimiento" value
+ * @method Evaluacion                          getEvaluacion()       Returns the current record's "Evaluacion" value
  * @method ConvocatoriaRequerimientoEvaluacion setConvocatoriaId()   Sets the current record's "convocatoria_id" value
  * @method ConvocatoriaRequerimientoEvaluacion setRequerimientoId()  Sets the current record's "requerimiento_id" value
  * @method ConvocatoriaRequerimientoEvaluacion setEvaluacionId()     Sets the current record's "evaluacion_id" value
  * @method ConvocatoriaRequerimientoEvaluacion setConvocatoria()     Sets the current record's "Convocatoria" value
  * @method ConvocatoriaRequerimientoEvaluacion setRequerimiento()    Sets the current record's "Requerimiento" value
+ * @method ConvocatoriaRequerimientoEvaluacion setEvaluacion()       Sets the current record's "Evaluacion" value
  * 
  * @package    .
  * @subpackage model
@@ -62,10 +65,17 @@ abstract class BaseConvocatoriaRequerimientoEvaluacion extends sfDoctrineRecord
         parent::setUp();
         $this->hasOne('Convocatoria', array(
              'local' => 'convocatoria_id',
-             'foreign' => 'id'));
+             'foreign' => 'id',
+             'onDelete' => 'CASCADE'));
 
         $this->hasOne('Requerimiento', array(
              'local' => 'requerimiento_id',
-             'foreign' => 'id'));
+             'foreign' => 'id',
+             'onDelete' => 'CASCADE'));
+
+        $this->hasOne('Evaluacion', array(
+             'local' => 'evaluacion_id',
+             'foreign' => 'id',
+             'onDelete' => 'CASCADE'));
     }
 }

@@ -25,4 +25,19 @@ class convocatoriasActions extends PlantillasDefault
 
         $this->list = $q->execute();
     }
+
+    public function executeShow() {
+        $this->form = new ConvocatoriaForm($this->getRoute()->getObject());
+        $this->form->removeFocus();
+
+        $this->object = $this->getRoute()->getObject();
+        $this->forward404Unless($this->object);
+    }
+    
+    protected function processForm(sfWebRequest $request, sfForm $form, $flash = '') {
+        $form->setRequerimientos($request->getParameter('requerimientos'));
+        $form->setEventos($request->getParameter('eventos'));
+        
+        parent::processForm($request, $form, $flash);
+    }
 }

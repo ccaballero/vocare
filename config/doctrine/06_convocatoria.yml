@@ -66,16 +66,20 @@ ConvocatoriaRequerimiento:
       fixed: false
       unsigned: true
       notnull: true
+      default: 0
     cantidad_requerida:
       type: integer(4)
       fixed: false
       unsigned: true
       notnull: true
+      default: 0
   relations:
     Convocatoria:
       foreignAlias: ConvocatoriaRequerimientos
+      onDelete: CASCADE
     Requerimiento:
       foreignAlias: ConvocatoriaRequerimientos
+      onDelete: CASCADE
 
 ConvocatoriaRequisito:
   connection: doctrine
@@ -94,8 +98,10 @@ ConvocatoriaRequisito:
   relations:
     Convocatoria:
       foreignAlias: ConvocatoriaRequisitos
+      onDelete: CASCADE
     Requisito:
       foreignAlias: ConvocatoriaRequisitos
+      onDelete: CASCADE
 
 ConvocatoriaDocumento:
   connection: doctrine
@@ -114,8 +120,10 @@ ConvocatoriaDocumento:
   relations:
     Convocatoria:
       foreignAlias: ConvocatoriaDocumentos
+      onDelete: CASCADE
     Documento:
       foreignAlias: ConvocatoriaDocumentos
+      onDelete: CASCADE
 
 ConvocatoriaEvento:
   connection: doctrine
@@ -138,8 +146,10 @@ ConvocatoriaEvento:
   relations:
     Convocatoria:
       foreignAlias: ConvocatoriaEventos
+      onDelete: CASCADE
     Evento:
       foreignAlias: ConvocatoriaEventos
+      onDelete: CASCADE
 
 ConvocatoriaEvaluacion:
   connection: doctrine
@@ -158,8 +168,10 @@ ConvocatoriaEvaluacion:
   relations:
     Convocatoria:
       foreignAlias: ConvocatoriaEvaluaciones
+      onDelete: CASCADE
     Evaluacion:
       foreignAlias: ConvocatoriaEvaluaciones
+      onDelete: CASCADE
 
 ConvocatoriaRequerimientoEvaluacion:
   connection: doctrine
@@ -183,7 +195,10 @@ ConvocatoriaRequerimientoEvaluacion:
   relations:
     Convocatoria:
       foreignAlias: ConvocatoriaRequerimientoEvaluaciones
+      onDelete: CASCADE
     Requerimiento:
       foreignAlias: ConvocatoriaRequerimientoEvaluaciones
+      onDelete: CASCADE
     Evaluacion:
       foreignAlias: ConvocatoriaRequerimientoEvaluaciones
+      onDelete: CASCADE

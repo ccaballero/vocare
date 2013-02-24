@@ -61,6 +61,7 @@ class PlantillasDefault extends sfActions
             $request->getParameter($form->getName()),
             $request->getFiles($form->getName())
         );
+        
         if ($form->isValid()) {
             $form->save();
 
@@ -69,6 +70,8 @@ class PlantillasDefault extends sfActions
             }
 
             $this->redirect($this->_route_list);
+        } else {
+            $this->getUser()->setFlash('notice', 'Se encontraron algunos errores en el formulario');
         }
         return $form;
     }

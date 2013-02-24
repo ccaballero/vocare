@@ -10,13 +10,16 @@ Doctrine_Manager::getInstance()->bindComponent('ConvocatoriaEvaluacion', 'doctri
  * @property integer $convocatoria_id
  * @property integer $evaluacion_id
  * @property Convocatoria $Convocatoria
+ * @property Evaluacion $Evaluacion
  * 
  * @method integer                getConvocatoriaId()  Returns the current record's "convocatoria_id" value
  * @method integer                getEvaluacionId()    Returns the current record's "evaluacion_id" value
  * @method Convocatoria           getConvocatoria()    Returns the current record's "Convocatoria" value
+ * @method Evaluacion             getEvaluacion()      Returns the current record's "Evaluacion" value
  * @method ConvocatoriaEvaluacion setConvocatoriaId()  Sets the current record's "convocatoria_id" value
  * @method ConvocatoriaEvaluacion setEvaluacionId()    Sets the current record's "evaluacion_id" value
  * @method ConvocatoriaEvaluacion setConvocatoria()    Sets the current record's "Convocatoria" value
+ * @method ConvocatoriaEvaluacion setEvaluacion()      Sets the current record's "Evaluacion" value
  * 
  * @package    .
  * @subpackage model
@@ -49,6 +52,12 @@ abstract class BaseConvocatoriaEvaluacion extends sfDoctrineRecord
         parent::setUp();
         $this->hasOne('Convocatoria', array(
              'local' => 'convocatoria_id',
-             'foreign' => 'id'));
+             'foreign' => 'id',
+             'onDelete' => 'CASCADE'));
+
+        $this->hasOne('Evaluacion', array(
+             'local' => 'evaluacion_id',
+             'foreign' => 'id',
+             'onDelete' => 'CASCADE'));
     }
 }

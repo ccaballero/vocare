@@ -1,0 +1,100 @@
+Convocatoria:
+  convocatoria_1:
+    nombre: Gestión I/2012 - II/2012
+    estado: finalizado
+    
+ConvocatoriaRequerimiento:
+  convocatoria_requerimiento_1_1:
+    Convocatoria: convocatoria_1
+    Requerimiento: requerimiento_1
+    numero_item: 1
+    cantidad_requerida: 7
+  convocatoria_requerimiento_1_2:
+    Convocatoria: convocatoria_1
+    Requerimiento: requerimiento_2
+    numero_item: 2
+    cantidad_requerida: 3
+  convocatoria_requerimiento_1_3:
+    Convocatoria: convocatoria_1
+    Requerimiento: requerimiento_3
+    numero_item: 3 
+    cantidad_requerida: 2
+  convocatoria_requerimiento_1_4:
+    Convocatoria: convocatoria_1
+    Requerimiento: requerimiento_4
+    numero_item: 4
+    cantidad_requerida: 1
+  convocatoria_requerimiento_1_5:
+    Convocatoria: convocatoria_1
+    Requerimiento: requerimiento_5
+    numero_item: 5
+    cantidad_requerida: 4
+  convocatoria_requerimiento_1_6:
+    Convocatoria: convocatoria_1
+    Requerimiento: requerimiento_6
+    numero_item: 6
+    cantidad_requerida: 1
+  convocatoria_requerimiento_1_7:
+    Convocatoria: convocatoria_1
+    Requerimiento: requerimiento_7
+    numero_item: 7
+    cantidad_requerida: 4
+    
+ConvocatoriaRequisito:
+  convocatoria_requisito_1_1:
+    Convocatoria: convocatoria_1
+    Requisito: requisito_1
+  convocatoria_requisito_1_2:
+    Convocatoria: convocatoria_1
+    Requisito: requisito_2
+  convocatoria_requisito_1_3:
+    Convocatoria: convocatoria_1
+    Requisito: requisito_3
+  convocatoria_requisito_1_4:
+    Convocatoria: convocatoria_1
+    Requisito: requisito_4
+  convocatoria_requisito_1_5:
+    Convocatoria: convocatoria_1
+    Requisito: requisito_5
+  convocatoria_requisito_1_6:
+    Convocatoria: convocatoria_1
+    Requisito: requisito_6
+    
+ConvocatoriaDocumento:
+  convocatoria_documento_1_1:
+    Convocatoria: convocatoria_1
+    Documento: documento_1
+  convocatoria_documento_1_2:
+    Convocatoria: convocatoria_1
+    Documento: documento_2
+  convocatoria_documento_1_3:
+    Convocatoria: convocatoria_1
+    Documento: documento_3
+  convocatoria_documento_1_4:
+    Convocatoria: convocatoria_1
+    Documento: documento_4
+  convocatoria_documento_1_5:
+    Convocatoria: convocatoria_1
+    Documento: documento_5
+  convocatoria_documento_1_6:
+    Convocatoria: convocatoria_1
+    Documento: documento_6
+    
+ConvocatoriaEvento:
+  convocatoria_evento_1_1:
+    Convocatoria: convocatoria_1
+    Evento: evento_1
+    fecha: 2012-06-19
+  convocatoria_evento_1_2:
+    Convocatoria: convocatoria_1
+    Evento: evento_2
+    fecha: 2012-07-05
+  convocatoria_evento_1_3:
+    Convocatoria: convocatoria_1
+    Evento: evento_3
+    fecha: 2012-07-06
+  convocatoria_evento_1_4:
+    Convocatoria: convocatoria_1
+    Evento: evento_4
+    fecha: 2012-07-17
+    

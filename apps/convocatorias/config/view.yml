@@ -12,9 +12,14 @@ default:
     #language:     en
     #robots:       index, follow
 
-  stylesheets:    [main.css]
+  stylesheets:
+   - main.css
+   - smoothness/jquery-ui-1.10.1.custom.min.css
 
-  javascripts:    []
+  javascripts:
+    - jquery-1.9.0.min.js
+    - jquery-ui-1.10.1.custom.min.js
+    - convocatorias.js
 
   has_layout:     true
   layout:         layout

@@ -1,0 +1,92 @@
+Evaluacion:
+  evaluacion_1:
+    nombre: Meritos
+    nombre_corto: Meritos
+  evaluacion_2:
+    nombre: Administracion de Linux. Nivel Basico
+    nombre_corto: Linux Basico
+  evaluacion_3:
+    nombre: Administracion de Linux. Nivel Avanzado
+    nombre_corto: Linux Avanzado
+  evaluacion_4:
+    nombre: Redes. Nivel Intermedio
+    nombre_corto: Redes N.I.
+  evaluacion_5:
+    nombre: PostgreSQL, MySQL. Nivel Intermedio
+    nombre_corto: PostgreSQL, MySQL
+  evaluacion_6:
+    nombre: Programación para Internet, Lenguajes de Programación (JSP, JavaScript, CSS, HTML, PHP, Delphi)
+    nombre_corto: Programación Internet
+  evaluacion_7:
+    nombre: Modelaje de Aplicaciones Web (UML), Proceso Unificado Estruturado
+    nombre_corto: Modelaje de Aplicaciones Web (UML)
+  evaluacion_8:
+    nombre: Ensamblaje y Mantenimiento de Computadores en Hardware y Software
+    nombre_corto: Ensamblaje
+  evaluacion_9:
+    nombre: Electronica Aplicada (practico)
+    nombre_corto: Electronica Practico
+  evaluacion_11:
+    nombre: Electronica Aplicada (teorico)
+    nombre_corto: Electronica Teorico
+  evaluacion_10:
+    nombre: Didactica
+    nombre_corto: Didactica
+
+#Evaluacion:
+#  evaluacion_1:
+#    nombre: Resultados finales (Auxiliares)
+#    children:
+#      evaluacion_2:
+#        nombre: Calificación de meritos
+#        children:
+#          evaluacion_3:
+#            nombre: Rendimiento Academico
+#            children:
+#              evaluacion_4:
+#                nombre: Promedio general de las materias cursadas
+#              evaluacion_5:
+#                nombre: Promedio general de las materias del anterior semestre
+#          evaluacion_6:
+#            nombre: Experiencia General
+#            children:
+#              evaluacion_7:
+#                nombre: Documentos de experiencia en laboratorios
+#                children:
+#                  evaluacion_8:
+#                    nombre: Auxiliar de Laboratorio Departamento de Informática-Sistemas del item respectivo
+#                  evaluacion_9:
+#                    nombre: Auxiliar AdHonorem Laboratorio Departamento de Informática-Sistemas
+#                  evaluacion_10:
+#                    nombre: Otros auxiliares en laboratorios de computación
+#              evaluacion_11:
+#                nombre: Producción
+#                children:
+#                  evaluacion_12:
+#                    nombre: Disertación cursos y/o participación en Proyectos
+#              evaluacion_13:
+#                nombre: Documentos de experiencia extrauniversitaria y de capacitación
+#                children:
+#                  evaluacion_14:
+#                    nombre: Experiencia como operador, programador, analista de sistemas, carga directivo en centro de cómputo
+#                  evaluacion_15:
+#                    nombre: Certificación de capacitación en el área especifica expedidos por el sistema universitario
+#      evaluacion_16:
+#        nombre: Calificación de conocimientos
+#        children:
+#          evaluacion_17:
+#            nombre: Administración Linux Basico - Avanzado
+#          evaluacion_18:
+#            nombre: Redes Nivel Intermedio
+#          evaluacion_19:
+#            nombre: PostgreSQL, MySQL. Nivel Intermedio
+#          evaluacion_20:
+#            nombre: Programación para Internet, lenguajes de programación (JSP, JavaScript, CSS, HTML, PHP, DELPHI)
+#          evaluacion_21:
+#            nombre: Modelaje de Aplicaciones Web (UML), Proceso unificado estructurado
+#          evaluacion_22:
+#            nombre: Ensamblaje y Mantenimiento de computadora en Hardware y Software
+#          evaluacion_23:
+#            nombre: Electronica Aplicada -Teórico. - Practico.
+#          evaluacion_24:
+#            nombre: Didactica

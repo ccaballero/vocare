@@ -52,10 +52,12 @@ abstract class BaseConvocatoriaRequisito extends sfDoctrineRecord
         parent::setUp();
         $this->hasOne('Convocatoria', array(
              'local' => 'convocatoria_id',
-             'foreign' => 'id'));
+             'foreign' => 'id',
+             'onDelete' => 'CASCADE'));
 
         $this->hasOne('Requisito', array(
              'local' => 'requisito_id',
-             'foreign' => 'id'));
+             'foreign' => 'id',
+             'onDelete' => 'CASCADE'));
     }
 }

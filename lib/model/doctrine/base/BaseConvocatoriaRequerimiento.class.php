@@ -56,6 +56,7 @@ abstract class BaseConvocatoriaRequerimiento extends sfDoctrineRecord
              'fixed' => 0,
              'unsigned' => true,
              'notnull' => true,
+             'default' => 0,
              'length' => 4,
              ));
         $this->hasColumn('cantidad_requerida', 'integer', 4, array(
@@ -63,6 +64,7 @@ abstract class BaseConvocatoriaRequerimiento extends sfDoctrineRecord
              'fixed' => 0,
              'unsigned' => true,
              'notnull' => true,
+             'default' => 0,
              'length' => 4,
              ));
     }
@@ -72,10 +74,12 @@ abstract class BaseConvocatoriaRequerimiento extends sfDoctrineRecord
         parent::setUp();
         $this->hasOne('Convocatoria', array(
              'local' => 'convocatoria_id',
-             'foreign' => 'id'));
+             'foreign' => 'id',
+             'onDelete' => 'CASCADE'));
 
         $this->hasOne('Requerimiento', array(
              'local' => 'requerimiento_id',
-             'foreign' => 'id'));
+             'foreign' => 'id',
+             'onDelete' => 'CASCADE'));
     }
 }
