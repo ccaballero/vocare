@@ -9,13 +9,13 @@ Doctrine_Manager::getInstance()->bindComponent('ConvocatoriaEvento', 'doctrine')
  * 
  * @property integer $convocatoria_id
  * @property integer $evento_id
- * @property timestamp $fecha
+ * @property date $fecha
  * @property Convocatoria $Convocatoria
  * @property Evento $Evento
  * 
  * @method integer            getConvocatoriaId()  Returns the current record's "convocatoria_id" value
  * @method integer            getEventoId()        Returns the current record's "evento_id" value
- * @method timestamp          getFecha()           Returns the current record's "fecha" value
+ * @method date               getFecha()           Returns the current record's "fecha" value
  * @method Convocatoria       getConvocatoria()    Returns the current record's "Convocatoria" value
  * @method Evento             getEvento()          Returns the current record's "Evento" value
  * @method ConvocatoriaEvento setConvocatoriaId()  Sets the current record's "convocatoria_id" value
@@ -48,11 +48,10 @@ abstract class BaseConvocatoriaEvento extends sfDoctrineRecord
              'primary' => true,
              'length' => 4,
              ));
-        $this->hasColumn('fecha', 'timestamp', 25, array(
-             'type' => 'timestamp',
+        $this->hasColumn('fecha', 'date', null, array(
+             'type' => 'date',
              'fixed' => 0,
              'notnull' => true,
-             'length' => 25,
              ));
     }
 

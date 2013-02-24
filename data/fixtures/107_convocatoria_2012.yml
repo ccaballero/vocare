@@ -84,17 +84,17 @@ ConvocatoriaEvento:
   convocatoria_evento_1_1:
     Convocatoria: convocatoria_1
     Evento: evento_1
-    fecha: 2012-06-19
+    fecha: '2012-06-19'
   convocatoria_evento_1_2:
     Convocatoria: convocatoria_1
     Evento: evento_2
-    fecha: 2012-07-05
+    fecha: '2012-07-05'
   convocatoria_evento_1_3:
     Convocatoria: convocatoria_1
     Evento: evento_3
-    fecha: 2012-07-06
+    fecha: '2012-07-06'
   convocatoria_evento_1_4:
     Convocatoria: convocatoria_1
     Evento: evento_4
-    fecha: 2012-07-17
+    fecha: '2012-07-17'
     

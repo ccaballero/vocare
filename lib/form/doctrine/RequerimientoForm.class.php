@@ -10,10 +10,10 @@ class RequerimientoForm extends BaseRequerimientoForm
         );
 
         $this->widgetSchema->setLabels(array(
-            'codigo' => 'Código:',
-            'nombre' => 'Nombre:',
+            'codigo' => 'Código (*):',
+            'nombre' => 'Nombre (*):',
             'texto' => 'Descripción:',
-            'horas_academicas', 'Horas Academicas (hrs/mes):',
+            'horas_academicas' => 'Horas Academicas (hrs/mes) (*):',
         ));
 
         $this->widgetSchema['codigo']->setAttribute('class', 'focus');

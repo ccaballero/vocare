@@ -17,13 +17,13 @@ abstract class BaseConvocatoriaEventoForm extends BaseFormDoctrine
     $this->setWidgets(array(
       'convocatoria_id' => new sfWidgetFormInputHidden(),
       'evento_id'       => new sfWidgetFormInputHidden(),
-      'fecha'           => new sfWidgetFormDateTime(),
+      'fecha'           => new sfWidgetFormDate(),
     ));
 
     $this->setValidators(array(
       'convocatoria_id' => new sfValidatorChoice(array('choices' => array($this->getObject()->get('convocatoria_id')), 'empty_value' => $this->getObject()->get('convocatoria_id'), 'required' => false)),
       'evento_id'       => new sfValidatorChoice(array('choices' => array($this->getObject()->get('evento_id')), 'empty_value' => $this->getObject()->get('evento_id'), 'required' => false)),
-      'fecha'           => new sfValidatorDateTime(),
+      'fecha'           => new sfValidatorDate(),
     ));
 
     $this->widgetSchema->setNameFormat('convocatoria_evento[%s]');

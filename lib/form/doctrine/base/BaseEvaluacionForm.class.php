@@ -1,25 +1,23 @@
 <?php
 
 /**
- * Requerimiento form base class.
+ * Evaluacion form base class.
  *
- * @method Requerimiento getObject() Returns the current form's model object
+ * @method Evaluacion getObject() Returns the current form's model object
  *
  * @package    .
  * @subpackage form
  * @author     Your name here
  * @version    SVN: $Id: sfDoctrineFormGeneratedTemplate.php 29553 2010-05-20 14:33:00Z Kris.Wallsmith $
  */
-abstract class BaseRequerimientoForm extends BaseFormDoctrine
+abstract class BaseEvaluacionForm extends BaseFormDoctrine
 {
   public function setup()
   {
     $this->setWidgets(array(
       'id'                 => new sfWidgetFormInputHidden(),
-      'codigo'             => new sfWidgetFormInputText(),
-      'nombre'             => new sfWidgetFormInputText(),
-      'texto'              => new sfWidgetFormTextarea(),
-      'horas_academicas'   => new sfWidgetFormInputText(),
+      'nombre'             => new sfWidgetFormTextarea(),
+      'nombre_corto'       => new sfWidgetFormInputText(),
       'created_at'         => new sfWidgetFormDateTime(),
       'updated_at'         => new sfWidgetFormDateTime(),
       'convocatorias_list' => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Convocatoria')),
@@ -27,16 +25,14 @@ abstract class BaseRequerimientoForm extends BaseFormDoctrine
 
     $this->setValidators(array(
       'id'                 => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
-      'codigo'             => new sfValidatorString(array('max_length' => 32)),
-      'nombre'             => new sfValidatorString(array('max_length' => 128)),
-      'texto'              => new sfValidatorString(array('required' => false)),
-      'horas_academicas'   => new sfValidatorInteger(),
+      'nombre'             => new sfValidatorString(),
+      'nombre_corto'       => new sfValidatorString(array('max_length' => 128)),
       'created_at'         => new sfValidatorDateTime(),
       'updated_at'         => new sfValidatorDateTime(),
       'convocatorias_list' => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Convocatoria', 'required' => false)),
     ));
 
-    $this->widgetSchema->setNameFormat('requerimiento[%s]');
+    $this->widgetSchema->setNameFormat('evaluacion[%s]');
 
     $this->errorSchema = new sfValidatorErrorSchema($this->validatorSchema);
 
@@ -47,7 +43,7 @@ abstract class BaseRequerimientoForm extends BaseFormDoctrine
 
   public function getModelName()
   {
-    return 'Requerimiento';
+    return 'Evaluacion';
   }
 
   public function updateDefaultsFromObject()

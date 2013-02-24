@@ -10,7 +10,7 @@ class DocumentoForm extends BaseDocumentoForm
         );
         
         $this->widgetSchema->setLabels(array(
-            'texto' => 'Descripción:',
+            'texto' => 'Descripción (*):',
         ));
 
         $this->widgetSchema['texto']->setAttribute('class', 'focus');

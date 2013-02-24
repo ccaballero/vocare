@@ -12,7 +12,7 @@ class RequisitoForm extends BaseRequisitoForm
         unset($this['created_at'], $this['updated_at']);
 
         $this->widgetSchema->setLabels(array(
-            'texto' => 'Descripción:',
+            'texto' => 'Descripción (*):',
         ));
 
         $this->widgetSchema['texto']->setAttribute('class', 'focus');

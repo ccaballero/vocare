@@ -67,6 +67,7 @@ abstract class BaseRequerimiento extends sfDoctrineRecord
              'type' => 'string',
              'fixed' => 0,
              'notnull' => true,
+             'default' => '',
              'length' => '',
              ));
         $this->hasColumn('horas_academicas', 'integer', 4, array(

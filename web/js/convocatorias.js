@@ -25,16 +25,22 @@ $(document).ready(function(){
         changeMonth: true
     };
     $.datepicker.setDefaults($.datepicker.regional['es']);
-    $( ".datepicker" ).datepicker();
+    $('.datepicker').datepicker();
     
-    $(".tab_contents").hide();
-    $(".tab_contents:first").show();
+    $('.tab_contents').hide();
+    if (window.location.hash !== '') {
+        $(window.location.hash).fadeIn();
+        $('#tabber .tab a[href="'+window.location.hash+'"]').addClass('active');
+    } else {
+        $('.tab_contents:first').fadeIn();
+        $('#tabber .tab a[href="#preview"]').addClass('active');
+    }
 
-    $("#tabber ul li a").click(function() {
-        var activeTab = $(this).attr("href");
-        $("#tabber ul li a").removeClass("active");
-        $(this).addClass("active");
-        $("#tabber .tab_details .tab_contents").hide();
+    $('#tabber ul li a').click(function() {
+        var activeTab = $(this).attr('href');
+        $('#tabber ul li a').removeClass('active');
+        $(this).addClass('active');
+        $('#tabber .tab_details .tab_contents').hide();
         $(activeTab).fadeIn();
     });
 });

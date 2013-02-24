@@ -21,6 +21,7 @@ Requerimiento:
       type: string()
       fixed: false
       notnull: true
+      default: ''
     horas_academicas:
       type: integer(4)
       fixed: false

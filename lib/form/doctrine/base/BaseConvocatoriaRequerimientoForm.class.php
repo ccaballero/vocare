@@ -24,8 +24,8 @@ abstract class BaseConvocatoriaRequerimientoForm extends BaseFormDoctrine
     $this->setValidators(array(
       'convocatoria_id'    => new sfValidatorChoice(array('choices' => array($this->getObject()->get('convocatoria_id')), 'empty_value' => $this->getObject()->get('convocatoria_id'), 'required' => false)),
       'requerimiento_id'   => new sfValidatorChoice(array('choices' => array($this->getObject()->get('requerimiento_id')), 'empty_value' => $this->getObject()->get('requerimiento_id'), 'required' => false)),
-      'numero_item'        => new sfValidatorInteger(),
-      'cantidad_requerida' => new sfValidatorInteger(),
+      'numero_item'        => new sfValidatorInteger(array('required' => false)),
+      'cantidad_requerida' => new sfValidatorInteger(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('convocatoria_requerimiento[%s]');

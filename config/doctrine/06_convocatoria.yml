@@ -140,7 +140,7 @@ ConvocatoriaEvento:
       unsigned: true
       primary: true
     fecha:
-      type: timestamp(25)
+      type: date
       fixed: false
       notnull: true
   relations:

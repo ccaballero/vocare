@@ -16,6 +16,7 @@ class PlantillasDefault extends sfActions
     }
 
     public function executeCreate(sfWebRequest $request) {
+        $this->title = $this->_messages['form']['new'];
         $this->form = $this->processForm(
             $request,
             new $this->_form(),
@@ -61,7 +62,7 @@ class PlantillasDefault extends sfActions
             $request->getParameter($form->getName()),
             $request->getFiles($form->getName())
         );
-        
+
         if ($form->isValid()) {
             $form->save();
 
@@ -73,6 +74,7 @@ class PlantillasDefault extends sfActions
         } else {
             $this->getUser()->setFlash('notice', 'Se encontraron algunos errores en el formulario');
         }
+
         return $form;
     }
 }

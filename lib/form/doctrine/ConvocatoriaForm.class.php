@@ -4,6 +4,7 @@ class ConvocatoriaForm extends BaseConvocatoriaForm
 {
     public function configure() {
         unset(
+            $this['evaluaciones_list'],
             $this['created_at'],
             $this['updated_at'],
             $this['estado']
@@ -48,7 +49,7 @@ class ConvocatoriaForm extends BaseConvocatoriaForm
         return $result;
     }
 
-    public static function rendererRequerimientos($widget, $inputs) {
+    public function rendererRequerimientos($widget, $inputs) {
         $result = '<table class="form-table"><tr>'
                 . '<th>&nbsp;</th>'
                 . '<th>Item</th>'
@@ -58,11 +59,19 @@ class ConvocatoriaForm extends BaseConvocatoriaForm
         foreach ($inputs as $key => $input) {
             $item = preg_replace('/.* value="(\d+)" .*/', '$1', $input['input']);
 
+            $value = array(' ', ' ');
+            if (array_key_exists($item, $this->requerimientos[0])) {
+                $value = array(
+                    'value="' . $this->requerimientos[0][$item] . '" ',
+                    'value="' . $this->requerimientos[1][$item] . '" ',
+                );
+            }
+
             $append = array(
-                '<input name="requerimientos[0][' . $item
-                . ']" type="text" class="text-right" style="width:36px" />',
-                '<input name="requerimientos[1][' . $item
-                . ']" type="text" class="text-right" style="width:36px" />'
+                '<input type="text" name="requerimientos[0][' . $item
+                . ']" class="text-right" style="width:36px"' . $value[0] . '/>',
+                '<input type="text" name="requerimientos[1][' . $item
+                . ']" class="text-right" style="width:36px"' . $value[1] . '/>'
             );
 
             $result .= '<tr><td style="width:16px">' . $input['input']
@@ -74,7 +83,7 @@ class ConvocatoriaForm extends BaseConvocatoriaForm
         return $result;
     }
 
-    public static function rendererEventos($widget, $inputs) {
+    public function rendererEventos($widget, $inputs) {
         $result = '<table class="form-table"><tr>'
                 . '<th>&nbsp;</th>'
                 . '<th>Fecha</th>'
@@ -82,8 +91,14 @@ class ConvocatoriaForm extends BaseConvocatoriaForm
                 . '</tr>';
         foreach ($inputs as $input) {
             $item = preg_replace('/.* value="(\d+)" .*/', '$1', $input['input']);
-            $append = '<input name="eventos[' . $item
-                   . ']" type="text" class="text-center datepicker" style="width:100px" />';
+
+            $value = ' ';
+            if (array_key_exists($item, $this->eventos)) {
+                $value = 'value="' . $this->eventos[$item] . '" ';
+            }
+
+            $append = '<input type="text" name="eventos[' . $item
+                . ']" class="text-center datepicker" style="width:100px"' . $value . '/>';
 
             $result .= '<tr><td style="width:16px">' . $input['input']
                     . '</td><td style="width:80px">' . $append
@@ -93,7 +108,7 @@ class ConvocatoriaForm extends BaseConvocatoriaForm
         return $result;
     }
 
-    public $requerimientos = array();
+    public $requerimientos = array(array(), array());
     public function setRequerimientos($requerimientos) {
         $this->requerimientos = $requerimientos;
     }

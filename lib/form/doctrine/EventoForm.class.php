@@ -10,7 +10,7 @@ class EventoForm extends BaseEventoForm
         );
         
         $this->widgetSchema->setLabels(array(
-            'descripcion' => 'Descripción:',
+            'descripcion' => 'Descripción (*):',
         ));
 
         $this->widgetSchema['descripcion']->setAttribute('class', 'focus');
