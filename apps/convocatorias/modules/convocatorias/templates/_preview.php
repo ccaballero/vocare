@@ -1,6 +1,7 @@
 <h1>CONVOCATORIA A CONCURSO DE MERITOS Y PRUEBAS DE CONOCIMIENTOS PARA OPTAR A
-AUXILIATURAS EN LABORATORIO DE COMPUTACION, DE MANTENIMIENTO Y DESARROLLO<br />
-==========<br />GESTION I/2012 –II/2012</h1>
+AUXILIATURAS EN LABORATORIO DE COMPUTACION, DE MANTENIMIENTO Y DESARROLLO
+<br />==========<br />
+<?php echo $convocatoria->getNombre() ?></h1>
 
 <p>El Departamento de Informática y Sistemas junto a las Carreras de Ing.
 Informática e Ing. de Sistemas, de la Facultad de Ciencias y Tecnología, convoca
@@ -12,90 +13,37 @@ para la gestión I/2012 y II/2012.</p>
 
 <table>
     <tr>
-        <th>Ítems</th>
+        <th>Ítem</th>
         <th>Cant.</th>
         <th>Hrs. Académicas</th>
         <th>Nombre de la Auxiliatura</th>
         <th>Código de la Auxiliatura</th>
     </tr>
+<?php foreach ($convocatoria->getConvocatoriaRequerimientos() as $r): ?>
     <tr>
-        <td>1</td>
-        <td>7 Aux.</td>
-        <td>80 Hrs/mes</td>
-        <td>Administrador de Laboratorio de Cómputo</td>
-        <td>LCO - ADM</td>
+        <td class="text-right"><?php echo $r->numero_item ?></td>
+        <td class="text-center"><?php echo $r->cantidad_requerida ?> Aux.</td>
+        <td class="text-center"><?php echo $r->Requerimiento->getHorasAcademicas() ?> Hrs/mes</td>
+        <td><?php echo $r->Requerimiento->getNombre() ?></td>
+        <td class="text-center"><?php echo $r->Requerimiento->getCodigo() ?></td>
     </tr>
+<?php endforeach; ?>
     <tr>
-        <td>2</td>
-        <td>3 Aux.</td>
-        <td>80 Hrs/mes</td>
-        <td>Administrador de Laboratorio de Desarrollo</td>
-        <td>LDS - ADM</td>
-    </tr>
-    <tr>
-        <td>3</td>
-        <td>2 Aux.</td>
-        <td>56 Hrs/mes</td>
-        <td>Auxiliar de Laboratorio de Desarrollo</td>
-        <td>LDS - AUX</td>
-    </tr>
-    <tr>
-        <td>4</td>
-        <td>1 Aux.</td>
-        <td>80 Hrs/mes</td>
-        <td>Administrador de Laboratorio de Mantenimiento de Software</td>
-        <td>LM – ADM -SW</td>
-    </tr>
-    <tr>
-        <td>5</td>
-        <td>4 Aux.</td>
-        <td>32 Hrs/mes</td>
-        <td>Auxiliar de Laboratorio de Mantenimiento de Software y Hardware</td>
-        <td>LM – AUX -SW</td>
-    </tr>
-    <tr>
-        <td>6</td>
-        <td>1 Aux.</td>
-        <td>80 Hrs/mes</td>
-        <td>Administrador de Laboratorio de Mantenimiento de Hardware</td>
-        <td>LM – ADM - HW</td>
-    </tr>
-    <tr>
-        <td>7</td>
-        <td>4 Aux.</td>
-        <td>32 Hrs/mes</td>
-        <td>Auxiliar de Laboratorio de Mantenimiento de Hardware</td>
-        <td>LM – AUX - HW</td>
-    </tr>
-    <tr>
-        <td>Total</td>
-        <td>22 Aux.</td>
+        <td class="text-right">Total</td>
+        <td><?php echo $convocatoria->getTotalRequerimientos() ?> Aux.</td>
     </tr>
 </table>
 
 <h2>2. REQUISITOS</h2>
 
 <ol>
+<?php foreach ($convocatoria->getRequisitos() as $r): ?>
     <li>
-        <p>Ser estudiante de las carreras de Lic. o Ing. en Informática o
-Licenciatura en Ingeniería de Sistemas y/o afín, que cursa regularmente en la
-universidad.</p>
+        <p><?php echo $r->getTexto() ?></p>
     </li>
-    <li>
-        <p>O haber concluido el plan de estudios (ser egresado), pudiendo
-postular a la Auxiliatura Universitaria dentro del siguiente periodo académico
-(dos años o cuatro semestres), a partir de la fecha de conclusión de su plan de
-materias. Este periodo de dos años no podrán ampliarse bajo circunstancia
-alguna, aun en caso de encontrarse cursando otra carrera.</p>
-    </li>
-    <li><p>No tener deudas de libros en la biblioteca de la FCyT.</p></li>
-    <li><p>No tener deudas de libros en la biblioteca del Centro de Estudiantes
-de la carrera correspondiente.</p></li>
-    <li><p>Haber aprobado la totalidad de materias hasta quinto
-semestre.</p></li>
-    <li><p>Participar y aprobar el concurso de meritos y proceso de prueba de
-selección.</p></li>
+<?php endforeach; ?>
 </ol>
+
 <p>NOTA: Se considera conclusión del plan de materias, el haber cursado el
 número de las materias requeridas en la curricula de la Carrera respectiva,
 exceptuando la materia titulación.</p>
@@ -103,25 +51,13 @@ exceptuando la materia titulación.</p>
 <h2>3. DOCUMENTOS REQUISITOS A PRESENTAR</h2>
 
 <ol>
-<li>
-    <p>Presentar Solicitud escrita para cada auxiliatura especificando
-claramente la auxiliatura a la que se postula:</p>
-    <ul>
-        <li><p>Código de auxiliatura</p></li>
-        <li><p>Nombre de la auxiliatura, dirigida a la Jefatura de
-Departamento.</p></li>
-    </ul>
-</li>
-<li><p>Kardex actualizado gestión 2011, expedido por registros e inscripciones
-de la Facultad. (Oficina de Kardex en la Facultad).</p></li>
-<li><p>Fotocopia del carnet de identidad.</p></li>
-<li><p>Certificado de la Biblioteca de la FCyT donde se evidencia que no tiene
-pendiente deuda de libros prestados.</p></li>
-<li><p>Presentar resumen de currículum Vitae de acuerdo a formato publicado en
-la página: http://www.cs.umss.edu.bo, sección convocatorias.</p></li>
-<li><p>Presentar documentación que respalde el currículum vitae, ORGANIZADO Y
-SEPARADO de acuerdo a la tabla de calificación de meritos.</p></li>
+<?php foreach ($convocatoria->getDocumentos() as $d): ?>
+    <li>
+        <p><?php echo $d->getTexto() ?></p>
+    </li>
+<?php endforeach; ?>
 </ol>
+
 <p>NOTA: La documentación y las fotocopias de certificados, deben ser validadas
 gratuitamente en Secretaria del Departamento de Informática y Sistemas.
 (Presentar original y fotocopia). Se deberá presentar documentación separada por
@@ -134,10 +70,10 @@ devuelta.</p>
 
 <p>Presentación de la documentación en sobre manila cerrado y rotulado con:
 <ul>
-    <li>Nombre y apellidos completos, dirección, teléfono(s) y e-mail del
-postulante.</li>
-    <li>Código de item de la auxiliatura a la que se postula.</li>
-    <li>Nombre de la auxiliatura a la que se presenta.</li>
+    <li><p>Nombre y apellidos completos, dirección, teléfono(s) y e-mail del
+postulante.</p></li>
+    <li><p>Código de item de la auxiliatura a la que se postula.</p></li>
+    <li><p>Nombre de la auxiliatura a la que se presenta.</p></li>
 </ul>
 
 <h3>4.2. DE LA FECHA Y LUGAR</h3>
@@ -154,7 +90,7 @@ puntaje final y se pondera de la siguiente manera.</p>
 
 <table>
     <tr>
-        <td>RENDIMIENTO ACADEMICO</td>
+        <td><strong>RENDIMIENTO ACADEMICO</strong></td>
         <td>65</td>
     </tr>
     <tr>
@@ -166,7 +102,7 @@ puntaje final y se pondera de la siguiente manera.</p>
         <td>30</td>
     </tr>
     <tr>
-        <td>EXPERIENCIA GENERAL</td>
+        <td><strong>EXPERIENCIA GENERAL</strong></td>
         <td>35</td>
     </tr>
     <tr>
@@ -257,83 +193,81 @@ en el (los) item(es) a los que se postulan.</p>
         <th colspan="7">Código de Auxiliatura</th>
     </tr>
     <tr>
-        <td colspan="2">&nbsp;</td>
-        <td>LCO-ADM</td>
-        <td>LDS-ADM</td>
-        <td>LDS-AUX</td>
-        <td>LM-ADM-SW</td>
-        <td>LM-AUX-SW</td>
-        <td>LM-ADM-HW</td>
-        <td>LM-AUX-HW</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td><strong><strong>LCO-ADM</strong></strong></td>
+        <td><strong>LDS-ADM</strong></td>
+        <td><strong>LDS-AUX</strong></td>
+        <td><strong>LM-ADM-SW</strong></td>
+        <td><strong>LM-AUX-SW</strong></td>
+        <td><strong>LM-ADM-HW</strong></td>
+        <td><strong>LM-AUX-HW</strong></td>
     </tr>
     <tr>
         <td>1</td>
         <td>ADM LINUX  BASICO - AVANZADO</td>
-        <td>25</td>
-        <td>10</td>
-        <td>10</td>
-        <td>10</td>
-        <td>10</td>
-        <td>10</td>
-        <td>10</td>
+        <td class="text-center">25</td>
+        <td class="text-center">10</td>
+        <td class="text-center">10</td>
+        <td class="text-center">10</td>
+        <td class="text-center">10</td>
+        <td class="text-center">10</td>
+        <td class="text-center">10</td>
     </tr>
     <tr>
         <td>2</td>
         <td>REDES NIVEL INTERMEDIO</td>
-        <td>25</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>10</td>
-        <td>10</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
+        <td class="text-center">25</td>
+        <td class="text-center">&nbsp;</td>
+        <td class="text-center">&nbsp;</td>
+        <td class="text-center">10</td>
+        <td class="text-center">10</td>
+        <td class="text-center">&nbsp;</td>
+        <td class="text-center">&nbsp;</td>
     </tr>
     <tr>
         <td>3</td>
         <td>POSTGRES, MYSQL NIVEL INTERMEDIO</td>
-        <td>20</td>
-        <td>20</td>
-        <td>30</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
+        <td class="text-center">20</td>
+        <td class="text-center">20</td>
+        <td class="text-center">30</td>
+        <td class="text-center">&nbsp;</td>
+        <td class="text-center">&nbsp;</td>
+        <td class="text-center">&nbsp;</td>
+        <td class="text-center">&nbsp;</td>
     </tr>
     <tr>
         <td>4</td>
-        <td>PROGRAMACION PARA INTERNET, LENGUAJES DE PROGRAMACION (JSP,
-JAVASCRIPT, CSS, HTML, PHP, DELPHI)</td>
-        <td>&nbsp;</td>
-        <td>40</td>
-        <td>40</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
+        <td>PROGRAMACION PARA INTERNET, LENGUAJES DE PROGRAMACION (JSP, JAVASCRIPT, CSS, HTML, PHP, DELPHI)</td>
+        <td class="text-center">&nbsp;</td>
+        <td class="text-center">40</td>
+        <td class="text-center">40</td>
+        <td class="text-center">&nbsp;</td>
+        <td class="text-center">&nbsp;</td>
+        <td class="text-center">&nbsp;</td>
+        <td class="text-center">&nbsp;</td>
     </tr>
     <tr>
         <td>5</td>
-        <td>MODELAJE DE APLICACIONES WEB (UML),PROCESO UNIFICADO
-ESTRUCTURADO</td>
-        <td>&nbsp;</td>
-        <td>20</td>
-        <td>20</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
+        <td>MODELAJE DE APLICACIONES WEB (UML),PROCESO UNIFICADO ESTRUCTURADO</td>
+        <td class="text-center">&nbsp;</td>
+        <td class="text-center">20</td>
+        <td class="text-center">20</td>
+        <td class="text-center">&nbsp;</td>
+        <td class="text-center">&nbsp;</td>
+        <td class="text-center">&nbsp;</td>
+        <td class="text-center">&nbsp;</td>
     </tr>
     <tr>
         <td>6</td>
-        <td>ENSAMBLAJE Y MANTENIMIENTO DE COMPUTADORA EN HARDWARE Y
-SOFTWARE</td>
-        <td>20</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>25</td>
-        <td>25</td>
-        <td>30</td>
-        <td>25</td>
+        <td>ENSAMBLAJE Y MANTENIMIENTO DE COMPUTADORA EN HARDWARE Y SOFTWARE</td>
+        <td class="text-center">20</td>
+        <td class="text-center">&nbsp;</td>
+        <td class="text-center">&nbsp;</td>
+        <td class="text-center">25</td>
+        <td class="text-center">25</td>
+        <td class="text-center">30</td>
+        <td class="text-center">25</td>
     </tr>
     <tr>
         <td rowspan="3">7</td>
@@ -342,34 +276,34 @@ SOFTWARE</td>
     </tr>
     <tr>
         <td>Teórico</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>20</td>
-        <td>30</td>
-        <td>25</td>
-        <td>30</td>
+        <td class="text-center">&nbsp;</td>
+        <td class="text-center">&nbsp;</td>
+        <td class="text-center">&nbsp;</td>
+        <td class="text-center">20</td>
+        <td class="text-center">30</td>
+        <td class="text-center">25</td>
+        <td class="text-center">30</td>
     </tr>
     <tr>
         <td>Practico</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>25</td>
-        <td>25</td>
-        <td>25</td>
-        <td>25</td>
+        <td class="text-center">&nbsp;</td>
+        <td class="text-center">&nbsp;</td>
+        <td class="text-center">&nbsp;</td>
+        <td class="text-center">25</td>
+        <td class="text-center">25</td>
+        <td class="text-center">25</td>
+        <td class="text-center">25</td>
     </tr>
     <tr>
         <td>8</td>
         <td>DIDACTICA</td>
-        <td>10</td>
-        <td>10</td>
-        <td>&nbsp;</td>
-        <td>10</td>
-        <td>&nbsp;</td>
-        <td>10</td>
-        <td>10</td>
+        <td class="text-center">10</td>
+        <td class="text-center">10</td>
+        <td class="text-center">&nbsp;</td>
+        <td class="text-center">10</td>
+        <td class="text-center">&nbsp;</td>
+        <td class="text-center">10</td>
+        <td class="text-center">10</td>
     </tr>
 </table>
 
@@ -384,25 +318,15 @@ designará 1 docente y un estudiante veedor por cada temática.</p>
 
 <table>
     <tr>
-        <td>EVENTOS</td>
-        <td>FECHAS</td>
+        <th>Eventos</th>
+        <th>Fechas</th>
     </tr>
+<?php foreach ($convocatoria->getConvocatoriaEventos() as $e): ?>
     <tr>
-        <td>Publicación de convocatoria</td>
-        <td>24 de Mayo de 2012</td>
+        <td><?php echo $e->Evento->getDescripcion() ?></td>
+        <td class="text-center"><?php echo $e->getFecha() ?></td>
     </tr>
-    <tr>
-        <td>Presentación de documentos</td>
-        <td>11 de Junio de 2012</td>
-    </tr>
-    <tr>
-        <td>Publicación de rol de pruebas practicas y de conocimientos</td>
-        <td>13 de Junio de 2012</td>
-    </tr>
-    <tr>
-        <td>Publicación de Resultados</td>
-        <td>25 de Junio de 2012</td>
-    </tr>
+<?php endforeach; ?>
 </table>
 
 <h2>9. SELECCIÓN</h2>
@@ -410,26 +334,25 @@ designará 1 docente y un estudiante veedor por cada temática.</p>
 seleccionados para cada item, considerando los resultados finales y  las
 necesidades propias de cada laboratorio.</p>
 
-<br />
-<span style="display: block;" class="center">Cochabamba, 24 de Mayo de 2012.</span>
-<br />
-<br />
+<div class="fecha">
+    <p>Cochabamba, 24 de Mayo de 2012.</p>
+</div>
 
-<table class="center">
-    <tr>
-        <td><br /><br />Lic. Rolando Jaldin Rosales<br />DIR. CARR. INFORMATICA</td>
-        <td><br /><br />DIR. CARR. ING. SISTEMAS</td>
-    </tr>
-    <tr>
-        <td><br /><br /><br /><br />Lic. Henrry Frank Villarroel Tapia<br />JEFE DPTO<br />INFORMATICA-SISTEMAS</td>
-        <td><br /><br /><br /><br />Ing. Hernan Flores Garcia<br />DECANO FCyT-UMSS</td>
-    </tr>
-</table>
-		
-
-
-
-
-
-		
-
+<div class="firmas">
+    <div class="firma">
+        <div class="nombre">Lic. Rolando Jaldin Rosales</div>
+        <div class="cargo">Dir. Carr. Informática</div>
+    </div>
+    <div class="firma">
+        <div class="nombre">Lic. Yony Richard Montoya Burgos</div>
+        <div class="cargo">Dir. Carr. Ing. Sistemas</div>
+    </div>
+    <div class="firma">
+        <div class="nombre">Lic. Henrry Frank Villarroel Tapia</div>
+        <div class="cargo">Jefe Dpto. Informática-Sistemas</div>
+    </div>
+    <div class="firma">
+        <div class="nombre">Ing. Hernan Flores Garcia</div>
+        <div class="cargo">Decano FCyT-UMSS</div>
+    </div>
+</div>

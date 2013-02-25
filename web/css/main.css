@@ -240,14 +240,13 @@ a {
 
 /* pestañas de las convocatorias */
 #tabber {
-	background: #f0f0f0;
-	border: 1px solid #fff;
-	position: relative;
+    background: #f0f0f0;
+    border: 1px solid #ffffff;
+    position: relative;
 }
 
 #tabber>ul {
     overflow: hidden;
-    border-right: 1px solid #fff;
     height: 35px;
     position: absolute;
     z-index: 100;
@@ -259,65 +258,83 @@ a {
 }
 
 #tabber li a {
-    background: #ddd;
-    border: 1px solid #fcfcfc;
-    border-right: 0;
-    color: #666;
+    background: #dddddd;
+    color: #666666;
+    border-right: 1px solid #ffffff;
     cursor: pointer;
     display: block;
-    height: 35px;
-    line-height: 35px;
-    padding: 0 30px;
+    line-height: 34px;
+    padding: 0px 30px;
     text-decoration: none;
     text-transform: uppercase;
 }
 
 #tabber li a:hover {
-    background: #eee;
+    background: #eeeeee;
 }
 
 #tabber li a.active {
     background: #f5f5f5;
-    border: 1px solid #fff;
-    border-right: 0;
-    color: #333;
+    line-height: 35px;
+    color: #333333;
 }
 
+/* contenedores dentro de las pestañas */
 #tabber .tab_details {
     background: #f5f5f5;
-    border: 1px solid #fff;
-    margin: 34px 0 0;
+    border-top: 1px solid #ffffff;
+    margin-top: 34px;
 }
 
 #tabber .tab_details .tab_contents {
-    padding: 20px
+    padding: 0px 20px 10px 20px;
 }
 
-#tabber .tab_details .tab_contents h1 {
-    font: normal 24px/1.1em Georgia, "Times New Roman", Times, serif;
+/* Propiedades especificas para la previsualizacion de una convocatoria */
+/*#tabber .tab_details .tab_contents h1 {
     padding: 0 0 10px;
 }
 
 #tabber .tab_details .tab_contents p {
     padding: 0 0 10px;
+}*/
+
+#preview h1,
+#preview h2,
+#preview h3 {
+    font-family: Georgia, Times, "Times New Roman", serif;
+    font-weight: normal;
 }
 
-/* Propiedades especificas para la previsualizacion de una convocatoria */
 #preview h1 {
+    font-size: 20px;
     text-align: center;
+    padding: 0px 0px 10px 0px;
 }
 
-#preview h2, #preview h3 {
-    margin: 0.8em 0em;
+#preview h2 {
+    font-size: 18px;
+    padding: 15px 0px 5px 0px;
+}
+
+#preview h3 {
+    font-size: 16px;
+    padding: 10px 0px 5px 0px;
+}
+
+#preview p {
+    font-size: 12px;
+    padding: 10px 0px;
+    line-height: 20px;
 }
 
 #preview ol {
-    margin-left: 2.0em;
+    padding: 0px 0px 0px 40px;
     list-style-type: lower-alpha;
 }
 
 #preview ul {
-    margin-left: 2.0em;
+    padding: 0px 0px 0px 40px;
     list-style-type: disc;
 }
 
@@ -325,6 +342,34 @@ a {
     width: 100%;
 }
 
-/*#main form p input[type="text"].small-width {
-    width: 4.0em;
-}*/
+#preview table tr th {
+    padding: 4px 0px;
+}
+
+#preview table tr td {
+    padding: 4px;
+    border: 3px solid #ffffff;
+}
+
+#preview .fecha {
+    display: block;
+    padding: 20px 0px 20px 0px;
+}
+
+#preview .fecha p {
+    text-align: center;
+}
+
+#preview .firmas .firma {
+    display: inline-block;
+    margin: 60px 20px 20px 20px;
+}
+
+#preview .firmas .firma .nombre {
+    text-align: center;
+}
+
+#preview .firmas .firma .cargo {
+    text-align: center;
+    text-transform: uppercase;
+}

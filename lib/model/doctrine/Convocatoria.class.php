@@ -38,8 +38,19 @@ class Convocatoria extends BaseConvocatoria
 
         return $this->_opciones;
     }
-    
+
     public function tieneAccion($accion) {
         return in_array($accion, $this->getOpciones());
+    }
+
+    public function getTotalRequerimientos() {
+        $q = Doctrine_Query::create()
+            ->select('SUM(cr.cantidad_requerida)')
+            ->from('Requerimiento r')
+            ->leftJoin('r.ConvocatoriaRequerimiento cr')
+            ->where('cr.convocatoria_id = ?', $this->getId());
+
+        $array = $q->fetchArray();
+        return $array[0]['SUM'];
     }
 }
