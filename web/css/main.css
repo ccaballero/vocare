@@ -31,6 +31,13 @@ a {
 
 /* Propiedades para la barra de principal de enlaces */
 #menu {
+    /* propiedades para un layout desktop */
+    position: fixed;
+    width: 100%;
+    z-index: 10;
+    top: 0px;
+    /* fin propiedades */
+    
     background: #1A243B;
     background: -moz-linear-gradient(center top , #162D50, #1A243B) repeat scroll 0 0 transparent;
     box-shadow: 0px 2px 8px #666666;
@@ -79,6 +86,10 @@ a {
 #content {
     max-width: 960px;
     margin: 0px auto;
+    
+    /* propiedades para un layout desktop */
+    margin-top: 30px;
+    /* fin propiedades */
 }
 
 #main {

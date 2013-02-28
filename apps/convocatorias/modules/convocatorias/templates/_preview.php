@@ -39,9 +39,9 @@ para la gestión I/2012 y II/2012.</p>
 <h2>2. REQUISITOS</h2>
 
 <ol>
-<?php foreach ($convocatoria->getRequisitos() as $r): ?>
+<?php foreach ($convocatoria->getConvocatoriaRequisitos() as $r): ?>
     <li>
-        <p><?php echo $r->getTexto() ?></p>
+        <p><?php echo $r->Requisito->getTexto() ?></p>
     </li>
 <?php endforeach; ?>
 </ol>
@@ -53,9 +53,9 @@ exceptuando la materia titulación.</p>
 <h2>3. DOCUMENTOS REQUISITOS A PRESENTAR</h2>
 
 <ol>
-<?php foreach ($convocatoria->getDocumentos() as $d): ?>
+<?php foreach ($convocatoria->getConvocatoriaDocumentos() as $d): ?>
     <li>
-        <p><?php echo $d->getTexto() ?></p>
+        <p><?php echo $d->Documento->getTexto() ?></p>
     </li>
 <?php endforeach; ?>
 </ol>

@@ -30,8 +30,8 @@ class ConvocatoriaForm extends BaseConvocatoriaForm
         $this->widgetSchema->setFormFormatterName('custom');
 
         $this->widgetSchema['requerimientos_list']->setOption('renderer_options', array('formatter' => array($this, 'rendererRequerimientos')));
-        $this->widgetSchema['requisitos_list']->setOption('renderer_options', array('formatter' => array($this, 'rendererBase')));
-        $this->widgetSchema['documentos_list']->setOption('renderer_options', array('formatter' => array($this, 'rendererBase')));
+        $this->widgetSchema['requisitos_list']->setOption('renderer_options', array('formatter' => array($this, 'rendererRequisitos')));
+        $this->widgetSchema['documentos_list']->setOption('renderer_options', array('formatter' => array($this, 'rendererDocumentos')));
         $this->widgetSchema['eventos_list']->setOption('renderer_options', array('formatter' => array($this, 'rendererEventos')));
     }
 
@@ -83,6 +83,56 @@ class ConvocatoriaForm extends BaseConvocatoriaForm
         return $result;
     }
 
+    public function rendererRequisitos($widget, $inputs) {
+        $result = '<table class="form-table"><tr>'
+                . '<th>&nbsp;</th>'
+                . '<th>Orden</th>'
+                . '<th>&nbsp;</th>'
+                . '</tr>';
+        foreach ($inputs as $input) {
+            $item = preg_replace('/.* value="(\d+)" .*/', '$1', $input['input']);
+
+            $value = ' ';
+            if (array_key_exists($item, $this->requisitos)) {
+                $value = 'value="' . $this->requisitos[$item] . '" ';
+            }
+
+            $append = '<input type="text" name="requisitos[' . $item
+                . ']" class="text-center" style="width:36px"' . $value . '/>';
+
+            $result .= '<tr><td style="width:16px">' . $input['input']
+                    . '</td><td style="width:36px">' . $append
+                    . '</td><td>' . $input['label'] . '</td></tr>';
+        }
+        $result .= '</table>';
+        return $result;
+    }
+
+    public function rendererDocumentos($widget, $inputs) {
+        $result = '<table class="form-table"><tr>'
+                . '<th>&nbsp;</th>'
+                . '<th>Orden</th>'
+                . '<th>&nbsp;</th>'
+                . '</tr>';
+        foreach ($inputs as $input) {
+            $item = preg_replace('/.* value="(\d+)" .*/', '$1', $input['input']);
+
+            $value = ' ';
+            if (array_key_exists($item, $this->documentos)) {
+                $value = 'value="' . $this->documentos[$item] . '" ';
+            }
+
+            $append = '<input type="text" name="documentos[' . $item
+                . ']" class="text-center" style="width:36px"' . $value . '/>';
+
+            $result .= '<tr><td style="width:16px">' . $input['input']
+                    . '</td><td style="width:36px">' . $append
+                    . '</td><td>' . $input['label'] . '</td></tr>';
+        }
+        $result .= '</table>';
+        return $result;
+    }
+
     public function rendererEventos($widget, $inputs) {
         $result = '<table class="form-table"><tr>'
                 . '<th>&nbsp;</th>'
@@ -113,6 +163,16 @@ class ConvocatoriaForm extends BaseConvocatoriaForm
         $this->requerimientos = $requerimientos;
     }
 
+    public $requisitos = array();
+    public function setRequisitos($requisitos) {
+        $this->requisitos = $requisitos;
+    }
+
+    public $documentos = array();
+    public function setDocumentos($documentos) {
+        $this->documentos = $documentos;
+    }
+
     public $eventos = array();
     public function setEventos($eventos) {
         $this->eventos = $eventos;
@@ -122,6 +182,7 @@ class ConvocatoriaForm extends BaseConvocatoriaForm
         parent::doSave($con);
 
         $id_convocatoria = $this->object->getId();
+
         foreach ($this->object->Requerimientos as $requerimiento) {
             if (array_key_exists($requerimiento->id, $this->requerimientos[0]) &&
                 !empty($this->requerimientos[0][$requerimiento->id])) {
@@ -136,6 +197,36 @@ class ConvocatoriaForm extends BaseConvocatoriaForm
                     ->set('r.cantidad_requerida', '?', $cantidad)
                     ->where('r.convocatoria_id = ?', $id_convocatoria)
                     ->andwhere('r.requerimiento_id = ?', $id_requerimiento);
+                $q->execute();
+            }
+        }
+
+        foreach ($this->object->Requisitos as $requisito) {
+            if (array_key_exists($requisito->id, $this->requisitos) &&
+                !empty($this->requisitos[$requisito->id])) {
+
+                $id_requisito = $requisito->id;
+                $value = $this->requisitos[$requisito->id];
+                $q = Doctrine_Query::create()
+                    ->update('ConvocatoriaRequisito r')
+                    ->set('r.numero_orden', '?', $value)
+                    ->where('r.convocatoria_id = ?', $id_convocatoria)
+                    ->andwhere('r.requisito_id = ?', $id_requisito);
+                $q->execute();
+            }
+        }
+
+        foreach ($this->object->Documentos as $documento) {
+            if (array_key_exists($documento->id, $this->documentos) &&
+                !empty($this->documentos[$documento->id])) {
+
+                $id_documento = $documento->id;
+                $value = $this->documentos[$documento->id];
+                $q = Doctrine_Query::create()
+                    ->update('ConvocatoriaDocumento d')
+                    ->set('d.numero_orden', '?', $value)
+                    ->where('d.convocatoria_id = ?', $id_convocatoria)
+                    ->andwhere('d.documento_id = ?', $id_documento);
                 $q->execute();
             }
         }

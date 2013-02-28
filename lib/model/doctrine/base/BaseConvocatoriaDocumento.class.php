@@ -9,15 +9,18 @@ Doctrine_Manager::getInstance()->bindComponent('ConvocatoriaDocumento', 'doctrin
  * 
  * @property integer $convocatoria_id
  * @property integer $documento_id
+ * @property integer $numero_orden
  * @property Convocatoria $Convocatoria
  * @property Documento $Documento
  * 
  * @method integer               getConvocatoriaId()  Returns the current record's "convocatoria_id" value
  * @method integer               getDocumentoId()     Returns the current record's "documento_id" value
+ * @method integer               getNumeroOrden()     Returns the current record's "numero_orden" value
  * @method Convocatoria          getConvocatoria()    Returns the current record's "Convocatoria" value
  * @method Documento             getDocumento()       Returns the current record's "Documento" value
  * @method ConvocatoriaDocumento setConvocatoriaId()  Sets the current record's "convocatoria_id" value
  * @method ConvocatoriaDocumento setDocumentoId()     Sets the current record's "documento_id" value
+ * @method ConvocatoriaDocumento setNumeroOrden()     Sets the current record's "numero_orden" value
  * @method ConvocatoriaDocumento setConvocatoria()    Sets the current record's "Convocatoria" value
  * @method ConvocatoriaDocumento setDocumento()       Sets the current record's "Documento" value
  * 
@@ -43,6 +46,14 @@ abstract class BaseConvocatoriaDocumento extends sfDoctrineRecord
              'fixed' => 0,
              'unsigned' => true,
              'primary' => true,
+             'length' => 4,
+             ));
+        $this->hasColumn('numero_orden', 'integer', 4, array(
+             'type' => 'integer',
+             'fixed' => 0,
+             'unsigned' => true,
+             'notnull' => true,
+             'default' => 0,
              'length' => 4,
              ));
     }

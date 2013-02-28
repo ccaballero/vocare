@@ -17,11 +17,13 @@ abstract class BaseConvocatoriaDocumentoForm extends BaseFormDoctrine
     $this->setWidgets(array(
       'convocatoria_id' => new sfWidgetFormInputHidden(),
       'documento_id'    => new sfWidgetFormInputHidden(),
+      'numero_orden'    => new sfWidgetFormInputText(),
     ));
 
     $this->setValidators(array(
       'convocatoria_id' => new sfValidatorChoice(array('choices' => array($this->getObject()->get('convocatoria_id')), 'empty_value' => $this->getObject()->get('convocatoria_id'), 'required' => false)),
       'documento_id'    => new sfValidatorChoice(array('choices' => array($this->getObject()->get('documento_id')), 'empty_value' => $this->getObject()->get('documento_id'), 'required' => false)),
+      'numero_orden'    => new sfValidatorInteger(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('convocatoria_documento[%s]');

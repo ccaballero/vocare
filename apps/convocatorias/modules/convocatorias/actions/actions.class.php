@@ -31,21 +31,39 @@ class convocatoriasActions extends PlantillasDefault
         $this->form = new ConvocatoriaForm($convocatorias);
         $this->form->removeFocus();
 
-        $q = Doctrine_Query::create()
+        $q1 = Doctrine_Query::create()
             ->from('ConvocatoriaRequerimiento cr')
             ->where('cr.convocatoria_id = ?', $convocatorias->id);
         $requerimientos = array();
-        foreach ($q->fetchArray() as $_requerimiento) {
+        foreach ($q1->fetchArray() as $_requerimiento) {
             $requerimientos[0][$_requerimiento['requerimiento_id']] = $_requerimiento['numero_item'];
             $requerimientos[1][$_requerimiento['requerimiento_id']] = $_requerimiento['cantidad_requerida'];
         }
         $this->form->setRequerimientos($requerimientos);
 
-        $q = Doctrine_Query::create()
+        $q2 = Doctrine_Query::create()
+            ->from('ConvocatoriaRequisito cr')
+            ->where('cr.convocatoria_id = ?', $convocatorias->id);
+        $requisitos = array();
+        foreach ($q2->fetchArray() as $_requisito) {
+            $requisitos[$_requisito['requisito_id']] = $_requisito['numero_orden'];
+        }
+        $this->form->setRequisitos($requisitos);
+
+        $q3 = Doctrine_Query::create()
+            ->from('ConvocatoriaDocumento cd')
+            ->where('cd.convocatoria_id = ?', $convocatorias->id);
+        $documentos = array();
+        foreach ($q3->fetchArray() as $_documento) {
+            $documentos[$_documento['documento_id']] = $_documento['numero_orden'];
+        }
+        $this->form->setDocumentos($documentos);
+        
+        $q4 = Doctrine_Query::create()
             ->from('ConvocatoriaEvento ce')
             ->where('ce.convocatoria_id = ?', $convocatorias->id);
         $eventos = array();
-        foreach ($q->fetchArray() as $_evento) {
+        foreach ($q4->fetchArray() as $_evento) {
             $eventos[$_evento['evento_id']] = $_evento['fecha'];
         }
         $this->form->setEventos($eventos);
@@ -56,6 +74,8 @@ class convocatoriasActions extends PlantillasDefault
 
     protected function processForm(sfWebRequest $request, sfForm $form, $flash = '') {
         $form->setRequerimientos($request->getParameter('requerimientos'));
+        $form->setRequisitos($request->getParameter('requisitos'));
+        $form->setDocumentos($request->getParameter('documentos'));
         $form->setEventos($request->getParameter('eventos'));
 
         return parent::processForm($request, $form, $flash);

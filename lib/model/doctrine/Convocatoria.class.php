@@ -87,4 +87,40 @@ class Convocatoria extends BaseConvocatoria
         $array = $q->fetchArray();
         return $array[0]['SUM'];
     }
+    
+    public function getConvocatoriaRequerimientos() {
+        $q = Doctrine_Core::getTable('ConvocatoriaRequerimiento')
+          ->createQuery('cr')
+          ->where('cr.convocatoria_id = ?', $this->getId())
+          ->orderBy('cr.numero_item ASC');
+
+        return $q->execute();
+    }
+
+    public function getConvocatoriaRequisitos() {
+        $q = Doctrine_Core::getTable('ConvocatoriaRequisito')
+          ->createQuery('cr')
+          ->where('cr.convocatoria_id = ?', $this->getId())
+          ->orderBy('cr.numero_orden ASC');
+
+        return $q->execute();
+    }
+
+    public function getConvocatoriaDocumentos() {
+        $q = Doctrine_Core::getTable('ConvocatoriaDocumento')
+          ->createQuery('cd')
+          ->where('cd.convocatoria_id = ?', $this->getId())
+          ->orderBy('cd.numero_orden ASC');
+
+        return $q->execute();
+    }
+
+    public function getConvocatoriaEventos() {
+        $q = Doctrine_Core::getTable('ConvocatoriaEvento')
+          ->createQuery('ce')
+          ->where('ce.convocatoria_id = ?', $this->getId())
+          ->orderBy('ce.fecha ASC');
+
+        return $q->execute();
+    }
 }

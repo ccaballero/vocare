@@ -17,11 +17,13 @@ abstract class BaseConvocatoriaRequisitoForm extends BaseFormDoctrine
     $this->setWidgets(array(
       'convocatoria_id' => new sfWidgetFormInputHidden(),
       'requisito_id'    => new sfWidgetFormInputHidden(),
+      'numero_orden'    => new sfWidgetFormInputText(),
     ));
 
     $this->setValidators(array(
       'convocatoria_id' => new sfValidatorChoice(array('choices' => array($this->getObject()->get('convocatoria_id')), 'empty_value' => $this->getObject()->get('convocatoria_id'), 'required' => false)),
       'requisito_id'    => new sfValidatorChoice(array('choices' => array($this->getObject()->get('requisito_id')), 'empty_value' => $this->getObject()->get('requisito_id'), 'required' => false)),
+      'numero_orden'    => new sfValidatorInteger(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('convocatoria_requisito[%s]');

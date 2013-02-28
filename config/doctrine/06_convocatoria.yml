@@ -95,6 +95,12 @@ ConvocatoriaRequisito:
       fixed: false
       unsigned: true
       primary: true
+    numero_orden:
+      type: integer(4)
+      fixed: false
+      unsigned: true
+      notnull: true
+      default: 0
   relations:
     Convocatoria:
       foreignAlias: ConvocatoriaRequisitos
@@ -117,6 +123,12 @@ ConvocatoriaDocumento:
       fixed: false
       unsigned: true
       primary: true
+    numero_orden:
+      type: integer(4)
+      fixed: false
+      unsigned: true
+      notnull: true
+      default: 0
   relations:
     Convocatoria:
       foreignAlias: ConvocatoriaDocumentos
