@@ -8,30 +8,33 @@
     <tr class="header">
         <th>Convocatoria</th>
         <th>Estado</th>
-        <th colspan="6">&nbsp;</th>
+        <th>&nbsp;</th>
+        <th colspan="<?php echo Convocatoria::$OPERACIONES_POSIBLES ?>">&nbsp;</th>
     </tr>
-<?php foreach($list as $i => $convocatoria): ?>
+<?php foreach ($list as $i => $convocatoria): ?>
     <tr class="<?php echo fmod($i, 2) ? 'even' : 'odd' ?>">
-        <td class="left"><?php echo $convocatoria->getNombre() ?></td>
-        <td class="center"><?php echo ucfirst($convocatoria->getEstado()) ?></td>
-        <td>
+        <td class="text-left">
+            <?php echo $convocatoria->getNombre() ?>
+        </td>
+        <td class="text-center">
+            <?php echo ucfirst($convocatoria->getEstado()) ?>
+        </td>
+        <td class="text-center">
             <?php echo link_to(
                 'Examinar', 'convocatorias_show', $convocatoria
             ) ?>
         </td>
-    <?php foreach($convocatoria->getAcciones() as $accion): ?>
-        <td>
-        <?php if ($convocatoria->tieneAccion($accion)): ?>
+    <?php foreach ($convocatoria->getOperacionesPosibles() as $operacion => $propiedades): ?>
+        <td class="text-center">
+        <?php if ($convocatoria->hasOperacion($operacion)): ?>
             <?php echo link_to(
-                ucfirst($accion), 'convocatorias_delete', $convocatoria, array(
-                    'method' => 'delete',
-                    'confirm' => '¿Esta seguro que desea eliminar la convocatoria?'
-                )
-            ) ?>
+                ucfirst($propiedades[0]), 'convocatorias_' . $operacion, $convocatoria, array(
+                    'method' => 'post',
+                    'confirm' => $propiedades[1]
+                )) ?>
         <?php endif; ?>
         </td>
     <?php endforeach; ?>
-        </td>
     </tr>
 <?php endforeach; ?>
 </table>

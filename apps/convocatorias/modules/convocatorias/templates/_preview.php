@@ -23,9 +23,11 @@ para la gestión I/2012 y II/2012.</p>
     <tr>
         <td class="text-right"><?php echo $r->numero_item ?></td>
         <td class="text-center"><?php echo $r->cantidad_requerida ?> Aux.</td>
-        <td class="text-center"><?php echo $r->Requerimiento->getHorasAcademicas() ?> Hrs/mes</td>
+        <td class="text-center">
+            <?php echo $r->Requerimiento->getHorasAcademicas() ?> Hrs/mes</td>
         <td><?php echo $r->Requerimiento->getNombre() ?></td>
-        <td class="text-center"><?php echo $r->Requerimiento->getCodigo() ?></td>
+        <td class="text-center">
+            <?php echo $r->Requerimiento->getCodigo() ?></td>
     </tr>
 <?php endforeach; ?>
     <tr>

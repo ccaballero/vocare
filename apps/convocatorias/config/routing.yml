@@ -5,11 +5,22 @@ convocatorias:
   class: sfDoctrineRouteCollection
   options:
     model: Convocatoria
-    actions: [list, new, create, edit, update, delete, show]
+    actions:
+      - list
+      - new
+      - create
+      - edit
+      - update
+      - show
+      - delete
     collection_actions:
       borradores: [get]
     object_actions:
-      toggle: [put]
+      promover: [post]
+      eliminar: [post]
+      enmendar: [post]
+      anular: [post]
+      finalizar: [post]
 
 requerimientos:
   class: sfDoctrineRouteCollection

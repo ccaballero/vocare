@@ -60,4 +60,10 @@ class convocatoriasActions extends PlantillasDefault
 
         return parent::processForm($request, $form, $flash);
     }
+
+    public function executePromover() {}
+    public function executeEliminar() {}
+    public function executeEnmendar() {}
+    public function executeAnular() {}
+    public function executeFinalizar() {}
 }

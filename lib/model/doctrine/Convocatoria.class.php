@@ -2,45 +2,79 @@
 
 class Convocatoria extends BaseConvocatoria
 {
-    protected $_opciones = null;
+    public static $OPERACIONES_POSIBLES = 5;
+
+    protected $_estados_posibles = array(
+        'borrador',
+        'emitido',
+        'anulado',
+        'vigente',
+        'finalizado',
+        'eliminado',
+    );
+
+    protected $_operaciones_posibles = array(
+        'eliminar' => array(
+            'eliminar',
+            '¿Esta seguro que desea eliminar esta convocatoria?',
+        ),
+        'promover' => array(
+            'promover',
+            '¿Esta seguro que desea promover esta convocatoria? Esto convertirá a esta en una convocatoria emitida',
+        ),
+        'enmendar' => array(
+            'enmendar',
+            '¿Esta seguro que desea enmendar esta convocatoria?',
+        ),
+        'anular' => array(
+            'anular',
+            '¿Esta seguro que desea anular la convocatoria?',
+        ),
+        'finalizar' => array(
+            'finalizar',
+            '¿Esta seguro que desea finalizar esta convocatoria?',
+        ),
+    );
+
+    protected $_operaciones_disponibles = array();
 
     public function __toString() {
         return '[' . $this->getEstado() . '] ' . $this->getNombre();
     }
 
-    public function getAcciones() {
-        return array('promover', 'enmendar', 'finalizar', 'anular', 'eliminar');
+    public function getOperacionesPosibles() {
+        return $this->_operaciones_posibles;
     }
 
-    public function getOpciones() {
-        if ($this->_opciones == null) {
+     public function getOperacionesDisponibles() {
+        if ($this->_operaciones_disponibles == null) {
             switch ($this->getEstado()) {
                 case 'borrador':
-                    $this->_opciones = array('promover', 'eliminar');
-                    break;
-                case 'emitido':
-                    $this->_opciones = array('promover', 'enmendar', 'anular');
-                    break;
-                case 'anulado':
-                    $this->_opciones = array();
-                    break;
-                case 'vigente':
-                    $this->_opciones = array('finalizar', 'anular');
-                    break;
-                case 'finalizado':
-                    $this->_opciones = array();
+                    $this->_operaciones_disponibles = array('eliminar', 'promover');
                     break;
                 case 'eliminado':
-                    $this->_opciones = array();
+                    $this->_operaciones_disponibles = array();
+                    break;
+                case 'emitido':
+                    $this->_operaciones_disponibles = array('promover', 'enmendar', 'anular');
+                    break;
+                case 'vigente':
+                    $this->_operaciones_disponibles = array('anular', 'finalizar');
+                    break;
+                case 'anulado':
+                    $this->_operaciones_disponibles = array();
+                    break;
+                case 'finalizado':
+                    $this->_operaciones_disponibles = array();
                     break;
             }
         }
 
-        return $this->_opciones;
+        return $this->_operaciones_disponibles;
     }
 
-    public function tieneAccion($accion) {
-        return in_array($accion, $this->getOpciones());
+    public function hasOperacion($operacion) {
+        return in_array($operacion, $this->getOperacionesDisponibles());
     }
 
     public function getTotalRequerimientos() {
