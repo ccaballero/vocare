@@ -16,7 +16,7 @@ abstract class BaseConvocatoriaForm extends BaseFormDoctrine
   {
     $this->setWidgets(array(
       'id'                  => new sfWidgetFormInputHidden(),
-      'nombre'              => new sfWidgetFormInputText(),
+      'gestion'             => new sfWidgetFormInputText(),
       'estado'              => new sfWidgetFormChoice(array('choices' => array('borrador' => 'borrador', 'emitido' => 'emitido', 'anulado' => 'anulado', 'vigente' => 'vigente', 'finalizado' => 'finalizado', 'eliminado' => 'eliminado'))),
       'created_at'          => new sfWidgetFormDateTime(),
       'updated_at'          => new sfWidgetFormDateTime(),
@@ -29,7 +29,7 @@ abstract class BaseConvocatoriaForm extends BaseFormDoctrine
 
     $this->setValidators(array(
       'id'                  => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
-      'nombre'              => new sfValidatorString(array('max_length' => 255)),
+      'gestion'             => new sfValidatorString(array('max_length' => 255)),
       'estado'              => new sfValidatorChoice(array('choices' => array(0 => 'borrador', 1 => 'emitido', 2 => 'anulado', 3 => 'vigente', 4 => 'finalizado', 5 => 'eliminado'), 'required' => false)),
       'created_at'          => new sfValidatorDateTime(),
       'updated_at'          => new sfValidatorDateTime(),

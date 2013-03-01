@@ -108,7 +108,7 @@ a {
     color: #162D50;
 }
 
-#main h1, #main h2, #main h3 {
+#main h1, #main h2, #main h3, #main h4 {
     font-family: Times,"Times New Roman",Georgia,serif;
 }
 
@@ -124,6 +124,11 @@ a {
 
 #main h3 {
     font-size: 20px;
+    margin-top: 10px;
+}
+
+#main h4 {
+    font-size: 18px;
     margin-top: 10px;
 }
 
@@ -312,7 +317,8 @@ a {
 
 #preview h1,
 #preview h2,
-#preview h3 {
+#preview h3,
+#preview h4 {
     font-family: Georgia, Times, "Times New Roman", serif;
     font-weight: normal;
 }
@@ -331,6 +337,11 @@ a {
 #preview h3 {
     font-size: 16px;
     padding: 10px 0px 5px 0px;
+}
+
+#preview h4 {
+    font-size: 14px;
+    padding: 5px 0px 5px 0px;
 }
 
 #preview p {

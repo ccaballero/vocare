@@ -11,14 +11,14 @@ class ConvocatoriaForm extends BaseConvocatoriaForm
         );
 
         $this->widgetSchema->setLabels(array(
-            'nombre' => 'Nombre:',
+            'gestion' => 'Gestión:',
             'requerimientos_list' => 'Requerimientos:',
             'requisitos_list' => 'Requisitos:',
             'documentos_list' => 'Documentos:',
             'eventos_list' => 'Eventos:',
         ));
 
-        $this->widgetSchema['nombre']->setAttribute('class', 'focus');
+        $this->widgetSchema['gestion']->setAttribute('class', 'focus');
 
         $this->widgetSchema['requerimientos_list']->setOption('renderer_class', 'sfWidgetFormSelectCheckbox');
         $this->widgetSchema['requisitos_list']->setOption('renderer_class', 'sfWidgetFormSelectCheckbox');
@@ -36,7 +36,7 @@ class ConvocatoriaForm extends BaseConvocatoriaForm
     }
 
     public function removeFocus() {
-        $this->widgetSchema['nombre']->setAttributes(array());
+        $this->widgetSchema['gestion']->setAttributes(array());
     }
 
     public static function rendererBase($widget, $inputs) {

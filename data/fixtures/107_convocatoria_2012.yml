@@ -1,7 +1,8 @@
 Convocatoria:
   convocatoria_1:
-    nombre: Gestión I/2012 - II/2012
+    gestion: I/2012 - II/2012
     estado: finalizado
+    publicacion: '2012-06-19'
     
 ConvocatoriaRequerimiento:
   convocatoria_requerimiento_1_1:

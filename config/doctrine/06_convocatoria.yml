@@ -9,7 +9,7 @@ Convocatoria:
       unsigned: true
       primary: true
       autoincrement: true
-    nombre:
+    gestion:
       type: string(255)
       fixed: false
       notnull: true
@@ -24,6 +24,10 @@ Convocatoria:
         - finalizado
         - eliminado
       default: borrador
+      notnull: true
+    publicacion:
+      type: date
+      fixed: false
       notnull: true
   relations:
     Requerimientos:

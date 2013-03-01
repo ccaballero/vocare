@@ -1,4 +1,4 @@
-<h1><?php echo $object->getNombre() ?></h1>
+<h1><?php echo $object->getGestion() ?></h1>
 <p style="font-size: 18px; margin-bottom: 10px;"><?php echo '(' . $object->getEstado() . ')' ?></p>
 
 <div id="tabber">

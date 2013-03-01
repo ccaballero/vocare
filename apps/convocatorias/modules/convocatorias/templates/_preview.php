@@ -1,13 +1,13 @@
 <h1>CONVOCATORIA A CONCURSO DE MERITOS Y PRUEBAS DE CONOCIMIENTOS PARA OPTAR A
 AUXILIATURAS EN LABORATORIO DE COMPUTACION, DE MANTENIMIENTO Y DESARROLLO
 <br />==========<br />
-<?php echo $convocatoria->getNombre() ?></h1>
+GESTIÓN <?php echo $convocatoria->getGestion() ?></h1>
 
 <p>El Departamento de Informática y Sistemas junto a las Carreras de Ing.
 Informática e Ing. de Sistemas, de la Facultad de Ciencias y Tecnología, convoca
 al concurso de meritos y examen de competencia para la provisión de Auxiliares
 del Departamento, tomando como base los requerimientos que se tienen programados
-para la gestión I/2012 y II/2012.</p>
+para la gestión <?php echo $convocatoria->getGestion() ?>.</p>
 
 <h2>1. REQUERIMIENTOS</h2>
 
@@ -33,6 +33,7 @@ para la gestión I/2012 y II/2012.</p>
     <tr>
         <td class="text-right">Total</td>
         <td><?php echo $convocatoria->getTotalRequerimientos() ?> Aux.</td>
+        <td colspan="3">&nbsp;</td>
     </tr>
 </table>
 
@@ -80,7 +81,7 @@ postulante.</p></li>
 
 <h3>4.2. DE LA FECHA Y LUGAR</h3>
 
-<p>La documentación deberá ser presentada hasta horas 11:30 del día 11 de Junio
+<p>La documentación deberá ser presentada hasta horas 11:30 del día 5 de Julio
 del 2012, en Secretaria del Departamento con la Sra. Fabiola Rojas
 Caballero.</p>
 
@@ -108,7 +109,7 @@ puntaje final y se pondera de la siguiente manera.</p>
         <td>35</td>
     </tr>
     <tr>
-        <td>Documentos de experiencia en laboratorios</td>
+        <td><strong>Documentos de experiencia en laboratorios</strong></td>
         <td>20</td>
     </tr>
     <tr>
@@ -118,9 +119,11 @@ item respectivo:</td>
     </tr>
     <tr>
         <td>2 pts/semestre Auxiliar titular.</td>
+        <td>&nbsp;</td>
     </tr>
     <tr>
         <td>1 pts/semestre Auxiliar Invitado.</td>
+        <td>&nbsp;</td>
     </tr>
     <tr>
         <td>Auxiliares AdHonorem Laboratorio Departamento de Informática -
@@ -129,6 +132,7 @@ Sistemas:</td>
     </tr>
     <tr>
         <td>1 pts/semestre Auxiliar.</td>
+        <td>&nbsp;</td>
     </tr>
     <tr>
         <td>Otros auxiliares en laboratorios de computación:</td>
@@ -136,9 +140,10 @@ Sistemas:</td>
     </tr>
     <tr>
         <td>1 pts/semestre Auxiliar.</td>
+        <td>&nbsp;</td>
     </tr>
     <tr>
-        <td>Producción</td>
+        <td><strong>Producción</strong></td>
         <td>5</td>
     </tr>
     <tr>
@@ -147,9 +152,10 @@ Sistemas:</td>
     </tr>
     <tr>
         <td>2.5 pto/certificado</td>
+        <td>&nbsp;</td>
     </tr>
     <tr>
-        <td>Documentos de experiencia extrauniversitaria y de capacitación</td>
+        <td><strong>Documentos de experiencia extrauniversitaria y de capacitación</strong></td>
         <td>10</td>
     </tr>
     <tr>
@@ -159,6 +165,7 @@ directivo en centro de cómputo:</td>
     </tr>
     <tr>
         <td>2 puntos por certificado</td>
+        <td>&nbsp;</td>
     </tr>
     <tr>
         <td>Certificación de capacitación en el área especifica expedidos por el
@@ -167,9 +174,11 @@ sistema universitario</td>
     </tr>
     <tr>
         <td>2 ptos/certificado aprobación</td>
+        <td>&nbsp;</td>
     </tr>
     <tr>
         <td>1 pto/certificado asistencia</td>
+        <td>&nbsp;</td>
     </tr>
 </table>
 <p>NOTA: Todo certificado será ponderado hasta el valor del puntaje especificado
@@ -178,12 +187,13 @@ en la tabla.</p>
 <h2>6. CALIFICACION DE CONOCIMIENTOS</h2>
 
 <p>La calificación de conocimientos se realiza sobre la base de 100 puntos,
-equivalentes al 80% de la calificación final. Las pruebas para los auxiliares
-sobre conocimientos se realizaran de acuerdo al temario y tabla siguiente.</p>
+equivalentes al 80% de la calificación final.</p>
+<p>Las pruebas para los auxiliares sobre conocimientos se realizaran de acuerdo
+al temario y tabla siguiente.</p>
 
 <h3>6.1. PORCENTAJES DE CALIFICACION PARA CADA TIPO DE AUXILIAR</h3>
 
-<h3>6.1.1. PRUEBAS ESCRITAS</h3>
+<h4>6.1.1. PRUEBAS ESCRITAS</h4>
 
 <p>Los postulantes deben de forma obligatoria rendir todas las pruebas escritas
 en el (los) item(es) a los que se postulan.</p>
@@ -326,7 +336,7 @@ designará 1 docente y un estudiante veedor por cada temática.</p>
 <?php foreach ($convocatoria->getConvocatoriaEventos() as $e): ?>
     <tr>
         <td><?php echo $e->Evento->getDescripcion() ?></td>
-        <td class="text-center"><?php echo $e->getFecha() ?></td>
+        <td class="text-center"><?php echo pretty_date($e->getFecha()) ?></td>
     </tr>
 <?php endforeach; ?>
 </table>
@@ -337,7 +347,7 @@ seleccionados para cada item, considerando los resultados finales y  las
 necesidades propias de cada laboratorio.</p>
 
 <div class="fecha">
-    <p>Cochabamba, 24 de Mayo de 2012.</p>
+    <p>Cochabamba, <?php echo pretty_date($convocatoria->getPublicacion()) ?>.</p>
 </div>
 
 <div class="firmas">
@@ -346,7 +356,7 @@ necesidades propias de cada laboratorio.</p>
         <div class="cargo">Dir. Carr. Informática</div>
     </div>
     <div class="firma">
-        <div class="nombre">Lic. Yony Richard Montoya Burgos</div>
+        <div class="nombre">Lic. Yony Montoya Burgos</div>
         <div class="cargo">Dir. Carr. Ing. Sistemas</div>
     </div>
     <div class="firma">

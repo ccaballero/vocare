@@ -2,10 +2,8 @@ Documento:
   documento_1:
     texto: |
       Presentar Solicitud escrita para cada auxiliatura especificando
-      claramente la auxiliatura a la que se postula:\n
-       - Código de auxiliatura.\n
-       - Nombre de la auxiliatura, dirigida a la Jefatura
-      de Departamento.
+      claramente la auxiliatura a la que se postula: código de auxiliatura,
+      nombre de la auxiliatura, dirigida a la Jefatura de Departamento.
   documento_2:
     texto: |
       Kardex actualizado gestión 2011, expedido por registros e
@@ -31,9 +29,8 @@ Documento:
     texto: |
       Presentar solicitud escrita dirigida a la Jefatura de Departamento
       de Informatica y Sistemas especificando claramente la(s)
-      auxiliatura(s) a la(s) que se postula:\n
-       - Código de auxiliatura.\n
-       - Nombre de la auxiliatura.
+      auxiliatura(s) a la(s) que se postula: código de auxiliatura, nombre de
+      la auxiliatura.
   documento_8:
     texto: |
       Kardex actualizado a la gestión 2012 (periodos cumplidos a la
@@ -43,4 +40,3 @@ Documento:
     texto: |
       Presentar certificado de condición de estudiante expedido por el
       Departamento de Registros e Inscripciones.
-      

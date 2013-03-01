@@ -14,7 +14,7 @@
 <?php foreach ($list as $i => $convocatoria): ?>
     <tr class="<?php echo fmod($i, 2) ? 'even' : 'odd' ?>">
         <td class="text-left">
-            <?php echo $convocatoria->getNombre() ?>
+            <?php echo $convocatoria->getGestion() ?>
         </td>
         <td class="text-center">
             <?php echo ucfirst($convocatoria->getEstado()) ?>
