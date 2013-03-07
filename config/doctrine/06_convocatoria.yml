@@ -29,6 +29,11 @@ Convocatoria:
       type: date
       fixed: false
       notnull: true
+    redaccion:
+      type: clob
+      fixed: false
+      notnull: true
+      default: ''
   relations:
     Requerimientos:
       class: Requerimiento
