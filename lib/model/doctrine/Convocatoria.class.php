@@ -130,6 +130,29 @@ class Convocatoria extends BaseConvocatoria
     }
 
     public function getFirmas() {
-        echo 'asdf';
+        return array(
+            new Firma('Dir. Carr. Informática', 'Lic. Rolando Jaldin Rosales'),
+            new Firma('Dir. Carr. Ing. Sistemas', 'Lic. Yony Montoya Burgos'),
+            new Firma('Jefe Dpto. Informática-Sistemas', 'Lic. Henrry Frank Villarroel Tapia'),
+            new Firma('Decano FCyT-UMSS', 'Ing. Hernan Flores Garcia'),
+        );
+    }    
+}
+
+class Firma {
+    public $cargo;
+    public $nombre;
+    
+    public function __construct($cargo, $nombre) {
+        $this->cargo = $cargo;
+        $this->nombre = $nombre;
+    }
+    
+    public function getCargo() {
+        return $this->cargo;
+    }
+    
+    public function getNombre() {
+        return $this->nombre;
     }
 }

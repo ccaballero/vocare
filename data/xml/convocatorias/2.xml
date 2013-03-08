@@ -54,9 +54,8 @@ exceptuando la materia titulación.</p>
 
 <p>NOTA: La documentación y las fotocopias de certificados, deben ser validadas
 gratuitamente en Secretaria del Departamento de Informática y Sistemas.
-(Presentar original y fotocopia). Se deberá presentar documentación separada por
-CADA UNA de las postulaciones, debidamente FOLIADA. La documentación no será
-devuelta.</p>
+(Presentar original y fotocopia). Se deberá presentar documentación debidamente
+FOLIADA. La documentación no será devuelta.</p>
 
 <h2>4. FECHA Y LUGAR DE PRESENTACION DE DOCUMENTOS</h2>
 
@@ -64,12 +63,12 @@ devuelta.</p>
 <p>Presentación de la documentación en sobre manila cerrado y rotulado con:</p>
 <ul>
     <li><p>Nombre y apellidos completos, dirección, teléfono(s) y e-mail del postulante.</p></li>
-    <li><p>Código de item de la auxiliatura a la que se postula.</p></li>
-    <li><p>Nombre de la auxiliatura a la que se presenta.</p></li>
+    <li><p>Código(s) de item de la(s) auxiliatura(s) a la(s) que se postula.</p></li>
+    <li><p>Nombre(s) de la(s) auxiliatura(s) a la(s) que se presenta.</p></li>
 </ul>
 
 <h3>4.2. DE LA FECHA Y LUGAR</h3>
-<p>La documentación deberá ser presentada hasta horas 11:30 del día 5 de Julio
+<p>La documentación deberá ser presentada hasta horas 17:30 del día 27 de Noviembre
 del 2012, en Secretaria del Departamento con la Sra. Fabiola Rojas Caballero.</p>
 
 <h2>5. CALIFICACION DE MERITOS</h2>
@@ -206,8 +205,8 @@ en el (los) item(es) a los que se postulan.</p>
         <td class="text-center">10</td>
         <td class="text-center">10</td>
         <td class="text-center">10</td>
-        <td class="text-center">10</td>
-        <td class="text-center">10</td>
+        <td class="text-center">&nbsp;</td>
+        <td class="text-center">&nbsp;</td>
     </tr>
     <tr>
         <td>2</td>
@@ -217,7 +216,7 @@ en el (los) item(es) a los que se postulan.</p>
         <td class="text-center">&nbsp;</td>
         <td class="text-center">10</td>
         <td class="text-center">10</td>
-        <td class="text-center">&nbsp;</td>
+        <td class="text-center">10</td>
         <td class="text-center">&nbsp;</td>
     </tr>
     <tr>
@@ -262,7 +261,7 @@ en el (los) item(es) a los que se postulan.</p>
         <td class="text-center">25</td>
         <td class="text-center">25</td>
         <td class="text-center">30</td>
-        <td class="text-center">25</td>
+        <td class="text-center">35</td>
     </tr>
     <tr>
         <td rowspan="3">7</td>
@@ -287,7 +286,7 @@ en el (los) item(es) a los que se postulan.</p>
         <td class="text-center">25</td>
         <td class="text-center">25</td>
         <td class="text-center">25</td>
-        <td class="text-center">25</td>
+        <td class="text-center">35</td>
     </tr>
     <tr>
         <td>8</td>
@@ -298,7 +297,7 @@ en el (los) item(es) a los que se postulan.</p>
         <td class="text-center">10</td>
         <td class="text-center">&nbsp;</td>
         <td class="text-center">10</td>
-        <td class="text-center">10</td>
+        <td class="text-center">&nbsp;</td>
     </tr>
 </table>
 

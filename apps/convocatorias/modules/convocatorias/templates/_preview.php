@@ -7,6 +7,7 @@ $tpl = file_get_contents($xml_file);
 $parts = preg_split('/(\[\[ | \]\])/', $tpl);
 
 $foreach_flag = false;
+$foreach_start = -1;
 $foreach_collection = null;
 $foreach_components = array();
 
@@ -15,30 +16,71 @@ for ($i = 1; $i < count($parts); $i+=2) {
 
     if (preg_match('/foreach [a-z]/', $tag)) {
         $element = substr($tag, 8);
-        $foreach_flag = true;
 
-        $method = 'get' . ucfirst($element);
-        $foreach_collection = $convocatoria->$method();
+        $foreach_flag = true;
+        $foreach_start = $i;
+        $foreach_collection = getProperty($convocatoria, $element);
+        $foreach_components = array();
 
         $parts[$i] = '';
     } else if (preg_match('/endforeach/', $tag)) {
-        $foreach_flag = false;
-        $foreach_collection = null;
+        $resume = array();
 
-        $parts[$i] = '';
+        $transpose = transponer($foreach_components);
+
+        for ($j = 0; $j < count($transpose); $j++) {
+            $res = '';
+            for ($k = 0; $k < count($transpose[$j]); $k++) {
+                $res .= $parts[$foreach_start + (2 * $k) + 1] . $transpose[$j][$k];
+            }
+            $res .= $parts[$i - 1];
+            $resume[] = $res;
+        }
+        
+        for ($c = $foreach_start; $c < $i; $c++) {
+            $parts[$c] = '';
+        }
+
+        $parts[$i] = implode('', $resume);
+
+        $foreach_flag = false;
+        $foreach_start = -1;
+        $foreach_collection = null;
+        $foreach_components = array();
     } else {
         if ($foreach_flag) {
+            $props = array();
             foreach ($foreach_collection as $element) {
-                $method = 'get' . ucfirst($tag);
-                $foreach_components[] = $element->$method();
+                $props[] = getProperty($element, $tag);
             }
-
+            $foreach_components[] = $props;
             $parts[$i] = '';
         } else {
-            $method = 'get' . ucfirst($tag);
-            $parts[$i] = $convocatoria->$method();
+            $parts[$i] = getProperty($convocatoria, $tag);
         }
     }
+}
+
+function transponer($matriz) {
+    $transpuesta = array();
+    for ($i = 0; $i < count($matriz); $i++) {
+        for ($j = 0; $j < count($matriz[$i]); $j++) {
+            $transpuesta[$j][$i] = $matriz[$i][$j];
+        }
+    }
+    return $transpuesta;
+}
+
+function getProperty($object, $property) {
+    $components = explode('.', $property);
+
+    $iterator = $object;
+    foreach ($components as $component) {
+        $method = 'get' . ucfirst($component);
+        $iterator = $iterator->$method();
+    }
+
+    return $iterator;
 }
 
 echo implode('', $parts);
