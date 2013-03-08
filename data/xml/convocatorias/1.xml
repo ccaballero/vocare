@@ -22,16 +22,16 @@
         </tr>
     [[ foreach requerimientos ]]
         <tr>
-            <td class="text-right">[[ numero_item ]]</td>
-            <td class="text-center">[[ cantidad_requerida ]] Aux.</td>
-            <td class="text-center">[[ horas_academicas ]] Hrs/mes</td>
+            <td class="text-right">[[ numeroItem ]]</td>
+            <td class="text-center">[[ cantidadRequerida ]] Aux.</td>
+            <td class="text-center">[[ horasAcademicas ]] Hrs/mes</td>
             <td>[[ nombre ]]</td>
             <td class="text-center">[[ codigo ]]</td>
         </tr>
     [[ endforeach ]]
         <tr>
             <td class="text-right">Total</td>
-            <td>[[ total_requerimientos ]] Aux.</td>
+            <td>[[ totalRequerimientos ]] Aux.</td>
             <td colspan="3">&nbsp;</td>
         </tr>
     </table>

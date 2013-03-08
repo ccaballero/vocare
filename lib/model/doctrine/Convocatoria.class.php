@@ -123,4 +123,13 @@ class Convocatoria extends BaseConvocatoria
 
         return $q->execute();
     }
+    
+    public function getPublicacion() {
+        include_once realpath(dirname(__FILE__) . '/../../../apps/convocatorias/lib/helper/PrettyDateHelper.php');
+        return pretty_date($this->_get('publicacion'));
+    }
+
+    public function getFirmas() {
+        echo 'asdf';
+    }
 }
