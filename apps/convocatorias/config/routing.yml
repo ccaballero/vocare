@@ -16,6 +16,8 @@ convocatorias:
     collection_actions:
       borradores: [get]
     object_actions:
+      texto: [get]
+      pdf: [get]
       promover: [post]
       eliminar: [post]
       enmendar: [post]

@@ -81,6 +81,21 @@ class convocatoriasActions extends PlantillasDefault
         return parent::processForm($request, $form, $flash);
     }
 
+    public function executeTexto() {
+        $convocatoria = $this->getRoute()->getObject();
+
+        $tpl = new myTemplate();
+        $tpl->setTemplateFile(
+            realpath(dirname(__FILE__) .
+            '/../../../../../data/txt/convocatorias/' .
+            $convocatoria->getId() . '.txt'));
+        $tpl->setObject($convocatoria);
+
+        header('Content-Type: text/plain; charset=utf-8');
+        echo $tpl->render();
+        die;
+    }
+    
     public function executePromover() {}
     public function executeEliminar() {}
     public function executeEnmendar() {}

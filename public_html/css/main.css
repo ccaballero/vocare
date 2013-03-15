@@ -395,3 +395,15 @@ a {
     text-align: center;
     text-transform: uppercase;
 }
+
+.buttons {
+    float: right;
+    margin: 0px 0px 10px 0px;
+}
+
+.buttons ul {}
+
+.buttons ul li {
+    list-style: none;
+    display: inline-block;
+}

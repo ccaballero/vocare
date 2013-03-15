@@ -9,6 +9,13 @@
     <div class="tab_details">
         <a name="preview"></a>
         <div id="preview" class="tab_contents">
+            <div class="buttons">
+                <ul>
+                    <li><?php echo link_to('Ver TXT', 'convocatorias_texto', $object) ?></li>
+                    <li><?php echo link_to('Ver PDF', 'convocatorias_pdf', $object) ?></li>
+                </ul>
+            </div>
+            <div class="clear"></div>
             <?php include_partial('convocatorias/preview', array('convocatoria' => $object)) ?>
         </div>
     	<div id="editor" class="tab_contents">
