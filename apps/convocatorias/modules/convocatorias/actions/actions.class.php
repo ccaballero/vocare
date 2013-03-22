@@ -58,7 +58,7 @@ class convocatoriasActions extends PlantillasDefault
             $documentos[$_documento['documento_id']] = $_documento['numero_orden'];
         }
         $this->form->setDocumentos($documentos);
-        
+
         $q4 = Doctrine_Query::create()
             ->from('ConvocatoriaEvento ce')
             ->where('ce.convocatoria_id = ?', $convocatorias->id);
@@ -70,6 +70,15 @@ class convocatoriasActions extends PlantillasDefault
 
         $this->object = $this->getRoute()->getObject();
         $this->forward404Unless($this->object);
+
+        $tpl = new myTemplate();
+        $tpl->setTemplateFile(realpath(
+            APPLICATION_PATH . '/data/xml/convocatorias/' .
+            $this->object->getId() . '.xml')
+        );
+        $tpl->setObject($this->object);
+
+        $this->preview = $tpl->render();
     }
 
     protected function processForm(sfWebRequest $request, sfForm $form, $flash = '') {
@@ -82,20 +91,55 @@ class convocatoriasActions extends PlantillasDefault
     }
 
     public function executeTexto() {
-        $convocatoria = $this->getRoute()->getObject();
+        $object = $this->getRoute()->getObject();
 
         $tpl = new myTemplate();
-        $tpl->setTemplateFile(
-            realpath(dirname(__FILE__) .
-            '/../../../../../data/txt/convocatorias/' .
-            $convocatoria->getId() . '.txt'));
-        $tpl->setObject($convocatoria);
+        $tpl->setTemplateFile(realpath(
+            APPLICATION_PATH . '/data/txt/convocatorias/' .
+            $object->getId() . '.txt')
+        );
+        $tpl->setObject($object);
 
-        header('Content-Type: text/plain; charset=utf-8');
-        echo $tpl->render();
-        die;
+        $this->setLayout(false);
+        sfConfig::set('sf_web_debug', false);
+
+        $this->getResponse()->clearHttpHeaders();
+        $this->getResponse()->setHttpHeader('Pragma: public', true);
+        $this->getResponse()->setContentType('text/plain; charset=utf-8');
+
+        $this->getResponse()->sendHttpHeaders();
+        $this->getResponse()->setContent($tpl->render());
+
+        return sfView::NONE;
     }
-    
+
+    public function executePdf() {
+        $object = $this->getRoute()->getObject();
+
+        $latex_dir = realpath(APPLICATION_PATH . '/data/tex/convocatorias');
+        $pdflatex_path = '/usr/bin/pdflatex';
+
+        $tex_file = $latex_dir . DIRECTORY_SEPARATOR . $object->getId() . '.tex';
+        $pdf_file = $latex_dir . DIRECTORY_SEPARATOR . $object->getId() . '.pdf';
+
+        exec($pdflatex_path . ' -output-directory ' . $latex_dir . ' ' . $tex_file);
+
+        $this->setLayout(false);
+        sfConfig::set('sf_web_debug', false);
+
+        $this->forward404Unless(file_exists($pdf_file));
+
+        $this->getResponse()->clearHttpHeaders();
+        $this->getResponse()->setHttpHeader('Pragma: public', true);
+        $this->getResponse()->setHttpHeader('Content-Disposition', 'attachment; filename="convocatoria.pdf' . '"');
+        $this->getResponse()->setContentType('application/pdf');
+
+        $this->getResponse()->sendHttpHeaders();
+        $this->getResponse()->setContent(readfile($pdf_file));
+
+        return sfView::NONE;
+    }
+
     public function executePromover() {}
     public function executeEliminar() {}
     public function executeEnmendar() {}

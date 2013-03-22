@@ -7,20 +7,29 @@
     	<li class="tab"><a href="#editor">Edición</a></li>
     </ul>
     <div class="tab_details">
-        <a name="preview"></a>
         <div id="preview" class="tab_contents">
+            <a name="preview"></a>
             <div class="buttons">
-                <ul>
-                    <li><?php echo link_to('Ver TXT', 'convocatorias_texto', $object) ?></li>
-                    <li><?php echo link_to('Ver PDF', 'convocatorias_pdf', $object) ?></li>
-                </ul>
+                <?php echo link_to('Ver TXT', 'convocatorias_texto',
+                    $object, array(
+                        'target' => '_blank'
+                    )
+                ) ?>
+                <?php echo link_to('Ver PDF', 'convocatorias_pdf',
+                    $object, array(
+                        'target' => '_blank'
+                    )
+                ) ?>
             </div>
             <div class="clear"></div>
-            <?php include_partial('convocatorias/preview', array('convocatoria' => $object)) ?>
+            <?php echo $sf_data->getRaw('preview') ?>
         </div>
     	<div id="editor" class="tab_contents">
             <a name="editor"></a>
-            <?php include_partial('convocatorias/editor', array('convocatoria' => $object, 'form' => $form)) ?>
+            <?php echo form_tag_for($form, '@convocatorias') ?>
+                <?php echo $form ?>
+                <p class="submit"><input type="submit" value="Registrar" /></p>
+            </form>
         </div>
     </div>
 </div>
