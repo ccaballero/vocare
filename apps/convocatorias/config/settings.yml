@@ -26,14 +26,25 @@ all:
   .settings:
     # Form security secret (CSRF protection)
     csrf_secret:            ce43c4693a5bc46e1902003b9cffefa7b7b0a3a6
-
     # Output escaping settings
     escaping_strategy:      true
     escaping_method:        ESC_SPECIALCHARS
-
     # Enable the database manager
     use_database:           true
-
+    # Helpers used by system
     standard_helpers:
       - Partial
       - PrettyDate
+    # Modules needed for authentification
+    enabled_modules:
+      - default
+      - sfGuardAuth
+      - sfGuardRegister
+      - sfGuardUser
+      - sfGuardGroup
+      - sfGuardPermission
+    # nana na nanana
+    login_module: sfGuardAuth
+    login_action: signin
+    secure_module: sfGuardAuth
+    secure_action: secure
