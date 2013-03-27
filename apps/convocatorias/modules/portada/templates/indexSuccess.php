@@ -23,7 +23,7 @@ informática y sistemas.</p>
         secretaria de la carrera de informática y sistemas, y pedir la asignación
         de tu cuenta a una nueva convocatoria.</p>
         <p>Según la etapa en la que se encuentra la convocatoria, tu puedes ir
-        viendo un conjunto de opciones, que fueron construidos para facilitar el
+        viendo un conjunto de opciones, que fueron construidas para facilitar el
         proceso para todos los postulantes.</p>
     </dd>
     <dt><strong>Como parte de una comisión</strong></dt>
@@ -33,9 +33,9 @@ informática y sistemas.</p>
         fiable, completa, veráz, y al dia.</p>
         <p>Si perteneces a la comisión de meritos, podrás ir marcando las
         condicionales requeridas segun las especificaciones de la convocatoria,
-        ademas de ver imprimir reportes de este proceso en multiples formatos.
+        ademas de ver e imprimir reportes de este proceso en multiples formatos.
         </p>
-        <p>Si pertences a una comisión de evaluación de conocimientos, puedes
+        <p>Si perteneces a una comisión de evaluación de conocimientos, puedes
         subir las calificaciones de los postulantes, ademas de generar tales
         reportes en multiples formatos.</p>
     </dd>
