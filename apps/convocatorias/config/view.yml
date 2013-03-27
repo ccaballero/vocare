@@ -3,14 +3,14 @@
 
 default:
   http_metas:
-    content-type: text/html
+    content-type: text/html; charset=utf-8
 
   metas:
-    #title:        symfony project
-    #description:  symfony project
-    #keywords:     symfony, project
-    #language:     en
-    #robots:       index, follow
+    title: vocare
+    description: sistema para el lanzamiento de convocatorias en el departamento de informática y sistemas
+    keywords: vocare, cidetsi, convocatorias
+    language: es
+    robots: index, follow
 
   stylesheets:
    - main.css
@@ -21,5 +21,5 @@ default:
     - jquery-ui-1.10.1.custom.min.js
     - convocatorias.js
 
-  has_layout:     true
-  layout:         layout
+  has_layout: true
+  layout: layout
