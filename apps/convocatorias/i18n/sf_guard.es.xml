@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE xliff PUBLIC "-//XLIFF//DTD XLIFF//EN" "http://www.oasis-open.org/committees/xliff/documents/xliff.dtd" >
+<xliff version="1.0">
+  <file original="global" source-language="en" datatype="plaintext">
+    <header/>
+    <body>
+      <trans-unit>
+        <source>Signin</source>
+        <target>Ingresar</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Want to register?</source>
+        <target>¿Desea registrarse?</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Username or E-Mail</source>
+        <target>Nombre de usuario o E-mail</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Register</source>
+        <target>Registrarse</target>
+      </trans-unit>
+      
+      <!--Registro de usuario-->
+      <trans-unit>
+        <source>First name</source>
+        <target>Nombres</target>
+      </trans-unit>
+      
+      <trans-unit>
+        <source>Last name</source>
+        <target>Apellidos</target>
+      </trans-unit>
+      
+      <trans-unit>
+        <source>Email address</source>
+        <target>E-mail</target>
+      </trans-unit>
+      
+      <trans-unit>
+        <source>Password again</source>
+        <target>Repita Contraseña</target>
+      </trans-unit>
+      
+      <trans-unit>
+          <source>Group Register </source>
+          <target>Registro de Grupo</target>
+      </trans-unit>
+      
+      <trans-unit>
+          <source>Is empty </source>
+          <target>Está vacio</target>
+      </trans-unit>
+      
+    </body>
+  </file>
+</xliff>
