@@ -1,3 +1,5 @@
 all:
   sf_guard_plugin:
     routes_register: false
+    allow_login_with_email: false
+    signin_form: sfGuardCustomFormSignin

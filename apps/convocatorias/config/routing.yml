@@ -3,13 +3,17 @@ sf_guard_signin:
   url: /ingresar
   param: { module: sfGuardAuth, action: signin}
 
-sf_guard_groupRegister:
-  url: /roles
-  param: {module: sfGuardGroup, action: groupRegister}
-
 sf_guard_signout:
   url: /salir
   param: {module: sfGuardAuth, action: signout}
+
+sf_guard_forgot_password:
+  url: /forgot_password
+  param: {module: sfGuardForgotPassword, action: index}
+
+sf_guard_groupRegister:
+  url: /roles
+  param: {module: sfGuardGroup, action: groupRegister}
 
 sf_guard_register:
   url: /registro
@@ -26,10 +30,6 @@ sf_guard_user:
 sf_guard_permission:
   url: /permissions
   param: {module: sfGuardPermission, action: index}
-
-sf_guard_forgot_password:
-  url: /forgot_password
-  param: {module: sfGuardForgotPassword, action: index}
 
 # routing for convocatorias
 convocatorias:

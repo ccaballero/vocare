@@ -35,6 +35,10 @@ all:
     standard_helpers:
       - Partial
       - PrettyDate
+      - I18N
+    #Form helper is out!.
+    i18n: on
+    default_culture: es_BO
     # Modules needed for authentification
     enabled_modules:
       - default
@@ -43,6 +47,7 @@ all:
       - sfGuardUser
       - sfGuardGroup
       - sfGuardPermission
+    
     # nana na nanana
     login_module: sfGuardAuth
     login_action: signin
