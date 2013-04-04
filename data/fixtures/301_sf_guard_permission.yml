@@ -5,8 +5,22 @@ sfGuardPermission:
     name: ver_convocatoria
   editar_convocatoria:
     name: editar_convocatoria
+  
+  lista_plantillas:
+    name: lista_plantillas
+  ver_plantilla:
+    name: ver_plantilla
+  editar_plantilla:
+    name: editar_plantilla
+  
+  lista_usuarios:
+    name: lista_usuarios
+  ver_usuario:
+    name: ver_usuario
+  editar_usuario:
+    name: editar_usuario
 
-#    
+#
 #  Permission_secretaria_jefe_de_departamento:
 #    name: secretaria_de_jefe_de_departamento
 #    description: 1
@@ -14,27 +28,27 @@ sfGuardPermission:
 #  Permission_direccion_de_carrera:
 #    name: direccion_de_carrera
 #    description: 1
-#    
+#
 #  Permission_consejo_de_carrera_docente:
 #    name: consejo_de_carrera_docente
 #    description: 1
-# 
+#
 #  Permission_consejo_de_carrera_estudiante:
-#    name: consejo_de_carrera_estudiante 
+#    name: consejo_de_carrera_estudiante
 #    description: 1
-#    
+#
 #  Permission_comision_de_meritos_docente:
 #    name: comision_de_meritos_docente
 #    description: 1
-#    
+#
 #  Permission_comision_de_meritos_estudiante:
 #    name: comision_de_meritos_estudiante
 #    description: 1
-#    
+#
 #  Permission_comision_de_conocimientos_docente:
 #    name: comision_de_conocimientos_docente
 #    description: 1
-#    
+#
 #  Permission_comision_de_conocimientos_estudiante:
 #    name: comision_de_conocimientos_estudiante
 #    description: 1

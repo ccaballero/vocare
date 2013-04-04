@@ -3,6 +3,7 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
     <head>
+        <link rel="shortcut icon" href="../../img/vocare.png" />
         <?php include_javascripts() ?>
         <?php include_stylesheets() ?>
         <?php include_http_metas() ?>
