@@ -1,37 +1,40 @@
 sfGuardPermission:
-  
-  Permission_jefe_de_departamento:
-    name: jefe_de_departamento
-    description: 1
-    
-  Permission_secretaria_jefe_de_departamento:
-    name: secretaria_de_jefe_de_departamento
-    description: 1
+  lista_convocatorias:
+    name: lista_convocatorias
+  ver_convocatoria:
+    name: ver_convocatoria
+  editar_convocatoria:
+    name: editar_convocatoria
 
-  Permission_direccion_de_carrera:
-    name: direccion_de_carrera
-    description: 1
-    
-  Permission_consejo_de_carrera_docente:
-    name: consejo_de_carrera_docente
-    description: 1
- 
-  Permission_consejo_de_carrera_estudiante:
-    name: consejo_de_carrera_estudiante 
-    description: 1
-    
-  Permission_comision_de_meritos_docente:
-    name: comision_de_meritos_docente
-    description: 1
-    
-  Permission_comision_de_meritos_estudiante:
-    name: comision_de_meritos_estudiante
-    description: 1
-    
-  Permission_comision_de_conocimientos_docente:
-    name: comision_de_conocimientos_docente
-    description: 1
-    
-  Permission_comision_de_conocimientos_estudiante:
-    name: comision_de_conocimientos_estudiante
-    description: 1
+#    
+#  Permission_secretaria_jefe_de_departamento:
+#    name: secretaria_de_jefe_de_departamento
+#    description: 1
+#
+#  Permission_direccion_de_carrera:
+#    name: direccion_de_carrera
+#    description: 1
+#    
+#  Permission_consejo_de_carrera_docente:
+#    name: consejo_de_carrera_docente
+#    description: 1
+# 
+#  Permission_consejo_de_carrera_estudiante:
+#    name: consejo_de_carrera_estudiante 
+#    description: 1
+#    
+#  Permission_comision_de_meritos_docente:
+#    name: comision_de_meritos_docente
+#    description: 1
+#    
+#  Permission_comision_de_meritos_estudiante:
+#    name: comision_de_meritos_estudiante
+#    description: 1
+#    
+#  Permission_comision_de_conocimientos_docente:
+#    name: comision_de_conocimientos_docente
+#    description: 1
+#    
+#  Permission_comision_de_conocimientos_estudiante:
+#    name: comision_de_conocimientos_estudiante
+#    description: 1

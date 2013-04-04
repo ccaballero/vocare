@@ -8,9 +8,7 @@ class sfGuardCustomFormSignin extends sfGuardFormSignin
         $this->widgetSchema['username']->setAttribute('class', 'focus');
 
         $decorator = new FormDecoratorDefault($this->getWidgetSchema());
-  	$this->widgetSchema->addFormFormatter('custom', $decorator);
-  	$this->widgetSchema->setFormFormatterName('custom');
-
-        $this->widgetSchema->getFormFormatter()->setTranslationCatalogue('sf_guard.es');
+        $this->widgetSchema->addFormFormatter('custom', $decorator);
+        $this->widgetSchema->setFormFormatterName('custom');
     }
 }

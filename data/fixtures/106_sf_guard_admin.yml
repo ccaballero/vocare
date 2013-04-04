@@ -1,20 +1,20 @@
 sfGuardUser:
   User_admin:
-    first_name:     admin
-    last_name:      admin
+    first_name:     Carlos Eduardo
+    last_name:      Caballero Burgoa
     email_address:  cijkb.j@gmail.com
     username:       admin
     password:       admin
     is_super_admin: true
-    Groups:         [Group_admin]
+#    Groups:         [Group_admin]
 
-sfGuardGroup:
-  Group_admin:
-    name:           admin
-    description:    Administrator group
-    Permissions:    [Permission_admin]
- 
-sfGuardPermission:
-  Permission_admin:
-    name:           admin
-    description:    Administrator permission
+#sfGuardGroup:
+#  Group_admin:
+#    name:           admin
+#    description:    Administrator group
+#    Permissions:    [Permission_admin]
+# 
+#sfGuardPermission:
+#  Permission_admin:
+#    name:           admin
+#    description:    Administrator permission

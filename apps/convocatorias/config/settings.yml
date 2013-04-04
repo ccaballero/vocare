@@ -1,6 +1,3 @@
-# You can find more information about this file on the symfony website:
-# http://www.symfony-project.org/reference/1_4/en/04-Settings
-
 prod:
   .settings:
     no_script_name:         true
@@ -37,18 +34,18 @@ all:
       - PrettyDate
       - I18N
     #Form helper is out!.
-    i18n: on
+    i18n: true
     default_culture: es_BO
+    charset: utf-8
     # Modules needed for authentification
     enabled_modules:
       - default
       - sfGuardAuth
-      - sfGuardRegister
       - sfGuardUser
-      - sfGuardGroup
-      - sfGuardPermission
-    
-    # nana na nanana
+#      - sfGuardRegister
+#      - sfGuardGroup
+#      - sfGuardPermission
+    # Settings for sfDoctrineGuardPlugin
     login_module: sfGuardAuth
     login_action: signin
     secure_module: sfGuardAuth

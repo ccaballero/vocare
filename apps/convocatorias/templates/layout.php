@@ -21,6 +21,9 @@
                 <?php if ($sf_user->hasFlash('notice')): ?>
                     <p class="message"><?php echo $sf_user->getFlash('notice') ?></p>
                 <?php endif; ?>
+                <?php if ($sf_user->hasFlash('error')): ?>
+                    <p class="message"><?php echo $sf_user->getFlash('notice') ?></p>
+                <?php endif; ?>
                 <?php echo $sf_content ?>
             </div>
             <div id="footer"><?php include_partial('portada/footer') ?></div>

@@ -4,6 +4,8 @@ class ConvocatoriaForm extends BaseConvocatoriaForm
 {
     public function configure() {
         unset(
+            $this['publicacion'],
+            $this['redaccion'],
             $this['evaluaciones_list'],
             $this['created_at'],
             $this['updated_at'],

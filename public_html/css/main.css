@@ -231,11 +231,11 @@ a {
 
 #main form ul.error_list {
     list-style: none;
+    margin-left: 215px;
 }
 
 #main form ul.error_list li {
     color: #666666;
-    font-weight: bold;
     font-style: italic;
 }
 

@@ -1,21 +1,66 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE xliff PUBLIC "-//XLIFF//DTD XLIFF//EN" "http://www.oasis-open.org/committees/xliff/documents/xliff.dtd" >
 <xliff version="1.0">
-  <file original="global" source-language="en" datatype="plaintext">
-    <header/>
-    <body>
-      <trans-unit>
-        <source>Signin</source>
-        <target>Ingresar</target>
-      </trans-unit>
-      <trans-unit>
-        <source>Want to register?</source>
-        <target>¿Desea registrarse?</target>
-      </trans-unit>
-      <trans-unit>
-        <source>Username or E-Mail</source>
-        <target>Nombre de usuario o E-mail</target>
-      </trans-unit>
+    <file original="global" source-language="en" datatype="plaintext">
+        <header/>
+        <body>
+            <trans-unit>
+                <source>Homepage</source>
+                <target>Inicio</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Requests</source>
+                <target>Convocatorias</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Templates</source>
+                <target>Plantillas</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Login</source>
+                <target>Ingresar</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Logout</source>
+                <target>Salir</target>
+            </trans-unit>
+
+            <!-- signin page -->
+            <trans-unit>
+                <source>Signin</source>
+                <target>Ingresar</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Username</source>
+                <target>Nombre de usuario</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Password</source>
+                <target>Contraseña</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Remember</source>
+                <target>Recordarme</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Forgot your password?</source>
+                <target>¿Olvidaste tu contraseña?</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Want to register?</source>
+                <target>¿Desea registrarse?</target>
+            </trans-unit>
+
+            <!-- form validation -->
+            <trans-unit>
+                <source>Required.</source>
+                <target>Campo requerido.</target>
+            </trans-unit>
+            <trans-unit>
+                <source>The username and/or password is invalid.</source>
+                <target>Los datos son invalidos.</target>
+            </trans-unit>
+
       <trans-unit>
         <source>Register</source>
         <target>Registrarse</target>
@@ -59,23 +104,7 @@
           <source>Email address</source>
           <target>Correo electrónico</target>
       </trans-unit>
-      <trans-unit>
-          <source>Username</source>
-          <target>Nombre de usuario</target>
-      </trans-unit>
-      <trans-unit>
-          <source>Password</source>
-          <target>Contraseña</target>
-      </trans-unit>
-      <trans-unit>
-          <source></source>
-          <target></target>
-      </trans-unit>
-      <trans-unit>
-          <source></source>
-          <target></target>
-      </trans-unit>
-      
-    </body>
-  </file>
+
+        </body>
+    </file>
 </xliff>
