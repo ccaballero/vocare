@@ -1,8 +1,11 @@
 <h1>Convocatorias</h1>
 
-<div class="tasks"><?php echo link_to(
-    'Crear nueva convocatoria', url_for('convocatorias_new')
-) ?></div>
+<div class="tasks">
+    <ul>
+        <li><?php echo link_to('Crear nueva convocatoria', url_for('convocatorias_new')) ?></li>
+        <li><?php echo link_to('Administración de plantillas', url_for('portada/plantillas')) ?></li>
+    </ul>
+</div>
 
 <table>
     <tr class="header">

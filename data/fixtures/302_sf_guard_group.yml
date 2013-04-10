@@ -1,87 +1,69 @@
 sfGuardGroup:
   jefe_de_departamento:
     name: Jefe de Departamento
-    description: Maxima autoridad del departamento
-    Permissions: [lista_convocatorias, ver_convocatoria, editar_convocatoria]
+    description: Maxima autoridad del Departamento de Informática y Sistemas.
+    Permissions:
+      - list_convocatorias
+      - view_convocatorias
+      - edit_convocatorias
+      - list_plantillas
+      - view_plantillas
+      - edit_plantillas
+      - list_usuarios
+      - view_usuarios
+      - edit_usuarios
+  secretaria_de_departamento:
+    name: Secretaría de Departamento
+    description: Secretaría del Departamento de Informática y Sistemas.
+    Permissions:
+      - list_convocatorias
+      - view_convocatorias
+      - edit_convocatorias
 
-#  Group_secretaria_jefe_de_departamento:
-#    name: Secretaria de jefe de departamento
-#    description: 2
-#    Permissions: [Permission_secretaria_jefe_de_departamento]
-#
-#
 #
 #  Group_direccion_de_carrera_ing_sistemas:
 #    name: Direccion de carrera de ing. de sistemas
-#    description: 2
 #    Permissions: [Permission_direccion_de_carrera]
-# 
 #  Group_direccion_de_carrera_ing_informatica:
 #    name: Direccion de carrera de ing. informatica
-#    description: 2
 #    Permissions: [Permission_direccion_de_carrera]
-#    
-#    
-# 
 #  Group_consejo_de_carrera_ing_sistemas_docente:
 #    name: Consejo de carrera de ing. de sistemas docente
 #    description: Persona que vela por la mejora de la carrera
 #    Permissions: [Permission_consejo_de_carrera_docente]
-# 
 #  Group_consejo_de_carrera_ing_sistemas_estudiante:
 #    name: Consejo de carrera de ing. de sistemas estudiante
 #    description: Persona que vela por la mejora de la carrera
 #    Permissions: [Permission_consejo_de_carrera_estudiante]
-#
 #  Group_consejo_de_carrera_ing_informatica_docente:
 #    name: Consejo de carrera de ing. informatica docente
 #    description: Persona que vela por la mejora de la carrera
 #    Permissions: [Permission_consejo_de_carrera_docente]
-# 
 #  Group_consejo_de_carrera_ing_informatica_estudiante:
 #    name: Consejo de carrera de ing. informatica estudiante
 #    description: Persona que vela por la mejora de la carrera
 #    Permissions: [Permission_consejo_de_carrera_estudiante]
-# 
-# 
-# 
 #  Group_comision_de_meritos_docente_sistemas:
 #    name: Comision de meritos docente sistemas
-#    description: 2
 #    Permissions: [Permission_comision_de_meritos_docente]
-# 
 #  Group_comision_de_meritos_estudiante_sistemas:
 #    name: Comision de meritos estudiante sistemas
-#    description: 2
 #    Permissions: [Permission_comision_de_meritos_estudiante]
-# 
 #  Group_comision_de_meritos_docente_informatica:
 #    name: Comision de meritos docente informatica
-#    description: 2
 #    Permissions: [Permission_comision_de_meritos_docente]
-# 
 #  Group_comision_de_meritos_estudiante_informatica:
 #    name: Comision de meritos estudiante informatica
-#    description: 2
 #    Permissions: [Permission_comision_de_meritos_estudiante]
-# 
 #  Group_comision_de_conocimientos_docente_sistemas:
 #    name: Comision de conocimientos docente sistemas
-#    description: 2
 #    Permissions: [Permission_comision_de_conocimientos_docente]
-# 
 #  Group_comision_de_conocimientos_estudiante_sistemas:
 #    name: Comision de conocimientos estudiante sistemas
-#    description: 2
 #    Permissions: [Permission_comision_de_conocimientos_estudiante]
-# 
 #  Group_comision_de_conocimientos_docente_informatica:
 #    name: Comision de conocimientos docente informatica
-#    description: 2
 #    Permissions: [Permission_comision_de_conocimientos_docente]
-# 
 #  Group_comision_de_conocimientos_estudiante_informatica:
 #    name: Comision de conocimientos estudiante informatica
-#    description: 2
 #    Permissions: [Permission_comision_de_conocimientos_estudiante]
-#

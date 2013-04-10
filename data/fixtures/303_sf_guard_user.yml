@@ -2,25 +2,22 @@ sfGuardUser:
   jefe_de_departamento:
     first_name: Lic. Henrry Frank
     last_name: Villarroel Tapia
-    email_address: hvillarroel@memi.umss.edu.bo 
+    email_address: hvillarroel@memi.umss.edu.bo
     username: hvillarroel
-    password: hvillarroel
-    is_super_admin: false
+    password: asdf
     Groups: [jefe_de_departamento]
+  secretaria_de_departamento:
+    first_name: Fabiola
+    last_name: Rodriguez Caballero
+    email_address: persona1@memi.umss.edu.bo
+    username: frodriguez
+    password: asdf
+    Groups: [secretaria_de_departamento]
 
-#  secretaria_de_jefe_de_departamento:
-#    first_name: Fabiola
-#    last_name: Rodriguez Completar
-#    email_address: persona1@memi.umss.edu.bo
-#    username: fabiola_rodriguez
-#    password: frodriguez
-#    is_super_admin: false
-#    Groups: [Group_secretaria_jefe_de_departamento]
-#      
 #  direccion_de_carrera_ing_sistemas:
 #    first_name: Lic. Yony Richard
-#    last_name: Montoya Burgos 
-#    email_address: yony@setbol.net 
+#    last_name: Montoya Burgos
+#    email_address: yony@setbol.net
 #    username: yony_montoya
 #    password: ymontoya
 #    is_super_admin: false
@@ -29,23 +26,23 @@ sfGuardUser:
 #  direccion_de_carrera_ing_informatica:
 #    first_name: Msc. Lic. K. Rolando
 #    last_name: Jaldin Rosales
-#    email_address: rjaldin@hotmail.com 
+#    email_address: rjaldin@hotmail.com
 #    username: rolando_jaldin
 #    password: rjaldin
 #    is_super_admin: false
 #    Groups: [Group_direccion_de_carrera_ing_informatica]
-#          
-#      
-#      
+#
+#
+#
 #  persona_0001:
 #    first_name: Ing. Jhonny
 #    last_name: Herrera Acebey
-#    email_address: herrera@ucbcba.edu.bo 
+#    email_address: herrera@ucbcba.edu.bo
 #    username: jhonny_herrera
 #    password: jherrera
 #    is_super_admin: false
 #    Groups: [Group_consejo_de_carrera_ing_sistemas_docente, Group_comision_de_conocimientos_docente_sistemas]
-#      
+#
 #  persona_0002:
 #    first_name: Tania
 #    last_name: Valero Malele
@@ -54,16 +51,16 @@ sfGuardUser:
 #    password: tvalero
 #    is_super_admin: false
 #    Groups: [Group_consejo_de_carrera_ing_sistemas_estudiante, Group_comision_de_meritos_estudiante_sistemas]
-#      
+#
 #  persona_0003:
 #    first_name: Msc. Indira Elva
 #    last_name: Camacho del Castillo
-#    email_address: agrofru@gmail.com 
+#    email_address: agrofru@gmail.com
 #    username: indira_camacho
 #    password: icamacho
 #    is_super_admin: false
 #    Groups: [Group_consejo_de_carrera_ing_informatica_docente]
-#      
+#
 #  persona_0004:
 #    first_name: usuario
 #    last_name: anonimo1
@@ -72,11 +69,11 @@ sfGuardUser:
 #    password: usuario1
 #    is_super_admin: false
 #    Groups: [Group_consejo_de_carrera_ing_informatica_estudiante]
-# 
+#
 #  persona_0005:
-#    first_name: Ing. Jimmy 
-#    last_name: Villarroel Novillo 
-#    email_address: jimmyvn_@hotmail.com 
+#    first_name: Ing. Jimmy
+#    last_name: Villarroel Novillo
+#    email_address: jimmyvn_@hotmail.com
 #    username: jimmy_villarroel
 #    password: jvillarroel
 #    is_super_admin: false

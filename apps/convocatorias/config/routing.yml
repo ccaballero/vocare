@@ -12,6 +12,16 @@ sf_guard_user:
   url: /usuarios
   param: {module: sfGuardUser, action: index}
 
+# sfGuardGroup
+sf_guard_group:
+  url: /grupos
+  param: {module: sfGuardGroup, action: index}
+
+# sfGuardPermission
+sf_guard_permission:
+  url: /permisos
+  param: {module: sfGuardPermission, action: index}
+
 #sf_guard_forgot_password:
 #  url: /forgot_password
 #  param: {module: sfGuardForgotPassword, action: index}
@@ -24,13 +34,6 @@ sf_guard_user:
 #  url: /registro
 #  param: {module: sfGuardRegister, action: index}
 #
-#sf_guard_group:
-#  url: /groups
-#  param: {module: sfGuardGroup, action: index}
-#
-#sf_guard_permission:
-#  url: /permissions
-#  param: {module: sfGuardPermission, action: index}
 
 # routing for convocatorias
 convocatorias:

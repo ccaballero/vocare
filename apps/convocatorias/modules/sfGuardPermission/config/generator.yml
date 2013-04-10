@@ -1,0 +1,19 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    config:
+      fields:
+        last_name:
+          label: Name
+        first_name:
+          label: Description
+      list:
+        title: Permission list
+        display: [name, description]
+        sort: [name, asc]
+      filter:
+        display: [name, description]
+      new:
+        title: Add a new group
+      edit:
+        title: Editar "%%name%%"

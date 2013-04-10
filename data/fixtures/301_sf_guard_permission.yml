@@ -1,54 +1,46 @@
 sfGuardPermission:
-  lista_convocatorias:
-    name: lista_convocatorias
-  ver_convocatoria:
-    name: ver_convocatoria
-  editar_convocatoria:
-    name: editar_convocatoria
-  
-  lista_plantillas:
-    name: lista_plantillas
-  ver_plantilla:
-    name: ver_plantilla
-  editar_plantilla:
-    name: editar_plantilla
-  
-  lista_usuarios:
-    name: lista_usuarios
-  ver_usuario:
-    name: ver_usuario
-  editar_usuario:
-    name: editar_usuario
+  list_convocatorias:
+    name: Listar convocatorias
+    description: Listar las convocatorias registradas en el sistema.
+  view_convocatorias:
+    name: Ver convocatoria
+    description: Ver la información detallada de una convocatoria.
+  edit_convocatorias:
+    name: Editar convocatoria
+    description: Editar la información de una convocatoria.
+  list_plantillas:
+    name: Listar plantillas
+    description: Listar las plantillas registradas en el sistema.
+  view_plantillas:
+    name: Ver plantilla
+    description: Ver la información detallada de una plantilla.
+  edit_plantillas:
+    name: Editar plantilla
+    description: Editar la información de una plantilla.
+  list_usuarios:
+    name: Listar usuarios
+    description: Listar los usuarios registrados en el sistema.
+  view_usuarios:
+    name: Ver usuario
+    description: Ver la información detallada de un usuario.
+  edit_usuarios:
+    name: Editar usuario
+    description: Editar la información de un usuario.
 
-#
+
 #  Permission_secretaria_jefe_de_departamento:
 #    name: secretaria_de_jefe_de_departamento
-#    description: 1
-#
 #  Permission_direccion_de_carrera:
 #    name: direccion_de_carrera
-#    description: 1
-#
 #  Permission_consejo_de_carrera_docente:
 #    name: consejo_de_carrera_docente
-#    description: 1
-#
 #  Permission_consejo_de_carrera_estudiante:
 #    name: consejo_de_carrera_estudiante
-#    description: 1
-#
 #  Permission_comision_de_meritos_docente:
 #    name: comision_de_meritos_docente
-#    description: 1
-#
 #  Permission_comision_de_meritos_estudiante:
 #    name: comision_de_meritos_estudiante
-#    description: 1
-#
 #  Permission_comision_de_conocimientos_docente:
 #    name: comision_de_conocimientos_docente
-#    description: 1
-#
 #  Permission_comision_de_conocimientos_estudiante:
 #    name: comision_de_conocimientos_estudiante
-#    description: 1

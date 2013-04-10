@@ -96,6 +96,10 @@
                 <target>Usuario</target>
             </trans-unit>
             <trans-unit>
+                <source>Users</source>
+                <target>Usuarios</target>
+            </trans-unit>
+            <trans-unit>
                 <source>Permissions and groups</source>
                 <target>Permisos y grupos</target>
             </trans-unit>
@@ -124,8 +128,37 @@
                 <target>El elemento fue actualizado correctamente</target>
             </trans-unit>
 
+            <!-- group administrator -->
+            <trans-unit>
+                <source>Group list</source>
+                <target>Lista de grupos</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Name</source>
+                <target>Nombre</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Description</source>
+                <target>Descripción</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Add a new group</source>
+                <target>Agregar un nuevo grupo</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Created at</source>
+                <target>Fecha de creación</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Updated at</source>
+                <target>Fecha de modificación</target>
+            </trans-unit>
 
-
+            <!-- permission administrator -->
+            <trans-unit>
+                <source>Permission list</source>
+                <target>Lista de permisos</target>
+            </trans-unit>
 
 
 

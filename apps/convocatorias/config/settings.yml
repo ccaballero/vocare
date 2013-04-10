@@ -42,9 +42,9 @@ all:
       - default
       - sfGuardAuth
       - sfGuardUser
+      - sfGuardGroup
+      - sfGuardPermission
 #      - sfGuardRegister
-#      - sfGuardGroup
-#      - sfGuardPermission
     # Settings for sfDoctrineGuardPlugin
     login_module: sfGuardAuth
     login_action: signin

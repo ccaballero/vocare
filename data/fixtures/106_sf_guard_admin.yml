@@ -4,7 +4,7 @@ sfGuardUser:
     last_name:      Caballero Burgoa
     email_address:  cijkb.j@gmail.com
     username:       admin
-    password:       admin
+    password:       asdf
     is_super_admin: true
 #    Groups:         [Group_admin]
 
