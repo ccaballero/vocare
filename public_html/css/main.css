@@ -427,3 +427,8 @@ a {
 
 #main .widget ul li a {}
 #main .widget ul li a:hover {}
+
+#sf_admin_bar {
+    display: inline-block;
+    float: none;
+}

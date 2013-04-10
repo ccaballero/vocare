@@ -1,0 +1,27 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    config:
+      fields:
+        last_name:
+          label: Surname
+        first_name:
+          label: Firstname
+        email_address:
+          label: Email address
+        username:
+          label: Username
+      list:
+        title: User list
+        display: [username, last_name, first_name, email_address]
+        sort: [last_name, asc]
+      filter:
+        display: [username, first_name, last_name, email_address]
+      new:
+        title: Add a new user
+      edit:
+        title: Editar "%%name%%"
+      form:
+        display:
+          "User": [first_name, last_name, email_address, username, password, password_again]
+          "Permissions and groups": [is_active, is_super_admin, groups_list]

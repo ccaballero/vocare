@@ -5,6 +5,9 @@
     <head>
         <link rel="shortcut icon" href="../../img/vocare.png" />
         <?php include_javascripts() ?>
+        
+        <?php sfContext::getInstance()->getResponse()->removeStylesheet('/sfDoctrinePlugin/css/global.css'); ?>
+        
         <?php include_stylesheets() ?>
         <?php include_http_metas() ?>
         <?php include_metas() ?>

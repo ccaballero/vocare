@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE xliff PUBLIC "-//XLIFF//DTD XLIFF//EN" "http://www.oasis-open.org/committees/xliff/documents/xliff.dtd" >
+<!DOCTYPE xliff PUBLIC "-//XLIFF//DTD XLIFF//EN"
+    "http://www.oasis-open.org/committees/xliff/documents/xliff.dtd">
 <xliff version="1.0">
     <file original="global" source-language="en" datatype="plaintext">
         <header/>
@@ -39,6 +40,10 @@
                 <target>Contraseña</target>
             </trans-unit>
             <trans-unit>
+                <source>Password (again)</source>
+                <target>Repetir contraseña</target>
+            </trans-unit>
+            <trans-unit>
                 <source>Remember</source>
                 <target>Recordarme</target>
             </trans-unit>
@@ -61,49 +66,87 @@
                 <target>Los datos son invalidos.</target>
             </trans-unit>
 
-      <trans-unit>
-        <source>Register</source>
-        <target>Registrarse</target>
-      </trans-unit>
-      
-      <!--Registro de usuario-->
-      <trans-unit>
-        <source>First name</source>
-        <target>Nombres</target>
-      </trans-unit>
-      
-      <trans-unit>
-        <source>Last name</source>
-        <target>Apellidos</target>
-      </trans-unit>
-      
-<!--      <trans-unit>
-        <source>Email address</source>
-        <target>E-mail</target>
-      </trans-unit>-->
-      
-      <trans-unit>
-        <source>Password again</source>
-        <target>Repita Contraseña</target>
-      </trans-unit>
-      
-      <trans-unit>
-          <source>Group Register</source>
-          <target>Registro de Grupo</target>
-      </trans-unit>
-      
-      <trans-unit>
-          <source>is empty</source>
-          <target>está vacio</target>
-      </trans-unit>
-      <trans-unit>
-          <source>User list</source>
-          <target>Lista de usuarios</target>
-      </trans-unit>
-      <trans-unit>
-          <source>Email address</source>
-          <target>Correo electrónico</target>
-      </trans-unit>
+            <!-- user administrator -->
+            <trans-unit>
+                <source>User list</source>
+                <target>Lista de usuarios</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Email address</source>
+                <target>Correo electrónico</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Firstname</source>
+                <target>Nombres</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Surname</source>
+                <target>Apellidos</target>
+            </trans-unit>
+            <trans-unit>
+                <source>is empty</source>
+                <target>está vacio</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Add a new user</source>
+                <target>Agregar un nuevo usuario</target>
+            </trans-unit>
+            <trans-unit>
+                <source>User</source>
+                <target>Usuario</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Permissions and groups</source>
+                <target>Permisos y grupos</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Is active</source>
+                <target>Activo</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Is super admin</source>
+                <target>Administrador</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Groups</source>
+                <target>Grupos</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Permissions</source>
+                <target>Permisos</target>
+            </trans-unit>
+            <trans-unit>
+                <source>The item was created successfully.</source>
+                <target>El elemento fue creado exitosamente.</target>
+            </trans-unit>
+            <trans-unit>
+                <source>The item was updated successfully.</source>
+                <target>El elemento fue actualizado correctamente</target>
+            </trans-unit>
+
+
+
+
+
+
+
+            <trans-unit>
+                <source></source>
+                <target></target>
+            </trans-unit>
+
+<trans-unit>
+    <source>Register</source>
+    <target>Registrarse</target>
+</trans-unit>
+<trans-unit>
+    <source>Password again</source>
+    <target>Repita Contraseña</target>
+</trans-unit>
+<trans-unit>
+    <source>Group Register</source>
+    <target>Registro de Grupo</target>
+</trans-unit>
 
         </body>
     </file>
