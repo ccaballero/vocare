@@ -29,12 +29,12 @@ Convocatoria:
       type: date
       fixed: false
       notnull: true
-    redaccion:
-      type: clob
-      fixed: false
-      notnull: true
-      default: ''
   relations:
+    Redacciones:
+      type: many
+      class: ConvocatoriaRedaccion
+      local: id
+      foreign: convocatoria_id
     Requerimientos:
       class: Requerimiento
       refClass: ConvocatoriaRequerimiento
@@ -222,4 +222,30 @@ ConvocatoriaRequerimientoEvaluacion:
       onDelete: CASCADE
     Evaluacion:
       foreignAlias: ConvocatoriaRequerimientoEvaluaciones
+      onDelete: CASCADE
+
+ConvocatoriaRedaccion:
+  connection: doctrine
+  tableName: convocatoria_redaccion
+  columns:
+    convocatoria_id:
+      type: integer(4)
+      fixed: false
+      unsigned: true
+      primary: true
+    numero_enmienda:
+      type: integer(4)
+      fixed: false
+      unsigned: true
+      notnull: true
+      default: 1
+    redaccion:
+      type: clob
+      fixed: false
+      notnull: true
+      default: ''
+  relations:
+    Convocatoria:
+      local: convocatoria_id
+      foreign: id
       onDelete: CASCADE

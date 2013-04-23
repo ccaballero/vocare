@@ -11,7 +11,7 @@ Doctrine_Manager::getInstance()->bindComponent('Convocatoria', 'doctrine');
  * @property string $gestion
  * @property enum $estado
  * @property date $publicacion
- * @property clob $redaccion
+ * @property Doctrine_Collection $Redacciones
  * @property Doctrine_Collection $Requerimientos
  * @property Doctrine_Collection $Requisitos
  * @property Doctrine_Collection $Documentos
@@ -28,7 +28,7 @@ Doctrine_Manager::getInstance()->bindComponent('Convocatoria', 'doctrine');
  * @method string              getGestion()                               Returns the current record's "gestion" value
  * @method enum                getEstado()                                Returns the current record's "estado" value
  * @method date                getPublicacion()                           Returns the current record's "publicacion" value
- * @method clob                getRedaccion()                             Returns the current record's "redaccion" value
+ * @method Doctrine_Collection getRedacciones()                           Returns the current record's "Redacciones" collection
  * @method Doctrine_Collection getRequerimientos()                        Returns the current record's "Requerimientos" collection
  * @method Doctrine_Collection getRequisitos()                            Returns the current record's "Requisitos" collection
  * @method Doctrine_Collection getDocumentos()                            Returns the current record's "Documentos" collection
@@ -44,7 +44,7 @@ Doctrine_Manager::getInstance()->bindComponent('Convocatoria', 'doctrine');
  * @method Convocatoria        setGestion()                               Sets the current record's "gestion" value
  * @method Convocatoria        setEstado()                                Sets the current record's "estado" value
  * @method Convocatoria        setPublicacion()                           Sets the current record's "publicacion" value
- * @method Convocatoria        setRedaccion()                             Sets the current record's "redaccion" value
+ * @method Convocatoria        setRedacciones()                           Sets the current record's "Redacciones" collection
  * @method Convocatoria        setRequerimientos()                        Sets the current record's "Requerimientos" collection
  * @method Convocatoria        setRequisitos()                            Sets the current record's "Requisitos" collection
  * @method Convocatoria        setDocumentos()                            Sets the current record's "Documentos" collection
@@ -102,17 +102,15 @@ abstract class BaseConvocatoria extends sfDoctrineRecord
              'fixed' => 0,
              'notnull' => true,
              ));
-        $this->hasColumn('redaccion', 'clob', null, array(
-             'type' => 'clob',
-             'fixed' => 0,
-             'notnull' => true,
-             'default' => '',
-             ));
     }
 
     public function setUp()
     {
         parent::setUp();
+        $this->hasMany('ConvocatoriaRedaccion as Redacciones', array(
+             'local' => 'id',
+             'foreign' => 'convocatoria_id'));
+
         $this->hasMany('Requerimiento as Requerimientos', array(
              'refClass' => 'ConvocatoriaRequerimiento',
              'local' => 'convocatoria_id',
