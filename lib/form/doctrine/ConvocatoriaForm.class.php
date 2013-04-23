@@ -62,7 +62,8 @@ class ConvocatoriaForm extends BaseConvocatoriaForm
             $item = preg_replace('/.* value="(\d+)" .*/', '$1', $input['input']);
 
             $value = array(' ', ' ');
-            if (array_key_exists($item, $this->requerimientos[0])) {
+            if (!empty($this->requerimientos) &&
+                array_key_exists($item, $this->requerimientos[0])) {
                 $value = array(
                     'value="' . $this->requerimientos[0][$item] . '" ',
                     'value="' . $this->requerimientos[1][$item] . '" ',

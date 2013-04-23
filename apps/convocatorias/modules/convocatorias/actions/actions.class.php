@@ -21,6 +21,7 @@ class convocatoriasActions extends PlantillasDefault
         $q = Doctrine_Query::create()
             ->select('c.*')
             ->from('Convocatoria c')
+            ->where('estado <> ?', 'eliminado')
             ->orderBy('c.updated_at');
 
         $this->list = $q->execute();
@@ -140,9 +141,30 @@ class convocatoriasActions extends PlantillasDefault
         return sfView::NONE;
     }
 
-    public function executePromover() {}
-    public function executeEliminar() {}
-    public function executeEnmendar() {}
-    public function executeAnular() {}
-    public function executeFinalizar() {}
+    // method for generalization of actions over convocatorias or whatever you are.
+    private function actionChange($action) {
+        $object = $this->getRoute()->getObject();
+        $this->getUser()->setFlash('notice', $object->executeTransform($action));
+        $this->redirect($this->_route_list);
+    }
+    
+    public function executeEliminar() {
+        $this->actionChange('eliminar');
+    }
+
+    public function executePromover() {
+        $this->actionChange('promover');
+    }
+
+    public function executeEnmendar() {
+        $this->actionChange('enmendar');
+    }
+
+    public function executeAnular() {
+        $this->actionChange('anular');
+    }
+
+    public function executeFinalizar() {
+        $this->actionChange('finalizar');
+    }
 }

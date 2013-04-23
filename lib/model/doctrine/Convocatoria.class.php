@@ -17,22 +17,27 @@ class Convocatoria extends BaseConvocatoria
         'eliminar' => array(
             'eliminar',
             '¿Esta seguro que desea eliminar esta convocatoria?',
+            'La convocatoria ha sido eliminada',
         ),
         'promover' => array(
             'promover',
-            '¿Esta seguro que desea promover esta convocatoria? Esto convertirá a esta en una convocatoria emitida',
+            '¿Esta seguro que desea promover esta convocatoria?',
+            'La convocatoria ha sido promovida',
         ),
         'enmendar' => array(
             'enmendar',
             '¿Esta seguro que desea enmendar esta convocatoria?',
+            'La convocatoria ha sido enmendada',
         ),
         'anular' => array(
             'anular',
             '¿Esta seguro que desea anular la convocatoria?',
+            'La convocatoria ha sido anulada',
         ),
         'finalizar' => array(
             'finalizar',
             '¿Esta seguro que desea finalizar esta convocatoria?',
+            'La convocatoria ha sido finalizada',
         ),
     );
 
@@ -77,6 +82,32 @@ class Convocatoria extends BaseConvocatoria
         return in_array($operacion, $this->getOperacionesDisponibles());
     }
 
+    public function executeTransform($operacion) {
+        switch ($operacion) {
+            case 'eliminar':
+                $this->estado = 'eliminado';
+                break;
+            case 'promover':
+                if ($this->estado == 'emitido') {
+                    $this->estado = 'vigente';
+                } else if ($this->estado == 'borrador') {
+                    $this->estado = 'emitido';
+                }
+                break;
+            case 'enmendar':
+                break;
+            case 'anular':
+                $this->estado = 'anulado';
+                break;
+            case 'finalizar':
+                $this->estado = 'finalizado';
+                break;
+        }
+        
+        $this->save();
+        return $this->_operaciones_posibles[$operacion][2];
+    }
+
     public function getTotalRequerimientos() {
         $q = Doctrine_Query::create()
             ->select('SUM(cr.cantidad_requerida)')
@@ -87,7 +118,7 @@ class Convocatoria extends BaseConvocatoria
         $array = $q->fetchArray();
         return $array[0]['SUM'];
     }
-    
+
     public function getConvocatoriaRequerimientos() {
         $q = Doctrine_Core::getTable('ConvocatoriaRequerimiento')
           ->createQuery('cr')
@@ -123,7 +154,7 @@ class Convocatoria extends BaseConvocatoria
 
         return $q->execute();
     }
-    
+
     public function getPublicacion() {
         include_once realpath(dirname(__FILE__) . '/../../../apps/convocatorias/lib/helper/PrettyDateHelper.php');
         return pretty_date($this->_get('publicacion'));
@@ -136,22 +167,22 @@ class Convocatoria extends BaseConvocatoria
             new Firma('Jefe Dpto. Informática-Sistemas', 'Lic. Henrry Frank Villarroel Tapia'),
             new Firma('Decano FCyT-UMSS', 'Ing. Hernan Flores Garcia'),
         );
-    }    
+    }
 }
 
 class Firma {
     public $cargo;
     public $nombre;
-    
+
     public function __construct($cargo, $nombre) {
         $this->cargo = $cargo;
         $this->nombre = $nombre;
     }
-    
+
     public function getCargo() {
         return $this->cargo;
     }
-    
+
     public function getNombre() {
         return $this->nombre;
     }
