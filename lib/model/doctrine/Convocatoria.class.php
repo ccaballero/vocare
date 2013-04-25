@@ -103,7 +103,7 @@ class Convocatoria extends BaseConvocatoria
                 $this->estado = 'finalizado';
                 break;
         }
-        
+
         $this->save();
         return $this->_operaciones_posibles[$operacion][2];
     }
@@ -167,6 +167,31 @@ class Convocatoria extends BaseConvocatoria
             new Firma('Jefe Dpto. Informática-Sistemas', 'Lic. Henrry Frank Villarroel Tapia'),
             new Firma('Decano FCyT-UMSS', 'Ing. Hernan Flores Garcia'),
         );
+    }
+
+    public function getMaxEnmienda() {
+        $q = Doctrine_Query::create()
+            ->select('MAX(cr.numero_enmienda)')
+            ->from('ConvocatoriaRedaccion cr')
+            ->where('cr.convocatoria_id = ?', $this->getId());
+
+        $array = $q->fetchArray();
+
+        if (empty($array[0]['MAX'])) {
+            return 0;
+        } else {
+            return $array[0]['MAX'];
+        }
+    }
+    
+    public function getEnmienda($numero_enmienda) {
+        $q = Doctrine_Core::getTable('ConvocatoriaRedaccion')
+          ->createQuery('cr')
+          ->where('cr.convocatoria_id = ?', $this->getId())
+          ->andWhere('cr.numero_enmienda = ?', $numero_enmienda);
+
+//        $enmienda = $q->fetch
+        return $q->execute();
     }
 }
 

@@ -28,13 +28,13 @@ class convocatoriasActions extends PlantillasDefault
     }
 
     public function executeShow() {
-        $convocatorias = $this->getRoute()->getObject();
-        $this->form = new ConvocatoriaForm($convocatorias);
+        $convocatoria = $this->getRoute()->getObject();
+        $this->form = new ConvocatoriaForm($convocatoria);
         $this->form->removeFocus();
 
         $q1 = Doctrine_Query::create()
             ->from('ConvocatoriaRequerimiento cr')
-            ->where('cr.convocatoria_id = ?', $convocatorias->id);
+            ->where('cr.convocatoria_id = ?', $convocatoria->id);
         $requerimientos = array();
         foreach ($q1->fetchArray() as $_requerimiento) {
             $requerimientos[0][$_requerimiento['requerimiento_id']] = $_requerimiento['numero_item'];
@@ -44,7 +44,7 @@ class convocatoriasActions extends PlantillasDefault
 
         $q2 = Doctrine_Query::create()
             ->from('ConvocatoriaRequisito cr')
-            ->where('cr.convocatoria_id = ?', $convocatorias->id);
+            ->where('cr.convocatoria_id = ?', $convocatoria->id);
         $requisitos = array();
         foreach ($q2->fetchArray() as $_requisito) {
             $requisitos[$_requisito['requisito_id']] = $_requisito['numero_orden'];
@@ -53,7 +53,7 @@ class convocatoriasActions extends PlantillasDefault
 
         $q3 = Doctrine_Query::create()
             ->from('ConvocatoriaDocumento cd')
-            ->where('cd.convocatoria_id = ?', $convocatorias->id);
+            ->where('cd.convocatoria_id = ?', $convocatoria->id);
         $documentos = array();
         foreach ($q3->fetchArray() as $_documento) {
             $documentos[$_documento['documento_id']] = $_documento['numero_orden'];
@@ -62,7 +62,7 @@ class convocatoriasActions extends PlantillasDefault
 
         $q4 = Doctrine_Query::create()
             ->from('ConvocatoriaEvento ce')
-            ->where('ce.convocatoria_id = ?', $convocatorias->id);
+            ->where('ce.convocatoria_id = ?', $convocatoria->id);
         $eventos = array();
         foreach ($q4->fetchArray() as $_evento) {
             $eventos[$_evento['evento_id']] = $_evento['fecha'];
@@ -72,6 +72,24 @@ class convocatoriasActions extends PlantillasDefault
         $this->object = $this->getRoute()->getObject();
         $this->forward404Unless($this->object);
 
+        // And this is the part for redactions
+        $this->max_enmienda = $this->object->getMaxEnmienda();
+                    $this->redactions = array(0 => '');
+        $this->redaction = $this->object->getEnmienda($this->max_enmienda);
+        
+        var_dump($this->redaction);
+        die;
+        
+        
+        $redactions = array();
+        $_redactions = $this->object->getRedacciones();
+        foreach ($_redactions as $_redaction) {
+            if ($_redaction->numero_enmienda > $max_enmienda) {
+                $max_enmienda = $_redaction->numero_enmienda;
+            }
+            $redactions[$_redaction->numero_enmienda] = $_redaction;
+        }
+
         // This is the part where I talk to templating
         $tpl = new myTemplate();
         $file = realpath(APPLICATION_PATH . '/data/xml/convocatorias/' . $this->object->getId() . '.xml');
@@ -79,24 +97,9 @@ class convocatoriasActions extends PlantillasDefault
             $tpl->setTemplateFile($file);
             $tpl->setObject($this->object);
             $this->preview = $tpl->render();
-            
-            // And this is the part for redactions
-            $max_enmienda = 1;
-            $redactions = array();
-            $_redactions = $this->object->getRedacciones();
-            foreach ($_redactions as $_redaction) {
-                if ($_redaction->numero_enmienda > $max_enmienda) {
-                    $max_enmienda = $_redaction->numero_enmienda;
-                }
-                $redactions[$_redaction->numero_enmienda] = $_redaction;
-            }
-            $this->max_enmienda = $max_enmienda;
-            $this->redactions = $redactions;
         } else {
             $this->preview = null;
-            
             $this->max_enmienda = 0;
-            $this->redactions = array(0 => '');
         }
     }
 
@@ -159,10 +162,34 @@ class convocatoriasActions extends PlantillasDefault
         return sfView::NONE;
     }
 
+    // questions related by redaction of text in convocatorias
+    public function executeRedaccion(sfWebRequest $request) {
+        $convocatoria = $this->getRoute()->getObject();
+
+//        $redacciones = $convocatoria->getRedacciones();
+
+        $max_enmienda = $convocatoria->getMaxEnmienda();
+        $texto_redaccion = $request->getParameter('redaction');
+
+        $cr = new ConvocatoriaRedaccion();
+        $cr->Convocatoria = $convocatoria;
+        $cr->numero_enmienda = intval($max_enmienda) + 1;
+        $cr->redaccion = $texto_redaccion;
+        $cr->save();
+
+        $this->getUser()->setFlash('notice', 'La redacción de la convocatoria acaba de ser editada');
+
+        echo 'TEST';
+        die;
+
+//        $this->redirect();
+    }
+
     // method for generalization of actions over convocatorias or whatever you are.
     private function actionChange($action) {
         $object = $this->getRoute()->getObject();
-        $this->getUser()->setFlash('notice', $object->executeTransform($action));
+        $message = $object->executeTransform($action);
+        $this->getUser()->setFlash('notice', $message);
         $this->redirect($this->_route_list);
     }
 

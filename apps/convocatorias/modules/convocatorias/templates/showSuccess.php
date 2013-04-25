@@ -44,9 +44,7 @@
         </div>
         <div id="redaction" class="tab_contents">
             <a name="redaction"></a>
-            <?php echo form_tag(
-                url_for('@convocatorias_redaccion', array('id' => 1))
-            ) ?>
+            <?php echo form_tag(url_for('convocatorias_redaccion', array('id' => $object->getId()))) ?>
                 <p><textarea name="redaction" class="full-area"><?php echo $redactions[$max_enmienda] ?></textarea></p>
                 <p class="submit"><input type="submit" value="Registrar" /></p>
             </form>
