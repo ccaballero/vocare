@@ -58,6 +58,7 @@ convocatorias:
       enmendar: [post]
       anular: [post]
       finalizar: [post]
+      redaccion: [post]
 
 requerimientos:
   class: sfDoctrineRouteCollection

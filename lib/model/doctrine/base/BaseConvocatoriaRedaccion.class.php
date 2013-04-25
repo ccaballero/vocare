@@ -35,7 +35,6 @@ abstract class BaseConvocatoriaRedaccion extends sfDoctrineRecord
              'type' => 'integer',
              'fixed' => 0,
              'unsigned' => true,
-             'primary' => true,
              'length' => 4,
              ));
         $this->hasColumn('numero_enmienda', 'integer', 4, array(
@@ -60,6 +59,6 @@ abstract class BaseConvocatoriaRedaccion extends sfDoctrineRecord
         $this->hasOne('Convocatoria', array(
              'local' => 'convocatoria_id',
              'foreign' => 'id',
-             'onDelete' => 'CASCADE'));
+             'onDelete' => 'cascade'));
     }
 }

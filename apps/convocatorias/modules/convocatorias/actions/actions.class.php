@@ -72,14 +72,32 @@ class convocatoriasActions extends PlantillasDefault
         $this->object = $this->getRoute()->getObject();
         $this->forward404Unless($this->object);
 
+        // This is the part where I talk to templating
         $tpl = new myTemplate();
-        $tpl->setTemplateFile(realpath(
-            APPLICATION_PATH . '/data/xml/convocatorias/' .
-            $this->object->getId() . '.xml')
-        );
-        $tpl->setObject($this->object);
-
-        $this->preview = $tpl->render();
+        $file = realpath(APPLICATION_PATH . '/data/xml/convocatorias/' . $this->object->getId() . '.xml');
+        if (file_exists($file)) {
+            $tpl->setTemplateFile($file);
+            $tpl->setObject($this->object);
+            $this->preview = $tpl->render();
+            
+            // And this is the part for redactions
+            $max_enmienda = 1;
+            $redactions = array();
+            $_redactions = $this->object->getRedacciones();
+            foreach ($_redactions as $_redaction) {
+                if ($_redaction->numero_enmienda > $max_enmienda) {
+                    $max_enmienda = $_redaction->numero_enmienda;
+                }
+                $redactions[$_redaction->numero_enmienda] = $_redaction;
+            }
+            $this->max_enmienda = $max_enmienda;
+            $this->redactions = $redactions;
+        } else {
+            $this->preview = null;
+            
+            $this->max_enmienda = 0;
+            $this->redactions = array(0 => '');
+        }
     }
 
     protected function processForm(sfWebRequest $request, sfForm $form, $flash = '') {
@@ -147,7 +165,7 @@ class convocatoriasActions extends PlantillasDefault
         $this->getUser()->setFlash('notice', $object->executeTransform($action));
         $this->redirect($this->_route_list);
     }
-    
+
     public function executeEliminar() {
         $this->actionChange('eliminar');
     }

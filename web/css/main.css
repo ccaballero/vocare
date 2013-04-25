@@ -232,6 +232,11 @@ a {
     height: 180px;
 }
 
+#main form p .full-area {
+    width: 900px;
+    height: 900px;
+}
+
 #main form p.submit {
     margin-top: 20px;
     margin-left: 210px;
@@ -407,15 +412,31 @@ a {
 
 #main .buttons {
     float: right;
+    background-color: #e0e0e0;
+    border-radius: 10px;
     margin: 16px 0px;
+    padding: 8px 10px 5px 10px;
 }
 
-#main .buttons a {
-    border-radius: 5px;
-    padding: 4px 10px;
-    background-color: #162D50;
-    color: #ffffff;
+#main .buttons ul {
+    margin: 0px;
+    padding: 0px;
+    list-style-type: none;
 }
+
+#main .buttons ul li {
+    display: inline-block;
+}
+
+#main .buttons ul li a {
+    margin: 0px;
+    padding: 0px 5px;
+    line-height: normal;
+    background: none;
+    border: none;
+}
+
+#main .buttons ul li a:hover {}
 
 #main .widget {
     margin: 10px;

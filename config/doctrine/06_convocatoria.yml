@@ -31,10 +31,10 @@ Convocatoria:
       notnull: true
   relations:
     Redacciones:
-      type: many
       class: ConvocatoriaRedaccion
       local: id
       foreign: convocatoria_id
+      type: many
     Requerimientos:
       class: Requerimiento
       refClass: ConvocatoriaRequerimiento
@@ -232,7 +232,6 @@ ConvocatoriaRedaccion:
       type: integer(4)
       fixed: false
       unsigned: true
-      primary: true
     numero_enmienda:
       type: integer(4)
       fixed: false
@@ -248,4 +247,4 @@ ConvocatoriaRedaccion:
     Convocatoria:
       local: convocatoria_id
       foreign: id
-      onDelete: CASCADE
+      onDelete: cascade

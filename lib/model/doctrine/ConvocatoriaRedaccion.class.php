@@ -12,4 +12,7 @@
  */
 class ConvocatoriaRedaccion extends BaseConvocatoriaRedaccion
 {
+    public function __toString() {
+        return $this->redaccion;
+    }
 }
