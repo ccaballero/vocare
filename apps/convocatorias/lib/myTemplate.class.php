@@ -4,6 +4,7 @@ class myTemplate
 {
     private $template;
     private $object;
+    private $renderization;
 
     public function setTemplateFile($filename) {
         $this->template = file_get_contents($filename);
@@ -76,7 +77,8 @@ class myTemplate
             }
         }
 
-        return implode('', $parts);
+        $this->renderization = implode('', $parts);
+        return $this->renderization;
     }
 
     private function transponer($matriz) {
@@ -99,5 +101,14 @@ class myTemplate
         }
 
         return $iterator;
+    }
+    
+    public function writeTxt($filename) {
+        $directory = sfConfig::get('app_convocatorias_generator_dir_generation');
+        
+        if (!empty($this->renderization)) {
+            // parsing xml to txt
+            file_put_contents($filename, $this->renderization);
+        }
     }
 }

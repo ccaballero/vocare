@@ -74,7 +74,6 @@ class convocatoriasActions extends PlantillasDefault
 
         // And this is the part for redactions
         $this->max_enmienda = $this->object->getMaxEnmienda();
-                    $this->redactions = array(0 => '');
         $this->redaction = $this->object->getEnmienda($this->max_enmienda);
 
         // This is the part where I talk to templating
@@ -90,7 +89,7 @@ class convocatoriasActions extends PlantillasDefault
         
         // This is the part for renderer control, Can I say this?
         $this->view_preview = true;
-        $this->view_editor = ($this->object->getEstado() == 'borrador');
+        $this->view_editor = ($this->object->getEstado() == 'borrador') || ($this->object->getEstado() == 'emitido');
         $this->view_redaction = ($this->object->getEstado() == 'borrador') || ($this->object->getEstado() == 'emitido');
         $this->view_users = ($this->object->getEstado() == 'borrador');
         $this->view_results = ($this->object->getEstado() == 'vigente') || ($this->object->getEstado() == 'finalizado');
@@ -106,6 +105,21 @@ class convocatoriasActions extends PlantillasDefault
     }
 
     public function executeTexto() {
+        echo sfConfig::get('app_convocatorias_generator_dir_generation');
+        die;
+        
+        
+        // This is the part where I talk to templating
+        $tpl = new myTemplate();
+        if (!empty($this->redaction)) {
+            $tpl->setTemplate($this->redaction);
+            $tpl->setObject($this->object);
+            $this->preview = $tpl->render();
+        } else {
+            $this->preview = null;
+            $this->max_enmienda = 0;
+        }
+        
         $object = $this->getRoute()->getObject();
 
         $tpl = new myTemplate();
