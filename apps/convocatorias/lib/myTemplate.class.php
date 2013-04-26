@@ -9,7 +9,7 @@ class myTemplate
         $this->template = file_get_contents($filename);
     }
 
-    public function seTemplate($template) {
+    public function setTemplate($template) {
         $this->template = $template;
     }
 

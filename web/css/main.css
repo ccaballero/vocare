@@ -28,6 +28,7 @@ a {
 .text-right { text-align: right; }
 
 .bold { font-weight: bold; }
+.disabled { color: #b0b0b0; }
 
 /* Propiedades para la barra de principal de enlaces */
 #menu {

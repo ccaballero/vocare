@@ -38,6 +38,8 @@
                         'method' => 'post',
                         'confirm' => $propiedades[1]
                     )) ?>
+            <?php else: ?>
+                <span class="disabled"><?php echo ucfirst($operacion) ?></span>
             <?php endif; ?>
             </td>
         <?php endforeach; ?>

@@ -190,8 +190,7 @@ class Convocatoria extends BaseConvocatoria
           ->where('cr.convocatoria_id = ?', $this->getId())
           ->andWhere('cr.numero_enmienda = ?', $numero_enmienda);
 
-//        $enmienda = $q->fetch
-        return $q->execute();
+        return $q->fetchOne();
     }
 }
 

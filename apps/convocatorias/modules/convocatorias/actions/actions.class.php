@@ -76,31 +76,24 @@ class convocatoriasActions extends PlantillasDefault
         $this->max_enmienda = $this->object->getMaxEnmienda();
                     $this->redactions = array(0 => '');
         $this->redaction = $this->object->getEnmienda($this->max_enmienda);
-        
-        var_dump($this->redaction);
-        die;
-        
-        
-        $redactions = array();
-        $_redactions = $this->object->getRedacciones();
-        foreach ($_redactions as $_redaction) {
-            if ($_redaction->numero_enmienda > $max_enmienda) {
-                $max_enmienda = $_redaction->numero_enmienda;
-            }
-            $redactions[$_redaction->numero_enmienda] = $_redaction;
-        }
 
         // This is the part where I talk to templating
         $tpl = new myTemplate();
-        $file = realpath(APPLICATION_PATH . '/data/xml/convocatorias/' . $this->object->getId() . '.xml');
-        if (file_exists($file)) {
-            $tpl->setTemplateFile($file);
+        if (!empty($this->redaction)) {
+            $tpl->setTemplate($this->redaction);
             $tpl->setObject($this->object);
             $this->preview = $tpl->render();
         } else {
             $this->preview = null;
             $this->max_enmienda = 0;
         }
+        
+        // This is the part for renderer control, Can I say this?
+        $this->view_preview = true;
+        $this->view_editor = ($this->object->getEstado() == 'borrador');
+        $this->view_redaction = ($this->object->getEstado() == 'borrador') || ($this->object->getEstado() == 'emitido');
+        $this->view_users = ($this->object->getEstado() == 'borrador');
+        $this->view_results = ($this->object->getEstado() == 'vigente') || ($this->object->getEstado() == 'finalizado');
     }
 
     protected function processForm(sfWebRequest $request, sfForm $form, $flash = '') {
@@ -166,8 +159,6 @@ class convocatoriasActions extends PlantillasDefault
     public function executeRedaccion(sfWebRequest $request) {
         $convocatoria = $this->getRoute()->getObject();
 
-//        $redacciones = $convocatoria->getRedacciones();
-
         $max_enmienda = $convocatoria->getMaxEnmienda();
         $texto_redaccion = $request->getParameter('redaction');
 
@@ -178,11 +169,7 @@ class convocatoriasActions extends PlantillasDefault
         $cr->save();
 
         $this->getUser()->setFlash('notice', 'La redacción de la convocatoria acaba de ser editada');
-
-        echo 'TEST';
-        die;
-
-//        $this->redirect();
+        $this->redirect($this->generateUrl('convocatorias_show', array('id' => $convocatoria->getId())));
     }
 
     // method for generalization of actions over convocatorias or whatever you are.
@@ -199,17 +186,39 @@ class convocatoriasActions extends PlantillasDefault
 
     public function executePromover() {
         $this->actionChange('promover');
+        
+        // Dos tipos de promover.
+        
+        // PROMOVER PARA QUE SEA EMITIDA
+        // Controlar que se tenga una redaccion basica
+        // Asignar roles a usuarios encargados de las distintas actividades
+        
+        // PROMOVER PARA QUE SEA VIGENTE
+        // Hacer que la convocatoria no tenga permisos para ser editada.
+        // Notificar a estos usuarios sobre los diferentes eventos del proceso
+        // Publicar la convocatoria en la pagina principal
     }
 
     public function executeEnmendar() {
         $this->actionChange('enmendar');
+        
+        // Hacer versiones de la redaccion final, solo se permiten cambios en
+        // el texto, no se pueden realizar nuevas asignaciones, es decir, edicion
+        // de la convocatoria.
+
+        // Notificar a los usuarios de los cambios realizados
     }
 
     public function executeAnular() {
         $this->actionChange('anular');
+        
+        // Notificar a los usuarios de la anulacion de la convocatoria
+        // Notificar a los postulantes, si es que existen, acerca de la anulacion
     }
 
     public function executeFinalizar() {
         $this->actionChange('finalizar');
+        
+        // Despublicar la convocatoria de la pagina principal
     }
 }
