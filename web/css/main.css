@@ -235,7 +235,12 @@ a {
 
 #main form p .full-area {
     width: 900px;
-    height: 900px;
+    height: 450px;
+}
+
+#main form p .middle-area {
+    width: 690px;
+    height: 450px;
 }
 
 #main form p.submit {
@@ -469,4 +474,60 @@ a {
 #sf_admin_bar {
     display: inline-block;
     float: none;
+}
+
+#redaction .tree {
+    float: left;
+    margin: 10px 0px 0px 0px;
+    width: 210px;
+}
+
+#redaction .tree h1 {
+    font-size: 18px;
+}
+
+#redaction .tree p {
+    margin: 0px 5px 0px 0px;
+}
+
+#redaction .tree ul {
+    list-style-type: none;
+    border-bottom: 1px solid #000000;
+}
+#redaction .tree ul li {
+    display: block;
+    padding: 2px 0px;
+    border-top: 1px solid #000000;
+}
+
+#redaction .tree ul li .title {
+    font-weight: bold;
+    padding-left: 5px;
+}
+
+#redaction .tree ul li a {}
+#redaction .tree ul li a:hover {}
+
+#redaction .tree ul li ul.options {
+    margin-left: 15px;
+    border-bottom: none;
+}
+
+#redaction .tree ul li ul.options li {
+    display: inline-block;
+    border: none;
+}
+
+#redaction .tree ul li ul.options li a {
+    margin: 0px;
+    padding: 0px 3px;
+    line-height: normal;
+    font-size: 11px;
+    text-transform: none;
+    background: none;
+    border: none;
+}
+
+#redaction .tree ul li ul.options li a:hover {
+    color: #000000;
 }

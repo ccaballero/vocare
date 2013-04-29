@@ -76,6 +76,23 @@ class convocatoriasActions extends PlantillasDefault
         $this->max_enmienda = $this->object->getMaxEnmienda();
         $this->redaction = $this->object->getEnmienda($this->max_enmienda);
 
+        // And this is the part for listing of convocatorias (I need to say
+        //convocatorias in english, but don't
+        $q = Doctrine_Query::create()
+            ->select(
+                'c.id AS id,' .
+                'c.gestion AS gestion,' .
+                'c.estado AS estado,' .
+                'MAX(cr.numero_enmienda) AS numero_enmienda,' .
+                'cr.redaccion AS redaccion')
+            ->from('Convocatoria c')
+            ->leftJoin('c.Redacciones cr')
+            ->where('c.estado <> ?', 'eliminado')
+            ->groupBy('cr.convocatoria_id')
+            ->orderBy('c.updated_at DESC');
+
+        $this->list = $q->execute();
+
         // This is the part where I talk to templating
         $tpl = new myTemplate();
         if (!empty($this->redaction)) {
@@ -86,7 +103,7 @@ class convocatoriasActions extends PlantillasDefault
             $this->preview = null;
             $this->max_enmienda = 0;
         }
-        
+
         // This is the part for renderer control, Can I say this?
         $this->view_preview = true;
         $this->view_editor = ($this->object->getEstado() == 'borrador') || ($this->object->getEstado() == 'emitido');
@@ -107,8 +124,8 @@ class convocatoriasActions extends PlantillasDefault
     public function executeTexto() {
         echo sfConfig::get('app_convocatorias_generator_dir_generation');
         die;
-        
-        
+
+
         // This is the part where I talk to templating
         $tpl = new myTemplate();
         if (!empty($this->redaction)) {
@@ -119,7 +136,7 @@ class convocatoriasActions extends PlantillasDefault
             $this->preview = null;
             $this->max_enmienda = 0;
         }
-        
+
         $object = $this->getRoute()->getObject();
 
         $tpl = new myTemplate();
@@ -200,13 +217,13 @@ class convocatoriasActions extends PlantillasDefault
 
     public function executePromover() {
         $this->actionChange('promover');
-        
+
         // Dos tipos de promover.
-        
+
         // PROMOVER PARA QUE SEA EMITIDA
         // Controlar que se tenga una redaccion basica
         // Asignar roles a usuarios encargados de las distintas actividades
-        
+
         // PROMOVER PARA QUE SEA VIGENTE
         // Hacer que la convocatoria no tenga permisos para ser editada.
         // Notificar a estos usuarios sobre los diferentes eventos del proceso
@@ -215,7 +232,7 @@ class convocatoriasActions extends PlantillasDefault
 
     public function executeEnmendar() {
         $this->actionChange('enmendar');
-        
+
         // Hacer versiones de la redaccion final, solo se permiten cambios en
         // el texto, no se pueden realizar nuevas asignaciones, es decir, edicion
         // de la convocatoria.
@@ -225,14 +242,14 @@ class convocatoriasActions extends PlantillasDefault
 
     public function executeAnular() {
         $this->actionChange('anular');
-        
+
         // Notificar a los usuarios de la anulacion de la convocatoria
         // Notificar a los postulantes, si es que existen, acerca de la anulacion
     }
 
     public function executeFinalizar() {
         $this->actionChange('finalizar');
-        
+
         // Despublicar la convocatoria de la pagina principal
     }
 }

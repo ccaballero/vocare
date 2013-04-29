@@ -36,11 +36,17 @@ $(document).ready(function(){
         $('#tabber .tab a[href="#preview"]').addClass('active');
     }
 
-    $('#tabber ul li a').click(function() {
+    $('#tabber ul#tabs li a').click(function() {
         var activeTab = $(this).attr('href');
         $('#tabber ul li a').removeClass('active');
         $(this).addClass('active');
         $('#tabber .tab_details .tab_contents').hide();
         $(activeTab).fadeIn();
+    });
+    
+    // this is the part when I copy redactions in convocatorias
+    $('a.clipboard').click(function() {
+        redaccion = $(this).attr('name');
+        $('textarea[name=redaction]').html(redacciones[redaccion]);
     });
 });
