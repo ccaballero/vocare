@@ -77,29 +77,29 @@
             <?php else: ?>
                 <ul>
                 <?php foreach ($list as $convocatoria): ?>
-                <?php if ($convocatoria->getId() !== $object->getId()): ?>
                     <li>
                         <span class="title">
-                            <?php echo $convocatoria->getGestion() ?>
-                        <?php if (!empty($convocatoria->numero_enmienda)): ?>
-                            (#<?php echo $convocatoria->numero_enmienda ?>)
+                            <?php echo $convocatoria['gestion'] ?>
+                        <?php if (!empty($convocatoria['numero_enmienda'])): ?>
+                            (#<?php echo $convocatoria['numero_enmienda'] ?>)
                         <?php endif; ?>
                         </span>
                         <ul class="options">
                             <li><?php echo link_to('Ver',
                                 url_for('convocatorias_show',
-                                    array('id' => $convocatoria->getId())
+                                    array('id' => $convocatoria['id'])
                                 ),
                                 array('target' => '_blank')
                             ) ?></li>                                
                             <li>
                                 <a class="clipboard"
-                                   name="red<?php echo $convocatoria->getId() ?>">Copiar</a>
-                                <script type="text/javascript">redacciones["red<?php echo $convocatoria->getId() ?>"] = <?php echo json_encode($convocatoria->redaccion) ?>;</script>
+                                   name="red<?php echo $convocatoria['id'] ?>">Copiar</a>
+                                <script type="text/javascript">
+redacciones["red<?php echo $convocatoria['id'] ?>"] = <?php echo json_encode($convocatoria['redaccion']) ?>;
+                                </script>
                             </li>
                         </ul>
                     </li>
-                <?php endif; ?>
                 <?php endforeach; ?>
                 </ul>
             <?php endif; ?>

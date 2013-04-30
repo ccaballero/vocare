@@ -78,20 +78,30 @@ class convocatoriasActions extends PlantillasDefault
 
         // And this is the part for listing of convocatorias (I need to say
         //convocatorias in english, but don't
-        $q = Doctrine_Query::create()
-            ->select(
-                'c.id AS id,' .
-                'c.gestion AS gestion,' .
-                'c.estado AS estado,' .
-                'MAX(cr.numero_enmienda) AS numero_enmienda,' .
-                'cr.redaccion AS redaccion')
-            ->from('Convocatoria c')
-            ->leftJoin('c.Redacciones cr')
-            ->where('c.estado <> ?', 'eliminado')
-            ->groupBy('cr.convocatoria_id')
-            ->orderBy('c.updated_at DESC');
+        $statement = Doctrine_Manager::getInstance()->connection();
+        $resultset = $statement->execute(
+            'SELECT c.id,
+                   c.gestion,
+                   c. estado,
+                   r.numero_enmienda,
+                   r.redaccion
+            FROM convocatoria c
+            RIGHT JOIN (
+                SELECT convocatoria_id, numero_enmienda, redaccion
+                FROM convocatoria_redaccion
+                WHERE (convocatoria_id, numero_enmienda) IN (
+                    SELECT convocatoria_id,
+                           MAX(numero_enmienda)
+                    FROM convocatoria_redaccion
+                    GROUP BY convocatoria_id
+                )
+            ) AS r
+            ON c.id = r.convocatoria_id
+            WHERE c.estado <> \'eliminado\'
+            ORDER BY c.updated_at DESC'
+        );
 
-        $this->list = $q->execute();
+        $this->list = $resultset->fetchAll();
 
         // This is the part where I talk to templating
         $tpl = new myTemplate();
