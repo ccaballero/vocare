@@ -93,9 +93,10 @@
                             ) ?></li>                                
                             <li>
                                 <a class="clipboard"
-                                   name="red<?php echo $convocatoria['id'] ?>">Copiar</a>
+                        name="red<?php echo $convocatoria['id'] ?>">Copiar</a>
                                 <script type="text/javascript">
-redacciones["red<?php echo $convocatoria['id'] ?>"] = <?php echo json_encode($convocatoria['redaccion']) ?>;
+                        redacciones["red<?php echo $convocatoria['id'] ?>"]=
+                        <?php echo json_encode($convocatoria['redaccion']) ?>;
                                 </script>
                             </li>
                         </ul>

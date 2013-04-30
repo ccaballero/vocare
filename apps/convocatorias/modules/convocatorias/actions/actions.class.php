@@ -199,15 +199,28 @@ class convocatoriasActions extends PlantillasDefault
     // questions related by redaction of text in convocatorias
     public function executeRedaccion(sfWebRequest $request) {
         $convocatoria = $this->getRoute()->getObject();
+        $estado = $convocatoria->getEstado();
+        $redacciones = $convocatoria->getRedacciones();
 
-        $max_enmienda = $convocatoria->getMaxEnmienda();
         $texto_redaccion = $request->getParameter('redaction');
 
-        $cr = new ConvocatoriaRedaccion();
-        $cr->Convocatoria = $convocatoria;
-        $cr->numero_enmienda = intval($max_enmienda) + 1;
-        $cr->redaccion = $texto_redaccion;
-        $cr->save();
+        if ($estado == 'emitido' || count($redacciones) == 0) {
+            $cr = new ConvocatoriaRedaccion();
+            $cr->Convocatoria = $convocatoria;
+            $cr->redaccion = $texto_redaccion;
+
+            if ($estado == 'emitido') {
+                $cr->numero_enmienda = intval($convocatoria->getMaxEnmienda()) + 1;
+            } else if ($estado == 'borrador') {
+                $cr->numero_enmienda = 1;
+            }
+            $cr->save();
+        } else if ($estado == 'borrador') {
+            foreach ($redacciones as $redaccion) {
+                $redaccion->redaccion = $texto_redaccion;
+                $redaccion->save();
+            }
+        }
 
         $this->getUser()->setFlash('notice', 'La redacción de la convocatoria acaba de ser editada');
         $this->redirect($this->generateUrl('convocatorias_show', array('id' => $convocatoria->getId())));
