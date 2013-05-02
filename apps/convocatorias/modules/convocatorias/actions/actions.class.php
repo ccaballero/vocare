@@ -115,11 +115,13 @@ class convocatoriasActions extends PlantillasDefault
         }
 
         // This is the part for renderer control, Can I say this?
+        $state = $this->object->getEstado();
+
         $this->view_preview = true;
-        $this->view_editor = ($this->object->getEstado() == 'borrador') || ($this->object->getEstado() == 'emitido');
-        $this->view_redaction = ($this->object->getEstado() == 'borrador') || ($this->object->getEstado() == 'emitido');
-        $this->view_users = ($this->object->getEstado() == 'borrador');
-        $this->view_results = ($this->object->getEstado() == 'vigente') || ($this->object->getEstado() == 'finalizado');
+        $this->view_editor = ($state == 'borrador') || ($state == 'emitido');
+        $this->view_redaction = ($state == 'borrador') || ($state == 'emitido');
+        $this->view_users = ($state == 'borrador' || ($state == 'emitido'));
+        $this->view_results = ($state == 'vigente') || ($state == 'finalizado');
     }
 
     protected function processForm(sfWebRequest $request, sfForm $form, $flash = '') {
@@ -251,16 +253,6 @@ class convocatoriasActions extends PlantillasDefault
         // Hacer que la convocatoria no tenga permisos para ser editada.
         // Notificar a estos usuarios sobre los diferentes eventos del proceso
         // Publicar la convocatoria en la pagina principal
-    }
-
-    public function executeEnmendar() {
-        $this->actionChange('enmendar');
-
-        // Hacer versiones de la redaccion final, solo se permiten cambios en
-        // el texto, no se pueden realizar nuevas asignaciones, es decir, edicion
-        // de la convocatoria.
-
-        // Notificar a los usuarios de los cambios realizados
     }
 
     public function executeAnular() {

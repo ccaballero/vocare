@@ -24,11 +24,11 @@ class Convocatoria extends BaseConvocatoria
             '¿Esta seguro que desea promover esta convocatoria?',
             'La convocatoria ha sido promovida',
         ),
-        'enmendar' => array(
-            'enmendar',
-            '¿Esta seguro que desea enmendar esta convocatoria?',
-            'La convocatoria ha sido enmendada',
-        ),
+//        'enmendar' => array(
+//            'enmendar',
+//            '¿Esta seguro que desea enmendar esta convocatoria?',
+//            'La convocatoria ha sido enmendada',
+//        ),
         'anular' => array(
             'anular',
             '¿Esta seguro que desea anular la convocatoria?',
