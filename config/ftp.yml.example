@@ -1,0 +1,29 @@
+production:
+  connection:
+    host: 
+    username: 
+    password: 
+  mkdir:
+    - /vocare/cache
+    - /vocare/config
+    - /vocare/lib
+    - /vocare/log
+  chmod:
+    - /vocare/cache -> 0777
+    - /vocare/log -> 0777
+  dirs:
+    - /apps -> /vocare/apps
+    - /config/doctrine -> /vocare/config/doctrine
+    - /data -> /vocare/data
+    - /lib/filter -> /vocare/lib/filter
+    - /lib/form -> /vocare/lib/form
+    - /lib/model -> /vocare/lib/model
+    - /plugins -> /vocare/plugins
+    - /shell -> /vocare/shell
+    - /test -> /vocare/test
+    - /web -> /public_html
+  files:
+    - /config/ProjectConfiguration.class.php -> /vocare/config/ProjectConfiguration.class.php
+    - /config/properties.ini -> /vocare/config/properties.ini
+    - /config/rsync_exclude.txt -> /vocare/config/rsync_exclude.txt
+    - /README -> /README
