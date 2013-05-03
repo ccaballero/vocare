@@ -147,13 +147,18 @@ class convocatoriasActions extends PlantillasDefault
         $xslDoc->load("$dirbase2/$filename2");
 
         $xmlDoc = new DOMDocument();
-        $xmlDoc->load("$dirbase1/$filename1");
+//        $xmlDoc->load("$dirbase1/$filename1");
+        $xmlDoc->loadXML(str_replace('&nbsp;', '', file_get_contents("$dirbase1/$filename1")));
 
         $proc = new XSLTProcessor();
         $proc->importStylesheet($xslDoc);
-        $result = $proc->transformToXML($xmlDoc);
 
-        if ($result) {
+        try {
+            ob_start();
+            $proc->transformToURI($xmlDoc, 'php://output');
+            $output = ob_get_contents();
+            ob_clean();
+
             $this->setLayout(false);
             sfConfig::set('sf_web_debug', false);
 
@@ -162,10 +167,9 @@ class convocatoriasActions extends PlantillasDefault
             $this->getResponse()->setContentType('text/plain; charset=utf-8');
 
             $this->getResponse()->sendHttpHeaders();
-            $this->getResponse()->setContent($result);
-        } else {
-            print "  the \$result variable the reason is that " . xslt_error($xh) .
-            print " and the error code is " . xslt_errno($xh);
+            $this->getResponse()->setContent($output);
+        } catch (Exception $e) {
+            $e->printStackTrace();
         }
 
         return sfView::NONE;
@@ -226,9 +230,14 @@ class convocatoriasActions extends PlantillasDefault
             }
         }
 
+        // This is the part where I talk to templating
+        $tpl = new myTemplate();
+        $tpl->setTemplate($texto_redaccion);
+        $tpl->setObject($convocatoria);
+
         $dirbase = sfConfig::get('app_dir_generation');
         $filename = $convocatoria->getId() . '_' . $numero_enmienda . '.xml';
-        file_put_contents("$dirbase/$filename", '<vocare>'. $texto_redaccion . '</vocare>');
+        file_put_contents("$dirbase/$filename", '<vocare>'. $tpl->render() . '</vocare>');
 
         $this->getUser()->setFlash('notice', 'La redacción de la convocatoria acaba de ser editada');
         $this->redirect($this->generateUrl('convocatorias_show', array('id' => $convocatoria->getId())));
