@@ -3,5 +3,5 @@ all:
     routes_register: false
     allow_login_with_email: false
     signin_form: sfGuardCustomFormSignin
-  convocatorias_generator:
-    dir_generation: %SF_ROOT_DIR%/data/convocatorias
+  dir_generation: %SF_ROOT_DIR%/data/convocatorias
+  xslt_transforms: %SF_ROOT_DIR%/data/xslt

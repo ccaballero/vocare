@@ -6,10 +6,12 @@ production:
   mkdir:
     - /vocare/cache
     - /vocare/config
+    - /vocare/data/convocatorias
     - /vocare/lib
     - /vocare/log
   chmod:
     - /vocare/cache -> 0777
+    - /vocare/data/convocatorias -> 0777
     - /vocare/log -> 0777
   dirs:
     - /apps -> /vocare/apps

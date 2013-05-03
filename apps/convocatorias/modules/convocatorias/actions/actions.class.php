@@ -134,39 +134,39 @@ class convocatoriasActions extends PlantillasDefault
     }
 
     public function executeTexto() {
-        echo sfConfig::get('app_convocatorias_generator_dir_generation');
-        die;
+        $convocatoria = $this->getRoute()->getObject();
+        $numero_enmienda = $convocatoria->getMaxEnmienda();
 
+        $dirbase1 = sfConfig::get('app_dir_generation');
+        $filename1 = $convocatoria->getId() . '_' . $numero_enmienda . '.xml';
 
-        // This is the part where I talk to templating
-        $tpl = new myTemplate();
-        if (!empty($this->redaction)) {
-            $tpl->setTemplate($this->redaction);
-            $tpl->setObject($this->object);
-            $this->preview = $tpl->render();
+        $dirbase2 = sfConfig::get('app_xslt_transforms');
+        $filename2 = 'transform-text.xslt';
+
+        $xslDoc = new DOMDocument();
+        $xslDoc->load("$dirbase2/$filename2");
+
+        $xmlDoc = new DOMDocument();
+        $xmlDoc->load("$dirbase1/$filename1");
+
+        $proc = new XSLTProcessor();
+        $proc->importStylesheet($xslDoc);
+        $result = $proc->transformToXML($xmlDoc);
+
+        if ($result) {
+            $this->setLayout(false);
+            sfConfig::set('sf_web_debug', false);
+
+            $this->getResponse()->clearHttpHeaders();
+            $this->getResponse()->setHttpHeader('Pragma: public', true);
+            $this->getResponse()->setContentType('text/plain; charset=utf-8');
+
+            $this->getResponse()->sendHttpHeaders();
+            $this->getResponse()->setContent($result);
         } else {
-            $this->preview = null;
-            $this->max_enmienda = 0;
+            print "  the \$result variable the reason is that " . xslt_error($xh) .
+            print " and the error code is " . xslt_errno($xh);
         }
-
-        $object = $this->getRoute()->getObject();
-
-        $tpl = new myTemplate();
-        $tpl->setTemplateFile(realpath(
-            APPLICATION_PATH . '/data/txt/convocatorias/' .
-            $object->getId() . '.txt')
-        );
-        $tpl->setObject($object);
-
-        $this->setLayout(false);
-        sfConfig::set('sf_web_debug', false);
-
-        $this->getResponse()->clearHttpHeaders();
-        $this->getResponse()->setHttpHeader('Pragma: public', true);
-        $this->getResponse()->setContentType('text/plain; charset=utf-8');
-
-        $this->getResponse()->sendHttpHeaders();
-        $this->getResponse()->setContent($tpl->render());
 
         return sfView::NONE;
     }
@@ -205,24 +205,30 @@ class convocatoriasActions extends PlantillasDefault
         $redacciones = $convocatoria->getRedacciones();
 
         $texto_redaccion = $request->getParameter('redaction');
+        $numero_enmienda = 1;
 
         if ($estado == 'emitido' || count($redacciones) == 0) {
+            if ($estado == 'emitido') {
+                $numero_enmienda = intval($convocatoria->getMaxEnmienda()) + 1;
+            }
+
             $cr = new ConvocatoriaRedaccion();
             $cr->Convocatoria = $convocatoria;
             $cr->redaccion = $texto_redaccion;
-
-            if ($estado == 'emitido') {
-                $cr->numero_enmienda = intval($convocatoria->getMaxEnmienda()) + 1;
-            } else if ($estado == 'borrador') {
-                $cr->numero_enmienda = 1;
-            }
+            $cr->numero_enmienda = $numero_enmienda;
             $cr->save();
-        } else if ($estado == 'borrador') {
+        }
+
+        if ($estado == 'borrador') {
             foreach ($redacciones as $redaccion) {
                 $redaccion->redaccion = $texto_redaccion;
                 $redaccion->save();
             }
         }
+
+        $dirbase = sfConfig::get('app_dir_generation');
+        $filename = $convocatoria->getId() . '_' . $numero_enmienda . '.xml';
+        file_put_contents("$dirbase/$filename", '<vocare>'. $texto_redaccion . '</vocare>');
 
         $this->getUser()->setFlash('notice', 'La redacción de la convocatoria acaba de ser editada');
         $this->redirect($this->generateUrl('convocatorias_show', array('id' => $convocatoria->getId())));
