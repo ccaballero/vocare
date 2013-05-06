@@ -366,7 +366,7 @@ ConvocatoriaRedaccion:
       [[ endforeach ]]
           <tr>
               <td class="text-right">Total</td>
-              <td>[[ totalRequerimientos ]] Aux.</td>
+              <td class="text-center">[[ totalRequerimientos ]] Aux.</td>
               <td colspan="3">&nbsp;</td>
           </tr>
       </table>

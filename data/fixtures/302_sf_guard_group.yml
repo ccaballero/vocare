@@ -6,9 +6,17 @@ sfGuardGroup:
       - list_convocatorias
       - view_convocatorias
       - edit_convocatorias
+      - create_convocatorias
+      - role_convocatorias
+      - delete_convocatorias
+      - promote_convocatorias
+      - finalize_convocatorias
+      - cancel_convocatorias
       - list_plantillas
       - view_plantillas
       - edit_plantillas
+      - new_plantillas
+      - delete_plantillas
       - list_usuarios
       - view_usuarios
       - edit_usuarios
@@ -19,6 +27,14 @@ sfGuardGroup:
       - list_convocatorias
       - view_convocatorias
       - edit_convocatorias
+      - create_convocatorias
+      - role_convocatorias
+      - delete_convocatorias
+      - list_plantillas
+      - view_plantillas
+      - edit_plantillas
+      - new_plantillas
+      - delete_plantillas
 
 #
 #  Group_direccion_de_carrera_ing_sistemas:

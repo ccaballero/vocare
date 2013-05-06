@@ -1,4 +1,5 @@
 sfGuardPermission:
+  # permissions in convocatorias
   list_convocatorias:
     name: Listar convocatorias
     description: Listar las convocatorias registradas en el sistema.
@@ -8,6 +9,26 @@ sfGuardPermission:
   edit_convocatorias:
     name: Editar convocatoria
     description: Editar la información de una convocatoria.
+  create_convocatorias:
+    name: Crear convocatoria
+    description: Crear una nueva convocatoria en estado borrador.
+  role_convocatorias:
+    name: Asignar roles
+    description: Asignar responsabilidades a usuarios en una convocatoria.
+  # permission in states of a convocatoria
+  delete_convocatorias:
+    name: Eliminar convocatoria.
+    description: Eliminar una convocatoria en estado borrador.
+  promote_convocatorias:
+    name: Promover convocatoria.
+    description: Iniciar el proceso de una convocatoria.
+  finalize_convocatorias:
+    name: Finalizar convocatoria.
+    description: Finalizar el proceso de una convocatoria.
+  cancel_convocatorias:
+    name: Anular convocatoria.
+    description: Anular una convocatoria vigente.
+  # permissions in templates
   list_plantillas:
     name: Listar plantillas
     description: Listar las plantillas registradas en el sistema.
@@ -17,6 +38,13 @@ sfGuardPermission:
   edit_plantillas:
     name: Editar plantilla
     description: Editar la información de una plantilla.
+  new_plantillas:
+    name: Crear plantilla.
+    description: Crear una nueva plantilla.
+  delete_plantillas:
+    name: Eliminar plantilla.
+    description: Eliminar una plantilla que no este siendo usada.
+  # permissions in users
   list_usuarios:
     name: Listar usuarios
     description: Listar los usuarios registrados en el sistema.
