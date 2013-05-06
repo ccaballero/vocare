@@ -3,38 +3,37 @@ sfGuardGroup:
     name: Jefe de Departamento
     description: Maxima autoridad del Departamento de Informática y Sistemas.
     Permissions:
-      - list_convocatorias
-      - view_convocatorias
-      - edit_convocatorias
-      - create_convocatorias
-      - role_convocatorias
-      - delete_convocatorias
-      - promote_convocatorias
-      - finalize_convocatorias
-      - cancel_convocatorias
-      - list_plantillas
-      - view_plantillas
-      - edit_plantillas
-      - new_plantillas
-      - delete_plantillas
-      - list_usuarios
-      - view_usuarios
-      - edit_usuarios
+      - convocatorias_list
+      - convocatorias_view
+      - convocatorias_edit
+      - convocatorias_create
+      - convocatorias_role
+      - convocatorias_eliminar
+      - convocatorias_promover
+      - convocatorias_finalizar
+      - convocatorias_anular
+      - plantillas_list
+      - plantillas_view
+      - plantillas_edit
+      - plantillas_create
+      - plantillas_delete
+      - usuarios_list
+      - usuarios_view
+      - usuarios_edit
   secretaria_de_departamento:
     name: Secretaría de Departamento
     description: Secretaría del Departamento de Informática y Sistemas.
     Permissions:
-      - list_convocatorias
-      - view_convocatorias
-      - edit_convocatorias
-      - create_convocatorias
-      - role_convocatorias
-      - delete_convocatorias
-      - list_plantillas
-      - view_plantillas
-      - edit_plantillas
-      - new_plantillas
-      - delete_plantillas
+      - convocatorias_list
+      - convocatorias_view
+      - convocatorias_edit
+      - convocatorias_create
+      - convocatorias_role
+      - plantillas_list
+      - plantillas_view
+      - plantillas_edit
+      - plantillas_create
+      - plantillas_delete
 
 #
 #  Group_direccion_de_carrera_ing_sistemas:

@@ -237,7 +237,10 @@ class convocatoriasActions extends PlantillasDefault
 
         $dirbase = sfConfig::get('app_dir_generation');
         $filename = $convocatoria->getId() . '_' . $numero_enmienda . '.xml';
-        file_put_contents("$dirbase/$filename", '<vocare>'. $tpl->render() . '</vocare>');
+        
+        $destination = $dirbase . '/' . $filename;
+        $content = '<vocare>' . $tpl->render() . '</vocare>';
+        $result = file_put_contents($destination, $content);
 
         $this->getUser()->setFlash('notice', 'La redacción de la convocatoria acaba de ser editada');
         $this->redirect($this->generateUrl('convocatorias_show', array('id' => $convocatoria->getId())));

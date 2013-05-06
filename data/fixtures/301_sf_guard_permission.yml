@@ -1,74 +1,73 @@
 sfGuardPermission:
   # permissions in convocatorias
-  list_convocatorias:
-    name: Listar convocatorias
+  convocatorias_list:
+    name: convocatorias_list
     description: Listar las convocatorias registradas en el sistema.
-  view_convocatorias:
-    name: Ver convocatoria
+  convocatorias_view:
+    name: convocatorias_view
     description: Ver la información detallada de una convocatoria.
-  edit_convocatorias:
-    name: Editar convocatoria
+  convocatorias_edit:
+    name: convocatorias_edit
     description: Editar la información de una convocatoria.
-  create_convocatorias:
-    name: Crear convocatoria
+  convocatorias_create:
+    name: convocatorias_create
     description: Crear una nueva convocatoria en estado borrador.
-  role_convocatorias:
-    name: Asignar roles
+  convocatorias_role:
+    name: convocatorias_role
     description: Asignar responsabilidades a usuarios en una convocatoria.
   # permission in states of a convocatoria
-  delete_convocatorias:
-    name: Eliminar convocatoria.
+  convocatorias_eliminar:
+    name: convocatorias_eliminar
     description: Eliminar una convocatoria en estado borrador.
-  promote_convocatorias:
-    name: Promover convocatoria.
+  convocatorias_promover:
+    name: convocatorias_promover
     description: Iniciar el proceso de una convocatoria.
-  finalize_convocatorias:
-    name: Finalizar convocatoria.
+  convocatorias_finalizar:
+    name: convocatorias_finalizar
     description: Finalizar el proceso de una convocatoria.
-  cancel_convocatorias:
-    name: Anular convocatoria.
+  convocatorias_anular:
+    name: convocatorias_anular
     description: Anular una convocatoria vigente.
   # permissions in templates
-  list_plantillas:
-    name: Listar plantillas
+  plantillas_list:
+    name: plantillas_list
     description: Listar las plantillas registradas en el sistema.
-  view_plantillas:
-    name: Ver plantilla
+  plantillas_view:
+    name: plantillas_view
     description: Ver la información detallada de una plantilla.
-  edit_plantillas:
-    name: Editar plantilla
+  plantillas_edit:
+    name: plantillas_edit
     description: Editar la información de una plantilla.
-  new_plantillas:
-    name: Crear plantilla.
+  plantillas_create:
+    name: plantillas_create
     description: Crear una nueva plantilla.
-  delete_plantillas:
-    name: Eliminar plantilla.
+  plantillas_delete:
+    name: plantillas_delete
     description: Eliminar una plantilla que no este siendo usada.
   # permissions in users
-  list_usuarios:
-    name: Listar usuarios
+  usuarios_list:
+    name: usuarios_list
     description: Listar los usuarios registrados en el sistema.
-  view_usuarios:
-    name: Ver usuario
+  usuarios_view:
+    name: usuarios_view
     description: Ver la información detallada de un usuario.
-  edit_usuarios:
-    name: Editar usuario
+  usuarios_edit:
+    name: usuarios_edit
     description: Editar la información de un usuario.
 
-
 #  Permission_secretaria_jefe_de_departamento:
-#    name: secretaria_de_jefe_de_departamento
+#    name: departamento_secretaria_de_jefe_de
 #  Permission_direccion_de_carrera:
-#    name: direccion_de_carrera
+#    name: carrera_direccion_de
 #  Permission_consejo_de_carrera_docente:
-#    name: consejo_de_carrera_docente
+#    name: docente_consejo_de_carrera
 #  Permission_consejo_de_carrera_estudiante:
-#    name: consejo_de_carrera_estudiante
+#    name: estudiante_consejo_de_carrera
 #  Permission_comision_de_meritos_docente:
-#    name: comision_de_meritos_docente
+#    name: docente_comision_de_meritos
 #  Permission_comision_de_meritos_estudiante:
-#    name: comision_de_meritos_estudiante
+#    name: estudiante_comision_de_meritos
 #  Permission_comision_de_conocimientos_docente:
-#    name: comision_de_conocimientos_docente
+#    name: docente_comision_de_conocimientos
 #  Permission_comision_de_conocimientos_estudiante:
-#    name: comision_de_conocimientos_estudiante
+#    name: estudiante_comision_de_conocimientos
