@@ -1,6 +1,6 @@
 <h1>Plantillas de requerimientos</h1>
 
-<?php if ($sf_user->hasCredential('create_plantillas')): ?>
+<?php if ($sf_user->hasCredential('plantillas_create')): ?>
 <div class="tasks">
     <ul>
         <li><?php echo link_to(
@@ -20,19 +20,22 @@
     <tr class="<?php echo fmod($i, 2) ? 'even' : 'odd' ?>">
         <td class="right"><?php echo $requerimiento->getCodigo() ?></td>
         <td><?php echo $requerimiento->getNombre() ?></td>
-        <td class="center"><?php echo $requerimiento->getHorasAcademicas() ?> Hrs/mes</td>
+        <td class="center">
+            <?php echo $requerimiento->getHorasAcademicas() ?> Hrs/mes</td>
         <td>
             <ul>
-            <?php if ($sf_user->hasCredential('edit_plantillas')): ?>
+            <?php if ($sf_user->hasCredential('plantillas_edit')): ?>
                 <li><?php echo link_to(
                     'Editar', 'requerimientos_edit', $requerimiento
                 ) ?></li>
             <?php endif; ?>
-            <?php if ($sf_user->hasCredential('delete_plantillas')): ?>
+            <?php if ($sf_user->hasCredential('plantillas_delete')): ?>
                 <li><?php echo link_to(
-                    'Eliminar', 'requerimientos_delete', $requerimiento, array(
+                    'Eliminar', 'requerimientos_delete', $requerimiento,
+                    array(
                         'method' => 'delete',
-                        'confirm' => '¿Esta seguro que desea eliminar el requerimiento?'
+                        'confirm' => '¿Esta seguro que desea eliminar '
+                            . 'el requerimiento?',
                     )
                 ) ?></li>
             <?php endif; ?>

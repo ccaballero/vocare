@@ -1,8 +1,10 @@
 <h1>Plantillas de eventos</h1>
 
+<?php if ($sf_user->hasCredential('plantillas_create')): ?>
 <div class="tasks"><?php echo link_to(
     'Crear nuevo evento', url_for('eventos_new')
 ) ?></div>
+<?php endif; ?>
 
 <table>
     <tr class="header">
@@ -14,15 +16,21 @@
         <td><?php echo $evento->getDescripcion() ?></td>
         <td>
             <ul>
+            <?php if ($sf_user->hasCredential('plantillas_edit')): ?>
                 <li><?php echo link_to(
                     'Editar', 'eventos_edit', $evento
                 ) ?></li>
+            <?php endif; ?>
+            <?php if ($sf_user->hasCredential('plantillas_delete')): ?>
                 <li><?php echo link_to(
-                    'Eliminar', 'eventos_delete', $evento, array(
+                    'Eliminar', 'eventos_delete', $evento,
+                    array(
                         'method' => 'delete',
-                        'confirm' => '¿Esta seguro que desea eliminar el evento?',
+                        'confirm' => '¿Esta seguro que desea eliminar '
+                            . 'el evento?',
                     )
                 ) ?></li>
+            <?php endif; ?>
             </ul>
         </td>
     </tr>

@@ -1,2 +1,23 @@
 default:
   is_secure: true
+index:
+  credentials:
+    - plantillas_list
+new:
+  credentials:
+    - plantillas_create
+create:
+  credentials:
+    - plantillas_create
+edit:
+  credentials:
+    - plantillas_edit
+update:
+  credentials:
+    - plantillas_edit
+delete:
+  credentials:
+    - plantillas_delete
+show:
+  credentials:
+    - plantillas_view

@@ -6,7 +6,7 @@
     <?php if ($view_preview): ?>
     	<li class="tab"><a href="#preview">Vista Previa</a></li>
     <?php endif; ?>
-    <?php if ($view_editor): ?>
+    <?php if ($view_editor && $sf_user->hasCredential('convocatorias_edit')): ?>
     	<li class="tab"><a href="#editor">Edición</a></li>
     <?php endif; ?>
     <?php if ($view_redaction): ?>
@@ -48,7 +48,8 @@
             <?php endif; ?>
         </div>
     <?php endif; ?>
-    <?php if ($view_editor): ?>
+    <?php if ($view_editor
+          && $sf_user->hasCredential('convocatorias_create')): ?>
     	<div id="editor" class="tab_contents">
             <a name="editor"></a>
             <?php echo form_tag_for($form, '@convocatorias') ?>

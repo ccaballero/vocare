@@ -1,0 +1,44 @@
+default:
+  is_secure: true
+index:
+  credentials:
+    - convocatorias_list
+new:
+  credentials:
+    - convocatorias_create
+create:
+  credentials:
+    - convocatorias_create
+edit:
+  credentials:
+    - convocatorias_edit
+update:
+  credentials:
+    - convocatorias_edit
+delete:
+  credentials:
+    - convocatorias_delete
+show:
+  credentials:
+    - convocatorias_view
+texto:
+  credentials:
+    - convocatorias_view
+pdf:
+  credentials:
+    - convocatorias_view
+redaccion:
+  credentials:
+    - convocatorias_view
+eliminar:
+  credentials:
+    - convocatorias_eliminar
+promover:
+  credentials:
+    - convocatorias_promover
+anular:
+  credentials:
+    - convocatorias_anular
+finalizar:
+  credentials:
+    - convocatorias_finalizar

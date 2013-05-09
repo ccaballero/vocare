@@ -43,7 +43,7 @@
         <?php foreach ($convocatoria->getOperacionesPosibles() as $operacion => $propiedades): ?>
             <td class="text-center">
             <?php if ($convocatoria->hasOperacion($operacion) &&
-                      $sf_user->hasCredential('convocatorias_promover')): ?>
+                      $sf_user->hasCredential('convocatorias_' . $operacion)): ?>
                 <?php echo link_to(
                     ucfirst($propiedades[0]), 'convocatorias_' . $operacion, $convocatoria, array(
                         'method' => 'post',

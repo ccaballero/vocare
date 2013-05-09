@@ -1,4 +1,10 @@
 default:
+  is_secure: true
+index:
   is_secure: false
 plantillas:
-  is_secure: true
+  credentials:
+    - plantillas_list
+usuarios:
+  credentials:
+    - usuarios_list
