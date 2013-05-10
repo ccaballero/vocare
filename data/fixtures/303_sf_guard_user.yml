@@ -1,39 +1,3 @@
-sfGuardUser:
-  jefe_de_departamento:
-    first_name: Lic. Henrry Frank
-    last_name: Villarroel Tapia
-    email_address: hvillarroel@memi.umss.edu.bo
-    username: hvillarroel
-    password: asdf
-    Groups: [jefe_de_departamento]
-  secretaria_de_departamento:
-    first_name: Fabiola
-    last_name: Rodriguez Caballero
-    email_address: persona1@memi.umss.edu.bo
-    username: frodriguez
-    password: asdf
-    Groups: [secretaria_de_departamento]
-
-#  direccion_de_carrera_ing_sistemas:
-#    first_name: Lic. Yony Richard
-#    last_name: Montoya Burgos
-#    email_address: yony@setbol.net
-#    username: yony_montoya
-#    password: ymontoya
-#    is_super_admin: false
-#    Groups: [Group_direccion_de_carrera_ing_sistemas]
-#
-#  direccion_de_carrera_ing_informatica:
-#    first_name: Msc. Lic. K. Rolando
-#    last_name: Jaldin Rosales
-#    email_address: rjaldin@hotmail.com
-#    username: rolando_jaldin
-#    password: rjaldin
-#    is_super_admin: false
-#    Groups: [Group_direccion_de_carrera_ing_informatica]
-#
-#
-#
 #  persona_0001:
 #    first_name: Ing. Jhonny
 #    last_name: Herrera Acebey

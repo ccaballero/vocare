@@ -5,6 +5,6 @@ index:
 plantillas:
   credentials:
     - plantillas_list
-usuarios:
+personas:
   credentials:
     - usuarios_list

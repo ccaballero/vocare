@@ -100,6 +100,10 @@
                 <target>Usuarios</target>
             </trans-unit>
             <trans-unit>
+                <source>People</source>
+                <target>Personas</target>
+            </trans-unit>
+            <trans-unit>
                 <source>Permissions and groups</source>
                 <target>Permisos y grupos</target>
             </trans-unit>
@@ -114,6 +118,10 @@
             <trans-unit>
                 <source>Groups</source>
                 <target>Grupos</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Admin groups</source>
+                <target>Cargos administrativos</target>
             </trans-unit>
             <trans-unit>
                 <source>Permissions</source>

@@ -1,0 +1,19 @@
+Cargo:
+  dir_carrera_informatica:
+    cargo:     Dir. Carr. Informática
+    encargado: Msc. Lic. Rolando Jaldin Rosales
+    email:     rjaldin@hotmail.com
+    activo:    true
+  dir_carrrera_sistemas:
+    cargo:     Dir. Carr. Ing. Sistemas
+    encargado: Lic. Yony Montoya Burgos
+    email:     yony@setbol.net
+    activo:    true
+  jefe_departamento:
+    cargo:     Jefe Dpto. Informática-Sistemas
+    encargado: Lic. Henrry Frank Villorroel Tapia
+    activo:    true
+  decano_fcyt:
+    cargo:     Decano FCyT-UMSS
+    encargado: Ing. Hernan Flores Garcia
+    activo:    true

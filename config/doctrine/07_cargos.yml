@@ -1,0 +1,26 @@
+Cargo:
+  actAs: [Timestampable]
+  connection: doctrine
+  tableName: cargo
+  columns:
+    id:
+      type: integer(4)
+      fixed: false
+      unsigned: true
+      primary: true
+      autoincrement: true
+    cargo:
+      type: string(255)
+      fixed: false
+      notnull: true
+    encargado:
+      type: string(255)
+      fixed: false
+      notnull: true
+    email:
+      type: string(255)
+      fixed: false
+      notnull: true
+    activo:
+      type: boolean
+      default: false

@@ -12,7 +12,7 @@ generator:
         display: [name, description]
         sort: [name, asc]
       filter:
-        display: [name, description]
+        class: false
       new:
         title: Add a new group
       edit:

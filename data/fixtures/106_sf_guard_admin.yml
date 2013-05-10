@@ -1,8 +1,118 @@
+sfGuardPermission:
+  # permissions in convocatorias
+  convocatorias_list:
+    name: convocatorias_list
+    description: Listar las convocatorias registradas en el sistema.
+  convocatorias_view:
+    name: convocatorias_view
+    description: Ver la información detallada de una convocatoria.
+  convocatorias_edit:
+    name: convocatorias_edit
+    description: Editar la información de una convocatoria.
+  convocatorias_create:
+    name: convocatorias_create
+    description: Crear una nueva convocatoria en estado borrador.
+  convocatorias_role:
+    name: convocatorias_role
+    description: Asignar responsabilidades a usuarios en una convocatoria.
+  # permission in states of a convocatoria
+  convocatorias_eliminar:
+    name: convocatorias_eliminar
+    description: Eliminar una convocatoria en estado borrador.
+  convocatorias_promover:
+    name: convocatorias_promover
+    description: Iniciar el proceso de una convocatoria.
+  convocatorias_finalizar:
+    name: convocatorias_finalizar
+    description: Finalizar el proceso de una convocatoria.
+  convocatorias_anular:
+    name: convocatorias_anular
+    description: Anular una convocatoria vigente.
+  # permissions in templates
+  plantillas_list:
+    name: plantillas_list
+    description: Listar las plantillas registradas en el sistema.
+  plantillas_view:
+    name: plantillas_view
+    description: Ver la información detallada de una plantilla.
+  plantillas_edit:
+    name: plantillas_edit
+    description: Editar la información de una plantilla.
+  plantillas_create:
+    name: plantillas_create
+    description: Crear una nueva plantilla.
+  plantillas_delete:
+    name: plantillas_delete
+    description: Eliminar una plantilla que no este siendo usada.
+  # permissions in users
+  usuarios_list:
+    name: usuarios_list
+    description: Listar los usuarios registrados en el sistema.
+  usuarios_view:
+    name: usuarios_view
+    description: Ver la información detallada de un usuario.
+  usuarios_edit:
+    name: usuarios_edit
+    description: Editar la información de un usuario.
+
+sfGuardGroup:
+  jefe_de_departamento:
+    name: Jefe de Departamento
+    description: Maxima autoridad del Departamento de Informática y Sistemas.
+    Permissions:
+      - convocatorias_list
+      - convocatorias_view
+      - convocatorias_edit
+      - convocatorias_create
+      - convocatorias_role
+      - convocatorias_eliminar
+      - convocatorias_promover
+      - convocatorias_finalizar
+      - convocatorias_anular
+      - plantillas_list
+      - plantillas_view
+      - plantillas_edit
+      - plantillas_create
+      - plantillas_delete
+      - usuarios_list
+      - usuarios_view
+      - usuarios_edit
+  secretaria_de_departamento:
+    name: Secretaría de Departamento
+    description: Secretaría del Departamento de Informática y Sistemas.
+    Permissions:
+      - convocatorias_list
+      - convocatorias_view
+      - convocatorias_edit
+      - convocatorias_create
+      - convocatorias_role
+      - plantillas_list
+      - plantillas_view
+      - plantillas_edit
+      - plantillas_create
+      - plantillas_delete
+
 sfGuardUser:
-  User_admin:
+  administrador:
     first_name:     Carlos Eduardo
     last_name:      Caballero Burgoa
     email_address:  cijkb.j@gmail.com
     username:       admin
     password:       asdf
     is_super_admin: true
+  jefe_de_departamento:
+    first_name:     Lic. Henrry Frank
+    last_name:      Villarroel Tapia
+    email_address:  hvillarroel@cs.umss.edu.bo
+    username:       jefe
+    password:       asdf
+    Groups:
+      - jefe_de_departamento
+  secretaria_de_departamento:
+    first_name:     Fabiola
+    last_name:      Rodriguez Caballero
+    email_address:  persona1@cs.umss.edu.bo
+    username:       secretaria
+    password:       asdf
+    Groups:
+      - secretaria_de_departamento
