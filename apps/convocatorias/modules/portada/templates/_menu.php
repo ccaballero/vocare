@@ -4,7 +4,7 @@
             ) ?></li>
 <?php if ($sf_user->hasCredential('convocatorias_list')): ?>
     <li><?php echo link_to(
-            __('Requests'), url_for('convocatorias'), array('accesskey' => '2')
+            __('Requests'), '@convocatorias', array('accesskey' => '2')
             ) ?></li>
 <?php endif; ?>
 <?php if ($sf_user->hasCredential('usuarios_list')): ?>

@@ -9,20 +9,14 @@ Doctrine_Manager::getInstance()->bindComponent('Cargo', 'doctrine');
  * 
  * @property integer $id
  * @property string $cargo
- * @property string $encargado
- * @property string $email
- * @property boolean $activo
+ * @property Doctrine_Collection $Encargados
  * 
- * @method integer getId()        Returns the current record's "id" value
- * @method string  getCargo()     Returns the current record's "cargo" value
- * @method string  getEncargado() Returns the current record's "encargado" value
- * @method string  getEmail()     Returns the current record's "email" value
- * @method boolean getActivo()    Returns the current record's "activo" value
- * @method Cargo   setId()        Sets the current record's "id" value
- * @method Cargo   setCargo()     Sets the current record's "cargo" value
- * @method Cargo   setEncargado() Sets the current record's "encargado" value
- * @method Cargo   setEmail()     Sets the current record's "email" value
- * @method Cargo   setActivo()    Sets the current record's "activo" value
+ * @method integer             getId()         Returns the current record's "id" value
+ * @method string              getCargo()      Returns the current record's "cargo" value
+ * @method Doctrine_Collection getEncargados() Returns the current record's "Encargados" collection
+ * @method Cargo               setId()         Sets the current record's "id" value
+ * @method Cargo               setCargo()      Sets the current record's "cargo" value
+ * @method Cargo               setEncargados() Sets the current record's "Encargados" collection
  * 
  * @package    .
  * @subpackage model
@@ -48,29 +42,13 @@ abstract class BaseCargo extends sfDoctrineRecord
              'notnull' => true,
              'length' => 255,
              ));
-        $this->hasColumn('encargado', 'string', 255, array(
-             'type' => 'string',
-             'fixed' => 0,
-             'notnull' => true,
-             'length' => 255,
-             ));
-        $this->hasColumn('email', 'string', 255, array(
-             'type' => 'string',
-             'fixed' => 0,
-             'notnull' => true,
-             'length' => 255,
-             ));
-        $this->hasColumn('activo', 'boolean', null, array(
-             'type' => 'boolean',
-             'default' => false,
-             ));
     }
 
     public function setUp()
     {
         parent::setUp();
-        $timestampable0 = new Doctrine_Template_Timestampable(array(
-             ));
-        $this->actAs($timestampable0);
+        $this->hasMany('CargoEncargado as Encargados', array(
+             'local' => 'id',
+             'foreign' => 'cargo_id'));
     }
 }

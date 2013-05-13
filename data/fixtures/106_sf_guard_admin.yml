@@ -54,6 +54,16 @@ sfGuardPermission:
   usuarios_edit:
     name: usuarios_edit
     description: Editar la información de un usuario.
+  # permissions in cargos
+  cargos_list:
+    name: cargos_list
+    description: Listar los cargos y el personal encargada en el sistema.
+  cargos_view:
+    name: cargos_view
+    description: Ver la información detallada de un cargo.
+  cargos_edit:
+    name: cargos_edit
+    description: Editar la información de un cargo y su asignación.
 
 sfGuardGroup:
   jefe_de_departamento:

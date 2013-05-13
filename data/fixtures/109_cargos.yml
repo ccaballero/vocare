@@ -1,19 +1,44 @@
 Cargo:
   dir_carrera_informatica:
-    cargo:     Dir. Carr. Informática
-    encargado: Msc. Lic. Rolando Jaldin Rosales
-    email:     rjaldin@hotmail.com
-    activo:    true
+    cargo: Dir. Carr. Informática
+    Encargados:
+      - encargado_1
   dir_carrrera_sistemas:
-    cargo:     Dir. Carr. Ing. Sistemas
-    encargado: Lic. Yony Montoya Burgos
-    email:     yony@setbol.net
-    activo:    true
+    cargo: Dir. Carr. Ing. Sistemas
+    Encargados:
+      - encargado_2
   jefe_departamento:
-    cargo:     Jefe Dpto. Informática-Sistemas
-    encargado: Lic. Henrry Frank Villorroel Tapia
-    activo:    true
+    cargo: Jefe Dpto. Informática-Sistemas
+    Encargados:
+      - encargado_3
   decano_fcyt:
-    cargo:     Decano FCyT-UMSS
+    cargo: Decano FCyT-UMSS
+    Encargados:
+      - encargado_4
+  director_academico:
+    cargo: Director Académico
+    Encargados:
+      - encargado_5
+      - encargado_6
+
+CargoEncargado:
+  encargado_1:
+    encargado: Msc. Lic. Rolando Jaldin Rosales
+    email: rjaldin@hotmail.com
+    fecha: '2013-01-01'
+  encargado_2:
+    encargado: Lic. Yony Montoya Burgos
+    email: yony@setbol.net
+    fecha: '2013-01-01'
+  encargado_3:
+    encargado: Lic. Henrry Frank Villarroel Tapia
+    fecha: '2013-01-01'
+  encargado_4:
     encargado: Ing. Hernan Flores Garcia
-    activo:    true
+    fecha: '2013-01-01'
+  encargado_5:
+    encargado: Ing. Guido Gomez
+    fecha: '2013-01-01'
+  encargado_6:
+    encargado: Ing. Rene Torrico Mejia
+    fecha: '2013-04-01'

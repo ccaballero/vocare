@@ -1,5 +1,4 @@
 Cargo:
-  actAs: [Timestampable]
   connection: doctrine
   tableName: cargo
   columns:
@@ -13,6 +12,21 @@ Cargo:
       type: string(255)
       fixed: false
       notnull: true
+  relations:
+    Encargados:
+      class: CargoEncargado
+      local: id
+      foreign: cargo_id
+      type: many
+
+CargoEncargado:
+  connection: doctrine
+  tableName: cargo_encargado
+  columns:
+    cargo_id:
+      type: integer(4)
+      fixed: false
+      unsigned: true
     encargado:
       type: string(255)
       fixed: false
@@ -20,7 +34,13 @@ Cargo:
     email:
       type: string(255)
       fixed: false
-      notnull: true
-    activo:
-      type: boolean
-      default: false
+      notnull: false
+    fecha:
+      type: date
+      fixed: false
+      notnull: true  
+  relations:
+    Cargo:
+      local: cargo_id
+      foreign: id
+      onDelete: cascade

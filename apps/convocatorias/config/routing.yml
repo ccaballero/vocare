@@ -76,6 +76,10 @@ eventos:
   class: sfDoctrineRouteCollection
   options: { model: Evento }
 
+cargos:
+  class: sfDoctrineRouteCollection
+  options: { model: Cargo }
+
 # default rules
 homepage:
   url:   /
