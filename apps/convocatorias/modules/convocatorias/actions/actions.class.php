@@ -27,7 +27,7 @@ class convocatoriasActions extends PlantillasDefault
         $this->list = $q->execute();
     }
 
-    public function executeShow() {
+    public function executeShow(sfWebRequest $request) {
         $convocatoria = $this->getRoute()->getObject();
         $this->form = new ConvocatoriaForm($convocatoria);
         $this->form->removeFocus();

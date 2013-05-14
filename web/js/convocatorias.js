@@ -1,3 +1,15 @@
+var is_hidden = true;
+
+function showbox(selector) {
+    if (is_hidden) {
+        $(selector).show();
+        is_hidden = false;
+    } else {
+        $(selector).hide();
+        is_hidden = true;
+    }
+}
+
 $(document).ready(function(){
     $('input[type="text"].focus').focus();
     $('textarea.focus').focus();

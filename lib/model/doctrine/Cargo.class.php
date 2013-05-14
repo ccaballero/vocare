@@ -21,9 +21,13 @@ class Cargo extends BaseCargo
           ->orderBy('ce.id DESC');
 
         $array2 = $q2->fetchArray();
-        
-        $this->encargadoActual = $array2[0]['encargado'];
-        $this->emailEncargado = $array2[0]['email'];
+
+        if (isset($array2[0])) {
+            $this->encargadoActual = $array2[0]['encargado'];
+            $this->emailEncargado = $array2[0]['email'];
+        } else {
+            $this->encargadoActual = 'No asignado aún';
+        }
     }
     
     public function getEncargadoActual() {
@@ -34,7 +38,7 @@ class Cargo extends BaseCargo
     }
 
     public function getEmailEncargado() {
-        if (empty($this->emailEncargado)) {
+        if (empty($this->encargadoActual)) {
             $this->getMax();
         }
         return $this->emailEncargado;

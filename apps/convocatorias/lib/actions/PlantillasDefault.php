@@ -52,7 +52,7 @@ class PlantillasDefault extends sfActions
         $this->redirect($this->_route_list);
     }
 
-    public function executeShow() {
+    public function executeShow(sfWebRequest $request) {
         $this->object = $this->getRoute()->getObject();
         $this->forward404Unless($this->object);
     }

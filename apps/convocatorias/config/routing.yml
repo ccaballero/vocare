@@ -78,7 +78,10 @@ eventos:
 
 cargos:
   class: sfDoctrineRouteCollection
-  options: { model: Cargo }
+  options:
+    model: Cargo
+    object_actions:
+      agregar: [get,post]
 
 # default rules
 homepage:

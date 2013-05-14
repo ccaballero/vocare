@@ -12,14 +12,5 @@ class CargoForm extends BaseCargoForm
   	$decorator = new FormDecoratorDefault($this->getWidgetSchema());
   	$this->widgetSchema->addFormFormatter('custom', $decorator);
   	$this->widgetSchema->setFormFormatterName('custom');
-
-//        if ($this->getObject()->isNew()) {
-//            $encargado = new CargoEncargadoForm();
-////            $encargado->setResources($this->getObject());
-////$newDescription->setId($this->getObject()->getId());
-////$newDescriptionForm = new ResourceDescriptionsForm($newDescription);
-//            $this->embedForm('Encargado', $encargado);
-//        }
-//        $this->embedRelation('Encargados', new CargoEncargadoForm($this->getObject()->getEncargados()));
     }
 }
