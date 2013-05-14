@@ -122,7 +122,10 @@
             <p>En esta página puede usted establecer el conjunto de personas
             encargadas del correcto desempeño en el proceso de ejecución de su
             convocatoria.</p>
-            
+            <div>
+                <h2>Firmas</h2>
+                
+            </div>
         </div>
     <?php endif; ?>
     <?php if ($view_results): ?>

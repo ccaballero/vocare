@@ -10,13 +10,19 @@ Doctrine_Manager::getInstance()->bindComponent('Cargo', 'doctrine');
  * @property integer $id
  * @property string $cargo
  * @property Doctrine_Collection $Encargados
+ * @property Doctrine_Collection $Convocatorias
+ * @property Doctrine_Collection $ConvocatoriaCargos
  * 
- * @method integer             getId()         Returns the current record's "id" value
- * @method string              getCargo()      Returns the current record's "cargo" value
- * @method Doctrine_Collection getEncargados() Returns the current record's "Encargados" collection
- * @method Cargo               setId()         Sets the current record's "id" value
- * @method Cargo               setCargo()      Sets the current record's "cargo" value
- * @method Cargo               setEncargados() Sets the current record's "Encargados" collection
+ * @method integer             getId()                 Returns the current record's "id" value
+ * @method string              getCargo()              Returns the current record's "cargo" value
+ * @method Doctrine_Collection getEncargados()         Returns the current record's "Encargados" collection
+ * @method Doctrine_Collection getConvocatorias()      Returns the current record's "Convocatorias" collection
+ * @method Doctrine_Collection getConvocatoriaCargos() Returns the current record's "ConvocatoriaCargos" collection
+ * @method Cargo               setId()                 Sets the current record's "id" value
+ * @method Cargo               setCargo()              Sets the current record's "cargo" value
+ * @method Cargo               setEncargados()         Sets the current record's "Encargados" collection
+ * @method Cargo               setConvocatorias()      Sets the current record's "Convocatorias" collection
+ * @method Cargo               setConvocatoriaCargos() Sets the current record's "ConvocatoriaCargos" collection
  * 
  * @package    .
  * @subpackage model
@@ -48,6 +54,15 @@ abstract class BaseCargo extends sfDoctrineRecord
     {
         parent::setUp();
         $this->hasMany('CargoEncargado as Encargados', array(
+             'local' => 'id',
+             'foreign' => 'cargo_id'));
+
+        $this->hasMany('Convocatoria as Convocatorias', array(
+             'refClass' => 'ConvocatoriaCargo',
+             'local' => 'cargo_id',
+             'foreign' => 'convocatoria_id'));
+
+        $this->hasMany('ConvocatoriaCargo as ConvocatoriaCargos', array(
              'local' => 'id',
              'foreign' => 'cargo_id'));
     }

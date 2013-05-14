@@ -55,6 +55,10 @@ Convocatoria:
       class: Evaluacion
       refClass: ConvocatoriaEvaluacion
       foreignAlias: Convocatorias
+    Cargos:
+      class: Cargo
+      refClass: ConvocatoriaCargo
+      foreignAlias: Convocatorias
 
 ConvocatoriaRequerimiento:
   connection: doctrine
@@ -248,3 +252,31 @@ ConvocatoriaRedaccion:
       local: convocatoria_id
       foreign: id
       onDelete: cascade
+
+ConvocatoriaCargo:
+  connection: doctrine
+  tableName: convocatoria_cargo
+  columns:
+    convocatoria_id:
+      type: integer(4)
+      fixed: false
+      unsigned: true
+      primary: true
+    cargo_id:
+      type: integer(4)
+      fixed: false
+      unsigned: true
+      primary: true
+    numero_orden:
+      type: integer(4)
+      fixed: false
+      unsigned: true
+      notnull: true
+      default: 0
+  relations:
+    Convocatoria:
+      foreignAlias: ConvocatoriaCargos
+      onDelete: CASCADE
+    Cargo:
+      foreignAlias: ConvocatoriaCargos
+      onDelete: CASCADE
