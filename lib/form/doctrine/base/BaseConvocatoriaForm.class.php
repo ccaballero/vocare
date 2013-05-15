@@ -26,6 +26,7 @@ abstract class BaseConvocatoriaForm extends BaseFormDoctrine
       'documentos_list'     => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Documento')),
       'eventos_list'        => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Evento')),
       'evaluaciones_list'   => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Evaluacion')),
+      'cargos_list'         => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Cargo')),
     ));
 
     $this->setValidators(array(
@@ -40,6 +41,7 @@ abstract class BaseConvocatoriaForm extends BaseFormDoctrine
       'documentos_list'     => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Documento', 'required' => false)),
       'eventos_list'        => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Evento', 'required' => false)),
       'evaluaciones_list'   => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Evaluacion', 'required' => false)),
+      'cargos_list'         => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Cargo', 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('convocatoria[%s]');
@@ -85,6 +87,11 @@ abstract class BaseConvocatoriaForm extends BaseFormDoctrine
       $this->setDefault('evaluaciones_list', $this->object->Evaluaciones->getPrimaryKeys());
     }
 
+    if (isset($this->widgetSchema['cargos_list']))
+    {
+      $this->setDefault('cargos_list', $this->object->Cargos->getPrimaryKeys());
+    }
+
   }
 
   protected function doSave($con = null)
@@ -94,6 +101,7 @@ abstract class BaseConvocatoriaForm extends BaseFormDoctrine
     $this->saveDocumentosList($con);
     $this->saveEventosList($con);
     $this->saveEvaluacionesList($con);
+    $this->saveCargosList($con);
 
     parent::doSave($con);
   }
@@ -285,6 +293,44 @@ abstract class BaseConvocatoriaForm extends BaseFormDoctrine
     if (count($link))
     {
       $this->object->link('Evaluaciones', array_values($link));
+    }
+  }
+
+  public function saveCargosList($con = null)
+  {
+    if (!$this->isValid())
+    {
+      throw $this->getErrorSchema();
+    }
+
+    if (!isset($this->widgetSchema['cargos_list']))
+    {
+      // somebody has unset this widget
+      return;
+    }
+
+    if (null === $con)
+    {
+      $con = $this->getConnection();
+    }
+
+    $existing = $this->object->Cargos->getPrimaryKeys();
+    $values = $this->getValue('cargos_list');
+    if (!is_array($values))
+    {
+      $values = array();
+    }
+
+    $unlink = array_diff($existing, $values);
+    if (count($unlink))
+    {
+      $this->object->unlink('Cargos', array_values($unlink));
+    }
+
+    $link = array_diff($values, $existing);
+    if (count($link))
+    {
+      $this->object->link('Cargos', array_values($link));
     }
   }
 

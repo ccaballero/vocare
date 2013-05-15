@@ -18,90 +18,31 @@ class convocatoriasActions extends PlantillasDefault
     );
 
     public function executeIndex() {
-        $q = Doctrine_Query::create()
-            ->select('c.*')
-            ->from('Convocatoria c')
-            ->where('estado <> ?', 'eliminado')
-            ->orderBy('c.updated_at');
-
-        $this->list = $q->execute();
+        $convocatoria = new Convocatoria();
+        $this->list = $convocatoria->listAll();
     }
 
     public function executeShow(sfWebRequest $request) {
         $convocatoria = $this->getRoute()->getObject();
+        $this->forward404Unless($convocatoria);
+
+        // Settings of editor form 
         $this->form = new ConvocatoriaForm($convocatoria);
         $this->form->removeFocus();
-
-        $q1 = Doctrine_Query::create()
-            ->from('ConvocatoriaRequerimiento cr')
-            ->where('cr.convocatoria_id = ?', $convocatoria->id);
-        $requerimientos = array();
-        foreach ($q1->fetchArray() as $_requerimiento) {
-            $requerimientos[0][$_requerimiento['requerimiento_id']] = $_requerimiento['numero_item'];
-            $requerimientos[1][$_requerimiento['requerimiento_id']] = $_requerimiento['cantidad_requerida'];
-        }
-        $this->form->setRequerimientos($requerimientos);
-
-        $q2 = Doctrine_Query::create()
-            ->from('ConvocatoriaRequisito cr')
-            ->where('cr.convocatoria_id = ?', $convocatoria->id);
-        $requisitos = array();
-        foreach ($q2->fetchArray() as $_requisito) {
-            $requisitos[$_requisito['requisito_id']] = $_requisito['numero_orden'];
-        }
-        $this->form->setRequisitos($requisitos);
-
-        $q3 = Doctrine_Query::create()
-            ->from('ConvocatoriaDocumento cd')
-            ->where('cd.convocatoria_id = ?', $convocatoria->id);
-        $documentos = array();
-        foreach ($q3->fetchArray() as $_documento) {
-            $documentos[$_documento['documento_id']] = $_documento['numero_orden'];
-        }
-        $this->form->setDocumentos($documentos);
-
-        $q4 = Doctrine_Query::create()
-            ->from('ConvocatoriaEvento ce')
-            ->where('ce.convocatoria_id = ?', $convocatoria->id);
-        $eventos = array();
-        foreach ($q4->fetchArray() as $_evento) {
-            $eventos[$_evento['evento_id']] = $_evento['fecha'];
-        }
-        $this->form->setEventos($eventos);
-
-        $this->object = $this->getRoute()->getObject();
-        $this->forward404Unless($this->object);
+        
+        $this->form->fetchRequerimientos($convocatoria);
+        $this->form->fetchRequisitos($convocatoria);
+        $this->form->fetchDocumentos($convocatoria);
+        $this->form->fetchEventos($convocatoria);
 
         // And this is the part for redactions
-        $this->max_enmienda = $this->object->getMaxEnmienda();
-        $this->redaction = $this->object->getEnmienda($this->max_enmienda);
+        $this->max_enmienda = $convocatoria->getMaxEnmienda();
+        $this->redaction = $convocatoria->getEnmienda($this->max_enmienda);
 
         // And this is the part for listing of convocatorias (I need to say
         //convocatorias in english, but don't
-        $statement = Doctrine_Manager::getInstance()->connection();
-        $resultset = $statement->execute(
-            'SELECT c.id,
-                   c.gestion,
-                   c. estado,
-                   r.numero_enmienda,
-                   r.redaccion
-            FROM convocatoria c
-            RIGHT JOIN (
-                SELECT convocatoria_id, numero_enmienda, redaccion
-                FROM convocatoria_redaccion
-                WHERE (convocatoria_id, numero_enmienda) IN (
-                    SELECT convocatoria_id,
-                           MAX(numero_enmienda)
-                    FROM convocatoria_redaccion
-                    GROUP BY convocatoria_id
-                )
-            ) AS r
-            ON c.id = r.convocatoria_id
-            WHERE c.estado <> \'eliminado\'
-            ORDER BY c.updated_at DESC'
-        );
-
-        $this->list = $resultset->fetchAll();
+        $this->list = $convocatoria->listRedactions();
+        $this->object = $convocatoria;
 
         // This is the part where I talk to templating
         $tpl = new myTemplate();
@@ -117,9 +58,14 @@ class convocatoriasActions extends PlantillasDefault
         // This is the part for renderer control, Can I say this?
         $state = $this->object->getEstado();
 
+        // This is the part when I build the roles for signatures
+        $cargos = new Cargo();
+        $this->cargos = $cargos->listAll();
+        
         $this->view_preview = true;
         $this->view_editor = ($state == 'borrador') || ($state == 'emitido');
         $this->view_redaction = ($state == 'borrador') || ($state == 'emitido');
+        $this->view_viewers = ($state == 'borrador' || ($state == 'emitido'));
         $this->view_users = ($state == 'borrador' || ($state == 'emitido'));
         $this->view_results = ($state == 'vigente') || ($state == 'finalizado');
     }

@@ -28,9 +28,9 @@ principalmente, y en la generación de otros documentos.</p>
         <td>
             <ul>
             <?php if ($sf_user->hasCredential('cargos_view')): ?>
-                <?php echo link_to(
+                <li><?php echo link_to(
                     'Examinar', 'cargos_show', $cargo
-                ) ?>
+                ) ?></li>
             <?php endif; ?>
             <?php if ($sf_user->hasCredential('cargos_edit')): ?>
                 <li><?php echo link_to(

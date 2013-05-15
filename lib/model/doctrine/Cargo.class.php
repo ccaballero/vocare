@@ -4,7 +4,16 @@ class Cargo extends BaseCargo
 {
     private $encargadoActual;
     private $emailEncargado;
-    
+
+    public function listAll() {
+        $q = Doctrine_Query::create()
+            ->select('c.*')
+            ->from('Cargo c')
+            ->orderBy('c.cargo ASC');
+
+        return $q->execute();
+    }
+
     private function getMax() {
         $q1 = Doctrine_Query::create()
             ->select('MAX(ce.fecha)')
@@ -29,7 +38,7 @@ class Cargo extends BaseCargo
             $this->encargadoActual = 'No asignado aún';
         }
     }
-    
+
     public function getEncargadoActual() {
         if (empty($this->encargadoActual)) {
             $this->getMax();

@@ -6,6 +6,7 @@ class ConvocatoriaForm extends BaseConvocatoriaForm
         unset(
             $this['publicacion'],
             $this['redaccion'],
+            $this['cargos_list'],
             $this['evaluaciones_list'],
             $this['created_at'],
             $this['updated_at'],
@@ -22,19 +23,35 @@ class ConvocatoriaForm extends BaseConvocatoriaForm
 
         $this->widgetSchema['gestion']->setAttribute('class', 'focus');
 
-        $this->widgetSchema['requerimientos_list']->setOption('renderer_class', 'sfWidgetFormSelectCheckbox');
-        $this->widgetSchema['requisitos_list']->setOption('renderer_class', 'sfWidgetFormSelectCheckbox');
-        $this->widgetSchema['documentos_list']->setOption('renderer_class', 'sfWidgetFormSelectCheckbox');
-        $this->widgetSchema['eventos_list']->setOption('renderer_class', 'sfWidgetFormSelectCheckbox');
+        $this->widgetSchema['requerimientos_list']->setOption(
+            'renderer_class', 'sfWidgetFormSelectCheckbox');
+        $this->widgetSchema['requisitos_list']->setOption(
+            'renderer_class', 'sfWidgetFormSelectCheckbox');
+        $this->widgetSchema['documentos_list']->setOption(
+            'renderer_class', 'sfWidgetFormSelectCheckbox');
+        $this->widgetSchema['eventos_list']->setOption(
+            'renderer_class', 'sfWidgetFormSelectCheckbox');
 
         $decorator = new FormDecoratorDefault($this->getWidgetSchema());
         $this->widgetSchema->addFormFormatter('custom', $decorator);
         $this->widgetSchema->setFormFormatterName('custom');
 
-        $this->widgetSchema['requerimientos_list']->setOption('renderer_options', array('formatter' => array($this, 'rendererRequerimientos')));
-        $this->widgetSchema['requisitos_list']->setOption('renderer_options', array('formatter' => array($this, 'rendererRequisitos')));
-        $this->widgetSchema['documentos_list']->setOption('renderer_options', array('formatter' => array($this, 'rendererDocumentos')));
-        $this->widgetSchema['eventos_list']->setOption('renderer_options', array('formatter' => array($this, 'rendererEventos')));
+        $this->widgetSchema['requerimientos_list']->setOption(
+            'renderer_options', array(
+                'formatter' => array($this, 'rendererRequerimientos')
+            ));
+        $this->widgetSchema['requisitos_list']->setOption(
+            'renderer_options', array(
+                'formatter' => array($this, 'rendererRequisitos')
+            ));
+        $this->widgetSchema['documentos_list']->setOption(
+            'renderer_options', array(
+                'formatter' => array($this, 'rendererDocumentos')
+            ));
+        $this->widgetSchema['eventos_list']->setOption(
+            'renderer_options', array(
+                'formatter' => array($this, 'rendererEventos')
+            ));
     }
 
     public function removeFocus() {
@@ -59,7 +76,8 @@ class ConvocatoriaForm extends BaseConvocatoriaForm
                 . '<th>&nbsp;</th>'
                 . '</tr>';
         foreach ($inputs as $key => $input) {
-            $item = preg_replace('/.* value="(\d+)" .*/', '$1', $input['input']);
+            $item = preg_replace(
+                '/.* value="(\d+)" .*/', '$1', $input['input']);
 
             $value = array(' ', ' ');
             if (!empty($this->requerimientos) &&
@@ -93,7 +111,8 @@ class ConvocatoriaForm extends BaseConvocatoriaForm
                 . '<th>&nbsp;</th>'
                 . '</tr>';
         foreach ($inputs as $input) {
-            $item = preg_replace('/.* value="(\d+)" .*/', '$1', $input['input']);
+            $item = preg_replace(
+                '/.* value="(\d+)" .*/', '$1', $input['input']);
 
             $value = ' ';
             if (array_key_exists($item, $this->requisitos)) {
@@ -118,7 +137,8 @@ class ConvocatoriaForm extends BaseConvocatoriaForm
                 . '<th>&nbsp;</th>'
                 . '</tr>';
         foreach ($inputs as $input) {
-            $item = preg_replace('/.* value="(\d+)" .*/', '$1', $input['input']);
+            $item = preg_replace(
+                '/.* value="(\d+)" .*/', '$1', $input['input']);
 
             $value = ' ';
             if (array_key_exists($item, $this->documentos)) {
@@ -143,7 +163,8 @@ class ConvocatoriaForm extends BaseConvocatoriaForm
                 . '<th>&nbsp;</th>'
                 . '</tr>';
         foreach ($inputs as $input) {
-            $item = preg_replace('/.* value="(\d+)" .*/', '$1', $input['input']);
+            $item = preg_replace(
+                '/.* value="(\d+)" .*/', '$1', $input['input']);
 
             $value = ' ';
             if (array_key_exists($item, $this->eventos)) {
@@ -151,7 +172,8 @@ class ConvocatoriaForm extends BaseConvocatoriaForm
             }
 
             $append = '<input type="text" name="eventos[' . $item
-                . ']" class="text-center datepicker" style="width:100px"' . $value . '/>';
+                . ']" class="text-center datepicker" style="width:100px"'
+                . $value . '/>';
 
             $result .= '<tr><td style="width:16px">' . $input['input']
                     . '</td><td style="width:80px">' . $append
@@ -166,9 +188,36 @@ class ConvocatoriaForm extends BaseConvocatoriaForm
         $this->requerimientos = $requerimientos;
     }
 
+    public function fetchRequerimientos($convocatoria) {
+        $q = Doctrine_Query::create()
+            ->from('ConvocatoriaRequerimiento cr')
+            ->where('cr.convocatoria_id = ?', $convocatoria->id);
+
+        $requerimientos = array();
+        foreach ($q->fetchArray() as $_requerimiento) {
+            $requerimientos[0][$_requerimiento['requerimiento_id']] =
+                $_requerimiento['numero_item'];
+            $requerimientos[1][$_requerimiento['requerimiento_id']] =
+                $_requerimiento['cantidad_requerida'];
+        }
+        $this->setRequerimientos($requerimientos);
+    }
+
     public $requisitos = array();
     public function setRequisitos($requisitos) {
         $this->requisitos = $requisitos;
+    }
+
+    public function fetchRequisitos($convocatoria) {
+        $q = Doctrine_Query::create()
+            ->from('ConvocatoriaRequisito cr')
+            ->where('cr.convocatoria_id = ?', $convocatoria->id);
+        $requisitos = array();
+        foreach ($q->fetchArray() as $_requisito) {
+            $requisitos[$_requisito['requisito_id']] =
+                $_requisito['numero_orden'];
+        }
+        $this->setRequisitos($requisitos);
     }
 
     public $documentos = array();
@@ -176,9 +225,32 @@ class ConvocatoriaForm extends BaseConvocatoriaForm
         $this->documentos = $documentos;
     }
 
+    public function fetchDocumentos($convocatoria) {
+        $q = Doctrine_Query::create()
+            ->from('ConvocatoriaDocumento cd')
+            ->where('cd.convocatoria_id = ?', $convocatoria->id);
+        $documentos = array();
+        foreach ($q->fetchArray() as $_documento) {
+            $documentos[$_documento['documento_id']] =
+                $_documento['numero_orden'];
+        }
+        $this->setDocumentos($documentos);
+    }
+
     public $eventos = array();
     public function setEventos($eventos) {
         $this->eventos = $eventos;
+    }
+    
+    public function fetchEventos($convocatoria) {
+        $q = Doctrine_Query::create()
+            ->from('ConvocatoriaEvento ce')
+            ->where('ce.convocatoria_id = ?', $convocatoria->id);
+        $eventos = array();
+        foreach ($q->fetchArray() as $_evento) {
+            $eventos[$_evento['evento_id']] = $_evento['fecha'];
+        }
+        $this->setEventos($eventos);
     }
 
     public function doSave($con = null) {
@@ -187,17 +259,17 @@ class ConvocatoriaForm extends BaseConvocatoriaForm
         $id_convocatoria = $this->object->getId();
 
         foreach ($this->object->Requerimientos as $requerimiento) {
-            if (array_key_exists($requerimiento->id, $this->requerimientos[0]) &&
-                !empty($this->requerimientos[0][$requerimiento->id])) {
+            if (array_key_exists($requerimiento->id, $this->requerimientos[0])
+                && !empty($this->requerimientos[0][$requerimiento->id])) {
 
                 $id_requerimiento = $requerimiento->id;
                 $item = intval($this->requerimientos[0][$requerimiento->id]);
-                $cantidad = intval($this->requerimientos[1][$requerimiento->id]);
+                $cant = intval($this->requerimientos[1][$requerimiento->id]);
 
                 $q = Doctrine_Query::create()
                     ->update('ConvocatoriaRequerimiento r')
                     ->set('r.numero_item', '?', $item)
-                    ->set('r.cantidad_requerida', '?', $cantidad)
+                    ->set('r.cantidad_requerida', '?', $cant)
                     ->where('r.convocatoria_id = ?', $id_convocatoria)
                     ->andwhere('r.requerimiento_id = ?', $id_requerimiento);
                 $q->execute();

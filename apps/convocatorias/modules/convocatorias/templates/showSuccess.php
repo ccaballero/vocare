@@ -12,8 +12,11 @@
     <?php if ($view_redaction): ?>
     	<li class="tab"><a href="#redaction">Redacción</a></li>
     <?php endif; ?>
+    <?php if ($view_viewers): ?>
+    	<li class="tab"><a href="#viewers">Cargos</a></li>
+    <?php endif; ?>
     <?php if ($view_users): ?>
-    	<li class="tab"><a href="#users">Cargos</a></li>
+    	<li class="tab"><a href="#users">Personal</a></li>
     <?php endif; ?>
     <?php if ($view_results): ?>
     	<li class="tab"><a href="#results">Resultados</a></li>
@@ -116,17 +119,52 @@
             </form>
         </div>
     <?php endif; ?>
+    <?php if ($view_viewers): ?>
+        <div id="viewers" class="tab_contents">
+            <a name="viewers"></a>
+            <p>En esta página puede usted establecer el conjunto de personas
+            encargadas de supervisar el proceso de ejecución de su convocatoria.
+            Estas personas no poseen una cuenta en el sistema, y su rol es mas
+            de ver documentos, y recepción de notificaciones.</p>
+            <div>
+                <h2>Firmas</h2>
+                <p>Esta tabla define el orden en el que los campos de firmas
+                aparecerán en los documentos oficiales generados, si el cargo
+                no esta marcado, entonces este no aparecerá. Ademas el orden se
+                toma de izquierda a derecha.</p>
+                <table>
+                    <tr class="header">
+                        <td>&nbsp;</td>
+                        <td>Cargo</td>
+                        <td>Encargado</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                <?php foreach ($cargos as $i => $cargo): ?>
+                    <tr class="<?php echo fmod($i, 2) ? 'even' : 'odd' ?>">
+                        <td class="text-center">
+                            <input type="checkbox" />
+                        </td>
+                        <td><?php echo $cargo->getCargo() ?></td>
+                        <td><?php echo $cargo->getEncargadoActual() ?></td>
+                        <td>
+                            <ul>
+                                <li><a href="">Subir</a></li>
+                                <li><a href="">Bajar</a></li>
+                            </ul>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+                </table>
+                <h2>Consejos de carrera</h2>
+            </div>
+        </div>
+    <?php endif; ?>
     <?php if ($view_users): ?>
         <div id="users" class="tab_contents">
             <a name="users"></a>
             <p>En esta página puede usted establecer el conjunto de personas
             encargadas del correcto desempeño en el proceso de ejecución de su
             convocatoria.</p>
-            <div>
-                <h2>Firmas</h2>
-                
-            </div>
-        </div>
     <?php endif; ?>
     <?php if ($view_results): ?>
         <div id="results" class="tab_contents">

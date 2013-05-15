@@ -24,11 +24,6 @@ class Convocatoria extends BaseConvocatoria
             '¿Esta seguro que desea promover esta convocatoria?',
             'La convocatoria ha sido promovida',
         ),
-//        'enmendar' => array(
-//            'enmendar',
-//            '¿Esta seguro que desea enmendar esta convocatoria?',
-//            'La convocatoria ha sido enmendada',
-//        ),
         'anular' => array(
             'anular',
             '¿Esta seguro que desea anular la convocatoria?',
@@ -55,16 +50,19 @@ class Convocatoria extends BaseConvocatoria
         if ($this->_operaciones_disponibles == null) {
             switch ($this->getEstado()) {
                 case 'borrador':
-                    $this->_operaciones_disponibles = array('eliminar', 'promover');
+                    $this->_operaciones_disponibles = array(
+                        'eliminar', 'promover');
                     break;
                 case 'eliminado':
                     $this->_operaciones_disponibles = array();
                     break;
                 case 'emitido':
-                    $this->_operaciones_disponibles = array('promover', 'enmendar', 'anular');
+                    $this->_operaciones_disponibles = array(
+                        'promover', 'enmendar', 'anular');
                     break;
                 case 'vigente':
-                    $this->_operaciones_disponibles = array('anular', 'finalizar');
+                    $this->_operaciones_disponibles = array(
+                        'anular', 'finalizar');
                     break;
                 case 'anulado':
                     $this->_operaciones_disponibles = array();
@@ -106,6 +104,16 @@ class Convocatoria extends BaseConvocatoria
 
         $this->save();
         return $this->_operaciones_posibles[$operacion][2];
+    }
+
+    public function listAll() {
+        $q = Doctrine_Query::create()
+            ->select('c.*')
+            ->from('Convocatoria c')
+            ->where('estado <> ?', 'eliminado')
+            ->orderBy('c.updated_at');
+
+        return $q->execute();
     }
 
     public function getTotalRequerimientos() {
@@ -156,17 +164,36 @@ class Convocatoria extends BaseConvocatoria
     }
 
     public function getPublicacion() {
-        include_once realpath(dirname(__FILE__) . '/../../../apps/convocatorias/lib/helper/PrettyDateHelper.php');
+        include_once realpath(dirname(__FILE__)
+            . '/../../../apps/convocatorias/lib/helper/PrettyDateHelper.php');
         return pretty_date($this->_get('publicacion'));
     }
 
-    public function getFirmas() {
-        return array(
-            new Firma('Dir. Carr. Informática', 'Lic. Rolando Jaldin Rosales'),
-            new Firma('Dir. Carr. Ing. Sistemas', 'Lic. Yony Montoya Burgos'),
-            new Firma('Jefe Dpto. Informática-Sistemas', 'Lic. Henrry Frank Villarroel Tapia'),
-            new Firma('Decano FCyT-UMSS', 'Ing. Hernan Flores Garcia'),
+    public function listRedactions() {
+        $statement = Doctrine_Manager::getInstance()->connection();
+        $resultset = $statement->execute(
+            'SELECT c.id,
+                   c.gestion,
+                   c. estado,
+                   r.numero_enmienda,
+                   r.redaccion
+            FROM convocatoria c
+            RIGHT JOIN (
+                SELECT convocatoria_id, numero_enmienda, redaccion
+                FROM convocatoria_redaccion
+                WHERE (convocatoria_id, numero_enmienda) IN (
+                    SELECT convocatoria_id,
+                           MAX(numero_enmienda)
+                    FROM convocatoria_redaccion
+                    GROUP BY convocatoria_id
+                )
+            ) AS r
+            ON c.id = r.convocatoria_id
+            WHERE c.estado <> \'eliminado\'
+            ORDER BY c.updated_at DESC'
         );
+
+        return $resultset->fetchAll();
     }
 
     public function getMaxEnmienda() {
@@ -183,7 +210,7 @@ class Convocatoria extends BaseConvocatoria
             return $array[0]['MAX'];
         }
     }
-    
+
     public function getEnmienda($numero_enmienda) {
         $q = Doctrine_Core::getTable('ConvocatoriaRedaccion')
           ->createQuery('cr')
@@ -191,6 +218,25 @@ class Convocatoria extends BaseConvocatoria
           ->andWhere('cr.numero_enmienda = ?', $numero_enmienda);
 
         return $q->fetchOne();
+    }
+
+    public function getFirmas() {
+        return array(
+            new Firma(
+                'Dir. Carr. Informática', 'Lic. Rolando Jaldin Rosales'
+            ),
+            new Firma(
+                'Dir. Carr. Ing. Sistemas', 'Lic. Yony Montoya Burgos'
+            ),
+            new Firma(
+                'Jefe Dpto. Informática-Sistemas',
+                'Lic. Henrry Frank Villarroel Tapia'
+            ),
+            new Firma(
+                'Decano FCyT-UMSS',
+                'Ing. Hernan Flores Garcia'
+            ),
+        );
     }
 }
 
