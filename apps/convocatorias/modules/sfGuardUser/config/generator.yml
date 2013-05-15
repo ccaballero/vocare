@@ -13,7 +13,7 @@ generator:
           label: Username
       list:
         title: User list
-        display: [username, last_name, first_name, email_address]
+        display: [=username, last_name, first_name, email_address]
         sort: [last_name, asc]
       filter:
         display: [username, first_name, last_name, email_address]

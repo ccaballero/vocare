@@ -44,6 +44,7 @@ all:
       - sfGuardUser
       - sfGuardGroup
       - sfGuardPermission
+      - sfGuardForgotPassword
 #      - sfGuardRegister
     # Settings for sfDoctrineGuardPlugin
     login_module: sfGuardAuth

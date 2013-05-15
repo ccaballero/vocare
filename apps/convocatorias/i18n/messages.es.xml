@@ -162,18 +162,20 @@
                 <target>Fecha de modificación</target>
             </trans-unit>
 
+            <!-- forgot password -->
+            <trans-unit>
+                <source>Do not worry, we can help you get back in to your account safely!</source>
+                <target>asdf</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Fill out the form below to request an e-mail with information on how to reset your password.</source>
+                <target>asdf</target>
+            </trans-unit>
+
             <!-- permission administrator -->
             <trans-unit>
                 <source>Permission list</source>
                 <target>Lista de permisos</target>
-            </trans-unit>
-
-
-
-
-            <trans-unit>
-                <source></source>
-                <target></target>
             </trans-unit>
 
 <trans-unit>

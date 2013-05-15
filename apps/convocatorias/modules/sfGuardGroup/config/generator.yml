@@ -9,7 +9,7 @@ generator:
           label: Description
       list:
         title: Group list
-        display: [name, description]
+        display: [name, description, description, description]
         sort: [name, asc]
       filter:
         class: false
