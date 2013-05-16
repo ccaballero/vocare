@@ -10,6 +10,13 @@ function showbox(selector) {
     }
 }
 
+function enumerate_checks() {
+    var counter = 1;
+    $('.draggable input[type="checkbox"]').each(function(){
+        $(this).attr('value', counter++);
+    });
+}   
+
 $(document).ready(function(){
     $('input[type="text"].focus').focus();
     $('textarea.focus').focus();
@@ -27,10 +34,21 @@ $(document).ready(function(){
     $.datepicker.regional['es'] = {
         prevText: '<Previo',
         nextText: 'Siguiente>',
-        monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-        monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+        monthNames: [
+            'Enero', 'Febrero', 'Marzo', 'Abril',
+            'Mayo', 'Junio', 'Julio', 'Agosto',
+            'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+        ],
+        monthNamesShort: [
+            'Ene', 'Feb', 'Mar', 'Abr',
+            'May', 'Jun', 'Jul', 'Ago',
+            'Sep', 'Oct', 'Nov', 'Dic'
+        ],
         weekHeader: 'Sm', weekStatus: '',
-        dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sabado'],
+        dayNames: [
+            'Domingo', 'Lunes', 'Martes', 'Miércoles',
+            'Jueves', 'Viernes', 'Sabado'
+        ],
         dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
         dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
         dateFormat: 'yy-mm-dd', firstDay: 1, 
@@ -60,5 +78,18 @@ $(document).ready(function(){
     $('a.clipboard').click(function() {
         redaccion = $(this).attr('name');
         $('textarea[name=redaction]').html(redacciones[redaccion]);
+    });
+    
+    // this is the part for up and down signatures in cargos tab
+    // http://stackoverflow.com/questions/1569889/jquery-move-table-row
+    enumerate_checks();
+    $(".up,.down").click(function() {
+        var row = $(this).parents("tr:first");
+        if ($(this).is(".up")) {
+            row.insertBefore(row.prev());
+        } else {
+            row.insertAfter(row.next());
+        }
+        enumerate_checks();
     });
 });

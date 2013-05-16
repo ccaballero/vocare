@@ -39,7 +39,7 @@ class Convocatoria extends BaseConvocatoria
     protected $_operaciones_disponibles = array();
 
     public function __toString() {
-        return '[' . $this->getEstado() . '] ' . $this->getNombre();
+        return '[' . $this->getEstado() . '] ' . $this->getGestion();
     }
 
     public function getOperacionesPosibles() {
@@ -221,22 +221,17 @@ class Convocatoria extends BaseConvocatoria
     }
 
     public function getFirmas() {
-        return array(
-            new Firma(
-                'Dir. Carr. Informática', 'Lic. Rolando Jaldin Rosales'
-            ),
-            new Firma(
-                'Dir. Carr. Ing. Sistemas', 'Lic. Yony Montoya Burgos'
-            ),
-            new Firma(
-                'Jefe Dpto. Informática-Sistemas',
-                'Lic. Henrry Frank Villarroel Tapia'
-            ),
-            new Firma(
-                'Decano FCyT-UMSS',
-                'Ing. Hernan Flores Garcia'
-            ),
-        );
+        $cargos = new Cargo();
+        $lista_cargos = $cargos->listAll($this);
+
+        $firmas = array();
+        foreach ($lista_cargos as $cargo) {
+            if (!empty($cargo['numero_orden'])) {
+                $firmas[] = new Firma($cargo['cargo'], $cargo['encargado']);
+            }
+        }
+        
+        return $firmas;
     }
 }
 

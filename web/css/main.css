@@ -403,6 +403,10 @@ a {
     text-align: center;
 }
 
+#preview .firmas {
+    text-align: center;
+}
+
 #preview .firmas .firma {
     display: inline-block;
     margin: 60px 20px 20px 20px;

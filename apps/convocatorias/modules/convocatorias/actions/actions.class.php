@@ -26,10 +26,10 @@ class convocatoriasActions extends PlantillasDefault
         $convocatoria = $this->getRoute()->getObject();
         $this->forward404Unless($convocatoria);
 
-        // Settings of editor form 
+        // Settings of editor form
         $this->form = new ConvocatoriaForm($convocatoria);
         $this->form->removeFocus();
-        
+
         $this->form->fetchRequerimientos($convocatoria);
         $this->form->fetchRequisitos($convocatoria);
         $this->form->fetchDocumentos($convocatoria);
@@ -60,8 +60,8 @@ class convocatoriasActions extends PlantillasDefault
 
         // This is the part when I build the roles for signatures
         $cargos = new Cargo();
-        $this->cargos = $cargos->listAll();
-        
+        $this->cargos = $cargos->listAll($convocatoria);
+
         $this->view_preview = true;
         $this->view_editor = ($state == 'borrador') || ($state == 'emitido');
         $this->view_redaction = ($state == 'borrador') || ($state == 'emitido');
@@ -183,12 +183,38 @@ class convocatoriasActions extends PlantillasDefault
 
         $dirbase = sfConfig::get('app_dir_generation');
         $filename = $convocatoria->getId() . '_' . $numero_enmienda . '.xml';
-        
+
         $destination = $dirbase . '/' . $filename;
         $content = '<vocare>' . $tpl->render() . '</vocare>';
         $result = file_put_contents($destination, $content);
 
         $this->getUser()->setFlash('notice', 'La redacción de la convocatoria acaba de ser editada');
+        $this->redirect($this->generateUrl('convocatorias_show', array('id' => $convocatoria->getId())));
+    }
+
+    public function executeFirmas(sfWebRequest $request) {
+        $convocatoria = $this->getRoute()->getObject();
+        $cargos = $request->getParameter('cargos');
+
+        // sort by numero_orden
+        asort($cargos);
+        $counter = 1;
+
+        // delete the old registers
+        Doctrine_Query::create()
+            ->delete('ConvocatoriaCargo cc')
+            ->where('cc.convocatoria_id = ?', $convocatoria->getId())
+            ->execute();
+
+        foreach ($cargos as $id => $peso) {
+            $convocatoria_cargo = new ConvocatoriaCargo();
+            $convocatoria_cargo->convocatoria_id = $convocatoria->getId();
+            $convocatoria_cargo->cargo_id = $id;
+            $convocatoria_cargo->numero_orden = $counter++;
+            $convocatoria_cargo->save();
+        }
+
+        $this->getUser()->setFlash('notice', 'La configuración de las firmas ha sido registrada');
         $this->redirect($this->generateUrl('convocatorias_show', array('id' => $convocatoria->getId())));
     }
 

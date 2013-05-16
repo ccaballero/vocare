@@ -186,11 +186,6 @@
     <source>Password again</source>
     <target>Repita Contraseña</target>
 </trans-unit>
-<trans-unit>
-    <source>Group Register</source>
-    <target>Registro de Grupo</target>
-</trans-unit>
-
         </body>
     </file>
 </xliff>

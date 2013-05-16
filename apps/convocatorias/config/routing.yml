@@ -1,57 +1,62 @@
-# sfGuardAuth
 sf_guard_signin:
   url: /acceder
-  param: { module: sfGuardAuth, action: signin}
+  param:
+    module: sfGuardAuth
+    action: signin
 
 sf_guard_signout:
   url: /salir
-  param: {module: sfGuardAuth, action: signout}
+  param:
+    module: sfGuardAuth
+    action: signout
 
-# sfGuardUser
 sf_guard_user:
   url: /usuarios
-  param: {module: sfGuardUser, action: index}
+  param:
+    module: sfGuardUser
+    action: index
 
-# sfGuardGroup
 sf_guard_group:
   url: /grupos
-  param: {module: sfGuardGroup, action: index}
+  param:
+    module: sfGuardGroup
+    action: index
 
-# sfGuardPermission
 sf_guard_permission:
   url: /permisos
-  param: {module: sfGuardPermission, action: index}
+  param:
+    module: sfGuardPermission
+    action: index
 
 sf_guard_forgot_password:
   url: /forgot_password
-  param: {module: sfGuardForgotPassword, action: index}
+  param:
+    module: sfGuardForgotPassword
+    action: index
 
 sf_guard_forgot_password_change:
-  url:   /forgot_password/:unique_key
+  url: /forgot_password/:unique_key
   class: sfDoctrineRoute
-  options: { model: sfGuardForgotPassword, type: object }
-  param: { module: sfGuardForgotPassword, action: change }
+  options:
+    model: sfGuardForgotPassword
+    type: object
+  param:
+    module: sfGuardForgotPassword
+    action: change
   requirements:
     sf_method: [get, post]
 
-#sf_guard_register:
-#  url: /registro
-#  param: {module: sfGuardRegister, action: index}
-#
+sf_guard_register:
+  url: /registro
+  param:
+    module: sfGuardRegister
+    action: index
 
-# routing for convocatorias
 convocatorias:
   class: sfDoctrineRouteCollection
   options:
     model: Convocatoria
-    actions:
-      - list
-      - new
-      - create
-      - edit
-      - update
-      - show
-      - delete
+    actions: [list, new, create, edit, update, show, delete]
     collection_actions:
       borradores: [get]
     object_actions:
@@ -63,40 +68,45 @@ convocatorias:
       anular: [post]
       finalizar: [post]
       redaccion: [post]
+      firmas: [post]
 
 requerimientos:
   class: sfDoctrineRouteCollection
-  options: { model: Requerimiento }
+  options:
+    model: Requerimiento
 
 requisitos:
   class: sfDoctrineRouteCollection
-  options: { model: Requisito }
+  options:
+    model: Requisito
 
 documentos:
   class: sfDoctrineRouteCollection
-  options: { model: Documento }
+  options:
+    model: Documento
 
 eventos:
   class: sfDoctrineRouteCollection
-  options: { model: Evento }
+  options:
+    model: Evento
 
 cargos:
   class: sfDoctrineRouteCollection
   options:
     model: Cargo
     object_actions:
-      agregar: [get,post]
+      agregar: [get, post]
 
-# default rules
 homepage:
-  url:   /
-  param: { module: portada, action: index }
+  url: /
+  param:
+    module: portada
+    action: index
 
-# generic rules
-# please, remove them by adding more specific rules
 default_index:
-  url:   /:module
-  param: { action: index }
+  url: /:module
+  param:
+    action: index
 
 default:
-  url:   /:module/:action/*
+  url: /:module/:action/*

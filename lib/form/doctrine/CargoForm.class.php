@@ -3,6 +3,10 @@
 class CargoForm extends BaseCargoForm
 {
     public function configure() {
+        unset(
+            $this['convocatorias_list']
+        );
+
         $this->widgetSchema->setLabels(array(
             'cargo' => 'Cargo (*):',
         ));

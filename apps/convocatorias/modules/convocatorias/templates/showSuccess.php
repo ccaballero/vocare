@@ -94,7 +94,7 @@
                                     array('id' => $convocatoria['id'])
                                 ),
                                 array('target' => '_blank')
-                            ) ?></li>                                
+                            ) ?></li>
                             <li>
                                 <a class="clipboard"
                         name="red<?php echo $convocatoria['id'] ?>">Copiar</a>
@@ -113,7 +113,7 @@
             <?php echo form_tag(
                 url_for('convocatorias_redaccion',
                 array('id' => $object->getId()))) ?>
-                <p><textarea name="redaction" 
+                <p><textarea name="redaction"
                    class="middle-area"><?php echo $redaction ?></textarea></p>
                 <p class="submit"><input type="submit" value="Registrar" /></p>
             </form>
@@ -126,37 +126,50 @@
             encargadas de supervisar el proceso de ejecución de su convocatoria.
             Estas personas no poseen una cuenta en el sistema, y su rol es mas
             de ver documentos, y recepción de notificaciones.</p>
-            <div>
+            <?php echo form_tag(
+                url_for('convocatorias_firmas',
+                array('id' => $object->getId()))) ?>
                 <h2>Firmas</h2>
                 <p>Esta tabla define el orden en el que los campos de firmas
                 aparecerán en los documentos oficiales generados, si el cargo
                 no esta marcado, entonces este no aparecerá. Ademas el orden se
                 toma de izquierda a derecha.</p>
-                <table>
-                    <tr class="header">
-                        <td>&nbsp;</td>
-                        <td>Cargo</td>
-                        <td>Encargado</td>
-                        <td>&nbsp;</td>
-                    </tr>
+                <table class="draggable">
+                    <thead>
+                        <tr class="header">
+                            <td>&nbsp;</td>
+                            <td>Cargo</td>
+                            <td>Encargado</td>
+                            <td>Correo electrónico</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    </thead>
                 <?php foreach ($cargos as $i => $cargo): ?>
                     <tr class="<?php echo fmod($i, 2) ? 'even' : 'odd' ?>">
                         <td class="text-center">
-                            <input type="checkbox" />
+                            <input type="checkbox"
+                                   name="cargos[<?php echo $cargo['id'] ?>]"
+                                   value="<?php echo $cargo['numero_orden'] ?>"
+                                <?php echo empty($cargo['numero_orden']) ?
+                                    '' : 'checked="checked"' ?> 
+                            />
                         </td>
-                        <td><?php echo $cargo->getCargo() ?></td>
-                        <td><?php echo $cargo->getEncargadoActual() ?></td>
+                        <td><?php echo $cargo['cargo'] ?></td>
+                        <td><?php echo $cargo['encargado'] ?></td>
+                        <td><?php echo $cargo['email'] ?></td>
                         <td>
                             <ul>
-                                <li><a href="">Subir</a></li>
-                                <li><a href="">Bajar</a></li>
+                                <li><a class="up">Subir</a></li>
+                                <li><a class="down">Bajar</a></li>
                             </ul>
                         </td>
                     </tr>
                 <?php endforeach; ?>
                 </table>
-                <h2>Consejos de carrera</h2>
-            </div>
+                <p class="submit">
+                    <input type="submit" value="Registrar">
+                </p>
+            </form>
         </div>
     <?php endif; ?>
     <?php if ($view_users): ?>
