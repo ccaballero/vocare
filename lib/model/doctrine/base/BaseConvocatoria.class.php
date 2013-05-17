@@ -18,6 +18,7 @@ Doctrine_Manager::getInstance()->bindComponent('Convocatoria', 'doctrine');
  * @property Doctrine_Collection $Eventos
  * @property Doctrine_Collection $Evaluaciones
  * @property Doctrine_Collection $Cargos
+ * @property Doctrine_Collection $Notificaciones
  * @property Doctrine_Collection $ConvocatoriaRequerimientos
  * @property Doctrine_Collection $ConvocatoriaRequisitos
  * @property Doctrine_Collection $ConvocatoriaDocumentos
@@ -37,6 +38,7 @@ Doctrine_Manager::getInstance()->bindComponent('Convocatoria', 'doctrine');
  * @method Doctrine_Collection getEventos()                               Returns the current record's "Eventos" collection
  * @method Doctrine_Collection getEvaluaciones()                          Returns the current record's "Evaluaciones" collection
  * @method Doctrine_Collection getCargos()                                Returns the current record's "Cargos" collection
+ * @method Doctrine_Collection getNotificaciones()                        Returns the current record's "Notificaciones" collection
  * @method Doctrine_Collection getConvocatoriaRequerimientos()            Returns the current record's "ConvocatoriaRequerimientos" collection
  * @method Doctrine_Collection getConvocatoriaRequisitos()                Returns the current record's "ConvocatoriaRequisitos" collection
  * @method Doctrine_Collection getConvocatoriaDocumentos()                Returns the current record's "ConvocatoriaDocumentos" collection
@@ -55,6 +57,7 @@ Doctrine_Manager::getInstance()->bindComponent('Convocatoria', 'doctrine');
  * @method Convocatoria        setEventos()                               Sets the current record's "Eventos" collection
  * @method Convocatoria        setEvaluaciones()                          Sets the current record's "Evaluaciones" collection
  * @method Convocatoria        setCargos()                                Sets the current record's "Cargos" collection
+ * @method Convocatoria        setNotificaciones()                        Sets the current record's "Notificaciones" collection
  * @method Convocatoria        setConvocatoriaRequerimientos()            Sets the current record's "ConvocatoriaRequerimientos" collection
  * @method Convocatoria        setConvocatoriaRequisitos()                Sets the current record's "ConvocatoriaRequisitos" collection
  * @method Convocatoria        setConvocatoriaDocumentos()                Sets the current record's "ConvocatoriaDocumentos" collection
@@ -146,6 +149,10 @@ abstract class BaseConvocatoria extends sfDoctrineRecord
              'refClass' => 'ConvocatoriaCargo',
              'local' => 'convocatoria_id',
              'foreign' => 'cargo_id'));
+
+        $this->hasMany('ConvocatoriaNotificacion as Notificaciones', array(
+             'local' => 'id',
+             'foreign' => 'convocatoria_id'));
 
         $this->hasMany('ConvocatoriaRequerimiento as ConvocatoriaRequerimientos', array(
              'local' => 'id',

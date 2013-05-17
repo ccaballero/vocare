@@ -170,6 +170,7 @@
                     <input type="submit" value="Registrar">
                 </p>
             </form>
+            <h2>Notificaciones</h2>
         </div>
     <?php endif; ?>
     <?php if ($view_users): ?>

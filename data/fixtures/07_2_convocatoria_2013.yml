@@ -349,6 +349,64 @@ ConvocatoriaCargo:
     Cargo: decano_fcyt
     numero_orden: 4
 
+#ConvocatoriaNotificacion:
+#  convocatoria_notificacion_2_1:
+#    Convocatoria: convocatoria_2
+#    cargo: Honorable Consejo de Carrera de Ing. Sistemas
+#    encargado: Ing. Jhonny Herrera Acebey
+#  convocatoria_notificacion_2_2:
+#    Convocatoria: convocatoria_2
+#    cargo: Honorable Consejo de Carrera de Ing. Sistemas
+#    encargado: Lic. María Leticia Blanco Coca
+#  convocatoria_notificacion_2_3:
+#    Convocatoria: convocatoria_2
+#    cargo: Honorable Consejo de Carrera de Ing. Sistemas
+#    encargado: Ing. Jorge Walter Orellana Araoz
+#  convocatoria_notificacion_2_4:
+#    Convocatoria: convocatoria_2
+#    cargo: Honorable Consejo de Carrera de Ing. Sistemas
+#    encargado: Lic. Rose Mary Salazar Anaya
+#  convocatoria_notificacion_2_5:
+#    Convocatoria: convocatoria_2
+#    cargo: Honorable Consejo de Carrera de Ing. Sistemas
+#    encargado: Lic. Victor Hugo Montaño Quiroga
+#  convocatoria_notificacion_2_6:
+#    Convocatoria: convocatoria_2
+#    cargo: Honorable Consejo de Carrera de Ing. Sistemas
+#    encargado: Lic. Patricia Rodriguez Bilbao
+#  convocatoria_notificacion_2_7:
+#    Convocatoria: convocatoria_2
+#    cargo: Honorable Consejo de Carrera de Ing. Sistemas
+#    encargado: Univ. Jersson Elias Quispe Amaru
+#  convocatoria_notificacion_2_8:
+#    Convocatoria: convocatoria_2
+#    cargo: Honorable Consejo de Carrera de Ing. Sistemas
+#    encargado: Univ. Tania Valero Malele
+#  convocatoria_notificacion_2_9:
+#    Convocatoria: convocatoria_2
+#    cargo: Honorable Consejo de Carrera de Ing. Sistemas
+#    encargado: Univ. Kevin Cabrera Nina
+#  convocatoria_notificacion_2_10:
+#    Convocatoria: convocatoria_2
+#    cargo: Honorable Consejo de Carrera de Ing. Sistemas
+#    encargado: Univ. Hector Paredes Milan
+#  convocatoria_notificacion_2_11:
+#    Convocatoria: convocatoria_2
+#    cargo: Honorable Consejo de Carrera de Ing. Sistemas
+#    encargado: Univ. Edson Aguayo Choque
+#  convocatoria_notificacion_2_12:
+#    Convocatoria: convocatoria_2
+#    cargo: Honorable Consejo de Carrera de Ing. Sistemas
+#    encargado: Univ. Edwin Caceres Cotjiri
+#  convocatoria_notificacion_2_13:
+#    Convocatoria: convocatoria_2
+#    cargo: Honorable Consejo de Carrera de Ing. Sistemas
+#    encargado: Univ. Cristian Cordoba
+#  convocatoria_notificacion_2_14:
+#    Convocatoria: convocatoria_2
+#    cargo: Honorable Consejo de Carrera de Ing. Sistemas
+#    encargado: Univ. Elmer Vargas
+
 ConvocatoriaRedaccion:
   convocatoria_redaccion_2_1:
     numero_enmienda: 1
