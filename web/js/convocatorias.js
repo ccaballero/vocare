@@ -17,6 +17,28 @@ function enumerate_checks() {
     });
 }   
 
+function add_row(selector) {
+    var last_row = $(selector+' tbody tr:last');
+    var new_row = last_row.clone();
+    
+    new_row.show().insertAfter(last_row);
+    
+    $(selector+' tbody tr:last input').each(function() {
+        $(this).attr('value', '');
+    });
+    
+    return false;
+}
+
+function remove_row(selector) {
+    if ($(selector).parents('tbody').children('tr').length > 1) {
+        $(selector).parents('tr:first').remove();
+    } else {
+        alert('no puede eliminarse la ultima file, no te pases.');
+    }
+    return false;
+}
+
 $(document).ready(function(){
     $('input[type="text"].focus').focus();
     $('textarea.focus').focus();
@@ -80,12 +102,12 @@ $(document).ready(function(){
         $('textarea[name=redaction]').html(redacciones[redaccion]);
     });
     
-    // this is the part for up and down signatures in cargos tab
+    // this is the part for up and down signatures in notifications tab
     // http://stackoverflow.com/questions/1569889/jquery-move-table-row
     enumerate_checks();
-    $(".up,.down").click(function() {
-        var row = $(this).parents("tr:first");
-        if ($(this).is(".up")) {
+    $('.up, .down').click(function() {
+        var row = $(this).parents('tr:first');
+        if ($(this).is('.up')) {
             row.insertBefore(row.prev());
         } else {
             row.insertAfter(row.next());

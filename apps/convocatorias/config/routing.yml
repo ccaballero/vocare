@@ -69,6 +69,7 @@ convocatorias:
       finalizar: [post]
       redaccion: [post]
       firmas: [post]
+      notificaciones: [post]
 
 requerimientos:
   class: sfDoctrineRouteCollection

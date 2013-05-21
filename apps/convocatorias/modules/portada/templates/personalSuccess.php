@@ -1,4 +1,4 @@
-<h1>Administración de personas</h1>
+<h1>Administración de personal</h1>
 
 <dl>
     <dt><?php echo link_to(__('Users'), '@sf_guard_user') ?></dt>

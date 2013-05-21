@@ -60,7 +60,8 @@ class convocatoriasActions extends PlantillasDefault
 
         // This is the part when I build the roles for signatures
         $cargos = new Cargo();
-        $this->cargos = $cargos->listAll($convocatoria);
+        $this->signatures = $cargos->listAll($convocatoria);
+        $this->notifications = $convocatoria->getNotificaciones();
 
         $this->view_preview = true;
         $this->view_editor = ($state == 'borrador') || ($state == 'emitido');
@@ -70,7 +71,8 @@ class convocatoriasActions extends PlantillasDefault
         $this->view_results = ($state == 'vigente') || ($state == 'finalizado');
     }
 
-    protected function processForm(sfWebRequest $request, sfForm $form, $flash = '') {
+    protected function processForm(sfWebRequest $request,
+            sfForm $form, $flash = '') {
         $form->setRequerimientos($request->getParameter('requerimientos'));
         $form->setRequisitos($request->getParameter('requisitos'));
         $form->setDocumentos($request->getParameter('documentos'));
@@ -94,7 +96,9 @@ class convocatoriasActions extends PlantillasDefault
 
         $xmlDoc = new DOMDocument();
 //        $xmlDoc->load("$dirbase1/$filename1");
-        $xmlDoc->loadXML(str_replace('&nbsp;', '', file_get_contents("$dirbase1/$filename1")));
+        $xmlDoc->loadXML(
+            str_replace('&nbsp;', '', file_get_contents("$dirbase1/$filename1"))
+        );
 
         $proc = new XSLTProcessor();
         $proc->importStylesheet($xslDoc);
@@ -127,10 +131,15 @@ class convocatoriasActions extends PlantillasDefault
         $latex_dir = realpath(APPLICATION_PATH . '/data/tex/convocatorias');
         $pdflatex_path = '/usr/bin/pdflatex';
 
-        $tex_file = $latex_dir . DIRECTORY_SEPARATOR . $object->getId() . '.tex';
-        $pdf_file = $latex_dir . DIRECTORY_SEPARATOR . $object->getId() . '.pdf';
+        $tex_file = $latex_dir . DIRECTORY_SEPARATOR
+                  . $object->getId() . '.tex';
+        $pdf_file = $latex_dir . DIRECTORY_SEPARATOR
+                  . $object->getId() . '.pdf';
 
-        exec($pdflatex_path . ' -output-directory ' . $latex_dir . ' ' . $tex_file);
+        exec(
+            $pdflatex_path . ' -output-directory ' .
+            $latex_dir . ' ' . $tex_file
+        );
 
         $this->setLayout(false);
         sfConfig::set('sf_web_debug', false);
@@ -139,7 +148,8 @@ class convocatoriasActions extends PlantillasDefault
 
         $this->getResponse()->clearHttpHeaders();
         $this->getResponse()->setHttpHeader('Pragma: public', true);
-        $this->getResponse()->setHttpHeader('Content-Disposition', 'attachment; filename="convocatoria.pdf' . '"');
+        $this->getResponse()->setHttpHeader('Content-Disposition',
+            'attachment; filename="convocatoria.pdf' . '"');
         $this->getResponse()->setContentType('application/pdf');
 
         $this->getResponse()->sendHttpHeaders();
@@ -188,8 +198,10 @@ class convocatoriasActions extends PlantillasDefault
         $content = '<vocare>' . $tpl->render() . '</vocare>';
         $result = file_put_contents($destination, $content);
 
-        $this->getUser()->setFlash('notice', 'La redacción de la convocatoria acaba de ser editada');
-        $this->redirect($this->generateUrl('convocatorias_show', array('id' => $convocatoria->getId())));
+        $this->getUser()->setFlash('notice', 'La redacción de la convocatoria'
+            . ' acaba de ser editada');
+        $this->redirect($this->generateUrl('convocatorias_show', array(
+            'id' => $convocatoria->getId())));
     }
 
     public function executeFirmas(sfWebRequest $request) {
@@ -214,11 +226,42 @@ class convocatoriasActions extends PlantillasDefault
             $convocatoria_cargo->save();
         }
 
-        $this->getUser()->setFlash('notice', 'La configuración de las firmas ha sido registrada');
-        $this->redirect($this->generateUrl('convocatorias_show', array('id' => $convocatoria->getId())));
+        $this->getUser()->setFlash('notice', 'La configuración de las firmas ha'
+            . ' sido registrada');
+        $this->redirect($this->generateUrl('convocatorias_show', array(
+            'id' => $convocatoria->getId())));
     }
 
-    // method for generalization of actions over convocatorias or whatever you are.
+    public function executeNotificaciones(sfWebRequest $request) {
+        $convocatoria = $this->getRoute()->getObject();
+
+        $notifications = $request->getParameter('notifications');
+
+        $cargos = $notifications['cargo'];
+        $encargados = $notifications['encargado'];
+        $emails = $notifications['email'];
+
+        $convocatoria->removeNotifications();
+
+        for ($i = 0; $i < count($encargados); $i++) {
+            if (!empty($cargos[$i]) &&
+                    !empty($encargados[$i]) && !empty($emails[$i])) {
+                $conv_notification = new ConvocatoriaNotificacion();
+                $conv_notification->convocatoria_id = $convocatoria->getId();
+                $conv_notification->cargo = $cargos[$i];
+                $conv_notification->encargado = $encargados[$i];
+                $conv_notification->email= $emails[$i];
+                $conv_notification->save();
+            }
+        }
+
+        $this->getUser()->setFlash('notice', 'La configuración de las' .
+            ' notificaciones ha sido registrada.');
+        $this->redirect($this->generateUrl('convocatorias_show', array(
+            'id' => $convocatoria->getId())) . '#viewers');
+    }
+
+    // method for generalization of actions over convocatorias or whatever.
     private function actionChange($action) {
         $object = $this->getRoute()->getObject();
         $message = $object->executeTransform($action);
@@ -249,7 +292,8 @@ class convocatoriasActions extends PlantillasDefault
         $this->actionChange('anular');
 
         // Notificar a los usuarios de la anulacion de la convocatoria
-        // Notificar a los postulantes, si es que existen, acerca de la anulacion
+        // Notificar a los postulantes, si es que existen
+        // acerca de la anulacion.
     }
 
     public function executeFinalizar() {

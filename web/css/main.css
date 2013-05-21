@@ -268,13 +268,17 @@ a {
 }
 
 /* tabla para listar las opciones en el formulario de convocatorias */
+#main form table {
+    margin-top: 10px;
+}
+
+#main form table input[type="text"] {
+    border: 1px solid #000000;
+}
+
 #main form table.form-table {
     margin-left: 210px;
     width: 600px;
-}
-
-#main form table.form-table input[type="text"] {
-    border: 1px solid #000000;
 }
 
 #main .message {

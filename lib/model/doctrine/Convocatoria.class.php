@@ -196,6 +196,14 @@ class Convocatoria extends BaseConvocatoria
         return $resultset->fetchAll();
     }
 
+    public function removeNotifications() {
+        $q = Doctrine_Query::create()
+            ->delete('ConvocatoriaNotificacion cn')
+            ->where('cn.convocatoria_id = ?', $this->getId());
+
+        $q->execute();
+    }
+
     public function getMaxEnmienda() {
         $q = Doctrine_Query::create()
             ->select('MAX(cr.numero_enmienda)')
@@ -230,7 +238,7 @@ class Convocatoria extends BaseConvocatoria
                 $firmas[] = new Firma($cargo['cargo'], $cargo['encargado']);
             }
         }
-        
+
         return $firmas;
     }
 }

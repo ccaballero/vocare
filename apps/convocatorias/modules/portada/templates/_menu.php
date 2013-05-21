@@ -9,7 +9,7 @@
 <?php endif; ?>
 <?php if ($sf_user->hasCredential('usuarios_list')): ?>
     <li><?php echo link_to(
-            __('People'), 'portada/personas', array('accesskey' => '3')
+            __('Staff'), 'portada/personal', array('accesskey' => '3')
             ) ?></li>
 <?php endif; ?>
 </ul>

@@ -100,8 +100,8 @@
                 <target>Usuarios</target>
             </trans-unit>
             <trans-unit>
-                <source>People</source>
-                <target>Personas</target>
+                <source>Staff</source>
+                <target>Personal</target>
             </trans-unit>
             <trans-unit>
                 <source>Permissions and groups</source>

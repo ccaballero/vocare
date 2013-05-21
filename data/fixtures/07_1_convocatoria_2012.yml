@@ -5,6 +5,8 @@ Convocatoria:
     publicacion: '2012-06-19'
     Redacciones:
       - convocatoria_redaccion_1_1
+    Notificaciones:
+      - convocatoria_notificacion_1_1
 
 ConvocatoriaRequerimiento:
   convocatoria_requerimiento_1_1:
@@ -118,6 +120,12 @@ ConvocatoriaCargo:
     Convocatoria: convocatoria_1
     Cargo: decano_fcyt
     numero_orden: 4
+
+ConvocatoriaNotificacion:
+  convocatoria_notificacion_1_1:
+    cargo: Administrador
+    encargado: Carlos Eduardo Caballero Burgoa
+    email: cijkb.j@gmail.com
 
 ConvocatoriaRedaccion:
   convocatoria_redaccion_1_1:
