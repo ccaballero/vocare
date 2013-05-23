@@ -3,5 +3,8 @@ all:
     routes_register: false
     allow_login_with_email: false
     signin_form: sfGuardCustomFormSignin
+    remember_key_expiration_age: 2592000   # 30 days in seconds
+    remember_cookie_name: myAppRememberMe
+    default_from_email: vocare@cs.umss.edu.bo
   dir_generation: %SF_ROOT_DIR%/data/convocatorias
   xslt_transforms: %SF_ROOT_DIR%/data/xslt

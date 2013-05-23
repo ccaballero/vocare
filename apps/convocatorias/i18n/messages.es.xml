@@ -52,8 +52,12 @@
                 <target>¿Olvidaste tu contraseña?</target>
             </trans-unit>
             <trans-unit>
+                <source>Request</source>
+                <target>Enviar petición</target>
+            </trans-unit>
+            <trans-unit>
                 <source>Want to register?</source>
-                <target>¿Desea registrarse?</target>
+                <target>¿Deseas registrarte?</target>
             </trans-unit>
 
             <!-- form validation -->
@@ -162,30 +166,21 @@
                 <target>Fecha de modificación</target>
             </trans-unit>
 
-            <!-- forgot password -->
-            <trans-unit>
-                <source>Do not worry, we can help you get back in to your account safely!</source>
-                <target>asdf</target>
-            </trans-unit>
-            <trans-unit>
-                <source>Fill out the form below to request an e-mail with information on how to reset your password.</source>
-                <target>asdf</target>
-            </trans-unit>
-
             <!-- permission administrator -->
             <trans-unit>
                 <source>Permission list</source>
                 <target>Lista de permisos</target>
             </trans-unit>
 
-<trans-unit>
-    <source>Register</source>
-    <target>Registrarse</target>
-</trans-unit>
-<trans-unit>
-    <source>Password again</source>
-    <target>Repita Contraseña</target>
-</trans-unit>
+            <!-- registration -->
+            <trans-unit>
+                <source>Register</source>
+                <target>Registrarse</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Password again</source>
+                <target>Repita Contraseña</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

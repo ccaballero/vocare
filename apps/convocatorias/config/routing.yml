@@ -29,13 +29,13 @@ sf_guard_permission:
     action: index
 
 sf_guard_forgot_password:
-  url: /forgot_password
+  url: /recuperar
   param:
     module: sfGuardForgotPassword
     action: index
 
 sf_guard_forgot_password_change:
-  url: /forgot_password/:unique_key
+  url: /recuperar/:unique_key
   class: sfDoctrineRoute
   options:
     model: sfGuardForgotPassword

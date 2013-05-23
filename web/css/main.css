@@ -224,7 +224,8 @@ a {
 
 #main form p input[type="text"],
 #main form p input[type="password"],
-#main form p textarea {
+#main form p textarea,
+#forgot_password_email_address {
     width: 360px;
     border: 1px solid #000000;
     padding: 3px;
