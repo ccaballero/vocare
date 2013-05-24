@@ -23,10 +23,10 @@
         <div id="content">
             <div id="main">
                 <?php if ($sf_user->hasFlash('notice')): ?>
-                    <p class="message"><?php echo $sf_user->getFlash('notice') ?></p>
+                    <p class="notice"><?php echo $sf_user->getFlash('notice') ?></p>
                 <?php endif; ?>
                 <?php if ($sf_user->hasFlash('error')): ?>
-                    <p class="message"><?php echo $sf_user->getFlash('notice') ?></p>
+                    <p class="error"><?php echo $sf_user->getFlash('error') ?></p>
                 <?php endif; ?>
                 <?php echo $sf_content ?>
             </div>

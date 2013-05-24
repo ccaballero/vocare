@@ -172,6 +172,40 @@
                 <target>Lista de permisos</target>
             </trans-unit>
 
+            <!-- forgot password -->
+            <trans-unit>
+                <source>Invalid e-mail address!</source>
+                <target>El correo electrónico es invalido</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Check your e-mail! You should receive something shortly!</source>
+                <target>Revisa tu correo electrónico, deberias recibir algo muy pronto</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Forgot Password Request for %s</source>
+                <target>Petición de cambio de contraseña para %s</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Click to change password</source>
+                <target>Click para cambiar la contraseña</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Password updated successfully!</source>
+                <target>Contraseña actualizada correctamente</target>
+            </trans-unit>
+            <trans-unit>
+                <source>New Password for %s</source>
+                <target>Nueva contraseña para %s</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Change</source>
+                <target>Cambiar</target>
+            </trans-unit>
+            <trans-unit>
+                <source>The two passwords must be the same.</source>
+                <target>Las dos contraseñas deben ser las mismas.</target>
+            </trans-unit>
+
             <!-- registration -->
             <trans-unit>
                 <source>Register</source>
@@ -184,3 +218,8 @@
         </body>
     </file>
 </xliff>
+
+<!--            <trans-unit>
+                <source></source>
+                <target></target>
+            </trans-unit>-->
