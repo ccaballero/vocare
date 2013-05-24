@@ -1,0 +1,38 @@
+Permiso:
+  actAs: [Timestampable]
+  columns:
+    nombre:
+      type: string(255)
+      unique: true
+    descripcion: string(1000)
+
+Grupo:
+  actAs: [Timestampable]
+  columns:
+    nombre:
+      type: string(255)
+      unique: true
+    descripcion: string(1000)
+
+GrupoPermiso:
+  options:
+    symfony:
+      form: false
+      filter: false
+  actAs: [Timestampable]
+  columns:
+    grupo_id:
+      type: integer
+      primary: true
+    permiso_id:
+      type: integer
+      primary: true
+  relations:
+    Grupo:
+      class: Grupo
+      local: grupo_id
+      onDelete: CASCADE
+    Permiso:
+      class: Permiso
+      local: permiso_id
+      onDelete: CASCADE
