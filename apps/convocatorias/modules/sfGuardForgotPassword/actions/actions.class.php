@@ -28,6 +28,7 @@ class sfGuardForgotPasswordActions extends BasesfGuardForgotPasswordActions
                     ->setFrom(
                         sfConfig::get('app_sf_guard_plugin_default_from_email'))
                     ->setTo($this->form->user->email_address)
+                    ->setContentType('text/html')
                     ->setSubject(
                         sprintf(
                             __('Forgot Password Request for %s'),
@@ -36,8 +37,7 @@ class sfGuardForgotPasswordActions extends BasesfGuardForgotPasswordActions
                         $this->getPartial(
                             'sfGuardForgotPassword/send_request', array(
                                 'user' => $this->form->user,
-                                'forgot_password' => $forgotPassword)))
-                    ->setContentType('text/html');
+                                'forgot_password' => $forgotPassword)));
 
                 $this->getMailer()->send($message);
 
@@ -54,9 +54,16 @@ class sfGuardForgotPasswordActions extends BasesfGuardForgotPasswordActions
     public function executeChange($request) {
         sfProjectConfiguration::getActive()->loadHelpers(array('I18N'));
 
-        $this->forgotPassword = $this->getRoute()->getObject();
+        try {
+            $forgotPassword = $this->getRoute()->getObject();
+        } catch (Exception $e) {
+            $this->forward404Unless($forgotPassword);
+        }
+
+        $this->forgotPassword = $forgotPassword;
         $this->user = $this->forgotPassword->User;
-        $this->form = new sfGuardChangeUserPasswordForm($this->user);
+        $this->form = new ChangePasswordForm($this->user);
+
 
         if ($request->isMethod('post')) {
             $this->form->bind($request->getParameter($this->form->getName()));
@@ -69,6 +76,7 @@ class sfGuardForgotPasswordActions extends BasesfGuardForgotPasswordActions
                     ->setFrom(
                         sfConfig::get('app_sf_guard_plugin_default_from_email'))
                     ->setTo($this->user->email_address)
+                    ->setContentType('text/html')
                     ->setSubject(
                         sprintf(
                             __('New Password for %s'),

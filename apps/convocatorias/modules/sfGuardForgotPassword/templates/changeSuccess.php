@@ -4,17 +4,8 @@
 
 <form action="<?php echo url_for('@sf_guard_forgot_password_change?unique_key='.$sf_request->getParameter('unique_key')) ?>"
       method="post">
-    <table>
-        <tbody>
-            <?php echo $form ?>
-        </tbody>
-        <tfoot>
-            <tr>
-                <td>
-                    <input type="submit" name="change"
-                           value="<?php echo __('Change') ?>" />
-                </td>
-            </tr>
-        </tfoot>
-    </table>
+    <?php echo $form ?>
+    <p class="submit">
+        <input type="submit" name="change" value="<?php echo __('Change') ?>" />
+    </p>
 </form>

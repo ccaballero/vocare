@@ -272,7 +272,8 @@ a {
     margin-top: 10px;
 }
 
-#main form table input[type="text"] {
+#main form table input[type="text"],
+#main form table input[type="password"] {
     border: 1px solid #000000;
 }
 

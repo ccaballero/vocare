@@ -1,13 +1,14 @@
 <?php
 
-class RequestPasswordForm extends sfGuardRequestForgotPasswordForm
+class ChangePasswordForm extends sfGuardChangeUserPasswordForm
 {
     public function configure() {
         $this->widgetSchema->setLabels(array(
-            'email_address' => 'Correo electrónico (*):',
+            'password' => 'Contraseña (*):',
+            'password again' => 'Repita su Contraseña (*):',
         ));
 
-        $this->widgetSchema['email_address']->setAttribute('class', 'focus');
+        $this->widgetSchema['password']->setAttribute('class', 'focus');
 
   	$decorator = new FormDecoratorDefault($this->getWidgetSchema());
   	$this->widgetSchema->addFormFormatter('custom', $decorator);
