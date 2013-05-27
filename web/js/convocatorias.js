@@ -25,8 +25,8 @@ function add_row(selector){
     return false
 }
 
-function add_li(selector){
-    var clone='<li>'+$(selector).next('div.clone').html()+'</li>'
+function add_li(selector,clone_selector){
+    var clone='<li>'+$(clone_selector).clone().html()+'</li>'
     var first=$(selector).prev('ul.list').html()
     $(selector).prev('ul.list').html(first+clone)
     return false

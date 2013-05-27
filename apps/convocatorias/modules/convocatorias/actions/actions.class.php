@@ -71,10 +71,10 @@ class convocatoriasActions extends PlantillasDefault
         $this->groups = Doctrine_Core::getTable('Grupo')
              ->createQuery('g')
              ->execute();
-        
+
         $roles = array();
         $assignments = new UsuarioGrupoConvocatoria();
-        
+
         foreach ($this->groups as $grupo) {
             $roles[$grupo->getId()] = $assignments->getUsuarios(
                 $convocatoria, $grupo);
@@ -278,10 +278,28 @@ class convocatoriasActions extends PlantillasDefault
         $this->redirect($this->generateUrl('convocatorias_show', array(
             'id' => $convocatoria->getId())) . '#viewers');
     }
-    
+
     public function executeCargos(sfWebRequest $request) {
-        var_dump($_POST);
-        die;
+        $convocatoria = $this->getRoute()->getObject();
+        $roles = $request->getParameter('roles');
+
+        $convocatoria->removeRoles();
+        
+        foreach ($roles as $id_group => $users) {
+            $users = array_unique($users);
+            foreach ($users as $id_user) {
+                $usuario = new UsuarioGrupoConvocatoria();
+                $usuario->user_id = $id_user;
+                $usuario->grupo_id = $id_group;
+                $usuario->convocatoria_id = $convocatoria->getId();
+                $usuario->save();
+            }
+        }
+
+        $this->getUser()->setFlash('notice', 'La configuración de los' .
+            ' cargos ha sido registrada.');
+        $this->redirect($this->generateUrl('convocatorias_show', array(
+            'id' => $convocatoria->getId())) . '#users');
     }
 
     // method for generalization of actions over convocatorias or whatever.

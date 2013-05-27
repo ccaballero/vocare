@@ -204,6 +204,14 @@ class Convocatoria extends BaseConvocatoria
         $q->execute();
     }
 
+    public function removeRoles() {
+        $q = Doctrine_Query::create()
+            ->delete('UsuarioGrupoConvocatoria us')
+            ->where('us.convocatoria_id = ?', $this->getId());
+        
+        $q->execute();
+    }
+    
     public function getMaxEnmienda() {
         $q = Doctrine_Query::create()
             ->select('MAX(cr.numero_enmienda)')

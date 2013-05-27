@@ -24,11 +24,16 @@ class UsuarioGrupoConvocatoria extends BaseUsuarioGrupoConvocatoria
         foreach ($array as $user) {
             $users[] = $user['user_id'];
         }
-        
-        $q2 = Doctrine_Core::getTable('sfGuardUser')
-          ->createQuery('u')
-          ->where('u.id IN (?)', implode(',', $users));
 
-        return $q2->execute();
+        $list_users = implode(',', $users);
+        if (!empty($list_users)) {
+            $q2 = Doctrine_Core::getTable('sfGuardUser')
+              ->createQuery('u')
+              ->where('u.id IN (' . $list_users . ')');
+
+            return $q2->execute();
+        } else {
+            return array();
+        }
     }
 }
