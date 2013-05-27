@@ -20,6 +20,10 @@ a {
     cursor: pointer;
 }
 
+span {
+    font-weight: bold;
+}
+
 .left { float: left; }
 .right { float: right; }
 .clear { clear: both; }
@@ -553,4 +557,22 @@ a {
 
 .hidden-box {
     display: none;
+}
+
+#main table tr td ul.list li {
+    display: block;
+}
+
+#main table tr td ul.list ĺi a {
+    float: left;
+}
+
+select {
+    border: 1px solid #000000;
+    background-color: #ffffff;
+    margin: 0px 0px 5px 0px;
+}
+
+option {
+    padding: 0px 5px;
 }

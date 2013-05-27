@@ -26,6 +26,7 @@ Doctrine_Manager::getInstance()->bindComponent('Convocatoria', 'doctrine');
  * @property Doctrine_Collection $ConvocatoriaEvaluaciones
  * @property Doctrine_Collection $ConvocatoriaRequerimientoEvaluaciones
  * @property Doctrine_Collection $ConvocatoriaCargos
+ * @property Doctrine_Collection $UsuarioGrupoConvocatoria
  * 
  * @method integer             getId()                                    Returns the current record's "id" value
  * @method string              getGestion()                               Returns the current record's "gestion" value
@@ -46,6 +47,7 @@ Doctrine_Manager::getInstance()->bindComponent('Convocatoria', 'doctrine');
  * @method Doctrine_Collection getConvocatoriaEvaluaciones()              Returns the current record's "ConvocatoriaEvaluaciones" collection
  * @method Doctrine_Collection getConvocatoriaRequerimientoEvaluaciones() Returns the current record's "ConvocatoriaRequerimientoEvaluaciones" collection
  * @method Doctrine_Collection getConvocatoriaCargos()                    Returns the current record's "ConvocatoriaCargos" collection
+ * @method Doctrine_Collection getUsuarioGrupoConvocatoria()              Returns the current record's "UsuarioGrupoConvocatoria" collection
  * @method Convocatoria        setId()                                    Sets the current record's "id" value
  * @method Convocatoria        setGestion()                               Sets the current record's "gestion" value
  * @method Convocatoria        setEstado()                                Sets the current record's "estado" value
@@ -65,6 +67,7 @@ Doctrine_Manager::getInstance()->bindComponent('Convocatoria', 'doctrine');
  * @method Convocatoria        setConvocatoriaEvaluaciones()              Sets the current record's "ConvocatoriaEvaluaciones" collection
  * @method Convocatoria        setConvocatoriaRequerimientoEvaluaciones() Sets the current record's "ConvocatoriaRequerimientoEvaluaciones" collection
  * @method Convocatoria        setConvocatoriaCargos()                    Sets the current record's "ConvocatoriaCargos" collection
+ * @method Convocatoria        setUsuarioGrupoConvocatoria()              Sets the current record's "UsuarioGrupoConvocatoria" collection
  * 
  * @package    .
  * @subpackage model
@@ -179,6 +182,10 @@ abstract class BaseConvocatoria extends sfDoctrineRecord
              'foreign' => 'convocatoria_id'));
 
         $this->hasMany('ConvocatoriaCargo as ConvocatoriaCargos', array(
+             'local' => 'id',
+             'foreign' => 'convocatoria_id'));
+
+        $this->hasMany('UsuarioGrupoConvocatoria', array(
              'local' => 'id',
              'foreign' => 'convocatoria_id'));
 

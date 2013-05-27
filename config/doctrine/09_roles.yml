@@ -1,0 +1,87 @@
+Permiso:
+  actAs: [Timestampable]
+  columns:
+    nombre:
+      type: string(255)
+      unique: true
+    descripcion: string(1000)
+
+Grupo:
+  actAs: [Timestampable]
+  columns:
+    nombre:
+      type: string(255)
+      unique: true
+    descripcion: string(1000)
+  relations:
+    Permisos:
+      class: Permiso
+      local: grupo_id
+      foreign: permiso_id
+      refClass: GrupoPermiso
+      foreignAlias: Grupos
+    Usuarios:
+      class: sfGuardUser
+      local: grupo_id
+      foreign: user_id
+      refClass: UsuarioGrupo
+      foreignAlias: Grupos
+
+GrupoPermiso:
+  options:
+    symfony:
+      form: false
+      filter: false
+  actAs: [Timestampable]
+  columns:
+    grupo_id:
+      type: integer
+      primary: true
+    permiso_id:
+      type: integer
+      primary: true
+  relations:
+    Grupo:
+      class: Grupo
+      local: grupo_id
+      onDelete: CASCADE
+    Permiso:
+      class: Permiso
+      local: permiso_id
+      onDelete: CASCADE
+
+UsuarioGrupoConvocatoria:
+  options:
+    symfony:
+      form: false
+      filter: false
+  actAs: [Timestampable]
+  columns:
+    user_id:
+      type: integer
+      primary: true
+    grupo_id:
+      type: integer
+      primary: true
+    convocatoria_id:
+      type: integer(4)
+      fixed: false
+      unsigned: true
+      primary: true
+  relations:
+    Usuario:
+       class: sfGuardUser
+       local: user_id
+       foreign: id
+       foreignType: one
+       onDelete: CASCADE  
+    Grupo:
+      class: Grupo
+      local: grupo_id
+      foreign: id
+      foreignType: one
+      onDelete: CASCADE
+    Convocatoria:
+      local: convocatoria_id
+      foreign: id
+      onDelete: CASCADE

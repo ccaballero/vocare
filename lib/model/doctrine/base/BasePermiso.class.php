@@ -7,13 +7,16 @@
  * 
  * @property string $nombre
  * @property string $descripcion
+ * @property Doctrine_Collection $Grupos
  * @property Doctrine_Collection $GrupoPermiso
  * 
  * @method string              getNombre()       Returns the current record's "nombre" value
  * @method string              getDescripcion()  Returns the current record's "descripcion" value
+ * @method Doctrine_Collection getGrupos()       Returns the current record's "Grupos" collection
  * @method Doctrine_Collection getGrupoPermiso() Returns the current record's "GrupoPermiso" collection
  * @method Permiso             setNombre()       Sets the current record's "nombre" value
  * @method Permiso             setDescripcion()  Sets the current record's "descripcion" value
+ * @method Permiso             setGrupos()       Sets the current record's "Grupos" collection
  * @method Permiso             setGrupoPermiso() Sets the current record's "GrupoPermiso" collection
  * 
  * @package    .
@@ -40,6 +43,11 @@ abstract class BasePermiso extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
+        $this->hasMany('Grupo as Grupos', array(
+             'refClass' => 'GrupoPermiso',
+             'local' => 'permiso_id',
+             'foreign' => 'grupo_id'));
+
         $this->hasMany('GrupoPermiso', array(
              'local' => 'id',
              'foreign' => 'permiso_id'));

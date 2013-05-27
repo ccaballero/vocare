@@ -65,13 +65,16 @@
     <?php if ($view_users): ?>
         <div id="users" class="tab_contents">
             <a name="users"></a>
-            <p>En esta página puede usted establecer el conjunto de personas
-            encargadas del correcto desempeño en el proceso de ejecución de su
-            convocatoria.</p>
+            <?php include_partial('convocatorias/users', array(
+                'object' => $object,
+                'groups' => $groups,
+                'users'  => $users,
+                'roles'  => $roles,
+            )) ?>
     <?php endif; ?>
     <?php if ($view_results): ?>
         <div id="results" class="tab_contents">
-            <a name="users"></a>
+            <a name="results"></a>
             <h1>Resultados</h1>
         </div>
     <?php endif; ?>

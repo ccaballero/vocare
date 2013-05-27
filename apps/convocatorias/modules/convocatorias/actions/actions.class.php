@@ -63,6 +63,24 @@ class convocatoriasActions extends PlantillasDefault
         $this->signatures = $cargos->listAll($convocatoria);
         $this->notifications = $convocatoria->getNotificaciones();
 
+        // This is the part when I generate the groups for a convocatoria
+        // I hate that i can't translate the word convocatoria
+        $this->users = Doctrine_Core::getTable('sfGuardUser')
+             ->createQuery('u')
+             ->execute();
+        $this->groups = Doctrine_Core::getTable('Grupo')
+             ->createQuery('g')
+             ->execute();
+        
+        $roles = array();
+        $assignments = new UsuarioGrupoConvocatoria();
+        
+        foreach ($this->groups as $grupo) {
+            $roles[$grupo->getId()] = $assignments->getUsuarios(
+                $convocatoria, $grupo);
+        }
+        $this->roles = $roles;
+
         $this->view_preview = true;
         $this->view_editor = ($state == 'borrador') || ($state == 'emitido');
         $this->view_redaction = ($state == 'borrador') || ($state == 'emitido');
@@ -259,6 +277,11 @@ class convocatoriasActions extends PlantillasDefault
             ' notificaciones ha sido registrada.');
         $this->redirect($this->generateUrl('convocatorias_show', array(
             'id' => $convocatoria->getId())) . '#viewers');
+    }
+    
+    public function executeCargos(sfWebRequest $request) {
+        var_dump($_POST);
+        die;
     }
 
     // method for generalization of actions over convocatorias or whatever.

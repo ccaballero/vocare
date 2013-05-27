@@ -33,6 +33,7 @@ all:
       - Partial
       - PrettyDate
       - I18N
+      - UserSelector
     #Form helper is out!.
     i18n: true
     default_culture: es_BO

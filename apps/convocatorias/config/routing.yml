@@ -70,6 +70,7 @@ convocatorias:
       redaccion: [post]
       firmas: [post]
       notificaciones: [post]
+      cargos: [post]
 
 requerimientos:
   class: sfDoctrineRouteCollection
