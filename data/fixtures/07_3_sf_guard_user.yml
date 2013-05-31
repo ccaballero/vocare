@@ -1,0 +1,106 @@
+sfGuardUser:
+  admin:
+    first_name:     Carlos Eduardo
+    last_name:      Caballero Burgoa
+    email_address:  cijkb.j@gmail.com
+    username:       admin
+    password:       asdf
+    is_super_admin: true
+  jefe:
+    first_name:     Lic. Henrry Frank
+    last_name:      Villarroel Tapia
+    email_address:  hvillarroel@cs.umss.edu.bo
+    username:       jefe
+    password:       asdf
+    Groups:         [ jefe_de_departamento ]
+  secretaria:
+    first_name:     Fabiola
+    last_name:      Rodriguez Caballero
+    email_address:  asdf01@cs.umss.edu.bo
+    username:       secretaria
+    password:       asdf
+    Groups:         [ secretaria_de_departamento ]
+  vcostas:
+    first_name:     Lic. Vladimir
+    last_name:      Costas Jauregui
+    email_address:  asdf02@cs.umss.edu.bo
+    username:       vcostas
+    password:       asdf
+  hcruz:
+    first_name:     Univ. Héctor
+    last_name:      Cruz
+    email_address:  asdf03@cs.umss.edu.bo
+    username:       hcruz
+    password:       asdf
+  jvillarroel:
+    first_name:     Ing. Jimmy
+    last_name:      Villarroel Novillo
+    email_address:  asdf04@cs.umss.edu.bo
+    username:       jvillarroel
+    password:       asdf
+  evargas:
+    first_name:     Univ. Elmer
+    last_name:      Vargas
+    email_address:  asdf05@cs.umss.edu.bo
+    username:       evargas
+    password:       asdf
+  mvia:
+    first_name:     Lic. Marcelo
+    last_name:      Via
+    email_address:  asdf06@cs.umss.edu.bo
+    username:       mvia
+    password:       asdf
+  gcussi:
+    first_name:     Lic. Grover
+    last_name:      Cussi Nicolás
+    email_address:  asdf07@cs.umss.edu.bo
+    username:       gcussi
+    password:       asdf
+  sacha:
+    first_name:     Ing. Samuel
+    last_name:      Achá Pérez
+    email_address:  asdf08@cs.umss.edu.bo
+    username:       sacha
+    password:       asdf
+  afiorilo:
+    first_name:     Ing. Américo
+    last_name:      Fiorilo Lozada
+    email_address:  asdf09@cs.umss.edu.bo
+    username:       afiorilo
+    password:       asdf
+  lagreda:
+    first_name:     Ing. Luis
+    last_name:      Agreda Corrales
+    email_address:  asdf10@cs.umss.edu.bo
+    username:       lagreda
+    password:       asdf
+  vmontaño:
+    first_name:     Lic. Victor Hugo
+    last_name:      Montaño Quiroga
+    email_address:  asdf11@cs.umss.edu.bo
+    username:       vmontaño
+    password:       asdf
+  rjaldin:
+    first_name:     Lic. Rolando
+    last_name:      Jaldín Rosales
+    email_address:  asdf12@cs.umss.edu.bo
+    username:       rjaldin
+    password:       asdf
+  rtorrico:
+    first_name:     Lic. Rosemary
+    last_name:      Torrico Bascopé
+    email_address:  asdf13@cs.umss.edu.bo
+    username:       rtorrico
+    password:       asdf
+  bcalancha:
+    first_name:     Lic. Boris
+    last_name:      Calancha Navia
+    email_address:  asdf14@cs.umss.edu.bo
+    username:       bcalancha
+    password:       asdf
+  avargas:
+    first_name:     Lic. Aidee
+    last_name:      Vargas Colque
+    email_address:  asdf15@cs.umss.edu.bo
+    username:       avargas
+    password:       asdf

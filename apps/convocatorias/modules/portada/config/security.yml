@@ -2,6 +2,8 @@ default:
   is_secure: true
 index:
   is_secure: false
+convocatorias:
+  is_secure: false
 plantillas:
   credentials:
     - plantillas_list

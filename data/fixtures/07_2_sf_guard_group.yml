@@ -1,0 +1,36 @@
+sfGuardGroup:
+  jefe_de_departamento:
+    name: Jefe de Departamento
+    description: Maxima autoridad del Departamento de Informática y Sistemas.
+    Permissions:
+      - convocatorias_list
+      - convocatorias_view
+      - convocatorias_edit
+      - convocatorias_create
+      - convocatorias_role
+      - convocatorias_eliminar
+      - convocatorias_promover
+      - convocatorias_finalizar
+      - convocatorias_anular
+      - plantillas_list
+      - plantillas_view
+      - plantillas_edit
+      - plantillas_create
+      - plantillas_delete
+      - usuarios_list
+      - usuarios_view
+      - usuarios_edit
+  secretaria_de_departamento:
+    name: Secretaría de Departamento
+    description: Secretaría del Departamento de Informática y Sistemas.
+    Permissions:
+      - convocatorias_list
+      - convocatorias_view
+      - convocatorias_edit
+      - convocatorias_create
+      - convocatorias_role
+      - plantillas_list
+      - plantillas_view
+      - plantillas_edit
+      - plantillas_create
+      - plantillas_delete

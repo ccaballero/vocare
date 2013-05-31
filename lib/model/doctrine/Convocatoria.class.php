@@ -116,6 +116,18 @@ class Convocatoria extends BaseConvocatoria
         return $q->execute();
     }
 
+    public function listByState($state, $limit = -1) {
+        $q = Doctrine_Query::create()
+            ->select('c.*')
+            ->from('Convocatoria c')
+            ->where('estado = ?', $state)
+            ->orderBy('c.publicacion');
+        if ($limit >= 0) {
+            $q->limit($limit);
+        }
+        return $q->execute();
+    }
+
     public function getTotalRequerimientos() {
         $q = Doctrine_Query::create()
             ->select('SUM(cr.cantidad_requerida)')
@@ -208,10 +220,10 @@ class Convocatoria extends BaseConvocatoria
         $q = Doctrine_Query::create()
             ->delete('UsuarioGrupoConvocatoria us')
             ->where('us.convocatoria_id = ?', $this->getId());
-        
+
         $q->execute();
     }
-    
+
     public function getMaxEnmienda() {
         $q = Doctrine_Query::create()
             ->select('MAX(cr.numero_enmienda)')

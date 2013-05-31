@@ -171,6 +171,11 @@
                 <source>Permission list</source>
                 <target>Lista de permisos</target>
             </trans-unit>
+            
+            <trans-unit>
+                <source>View all</source>
+                <target>Ver todo</target>
+            </trans-unit>
 
             <!-- forgot password -->
             <trans-unit>

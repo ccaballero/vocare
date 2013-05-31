@@ -21,7 +21,6 @@
  * @property Doctrine_Collection $sfGuardUserGroup
  * @property sfGuardRememberKey $RememberKeys
  * @property sfGuardForgotPassword $ForgotPassword
- * @property Doctrine_Collection $Grupos
  * @property UsuarioGrupoConvocatoria $UsuarioGrupoConvocatoria
  * 
  * @method string                   getFirstName()                Returns the current record's "first_name" value
@@ -40,7 +39,6 @@
  * @method Doctrine_Collection      getSfGuardUserGroup()         Returns the current record's "sfGuardUserGroup" collection
  * @method sfGuardRememberKey       getRememberKeys()             Returns the current record's "RememberKeys" value
  * @method sfGuardForgotPassword    getForgotPassword()           Returns the current record's "ForgotPassword" value
- * @method Doctrine_Collection      getGrupos()                   Returns the current record's "Grupos" collection
  * @method UsuarioGrupoConvocatoria getUsuarioGrupoConvocatoria() Returns the current record's "UsuarioGrupoConvocatoria" value
  * @method sfGuardUser              setFirstName()                Sets the current record's "first_name" value
  * @method sfGuardUser              setLastName()                 Sets the current record's "last_name" value
@@ -58,7 +56,6 @@
  * @method sfGuardUser              setSfGuardUserGroup()         Sets the current record's "sfGuardUserGroup" collection
  * @method sfGuardUser              setRememberKeys()             Sets the current record's "RememberKeys" value
  * @method sfGuardUser              setForgotPassword()           Sets the current record's "ForgotPassword" value
- * @method sfGuardUser              setGrupos()                   Sets the current record's "Grupos" collection
  * @method sfGuardUser              setUsuarioGrupoConvocatoria() Sets the current record's "UsuarioGrupoConvocatoria" value
  * 
  * @package    .
@@ -154,11 +151,6 @@ abstract class BasesfGuardUser extends sfDoctrineRecord
         $this->hasOne('sfGuardForgotPassword as ForgotPassword', array(
              'local' => 'id',
              'foreign' => 'user_id'));
-
-        $this->hasMany('Grupo as Grupos', array(
-             'refClass' => 'UsuarioGrupo',
-             'local' => 'user_id',
-             'foreign' => 'grupo_id'));
 
         $this->hasOne('UsuarioGrupoConvocatoria', array(
              'local' => 'id',

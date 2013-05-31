@@ -25,28 +25,88 @@ Grupo:
       - registro
       - recepcion
   comision_meritos:
-    nombre: Comision de meritos
-    descripcion: Integrante de la comision de meritos para una convocatoria determinada
+    nombre: Comisión de meritos
+    descripcion: Integrante de la comisión de meritos para una convocatoria determinada
     Permisos:
       - edicion_habilitados
   comision_conocimientos:
-    nombre: Comision de conocimientos
-    descripcion: Integrante de la comision de conocimientos para una convocatoria determinada.
+    nombre: Comisión de conocimientos
+    descripcion: Integrante de la comisión de conocimientos para una convocatoria determinada.
 
 UsuarioGrupoConvocatoria:
-  ugc1_1:
-    Usuario: jefe_de_departamento
+  jefe_1:
+    Usuario: jefe
     Grupo: administrador
     Convocatoria: convocatoria_1
-  ugc1_2:
-    Usuario: secretaria_de_departamento
+  secretaria:
+    Usuario: secretaria
     Grupo: secretaria
     Convocatoria: convocatoria_1
-  ugc2_1:
-    Usuario: jefe_de_departamento
+  jefe_2:
+    Usuario: jefe
     Grupo: administrador
     Convocatoria: convocatoria_2
-  ugc2_2:
-    Usuario: secretaria_de_departamento
+  secretaria_2:
+    Usuario: secretaria
     Grupo: secretaria
+    Convocatoria: convocatoria_2
+  tribunal_meritos_1:
+    Usuario: vcostas
+    Grupo: comision_meritos
+    Convocatoria: convocatoria_2
+  tribunal_meritos_2:
+    Usuario: hcruz
+    Grupo: comision_meritos
+    Convocatoria: convocatoria_2
+  tribunal_meritos_3:
+    Usuario: jvillarroel
+    Grupo: comision_meritos
+    Convocatoria: convocatoria_2
+  tribunal_meritos_4:
+    Usuario: evargas
+    Grupo: comision_meritos
+    Convocatoria: convocatoria_2
+  tribunal_conocimientos_01:
+    Usuario: mvia
+    Grupo: comision_conocimientos
+    Convocatoria: convocatoria_2
+  tribunal_conocimientos_02:
+    Usuario: gcussi
+    Grupo: comision_conocimientos
+    Convocatoria: convocatoria_2
+  tribunal_conocimientos_03:
+    Usuario: sacha
+    Grupo: comision_conocimientos
+    Convocatoria: convocatoria_2
+  tribunal_conocimientos_04:
+    Usuario: afiorilo
+    Grupo: comision_conocimientos
+    Convocatoria: convocatoria_2
+  tribunal_conocimientos_:
+    Usuario: lagreda
+    Grupo: comision_conocimientos
+    Convocatoria: convocatoria_2
+  tribunal_conocimientos_:
+    Usuario: vcostas
+    Grupo: comision_conocimientos
+    Convocatoria: convocatoria_2
+  tribunal_conocimientos_:
+    Usuario: vmontaño
+    Grupo: comision_conocimientos
+    Convocatoria: convocatoria_2
+  tribunal_conocimientos_:
+    Usuario: rjaldin
+    Grupo: comision_conocimientos
+    Convocatoria: convocatoria_2
+  tribunal_conocimientos_:
+    Usuario: rtorrico
+    Grupo: comision_conocimientos
+    Convocatoria: convocatoria_2
+  tribunal_conocimientos_:
+    Usuario: bcalancha
+    Grupo: comision_conocimientos
+    Convocatoria: convocatoria_2
+  tribunal_conocimientos_:
+    Usuario: avargas
+    Grupo: comision_conocimientos
     Convocatoria: convocatoria_2

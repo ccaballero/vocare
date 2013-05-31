@@ -20,12 +20,6 @@ Grupo:
       foreign: permiso_id
       refClass: GrupoPermiso
       foreignAlias: Grupos
-    Usuarios:
-      class: sfGuardUser
-      local: grupo_id
-      foreign: user_id
-      refClass: UsuarioGrupo
-      foreignAlias: Grupos
 
 GrupoPermiso:
   options:

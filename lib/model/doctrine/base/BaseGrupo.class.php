@@ -8,20 +8,17 @@
  * @property string $nombre
  * @property string $descripcion
  * @property Doctrine_Collection $Permisos
- * @property Doctrine_Collection $Usuarios
  * @property Doctrine_Collection $GrupoPermiso
  * @property UsuarioGrupoConvocatoria $UsuarioGrupoConvocatoria
  * 
  * @method string                   getNombre()                   Returns the current record's "nombre" value
  * @method string                   getDescripcion()              Returns the current record's "descripcion" value
  * @method Doctrine_Collection      getPermisos()                 Returns the current record's "Permisos" collection
- * @method Doctrine_Collection      getUsuarios()                 Returns the current record's "Usuarios" collection
  * @method Doctrine_Collection      getGrupoPermiso()             Returns the current record's "GrupoPermiso" collection
  * @method UsuarioGrupoConvocatoria getUsuarioGrupoConvocatoria() Returns the current record's "UsuarioGrupoConvocatoria" value
  * @method Grupo                    setNombre()                   Sets the current record's "nombre" value
  * @method Grupo                    setDescripcion()              Sets the current record's "descripcion" value
  * @method Grupo                    setPermisos()                 Sets the current record's "Permisos" collection
- * @method Grupo                    setUsuarios()                 Sets the current record's "Usuarios" collection
  * @method Grupo                    setGrupoPermiso()             Sets the current record's "GrupoPermiso" collection
  * @method Grupo                    setUsuarioGrupoConvocatoria() Sets the current record's "UsuarioGrupoConvocatoria" value
  * 
@@ -53,11 +50,6 @@ abstract class BaseGrupo extends sfDoctrineRecord
              'refClass' => 'GrupoPermiso',
              'local' => 'grupo_id',
              'foreign' => 'permiso_id'));
-
-        $this->hasMany('sfGuardUser as Usuarios', array(
-             'refClass' => 'UsuarioGrupo',
-             'local' => 'grupo_id',
-             'foreign' => 'user_id'));
 
         $this->hasMany('GrupoPermiso', array(
              'local' => 'id',
