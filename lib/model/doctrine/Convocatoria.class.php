@@ -208,22 +208,6 @@ class Convocatoria extends BaseConvocatoria
         return $resultset->fetchAll();
     }
 
-    public function removeNotifications() {
-        $q = Doctrine_Query::create()
-            ->delete('ConvocatoriaNotificacion cn')
-            ->where('cn.convocatoria_id = ?', $this->getId());
-
-        $q->execute();
-    }
-
-    public function removeRoles() {
-        $q = Doctrine_Query::create()
-            ->delete('UsuarioGrupoConvocatoria us')
-            ->where('us.convocatoria_id = ?', $this->getId());
-
-        $q->execute();
-    }
-
     public function getMaxEnmienda() {
         $q = Doctrine_Query::create()
             ->select('MAX(cr.numero_enmienda)')
@@ -260,6 +244,160 @@ class Convocatoria extends BaseConvocatoria
         }
 
         return $firmas;
+    }
+
+    public function validateRedaction() {
+        $q = Doctrine_Query::create()
+            ->select('COUNT(*)')
+            ->from('ConvocatoriaRedaccion cr')
+            ->where('cr.convocatoria_id = ?', $this->getId());
+
+        $array = $q->fetchArray();
+
+        if ($array[0]['COUNT'] == 0) {
+            $result = 0;
+            $message = 'No se ha establecido una redacción de convocatoria';
+        } else {
+            $result = 2;
+            $message = '';
+        }
+
+        return array(
+            'result' => $result,
+            'message' => $message,
+        );
+    }
+
+    public function removeNotifications() {
+        $q = Doctrine_Query::create()
+            ->delete('ConvocatoriaNotificacion cn')
+            ->where('cn.convocatoria_id = ?', $this->getId());
+
+        $q->execute();
+    }
+
+    public function validateNotification() {
+        $q = Doctrine_Query::create()
+            ->select('COUNT(*)')
+            ->from('ConvocatoriaCargo cc')
+            ->where('cc.convocatoria_id = ?', $this->getId());
+
+        $array = $q->fetchArray();
+
+        if ($array[0]['COUNT'] == 0) {
+            $result = 1;
+            $message = 'No se han establecido cargos para el campo de firmas';
+        } else {
+            $result = 2;
+            $message = '';
+        }
+
+        return array(
+            'result' => $result,
+            'message' => $message,
+        );
+    }
+
+    public function removeRoles() {
+        $q = Doctrine_Query::create()
+            ->delete('UsuarioGrupoConvocatoria us')
+            ->where('us.convocatoria_id = ?', $this->getId());
+
+        $q->execute();
+    }
+
+    public function validateEncargados() {
+        $statement = Doctrine_Manager::getInstance()->connection();
+        $resultset = $statement->execute(
+            'SELECT g.nombre as nombre,
+                    u.count AS count
+            FROM grupo g
+            LEFT JOIN (
+                SELECT grupo_id AS id,
+                       count(*) AS count
+                FROM usuario_grupo_convocatoria
+                WHERE convocatoria_id = ' . $this->getId() . '
+                GROUP BY grupo_id
+            ) AS u
+            ON g.id = u.id');
+
+        $encargados = $resultset->fetchAll();
+
+        $valid = true;
+        $messages = array();
+
+        foreach ($encargados as $encargado) {
+            $count = intval($encargado['count']);
+            $grupo = $encargado['nombre'];
+
+            $valid &= ($count <> 0);
+            if ($count == 0) {
+                $messages[] = "El rol $grupo no contiene ningun encargado";
+            }
+        }
+
+        return array(
+            'result' => ($valid) ? 2 : 0,
+            'message' => implode(' - ', $messages),
+        );
+    }
+
+    public function validateEmitido() {
+        $result1 = $this->validateRedaction();
+        $result2 = $this->validateNotification();
+        $result3 = $this->validateEncargados();
+
+        $_1 = $result1['result'];
+        $_2 = $result2['result'];
+        $_3 = $result3['result'];
+
+        if ($_1 == 0 || $_2 == 0 || $_3 == 0) {
+            $_t = 0;
+        } else if ($_1 == 1 || $_2 == 1 || $_3 == 1) {
+            $_t = 1;
+        } else {
+            $_t = 2;
+        }
+
+        return array(
+            'result' => $_t,
+            'message' => implode(' - ', array(
+                $result1['message'],
+                $result2['message'],
+                $result3['message'],
+            )),
+        );
+    }
+    
+    public function validateOperation($operation) {
+        if ($operation == 'promover') {
+            switch ($this->getEstado()) {
+                case 'borrador':
+                    $valid = $this->validateRedaction();
+                    break;
+                case 'emitido':
+                    $valid = $this->validateEmitido();
+                    break;
+            }
+            return $valid['result'];
+        }
+        
+        return true;
+    }
+    
+    public function validateState() {
+        $state = $this->getEstado();
+        switch ($state) {
+            case 'borrador':
+                return $this->validateRedaction();
+            case 'emitido':
+                return $this->validateEmitido();
+        }
+        
+        return array(
+            'result' => 2,
+            'message' => '',
+        );
     }
 }
 

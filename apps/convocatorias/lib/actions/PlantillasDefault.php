@@ -35,11 +35,13 @@ class PlantillasDefault extends sfActions
 
     public function executeUpdate(sfWebRequest $request) {
         $this->form = new $this->_form($this->getRoute()->getObject());
-        $this->processForm(
+        $this->form = $this->processForm(
             $request,
             $this->form,
             $this->_messages['flash']['edit']
         );
+        
+        $this->setTemplate('form');
     }
 
     public function executeDelete(sfWebRequest $request) {

@@ -32,6 +32,7 @@
             </td>
             <td class="text-center">
                 <?php echo ucfirst($convocatoria->getEstado()) ?>
+                <?php echo image_state($convocatoria->validateState()) ?>
             </td>
             <td class="text-center">
             <?php if ($sf_user->hasCredential('convocatorias_view')): ?>
@@ -43,7 +44,8 @@
         <?php foreach ($convocatoria->getOperacionesPosibles() as $operacion => $propiedades): ?>
             <td class="text-center">
             <?php if ($convocatoria->hasOperacion($operacion) &&
-                      $sf_user->hasCredential('convocatorias_' . $operacion)): ?>
+                      $sf_user->hasCredential('convocatorias_' . $operacion) &&
+                      $convocatoria->validateOperation($operacion) == 2): ?>
                 <?php echo link_to(
                     ucfirst($propiedades[0]), 'convocatorias_' . $operacion, $convocatoria, array(
                         'method' => 'post',

@@ -10,13 +10,28 @@
     	<li class="tab"><a href="#editor">Edición</a></li>
     <?php endif; ?>
     <?php if ($view_redaction): ?>
-    	<li class="tab"><a href="#redaction">Redacción</a></li>
+    	<li class="tab">
+            <a href="#redaction">
+                Redacción
+                <?php echo image_state($object->validateRedaction()) ?>
+            </a>
+        </li>
     <?php endif; ?>
     <?php if ($view_viewers): ?>
-    	<li class="tab"><a href="#viewers">Notificaciones</a></li>
+    	<li class="tab">
+            <a href="#viewers">
+                Notificaciones
+                <?php echo image_state($object->validateNotification()) ?>
+            </a>
+        </li>
     <?php endif; ?>
     <?php if ($view_users): ?>
-    	<li class="tab"><a href="#users">Encargados</a></li>
+    	<li class="tab">
+            <a href="#users">
+                Encargados
+                <?php echo image_state($object->validateEncargados()) ?>
+            </a>
+        </li>
     <?php endif; ?>
     <?php if ($view_results): ?>
     	<li class="tab"><a href="#results">Resultados</a></li>
