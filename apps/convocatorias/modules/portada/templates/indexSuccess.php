@@ -45,23 +45,21 @@
     <?php if (count($vigentes) == 0): ?>
         <p>No existe ninguna convocatoria vigente.</p>
     <?php else: ?>
-        <dl>
         <?php foreach ($vigentes as $convocatoria): ?>
             <?php include_partial('convocatoria_small', array(
                 'convocatoria' => $convocatoria,
             )) ?>
         <?php endforeach; ?>
-        </dl>
     <?php endif; ?>
     <h2>Convocatorias finalizadas</h2>
     <?php if (count($finalizadas) == 0): ?>
         <p>No existe ninguna convocatoria finalizada.</p>
     <?php else: ?>
-        <dl>
         <?php foreach ($finalizadas as $convocatoria): ?>
-
+            <?php include_partial('convocatoria_small', array(
+                'convocatoria' => $convocatoria,
+            )) ?>
         <?php endforeach; ?>
-        </dl>
-        <?php echo link_to(__('View all'), 'portada/convocatorias') ?>
+        <p><?php echo link_to(__('View all'), 'portada/convocatorias') ?></p>
     <?php endif; ?>
 </div>

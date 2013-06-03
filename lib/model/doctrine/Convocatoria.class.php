@@ -41,6 +41,10 @@ class Convocatoria extends BaseConvocatoria
     public function __toString() {
         return '[' . $this->getEstado() . '] ' . $this->getGestion();
     }
+    
+    public function getTitle() {
+        return 'Convocatoria a auxiliares';
+    }
 
     public function getOperacionesPosibles() {
         return $this->_operaciones_posibles;

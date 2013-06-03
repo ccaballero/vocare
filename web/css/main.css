@@ -477,22 +477,33 @@ span {
 }
 
 #main .widget h1,
-#main .widget h2 {
+#main .widget h2,
+#main .widget h3 {
     margin: 0px;
     padding: 0px;
     font-size: 20px;
 }
 
-#main .widget ul {
-    list-style: none;
+#main .widget a {
+    text-decoration: underline;
 }
 
-#main .widget ul li {
-    margin: 4px 0px;
+#main .widget dl {
+    margin: 0px;
+    padding-left: 5px;
+    padding-bottom: 10px;
 }
 
-#main .widget ul li a {}
-#main .widget ul li a:hover {}
+#main .widget dl dt {
+    float: left;
+    font-weight: bold;
+    padding-right: 5px;
+}
+
+#main .widget dl dd {
+    padding: 0px;
+    /*float: left;*/
+}
 
 #sf_admin_bar {
     display: inline-block;
