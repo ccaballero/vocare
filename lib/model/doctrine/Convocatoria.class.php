@@ -180,7 +180,12 @@ class Convocatoria extends BaseConvocatoria
     public function getPublicacion() {
         include_once realpath(dirname(__FILE__)
             . '/../../../apps/convocatorias/lib/helper/PrettyDateHelper.php');
-        return pretty_date($this->_get('publicacion'));
+        
+        $publicacion = $this->_get('publicacion');
+        if (empty($publicacion)) {
+            $publicacion = date('Y-m-d');
+        }
+        return pretty_date($publicacion);
     }
 
     public function listRedactions() {

@@ -195,6 +195,12 @@ class convocatoriasActions extends PlantillasDefault
             $cr->redaccion = $texto_redaccion;
             $cr->numero_enmienda = $numero_enmienda;
             $cr->save();
+
+            // notification of change in enmienda;
+            $this->emailNotification(
+              $this->emailTitle('enmendada'),
+                $this->emailContent('enmendada')
+            );
         }
 
         if ($estado == 'borrador') {
@@ -345,51 +351,52 @@ class convocatoriasActions extends PlantillasDefault
             ->setContentType('text/html');
 
         $this->getMailer()->send($message);
+
     }
 
     // state transition (eliminar)
     public function executeEliminar() {
-        $this->actionChange('eliminar');
         $this->emailNotification(
             $this->emailTitle('eliminada'),
             $this->emailContent('eliminada')
         );
+        $this->actionChange('eliminar');
     }
 
     // state transition (promover)
     public function executePromover() {
-        $this->actionChange('promover');
-        
         $convocatoria = $this->getRoute()->getObject();
         if ($convocatoria->getEstado() == 'borrador') {
             $title = 'emitida';
         } else {
             $title = 'publicada';
         }
-        
+
         $this->emailNotification(
             $this->emailTitle($title),
             $this->emailContent($title)
         );
+
+        $this->actionChange('promover');
     }
 
     public function executeAnular() {
-        $this->actionChange('anular');
-
         $this->emailNotification(
             $this->emailTitle('anulada'),
             $this->emailContent('anulada')
         );
         // Notificar a los postulantes, si es que existen
         // acerca de la anulacion.
+
+        $this->actionChange('anular');
     }
 
     public function executeFinalizar() {
-        $this->actionChange('finalizar');
-
         $this->emailNotification(
             $this->emailTitle('finalizada'),
             $this->emailContent('finalizada')
         );
+
+        $this->actionChange('finalizar');
     }
 }
