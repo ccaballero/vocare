@@ -62,11 +62,12 @@ convocatorias:
     object_actions:
       texto: [get]
       pdf: [get]
-      promover: [post]
+      # state transition
       eliminar: [post]
-      enmendar: [post]
+      promover: [post]
       anular: [post]
       finalizar: [post]
+      # end state transition
       redaccion: [post]
       firmas: [post]
       notificaciones: [post]

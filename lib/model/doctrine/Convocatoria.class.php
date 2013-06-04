@@ -41,7 +41,7 @@ class Convocatoria extends BaseConvocatoria
     public function __toString() {
         return '[' . $this->getEstado() . '] ' . $this->getGestion();
     }
-    
+
     public function getTitle() {
         return 'Convocatoria a auxiliares';
     }
@@ -96,8 +96,6 @@ class Convocatoria extends BaseConvocatoria
                     $this->estado = 'emitido';
                 }
                 break;
-            case 'enmendar':
-                break;
             case 'anular':
                 $this->estado = 'anulado';
                 break;
@@ -115,7 +113,7 @@ class Convocatoria extends BaseConvocatoria
             ->select('c.*')
             ->from('Convocatoria c')
             ->where('estado <> ?', 'eliminado')
-            ->orderBy('c.updated_at');
+            ->orderBy('c.gestion ASC');
 
         return $q->execute();
     }
@@ -372,7 +370,7 @@ class Convocatoria extends BaseConvocatoria
             )),
         );
     }
-    
+
     public function validateOperation($operation) {
         if ($operation == 'promover') {
             switch ($this->getEstado()) {
@@ -385,10 +383,10 @@ class Convocatoria extends BaseConvocatoria
             }
             return $valid['result'];
         }
-        
+
         return true;
     }
-    
+
     public function validateState() {
         $state = $this->getEstado();
         switch ($state) {
@@ -397,7 +395,7 @@ class Convocatoria extends BaseConvocatoria
             case 'emitido':
                 return $this->validateEmitido();
         }
-        
+
         return array(
             'result' => 2,
             'message' => '',

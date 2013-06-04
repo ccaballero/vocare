@@ -36,6 +36,10 @@
                 <target>Nombre de usuario</target>
             </trans-unit>
             <trans-unit>
+                <source>Username or E-Mail</source>
+                <target>Usuario/Correo Electrónico</target>
+            </trans-unit>
+            <trans-unit>
                 <source>Password</source>
                 <target>Contraseña</target>
             </trans-unit>

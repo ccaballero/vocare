@@ -85,7 +85,7 @@ class convocatoriasActions extends PlantillasDefault
         $this->view_editor = ($state == 'borrador') || ($state == 'emitido');
         $this->view_redaction = ($state == 'borrador') || ($state == 'emitido');
         $this->view_viewers = ($state == 'borrador' || ($state == 'emitido'));
-        $this->view_users = ($state == 'borrador' || ($state == 'emitido'));
+        $this->view_users = ($state == 'emitido');
         $this->view_results = ($state == 'vigente') || ($state == 'finalizado');
     }
 
@@ -284,7 +284,7 @@ class convocatoriasActions extends PlantillasDefault
         $roles = $request->getParameter('roles');
 
         $convocatoria->removeRoles();
-        
+
         foreach ($roles as $id_group => $users) {
             $users = array_unique($users);
             foreach ($users as $id_user) {
@@ -310,29 +310,76 @@ class convocatoriasActions extends PlantillasDefault
         $this->redirect($this->_route_list);
     }
 
-    public function executeEliminar() {
-        $this->actionChange('eliminar');
+    private function emailTitle($operation) {
+        $convocatoria = $this->getRoute()->getObject();
+        $tpl = 'Sistema de Convocatorias [convocatoria %s fue %s]';
+        return sprintf($tpl, $convocatoria->getGestion(), $operation);
     }
 
+    private function emailContent($operation) {
+        $convocatoria = $this->getRoute()->getObject();
+        return $this->getPartial(
+            'convocatorias/email_notification',
+            array(
+                'convocatoria' => $convocatoria,
+                'user' => $this->getUser(),
+                'operation' => $operation,
+            ));
+    }
+
+    private function emailNotification($title, $content) {
+        $convocatoria = $this->getRoute()->getObject();
+
+        // notifications of subscribers
+        $subscribers = $convocatoria->getNotificaciones();
+        $to = array();
+        foreach ($subscribers as $subscriber) {
+            $to[$subscriber->getEmail()] = $subscriber->getEncargado();
+        }
+
+        $message = Swift_Message::newInstance()
+            ->setFrom(sfConfig::get('app_sf_guard_plugin_default_from_email'))
+            ->setTo($to)
+            ->setSubject($title)
+            ->setBody($content)
+            ->setContentType('text/html');
+
+        $this->getMailer()->send($message);
+    }
+
+    // state transition (eliminar)
+    public function executeEliminar() {
+        $this->actionChange('eliminar');
+        $this->emailNotification(
+            $this->emailTitle('eliminada'),
+            $this->emailContent('eliminada')
+        );
+    }
+
+    // state transition (promover)
     public function executePromover() {
         $this->actionChange('promover');
-
-        // Dos tipos de promover.
-
-        // PROMOVER PARA QUE SEA EMITIDA
-        // Controlar que se tenga una redaccion basica
-        // Asignar roles a usuarios encargados de las distintas actividades
-
-        // PROMOVER PARA QUE SEA VIGENTE
-        // Hacer que la convocatoria no tenga permisos para ser editada.
-        // Notificar a estos usuarios sobre los diferentes eventos del proceso
-        // Publicar la convocatoria en la pagina principal
+        
+        $convocatoria = $this->getRoute()->getObject();
+        if ($convocatoria->getEstado() == 'borrador') {
+            $title = 'emitida';
+        } else {
+            $title = 'publicada';
+        }
+        
+        $this->emailNotification(
+            $this->emailTitle($title),
+            $this->emailContent($title)
+        );
     }
 
     public function executeAnular() {
         $this->actionChange('anular');
 
-        // Notificar a los usuarios de la anulacion de la convocatoria
+        $this->emailNotification(
+            $this->emailTitle('anulada'),
+            $this->emailContent('anulada')
+        );
         // Notificar a los postulantes, si es que existen
         // acerca de la anulacion.
     }
@@ -340,6 +387,9 @@ class convocatoriasActions extends PlantillasDefault
     public function executeFinalizar() {
         $this->actionChange('finalizar');
 
-        // Despublicar la convocatoria de la pagina principal
+        $this->emailNotification(
+            $this->emailTitle('finalizada'),
+            $this->emailContent('finalizada')
+        );
     }
 }
