@@ -113,7 +113,6 @@ class convocatoriasActions extends PlantillasDefault
         $xslDoc->load("$dirbase2/$filename2");
 
         $xmlDoc = new DOMDocument();
-//        $xmlDoc->load("$dirbase1/$filename1");
         $xmlDoc->loadXML(
             str_replace('&nbsp;', '', file_get_contents("$dirbase1/$filename1"))
         );
