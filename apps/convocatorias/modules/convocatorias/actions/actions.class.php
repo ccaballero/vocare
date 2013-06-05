@@ -81,12 +81,14 @@ class convocatoriasActions extends PlantillasDefault
         }
         $this->roles = $roles;
 
-        $this->view_preview = true;
-        $this->view_editor = ($state == 'borrador') || ($state == 'emitido');
-        $this->view_redaction = ($state == 'borrador') || ($state == 'emitido');
-        $this->view_viewers = ($state == 'borrador' || ($state == 'emitido'));
-        $this->view_users = ($state == 'emitido');
-        $this->view_results = ($state == 'vigente') || ($state == 'finalizado');
+        $this->tabs = array(
+            'preview' => true,
+            'editor' => ($state == 'borrador') || ($state == 'emitido'),
+            'redaction' => ($state == 'borrador') || ($state == 'emitido'),
+            'viewers' => ($state == 'borrador' || ($state == 'emitido')),
+            'users' => ($state == 'emitido'),
+            'results' => ($state == 'vigente') || ($state == 'finalizado'),
+        );
     }
 
     protected function processForm(sfWebRequest $request,
@@ -99,7 +101,7 @@ class convocatoriasActions extends PlantillasDefault
         return parent::processForm($request, $form, $flash);
     }
 
-    public function executeTexto() {
+    private function xsltTrasform($xslt) {
         $convocatoria = $this->getRoute()->getObject();
         $numero_enmienda = $convocatoria->getMaxEnmienda();
 
@@ -107,7 +109,7 @@ class convocatoriasActions extends PlantillasDefault
         $filename1 = $convocatoria->getId() . '_' . $numero_enmienda . '.xml';
 
         $dirbase2 = sfConfig::get('app_xslt_transforms');
-        $filename2 = 'transform-text.xslt';
+        $filename2 = $xslt . '.xslt';
 
         $xslDoc = new DOMDocument();
         $xslDoc->load("$dirbase2/$filename2");
@@ -125,19 +127,37 @@ class convocatoriasActions extends PlantillasDefault
             $proc->transformToURI($xmlDoc, 'php://output');
             $output = ob_get_contents();
             ob_clean();
-
-            $this->setLayout(false);
-            sfConfig::set('sf_web_debug', false);
-
-            $this->getResponse()->clearHttpHeaders();
-            $this->getResponse()->setHttpHeader('Pragma: public', true);
-            $this->getResponse()->setContentType('text/plain; charset=utf-8');
-
-            $this->getResponse()->sendHttpHeaders();
-            $this->getResponse()->setContent($output);
+            
+            return $output;
         } catch (Exception $e) {
             $e->printStackTrace();
         }
+    }
+
+    public function executeTexto() {
+        $this->setLayout(false);
+        sfConfig::set('sf_web_debug', false);
+
+        $this->getResponse()->clearHttpHeaders();
+        $this->getResponse()->setHttpHeader('Pragma: public', true);
+        $this->getResponse()->setContentType('text/plain; charset=utf-8');
+
+        $this->getResponse()->sendHttpHeaders();
+        $this->getResponse()->setContent($this->xsltTrasform('transform-text'));
+
+        return sfView::NONE;
+    }
+
+    public function executeLatex() {
+        $this->setLayout(false);
+        sfConfig::set('sf_web_debug', false);
+
+        $this->getResponse()->clearHttpHeaders();
+        $this->getResponse()->setHttpHeader('Pragma: public', true);
+        $this->getResponse()->setContentType('text/plain; charset=utf-8');
+
+        $this->getResponse()->sendHttpHeaders();
+        $this->getResponse()->setContent($this->xsltTrasform('transform-latex'));
 
         return sfView::NONE;
     }
@@ -342,15 +362,16 @@ class convocatoriasActions extends PlantillasDefault
             $to[$subscriber->getEmail()] = $subscriber->getEncargado();
         }
 
-        $message = Swift_Message::newInstance()
-            ->setFrom(sfConfig::get('app_sf_guard_plugin_default_from_email'))
-            ->setTo($to)
-            ->setSubject($title)
-            ->setBody($content)
-            ->setContentType('text/html');
+        if (!empty($to)) {
+            $message = Swift_Message::newInstance()
+                ->setFrom(sfConfig::get('app_sf_guard_plugin_default_from_email'))
+                ->setTo($to)
+                ->setSubject($title)
+                ->setBody($content)
+                ->setContentType('text/html');
 
-        $this->getMailer()->send($message);
-
+            $this->getMailer()->send($message);
+        }
     }
 
     // state transition (eliminar)

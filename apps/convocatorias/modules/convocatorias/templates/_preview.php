@@ -2,8 +2,14 @@
     <ul>
         <li>
             <?php echo link_to(
-                image_tag('/img/page_white.png'),
+                image_tag('/img/page_white_text.png'),
                 'convocatorias_texto',
+                $object, array('target' => '_blank')) ?>
+        </li>
+        <li>
+            <?php echo link_to(
+                image_tag('/img/page_code.png'),
+                'convocatorias_latex',
                 $object, array('target' => '_blank')) ?>
         </li>
         <li>

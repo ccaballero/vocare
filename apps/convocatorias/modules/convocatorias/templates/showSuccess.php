@@ -2,43 +2,13 @@
 <p><?php echo '(' . $object->getEstado() . ')' ?></p>
 
 <div id="tabber">
-    <ul id="tabs">
-    <?php if ($view_preview): ?>
-    	<li class="tab"><a href="#preview">Vista Previa</a></li>
-    <?php endif; ?>
-    <?php if ($view_editor && $sf_user->hasCredential('convocatorias_edit')): ?>
-    	<li class="tab"><a href="#editor">Edición</a></li>
-    <?php endif; ?>
-    <?php if ($view_redaction): ?>
-    	<li class="tab">
-            <a href="#redaction">
-                Redacción
-                <?php echo image_state($object->validateRedaction()) ?>
-            </a>
-        </li>
-    <?php endif; ?>
-    <?php if ($view_viewers): ?>
-    	<li class="tab">
-            <a href="#viewers">
-                Notificaciones
-                <?php echo image_state($object->validateNotification()) ?>
-            </a>
-        </li>
-    <?php endif; ?>
-    <?php if ($view_users): ?>
-    	<li class="tab">
-            <a href="#users">
-                Encargados
-                <?php echo image_state($object->validateEncargados()) ?>
-            </a>
-        </li>
-    <?php endif; ?>
-    <?php if ($view_results): ?>
-    	<li class="tab"><a href="#results">Resultados</a></li>
-    <?php endif; ?>
-    </ul>
+    <?php include_partial('convocatorias/tabs', array(
+        'object' => $object,
+        'tabs' => $tabs,
+    )) ?>
+
     <div class="tab_details">
-    <?php if ($view_preview): ?>
+    <?php if ($tabs['preview']): ?>
         <div id="preview" class="tab_contents">
             <a name="preview"></a>
             <?php include_partial('convocatorias/preview', array(
@@ -47,7 +17,7 @@
             )) ?>
         </div>
     <?php endif; ?>
-    <?php if ($view_editor
+    <?php if ($tabs['editor']
           && $sf_user->hasCredential('convocatorias_create')): ?>
     	<div id="editor" class="tab_contents">
             <a name="editor"></a>
@@ -57,7 +27,7 @@
             </form>
         </div>
     <?php endif; ?>
-    <?php if ($view_redaction): ?>
+    <?php if ($tabs['redaction']): ?>
         <div id="redaction" class="tab_contents">
             <a name="redaction"></a>
             <?php include_partial('convocatorias/redactions', array(
@@ -67,7 +37,7 @@
             )) ?>
         </div>
     <?php endif; ?>
-    <?php if ($view_viewers): ?>
+    <?php if ($tabs['viewers']): ?>
         <div id="viewers" class="tab_contents">
             <a name="viewers"></a>
             <?php include_partial('convocatorias/notifications', array(
@@ -77,7 +47,7 @@
             )) ?>
         </div>
     <?php endif; ?>
-    <?php if ($view_users): ?>
+    <?php if ($tabs['users']): ?>
         <div id="users" class="tab_contents">
             <a name="users"></a>
             <?php include_partial('convocatorias/users', array(
@@ -87,7 +57,7 @@
                 'roles'  => $roles,
             )) ?>
     <?php endif; ?>
-    <?php if ($view_results): ?>
+    <?php if ($tabs['results']): ?>
         <div id="results" class="tab_contents">
             <a name="results"></a>
             <h1>Resultados</h1>
