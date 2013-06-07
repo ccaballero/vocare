@@ -8,3 +8,4 @@ all:
     default_from_email: vocare@cs.umss.edu.bo
   dir_generation: %SF_ROOT_DIR%/data/convocatorias
   xslt_transforms: %SF_ROOT_DIR%/data/xslt
+  pdflatex: /usr/bin/pdflatex

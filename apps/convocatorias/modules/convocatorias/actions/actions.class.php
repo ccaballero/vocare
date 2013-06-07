@@ -101,82 +101,33 @@ class convocatoriasActions extends PlantillasDefault
         return parent::processForm($request, $form, $flash);
     }
 
-    private function xsltTrasform($xslt) {
+    public function renderXSLT($xslt, $mime = 'text/plain; charset=utf-8') {
         $convocatoria = $this->getRoute()->getObject();
-        $numero_enmienda = $convocatoria->getMaxEnmienda();
 
-        $dirbase1 = sfConfig::get('app_dir_generation');
-        $filename1 = $convocatoria->getId() . '_' . $numero_enmienda . '.xml';
+        $this->setLayout(false);
+        sfConfig::set('sf_web_debug', false);
 
-        $dirbase2 = sfConfig::get('app_xslt_transforms');
-        $filename2 = $xslt . '.xslt';
+        $this->getResponse()->clearHttpHeaders();
+        $this->getResponse()->setHttpHeader('Pragma: public', true);
+        $this->getResponse()->setContentType($mime);
 
-        $xslDoc = new DOMDocument();
-        $xslDoc->load("$dirbase2/$filename2");
+        $this->getResponse()->sendHttpHeaders();
+        $this->getResponse()->setContent($convocatoria->render($xslt));
 
-        $xmlDoc = new DOMDocument();
-        $xmlDoc->loadXML(
-            str_replace('&nbsp;', '', file_get_contents("$dirbase1/$filename1"))
-        );
-
-        $proc = new XSLTProcessor();
-        $proc->importStylesheet($xslDoc);
-
-        try {
-            ob_start();
-            $proc->transformToURI($xmlDoc, 'php://output');
-            $output = ob_get_contents();
-            ob_clean();
-            
-            return $output;
-        } catch (Exception $e) {
-            $e->printStackTrace();
-        }
+        return sfView::NONE;
     }
 
     public function executeTexto() {
-        $this->setLayout(false);
-        sfConfig::set('sf_web_debug', false);
-
-        $this->getResponse()->clearHttpHeaders();
-        $this->getResponse()->setHttpHeader('Pragma: public', true);
-        $this->getResponse()->setContentType('text/plain; charset=utf-8');
-
-        $this->getResponse()->sendHttpHeaders();
-        $this->getResponse()->setContent($this->xsltTrasform('transform-text'));
-
-        return sfView::NONE;
+        return $this->renderXSLT('transform-txt');
     }
 
     public function executeLatex() {
-        $this->setLayout(false);
-        sfConfig::set('sf_web_debug', false);
-
-        $this->getResponse()->clearHttpHeaders();
-        $this->getResponse()->setHttpHeader('Pragma: public', true);
-        $this->getResponse()->setContentType('text/plain; charset=utf-8');
-
-        $this->getResponse()->sendHttpHeaders();
-        $this->getResponse()->setContent($this->xsltTrasform('transform-latex'));
-
-        return sfView::NONE;
+        return $this->renderXSLT('transform-latex');
     }
 
     public function executePdf() {
-        $object = $this->getRoute()->getObject();
-
-        $latex_dir = realpath(APPLICATION_PATH . '/data/tex/convocatorias');
-        $pdflatex_path = '/usr/bin/pdflatex';
-
-        $tex_file = $latex_dir . DIRECTORY_SEPARATOR
-                  . $object->getId() . '.tex';
-        $pdf_file = $latex_dir . DIRECTORY_SEPARATOR
-                  . $object->getId() . '.pdf';
-
-        exec(
-            $pdflatex_path . ' -output-directory ' .
-            $latex_dir . ' ' . $tex_file
-        );
+        $convocatoria = $this->getRoute()->getObject();
+        $pdf_file = $convocatoria->compilePDF();
 
         $this->setLayout(false);
         sfConfig::set('sf_web_debug', false);
@@ -186,7 +137,7 @@ class convocatoriasActions extends PlantillasDefault
         $this->getResponse()->clearHttpHeaders();
         $this->getResponse()->setHttpHeader('Pragma: public', true);
         $this->getResponse()->setHttpHeader('Content-Disposition',
-            'attachment; filename="convocatoria.pdf' . '"');
+            'attachment; filename="convocatoria_' . basename($pdf_file) . '"');
         $this->getResponse()->setContentType('application/pdf');
 
         $this->getResponse()->sendHttpHeaders();

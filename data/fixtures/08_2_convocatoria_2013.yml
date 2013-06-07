@@ -364,7 +364,7 @@ ConvocatoriaRedaccion:
       para la gestión [[ gestion ]].</p>
 
       <h2>REQUERIMIENTOS</h2>
-      <table>
+      <table latex="{|c|c|p{2.8cm}|p{5.2cm}|p{2.8cm}|}">
           <tr>
               <th>Ítem</th>
               <th>Cant.</th>
@@ -430,7 +430,7 @@ ConvocatoriaRedaccion:
       postulante y se realizará sobre la base de 100 puntos que representa el 20% del
       puntaje final y se pondera de la siguiente manera.</p>
 
-      <table>
+      <table latex="{|p{14cm}|c|}">
           <tr>
               <td><strong>RENDIMIENTO ACADEMICO</strong></td>
               <td>65</td>
@@ -534,7 +534,7 @@ ConvocatoriaRedaccion:
       <p>Los postulantes deben de forma obligatoria rendir todas las pruebas escritas
       en el (los) item(es) a los que se postulan.</p>
 
-      <table>
+      <table latex="{|c|p{5.8cm}|p{0.8cm}|p{0.8cm}|p{0.8cm}|p{0.8cm}|p{0.8cm}|p{0.8cm}|p{0.8cm}|}">
           <tr>
               <th>#</th>
               <th>Temática</th>
@@ -662,7 +662,7 @@ ConvocatoriaRedaccion:
       designará 1 docente y un estudiante veedor por cada temática.</p>
 
       <h2>CRONOGRAMA GENERAL</h2>
-      <table>
+      <table latex="{|l|l|}">
           <tr>
               <th>Eventos</th>
               <th>Fechas</th>

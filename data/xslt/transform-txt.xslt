@@ -65,8 +65,8 @@
     <xsl:template match="div[@class='firmas']">
         <xsl:text>&#xA;</xsl:text>
         <xsl:text>&#xA;</xsl:text>
-        <xsl:apply-templates select="div[@class='firma']" />
         <xsl:text>&#xA;</xsl:text>
+        <xsl:apply-templates select="div[@class='firma']" />
     </xsl:template>
 
     <xsl:template match="div[@class='firmas']/div[@class='firma']">
