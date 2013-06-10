@@ -192,8 +192,13 @@ class convocatoriasActions extends PlantillasDefault
         $content = '<vocare>' . $tpl->render() . '</vocare>';
         $result = file_put_contents($destination, $content);
 
-        $this->getUser()->setFlash('notice', 'La redacción de la convocatoria'
-            . ' acaba de ser editada');
+        if ($result) {
+            $this->getUser()->setFlash('notice', 'La redacción de la '
+                . 'convocatoria acaba de ser editada');
+        } else {
+            $this->getUser()->setFlash('notice', 'La redacción de la '
+                . 'convocatoria no pudo ser editada');
+        }
         $this->redirect($this->generateUrl('convocatorias_show', array(
             'id' => $convocatoria->getId())));
     }

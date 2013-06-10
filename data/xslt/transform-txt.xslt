@@ -59,22 +59,23 @@
     </xsl:template>
 
     <xsl:template match="div[@class='fecha']">
+        <xsl:text>&#xA;</xsl:text>
         <xsl:value-of select="p" />
     </xsl:template>
 
     <xsl:template match="div[@class='firmas']">
-        <xsl:text>&#xA;</xsl:text>
-        <xsl:text>&#xA;</xsl:text>
-        <xsl:text>&#xA;</xsl:text>
-        <xsl:apply-templates select="div[@class='firma']" />
+        <!--<xsl:text>&#xA;</xsl:text>-->
+        <!--<xsl:text>&#xA;</xsl:text>-->
+        <!--<xsl:text>&#xA;</xsl:text>-->
+        <!--<xsl:apply-templates select="div[@class='firma']" />-->
     </xsl:template>
 
-    <xsl:template match="div[@class='firmas']/div[@class='firma']">
+<!--    <xsl:template match="div[@class='firmas']/div[@class='firma']">
         <xsl:text>- </xsl:text>
         <xsl:value-of select="div[@class='nombre']" />
         <xsl:text>&#xA;</xsl:text>
         <xsl:text>  </xsl:text>
         <xsl:value-of select="div[@class='cargo']" />
         <xsl:text>&#xA;</xsl:text>
-    </xsl:template>
+    </xsl:template>-->
 </xsl:stylesheet>

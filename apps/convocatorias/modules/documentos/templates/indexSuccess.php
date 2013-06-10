@@ -1,9 +1,13 @@
 <h1>Plantillas de documentos requisitos</h1>
 
 <?php if ($sf_user->hasCredential('plantillas_create')): ?>
-<div class="tasks"><?php echo link_to(
-    'Crear nuevo documento requisito', url_for('documentos_new')
-) ?></div>
+<div class="tasks">
+    <ul>
+        <li><?php echo link_to('Crear nuevo documento requisito',
+            url_for('documentos_new'), array('accesskey' => 'n')
+        ) ?></li>
+    </ul>
+</div>
 <?php endif; ?>
 
 <table>

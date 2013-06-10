@@ -1,6 +1,9 @@
 <ul>
 <?php if ($sf_user->isAuthenticated()): ?>
-    <li><a href=""><?php echo $sf_user->getFullname() ?></a></li>
+    <li><?php echo link_to(
+            $sf_user->getFullname(), 'portada/perfil', array('accesskey' => '9')
+            ) ?></li>
+    </li>
     <li><?php echo link_to(
             __('Logout'), '@sf_guard_signout', array('accesskey' => '0')
             ) ?></li>

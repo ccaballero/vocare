@@ -3,8 +3,9 @@
 <?php if ($sf_user->hasCredential('plantillas_create')): ?>
 <div class="tasks">
     <ul>
-        <li><?php echo link_to(
-        'Crear nuevo requerimiento', url_for('requerimientos_new')) ?></li>
+        <li><?php echo link_to('Crear nuevo requerimiento',
+            url_for('requerimientos_new'), array('accesskey' => 'n')
+        ) ?></li>
     </ul>
 </div>
 <?php endif; ?>

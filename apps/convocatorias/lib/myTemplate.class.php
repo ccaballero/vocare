@@ -102,13 +102,4 @@ class myTemplate
 
         return $iterator;
     }
-    
-    public function writeTxt($filename) {
-        $directory = sfConfig::get('app_convocatorias_generator_dir_generation');
-        
-        if (!empty($this->renderization)) {
-            // parsing xml to txt
-            file_put_contents($filename, $this->renderization);
-        }
-    }
 }

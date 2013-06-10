@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SYMFONY='/opt/symfony-1.4.18/data/bin/symfony'
+SYMFONY='/opt/symfony/data/bin/symfony'
 PROJECT_PATH='/var/www/vocare.local/'
 
 cd $PROJECT_PATH

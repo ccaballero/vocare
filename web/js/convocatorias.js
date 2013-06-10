@@ -88,6 +88,7 @@ $(document).ready(function(){
     $.datepicker.setDefaults($.datepicker.regional['es'])
     $('.datepicker').datepicker()
 
+    // tabber section
     $('.tab_contents').hide()
     if(window.location.hash!==''){
         $(window.location.hash).fadeIn()
@@ -104,6 +105,7 @@ $(document).ready(function(){
         $('#tabber .tab_details .tab_contents').hide()
         $(activeTab).fadeIn()
     })
+    // end tabber
 
     // this is the part when I copy redactions in convocatorias
     $('a.clipboard').click(function(){

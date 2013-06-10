@@ -12,6 +12,6 @@ class ChangePasswordForm extends sfGuardChangeUserPasswordForm
 
   	$decorator = new FormDecoratorDefault($this->getWidgetSchema());
   	$this->widgetSchema->addFormFormatter('custom', $decorator);
-  	$this->widgetSchema->setFormFormatterName('custom');    
+  	$this->widgetSchema->setFormFormatterName('custom');
     }
 }
