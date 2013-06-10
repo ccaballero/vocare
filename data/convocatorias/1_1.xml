@@ -360,11 +360,12 @@ en el (los) ítem(es) a los que se postulan.</p>
         <td class="text-center">25</td>
     </tr>
     <tr>
-        <td rowspan="3">7</td>
+        <td>7</td>
         <td>ELECTRONICA  APLICADA</td>
         <td colspan="7">&nbsp;</td>
     </tr>
     <tr>
+        <td>&nbsp;</td>
         <td>Teórico</td>
         <td class="text-center">&nbsp;</td>
         <td class="text-center">&nbsp;</td>
@@ -375,6 +376,7 @@ en el (los) ítem(es) a los que se postulan.</p>
         <td class="text-center">30</td>
     </tr>
     <tr>
+        <td>&nbsp;</td>
         <td>Practico</td>
         <td class="text-center">&nbsp;</td>
         <td class="text-center">&nbsp;</td>

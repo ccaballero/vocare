@@ -243,8 +243,9 @@ class convocatoriasActions extends PlantillasDefault
         $convocatoria->removeNotifications();
 
         for ($i = 0; $i < count($encargados); $i++) {
-            if (!empty($cargos[$i]) &&
-                    !empty($encargados[$i]) && !empty($emails[$i])) {
+            if (!empty($cargos[$i])
+                && !empty($encargados[$i])
+                && !empty($emails[$i])) {
                 $conv_notification = new ConvocatoriaNotificacion();
                 $conv_notification->convocatoria_id = $convocatoria->getId();
                 $conv_notification->cargo = $cargos[$i];
@@ -320,7 +321,8 @@ class convocatoriasActions extends PlantillasDefault
 
         if (!empty($to)) {
             $message = Swift_Message::newInstance()
-                ->setFrom(sfConfig::get('app_sf_guard_plugin_default_from_email'))
+                ->setFrom(
+                    sfConfig::get('app_sf_guard_plugin_default_from_email'))
                 ->setTo($to)
                 ->setSubject($title)
                 ->setBody($content)

@@ -150,22 +150,42 @@
     </xsl:template>
 
     <xsl:template match="div[@class='fecha']">
+        <xsl:text>\vspace{4cm}</xsl:text>
+        <xsl:text>&#xA;</xsl:text>
+        <xsl:text>&#xA;</xsl:text>
+        <xsl:text>\begin{center}</xsl:text>
+        <xsl:text>&#xA;</xsl:text>
         <xsl:value-of select="p" />
+        <xsl:text>&#xA;</xsl:text>
+        <xsl:text>\end{center}</xsl:text>
     </xsl:template>
 
     <xsl:template match="div[@class='firmas']">
         <xsl:text>&#xA;</xsl:text>
-        <xsl:text>&#xA;</xsl:text>
         <xsl:apply-templates select="div[@class='firma']" />
-        <xsl:text>&#xA;</xsl:text>
     </xsl:template>
 
     <xsl:template match="div[@class='firmas']/div[@class='firma']">
-        <xsl:text>- </xsl:text>
-        <xsl:value-of select="div[@class='nombre']" />
+        <xsl:if test="position() mod 2 = 1">
+            <xsl:text>&#xA;</xsl:text>
+            <xsl:text>\vspace{4cm}</xsl:text>
+            <xsl:text>&#xA;</xsl:text>
+            <xsl:text>&#xA;</xsl:text>
+        </xsl:if>
+        <xsl:text>\begin{minipage}[b]{0.5\textwidth}</xsl:text>
         <xsl:text>&#xA;</xsl:text>
-        <xsl:text>  </xsl:text>
+        <xsl:text>\begin{center}</xsl:text>
+        <xsl:text>&#xA;</xsl:text>
+        <xsl:text>{\bf </xsl:text>
+        <xsl:value-of select="div[@class='nombre']" />
+        <xsl:text>}\\</xsl:text>
+        <xsl:text>&#xA;</xsl:text>
         <xsl:value-of select="div[@class='cargo']" />
+        <xsl:text>\\</xsl:text>
+        <xsl:text>&#xA;</xsl:text>
+        <xsl:text>\end{center}</xsl:text>
+        <xsl:text>&#xA;</xsl:text>
+        <xsl:text>\end{minipage}</xsl:text>
         <xsl:text>&#xA;</xsl:text>
     </xsl:template>
 

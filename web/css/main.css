@@ -236,6 +236,8 @@ span {
 
 #main form p textarea {
     height: 180px;
+    font-family: Consolas, Lucida Console, Monaco, monospace;
+    font-size: 12px;
 }
 
 #main form p .full-area {
