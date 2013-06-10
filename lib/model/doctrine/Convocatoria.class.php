@@ -407,6 +407,21 @@ class Convocatoria extends BaseConvocatoria
         );
     }
 
+    public function renderLastXHTML() {
+        return $this->renderXHTML($this->getEnmienda($this->getMaxEnmienda()));
+    }
+    
+    public function renderXHTML($redaction) {
+        $tpl = new myTemplate();
+        if (!empty($redaction)) {
+            $tpl->setTemplate($redaction);
+            $tpl->setObject($this);
+            return $tpl->render();
+        }
+
+        return '';
+    }
+
     public function render($xslt) {
         $dirbase1 = sfConfig::get('app_dir_generation');
         $filename1 = $this->getId() . '_' . $this->getMaxEnmienda() . '.xml';

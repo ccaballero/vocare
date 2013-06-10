@@ -26,6 +26,15 @@ class convocatoriasActions extends PlantillasDefault
         $convocatoria = $this->getRoute()->getObject();
         $this->forward404Unless($convocatoria);
 
+        // This is the part for renderer control, Can I say this?
+        $state = $convocatoria->getEstado();
+
+        // permission control
+        if (!$this->getUser()->hasCredential('convocatorias_view')
+            && !in_array($state, array('vigente', 'finalizado'))) {
+            $this->forward404();
+        }
+
         // Settings of editor form
         $this->form = new ConvocatoriaForm($convocatoria);
         $this->form->removeFocus();
@@ -45,18 +54,12 @@ class convocatoriasActions extends PlantillasDefault
         $this->object = $convocatoria;
 
         // This is the part where I talk to templating
-        $tpl = new myTemplate();
         if (!empty($this->redaction)) {
-            $tpl->setTemplate($this->redaction);
-            $tpl->setObject($this->object);
-            $this->preview = $tpl->render();
+            $this->preview = $convocatoria->renderXHTML($this->redaction);
         } else {
             $this->preview = null;
             $this->max_enmienda = 0;
         }
-
-        // This is the part for renderer control, Can I say this?
-        $state = $this->object->getEstado();
 
         // This is the part when I build the roles for signatures
         $cargos = new Cargo();

@@ -1,4 +1,4 @@
-<div style="max-width: 660px; float: left;">
+<div style="max-width: 650px; float: left;">
     <h1>Sistema para la administración de convocatorias</h1>
     <p>Bienvenido al sistema para el seguimiento de convocatorias en las
     carreras de informática y sistemas.</p>

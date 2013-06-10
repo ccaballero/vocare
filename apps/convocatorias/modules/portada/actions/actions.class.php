@@ -10,7 +10,8 @@ class portadaActions extends sfActions
 
     public function executeConvocatorias() {
         $convocatoria = new Convocatoria();
-        $this->convocatorias = $convocatoria->listVisibles();
+        $this->vigentes = $convocatoria->listByState('vigente');
+        $this->finalizadas = $convocatoria->listByState('finalizado');
     }
 
     public function executePlantillas(sfWebRequest $request) {}

@@ -19,14 +19,13 @@ delete:
   credentials:
     - convocatorias_delete
 show:
-  credentials:
-    - convocatorias_view
+  is_secure: false
 texto:
-  credentials:
-    - convocatorias_view
+  is_secure: false
+latex:
+  is_secure: false
 pdf:
-  credentials:
-    - convocatorias_view
+  is_secure: false
 redaccion:
   credentials:
     - convocatorias_view

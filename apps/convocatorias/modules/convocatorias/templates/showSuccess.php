@@ -11,6 +11,10 @@
     <?php if ($tabs['preview']): ?>
         <div id="preview" class="tab_contents">
             <a name="preview"></a>
+            <?php include_partial('convocatorias/tasks', array(
+                'object' => $object,
+                'flags' => array(false, true, true, true),
+            )) ?>
             <?php include_partial('convocatorias/preview', array(
                 'object' => $object,
                 'preview' => $preview,
