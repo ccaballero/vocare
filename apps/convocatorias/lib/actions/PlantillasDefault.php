@@ -50,7 +50,8 @@ class PlantillasDefault extends sfActions
         $object = $this->getRoute()->getObject();
         $object->delete();
 
-        $this->getUser()->setFlash('notice', $this->_messages['flash']['delete']);
+        $this->getUser()->setFlash('notice',
+            $this->_messages['flash']['delete']);
         $this->redirect($this->_route_list);
     }
 
@@ -59,7 +60,8 @@ class PlantillasDefault extends sfActions
         $this->forward404Unless($this->object);
     }
 
-    protected function processForm(sfWebRequest $request, sfForm $form, $flash = '') {
+    protected function processForm(sfWebRequest $request,
+        sfForm $form, $flash = '') {
         $form->bind(
             $request->getParameter($form->getName()),
             $request->getFiles($form->getName())
@@ -74,7 +76,8 @@ class PlantillasDefault extends sfActions
 
             $this->redirect($this->_route_list);
         } else {
-            $this->getUser()->setFlash('notice', 'Se encontraron algunos errores en el formulario');
+            $this->getUser()->setFlash('notice',
+                'Se encontraron algunos errores en el formulario');
         }
 
         return $form;
