@@ -22,12 +22,7 @@
         <div class="clear"></div>
         <div id="content">
             <div id="main">
-                <?php if ($sf_user->hasFlash('notice')): ?>
-                    <p class="notice"><?php echo $sf_user->getFlash('notice') ?></p>
-                <?php endif; ?>
-                <?php if ($sf_user->hasFlash('error')): ?>
-                    <p class="error"><?php echo $sf_user->getFlash('error') ?></p>
-                <?php endif; ?>
+                <?php include_partial('portada/messages') ?>
                 <?php echo $sf_content ?>
             </div>
             <div id="footer"><?php include_partial('portada/footer') ?></div>

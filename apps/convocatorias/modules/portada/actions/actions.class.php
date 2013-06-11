@@ -21,7 +21,7 @@ class portadaActions extends sfActions
         $user = $this->getUser();
 
         $this->settings = new FormProfile($user->getGuard());
-        $this->passwd = new ChangePasswordForm();
+        $this->passwd = new ChangePasswordForm($user->getGuard());
 
         if ($request->isMethod('post')) {
             $type = $request->getParameter('type');
@@ -31,11 +31,11 @@ class portadaActions extends sfActions
                     $form->bind($request->getParameter($form->getName()));
                     if ($form->isValid()) {
                         $form->save();
-                        $this->getUser()->setFlash('notice',
+                        $this->getUser()->setFlash('success',
                             'Sus datos fueron actualizados correctamente');
                         $this->redirect('@profile');
                     } else {
-                        $this->getUser()->setFlash('notice',
+                        $this->getUser()->setFlash('error',
                             'Se encontraron algunos errores en el formulario');
                     }
                     break;
@@ -44,11 +44,11 @@ class portadaActions extends sfActions
                     $form->bind($request->getParameter($form->getName()));
                     if ($form->isValid()) {
                         $form->save();
-                        $this->getUser()->setFlash('notice',
+                        $this->getUser()->setFlash('success',
                             'Su contraseña ha sido cambiada correctamente');
                         $this->redirect('@profile');
                     } else {
-                        $this->getUser()->setFlash('notice',
+                        $this->getUser()->setFlash('error',
                             'Se encontraron algunos errores en el formulario');
                     }
                     break;

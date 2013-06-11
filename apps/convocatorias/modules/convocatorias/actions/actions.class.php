@@ -196,10 +196,10 @@ class convocatoriasActions extends PlantillasDefault
         $result = file_put_contents($destination, $content);
 
         if ($result) {
-            $this->getUser()->setFlash('notice', 'La redacción de la '
+            $this->getUser()->setFlash('success', 'La redacción de la '
                 . 'convocatoria acaba de ser editada');
         } else {
-            $this->getUser()->setFlash('notice', 'La redacción de la '
+            $this->getUser()->setFlash('error', 'La redacción de la '
                 . 'convocatoria no pudo ser editada');
         }
         $this->redirect($this->generateUrl('convocatorias_show', array(
@@ -228,7 +228,7 @@ class convocatoriasActions extends PlantillasDefault
             $convocatoria_cargo->save();
         }
 
-        $this->getUser()->setFlash('notice', 'La configuración de las firmas ha'
+        $this->getUser()->setFlash('success', 'La configuración de las firmas ha'
             . ' sido registrada');
         $this->redirect($this->generateUrl('convocatorias_show', array(
             'id' => $convocatoria->getId())));
@@ -258,7 +258,7 @@ class convocatoriasActions extends PlantillasDefault
             }
         }
 
-        $this->getUser()->setFlash('notice', 'La configuración de las' .
+        $this->getUser()->setFlash('success', 'La configuración de las' .
             ' notificaciones ha sido registrada.');
         $this->redirect($this->generateUrl('convocatorias_show', array(
             'id' => $convocatoria->getId())) . '#viewers');
@@ -281,7 +281,7 @@ class convocatoriasActions extends PlantillasDefault
             }
         }
 
-        $this->getUser()->setFlash('notice', 'La configuración de los' .
+        $this->getUser()->setFlash('success', 'La configuración de los' .
             ' cargos ha sido registrada.');
         $this->redirect($this->generateUrl('convocatorias_show', array(
             'id' => $convocatoria->getId())) . '#users');

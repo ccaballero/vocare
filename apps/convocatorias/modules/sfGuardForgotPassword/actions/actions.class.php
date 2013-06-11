@@ -89,7 +89,7 @@ class sfGuardForgotPasswordActions extends BasesfGuardForgotPasswordActions
 
                 $this->getMailer()->send($message);
 
-                $this->getUser()->setFlash('notice', __('Password updated successfully!'));
+                $this->getUser()->setFlash('success', __('Password updated successfully!'));
                 $this->redirect('@sf_guard_signin');
             }
         }

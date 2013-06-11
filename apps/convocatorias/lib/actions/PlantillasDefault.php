@@ -50,7 +50,7 @@ class PlantillasDefault extends sfActions
         $object = $this->getRoute()->getObject();
         $object->delete();
 
-        $this->getUser()->setFlash('notice',
+        $this->getUser()->setFlash('success',
             $this->_messages['flash']['delete']);
         $this->redirect($this->_route_list);
     }
@@ -71,12 +71,12 @@ class PlantillasDefault extends sfActions
             $form->save();
 
             if (!empty($flash)) {
-                $this->getUser()->setFlash('notice', $flash);
+                $this->getUser()->setFlash('success', $flash);
             }
 
             $this->redirect($this->_route_list);
         } else {
-            $this->getUser()->setFlash('notice',
+            $this->getUser()->setFlash('error',
                 'Se encontraron algunos errores en el formulario');
         }
 

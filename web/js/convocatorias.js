@@ -125,4 +125,10 @@ $(document).ready(function(){
         }
         enumerate_checks()
     })
+    
+    // flash messenger close
+    $('#messages .close a').click(function(){
+        $(this).parents('#messages').fadeOut()
+        return false
+    })
 })
