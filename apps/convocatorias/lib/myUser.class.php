@@ -2,23 +2,33 @@
 
 class myUser extends sfGuardSecurityUser
 {
+    private $_guard;
+    
+    public function getGuard() {
+        if (!isset($this->_guard)) {
+            $this->_guard = $this->getGuardUser();
+        }
+        
+        return $this->_guard;
+    }
+    
+    public function getId() {
+        return $this->getGuard()->id;
+    }
+
     public function getFirstName() {
-        $guard = $this->getGuardUser();
-        return $guard->first_name;
+        return $this->getGuard()->first_name;
     }
-    
+
     public function getLastName() {
-        $guard = $this->getGuardUser();
-        return $guard->last_name;
+        return $this->getGuard()->last_name;
     }
-    
+
     public function getEmailAddress() {
-        $guard = $this->getGuardUser();
-        return $guard->email_address;
-    }    
-    
+        return $this->getGuard()->email_address;
+    }
+
     public function getFullname() {
-        $guard = $this->getGuardUser();
-        return $guard->getFullName();
+        return $this->getGuard()->getFullName();
     }
 }

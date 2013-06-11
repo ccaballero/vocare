@@ -1,3 +1,9 @@
+profile:
+  url: /perfil
+  param:
+    module: portada
+    action: perfil
+
 sf_guard_signin:
   url: /acceder
   param:

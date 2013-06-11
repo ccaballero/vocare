@@ -16,7 +16,7 @@ contraseña para el acceso al sistema.</p>
 <form accept-charset="utf-8" action="" method="post">
     <?php echo $passwd ?>
     <p class="submit">
-        <input type="hidden" name="passwd" value="settings" />
+        <input type="hidden" name="type" value="passwd" />
         <input type="submit" value="Modificar contraseña" />
     </p>
 </form>

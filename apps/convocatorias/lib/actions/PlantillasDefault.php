@@ -40,7 +40,7 @@ class PlantillasDefault extends sfActions
             $this->form,
             $this->_messages['flash']['edit']
         );
-        
+
         $this->setTemplate('form');
     }
 
