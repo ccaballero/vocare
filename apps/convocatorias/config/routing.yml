@@ -52,11 +52,11 @@ sf_guard_forgot_password_change:
   requirements:
     sf_method: [get, post]
 
-sf_guard_register:
-  url: /registro
-  param:
-    module: sfGuardRegister
-    action: index
+#sf_guard_register:
+#  url: /registro
+#  param:
+#    module: sfGuardRegister
+#    action: index
 
 convocatorias:
   class: sfDoctrineRouteCollection

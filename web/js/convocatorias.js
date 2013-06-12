@@ -49,6 +49,8 @@ function remove_li(selector){
 $(document).ready(function(){
     $('input[type="text"].focus').focus()
     $('textarea.focus').focus()
+    $('#signin_username').focus()
+    
     $('.closeable').click(function(){
         $(this).parent().fadeOut()
         return false

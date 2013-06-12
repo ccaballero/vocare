@@ -14,6 +14,10 @@
                 <target>Convocatorias</target>
             </trans-unit>
             <trans-unit>
+                <source>Documentation</source>
+                <target>Documentación</target>
+            </trans-unit>
+            <trans-unit>
                 <source>Templates</source>
                 <target>Plantillas</target>
             </trans-unit>

@@ -16,6 +16,7 @@ class portadaActions extends sfActions
 
     public function executePlantillas(sfWebRequest $request) {}
     public function executePersonal(sfWebRequest $request) {}
+    public function executeDocumentacion(sfWebRequest $request) {}
 
     public function executePerfil(sfWebRequest $request) {
         $user = $this->getUser();

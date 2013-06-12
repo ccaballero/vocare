@@ -90,6 +90,7 @@ class convocatoriasActions extends PlantillasDefault
             'redaction' => ($state == 'borrador') || ($state == 'emitido'),
             'viewers' => ($state == 'borrador' || ($state == 'emitido')),
             'users' => ($state == 'emitido'),
+            'letters' => ($state == 'emitido'),
             'results' => ($state == 'vigente') || ($state == 'finalizado'),
         );
     }

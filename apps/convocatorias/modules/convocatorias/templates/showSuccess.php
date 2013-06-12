@@ -60,6 +60,13 @@
                 'users'  => $users,
                 'roles'  => $roles,
             )) ?>
+        </div>
+    <?php endif; ?>
+    <?php if ($tabs['letters']): ?>
+        <div id="letters" class="tab_contents">
+            <a name="letters"></a>
+            <h1>Envio de cartas</h1>
+        </div>
     <?php endif; ?>
     <?php if ($tabs['results']): ?>
         <div id="results" class="tab_contents">
