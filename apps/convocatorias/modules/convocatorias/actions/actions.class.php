@@ -189,11 +189,15 @@ class convocatoriasActions extends PlantillasDefault
         $tpl->setTemplate($texto_redaccion);
         $tpl->setObject($convocatoria);
 
+        $render = $tpl->render();
+        $specialEscape = new SpecialEscape();
+        $escape = $specialEscape->specialEscape($render);
+
         $dirbase = sfConfig::get('app_dir_generation');
         $filename = $convocatoria->getId() . '_' . $numero_enmienda . '.xml';
 
         $destination = $dirbase . '/' . $filename;
-        $content = '<vocare>' . $tpl->render() . '</vocare>';
+        $content = '<vocare>' . $escape . '</vocare>';
         $result = file_put_contents($destination, $content);
 
         if ($result) {
@@ -203,6 +207,7 @@ class convocatoriasActions extends PlantillasDefault
             $this->getUser()->setFlash('error', 'La redacción de la '
                 . 'convocatoria no pudo ser editada');
         }
+
         $this->redirect($this->generateUrl('convocatorias_show', array(
             'id' => $convocatoria->getId())));
     }

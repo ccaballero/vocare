@@ -39,3 +39,147 @@
     font-weight: bold;
     padding: 0px 6px 0px 0px;
 }
+
+/* clases para la pestaña de previsualización */
+#preview h1,
+#preview h2,
+#preview h3,
+#preview h4 {
+    font-family: Didot, "Didot LT STD", "Hoefler Text", Garamond, "Times New Roman", serif;
+    font-weight: normal;
+}
+
+#preview h1 {
+    font-size: 20px;
+    text-align: center;
+    padding: 0px 0px 10px 0px;
+}
+
+#preview h2 {
+    font-size: 18px;
+    padding: 15px 0px 5px 0px;
+}
+
+#preview h3 {
+    font-size: 16px;
+    padding: 10px 0px 5px 0px;
+}
+
+#preview h4 {
+    font-size: 14px;
+    padding: 5px 0px 5px 0px;
+}
+
+#preview p {
+    font-size: 12px;
+    padding: 10px 0px;
+    line-height: 20px;
+}
+
+#preview ol {
+    padding: 0px 0px 0px 40px;
+    list-style-type: lower-alpha;
+}
+
+#preview ul {
+    padding: 0px 0px 0px 40px;
+    list-style-type: disc;
+}
+
+#preview table {
+    width: 100%;
+}
+
+#preview table tr th {
+    padding: 4px 0px;
+}
+
+#preview table tr td {
+    padding: 4px;
+    border: 3px solid #ffffff;
+}
+
+#preview .fecha {
+    display: block;
+    padding: 20px 0px 20px 0px;
+}
+
+#preview .fecha p {
+    text-align: center;
+}
+
+#preview .firmas {
+    text-align: center;
+}
+
+#preview .firmas .firma {
+    display: inline-block;
+    margin: 60px 20px 20px 20px;
+}
+
+#preview .firmas .firma .nombre {
+    text-align: center;
+}
+
+#preview .firmas .firma .cargo {
+    text-align: center;
+    text-transform: uppercase;
+}
+
+/* clases para la pestaña de redacción */
+#redaction .tree {
+    float: left;
+    margin: 10px 0px 0px 0px;
+    width: 210px;
+}
+
+#redaction .tree h1 {
+    font-size: 18px;
+}
+
+#redaction .tree p {
+    margin: 0px 5px 0px 0px;
+}
+
+#redaction .tree ul {
+    list-style-type: none;
+    border-bottom: 1px solid #000000;
+}
+
+#redaction .tree ul li {
+    display: block;
+    padding: 2px 0px;
+    border-top: 1px solid #000000;
+}
+
+#redaction .tree ul li .title {
+    font-weight: bold;
+    padding-left: 5px;
+}
+
+#redaction .tree ul li a {}
+#redaction .tree ul li a:hover {}
+
+#redaction .tree ul li ul.options {
+    margin-left: 15px;
+    border-bottom: none;
+}
+
+#redaction .tree ul li ul.options li {
+    display: inline-block;
+    border: none;
+}
+
+#redaction .tree ul li ul.options li a {
+    margin: 0px;
+    padding: 0px 3px;
+    line-height: normal;
+    font-size: 11px;
+    text-transform: none;
+    background: none;
+    border: none;
+}
+
+#redaction .tree ul li ul.options li a:hover {
+    color: #000000;
+}

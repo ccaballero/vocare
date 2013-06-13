@@ -17,6 +17,8 @@
         <xsl:text>&#xA;</xsl:text>
         <xsl:text>\usepackage{multirow}</xsl:text>
         <xsl:text>&#xA;</xsl:text>
+        <xsl:text>\usepackage{url}</xsl:text>
+        <xsl:text>&#xA;</xsl:text>
         <xsl:text>&#xA;</xsl:text>
         <xsl:text>\title{</xsl:text>
         <xsl:apply-templates select="//h1" mode="pre-process" />
@@ -66,6 +68,10 @@
         <xsl:apply-templates />
         <xsl:text>&#xA;</xsl:text>
         <xsl:text>&#xA;</xsl:text>
+    </xsl:template>
+    
+    <xsl:template match="p" mode="inside-li">
+        <xsl:apply-templates />
     </xsl:template>
 
     <xsl:template match="table">
@@ -145,7 +151,7 @@
 
     <xsl:template match="ol/li|ul/li">
         <xsl:text>\item </xsl:text>
-        <xsl:apply-templates select="p/text()" />
+        <xsl:apply-templates select="p" mode="inside-li" />
         <xsl:text>&#xA;</xsl:text>
     </xsl:template>
 
@@ -191,6 +197,12 @@
 
     <xsl:template match="strong">
         <xsl:text>\textbf{</xsl:text>
+        <xsl:apply-templates />
+        <xsl:text>}</xsl:text>
+    </xsl:template>
+
+    <xsl:template match="a">
+        <xsl:text> \url{</xsl:text>
         <xsl:apply-templates />
         <xsl:text>}</xsl:text>
     </xsl:template>

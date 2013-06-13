@@ -3,7 +3,7 @@
     <?php if ($flags[0]): ?>
         <li>
             <?php echo link_to(
-                image_tag('/img/eye.png'),
+                image_tag('/img/magnifier.png'),
                 'convocatorias_show',
                 $object, array(
                     'target' => '_blank',

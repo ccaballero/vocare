@@ -35,6 +35,7 @@ all:
       - I18N
       - UserSelector
       - ImageState
+      - SpecialEscape
     #Form helper is out!.
     i18n: true
     default_culture: es_BO

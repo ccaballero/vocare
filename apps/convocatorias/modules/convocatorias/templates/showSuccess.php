@@ -1,6 +1,24 @@
 <h1><?php echo $object->getGestion() ?></h1>
 <p><?php echo '(' . $object->getEstado() . ')' ?></p>
 
+<div class="states">
+    <ul>
+    <?php foreach ($object->getOperacionesPosibles() as $op => $pr): ?>
+        <?php if ($object->hasOperacion($op) &&
+                  $sf_user->hasCredential('convocatorias_' . $op) &&
+                  $object->validateOperation($op) == 2): ?>
+            <li><?php echo link_to(
+                ucfirst($pr[0]), 'convocatorias_' . $op, $object, array(
+                    'method' => 'post',
+                    'confirm' => $pr[1]
+                )) ?></li>
+        <?php else: ?>
+            <li><span class="disabled"><?php echo ucfirst($op) ?></span></li>
+        <?php endif; ?>
+    <?php endforeach; ?>
+    </ul>
+</div>
+
 <div id="tabber">
     <?php include_partial('convocatorias/tabs', array(
         'object' => $object,
