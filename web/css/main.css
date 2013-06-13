@@ -176,25 +176,54 @@ span {
     display: inline;
 }
 
+/* task bar inside the main container */
 #main div.tasks {
-    margin: 20px 10px 10px 10px;
+    margin: 20px 10px 10px 0px;
 }
 
-#main div.tasks ul {
+#main div.states {
+    position: absolute;
+    top: 58px;
+    right: 6px;
+}
+
+#main div.tasks ul,
+#main div.states ul {
     list-style: none;
+    height: 10px;
+}
+
+#main div.tasks ul li,
+#main div.states ul li {
+    display: inline-block;
+    float: left;
 }
 
 #main div.tasks ul li {
-    display: inline-block;
+    margin: 0px 2px 0px 0px;
 }
 
-#main div.tasks ul li a {
-    background-color: #E0E0E0;
-    padding: 4px 8px;
-    margin: 0px 3px;
+#main div.states ul li {
+    margin: 0px 0px 0px 2px;
 }
 
-#main div.tasks ul li a:hover {}
+#main div.tasks ul li a,
+#main div.states ul li a,
+#main div.states ul li span {
+    background-color: #F0F0F0;
+    padding: 3px 8px;
+    border: 1px solid #DDDDDD;
+    font-weight: normal;
+}
+
+#main div.tasks ul li a,
+#main div.states ul li a {
+    color: #000000;
+}
+
+#main div.tasks ul li a:hover,
+#main div.states ul li a:hover {}
+/* end of tasks bars */
 
 #main dl {
     margin: 10px 0px;
@@ -310,36 +339,6 @@ span {
 #main .success { background-color: #B9E4BC; }
 #main .notice {  background-color: #F2F2C5; }
 #main .error {   background-color: #F2C6C5; }
-
-#main .states {
-    position: absolute;
-    top: 58px;
-    right: 6px;
-}
-
-#main .states ul {
-    list-style: none;
-}
-
-#main .states ul li {
-    display: inline-block;
-    float: left;
-    margin: 0px 0px 0px 2px;
-}
-
-#main .states ul li a,
-#main .states ul li span {
-    background-color: #F0F0F0;
-    padding: 3px 8px;
-    border: 1px solid #DDDDDD;
-    font-weight: normal;
-}
-
-#main .states ul li a {
-    color: #000000;
-}
-
-#main .states ul li a:hover {}
 
 /* pestañas de las convocatorias */
 #tabber {
