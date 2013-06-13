@@ -108,6 +108,11 @@ cargos:
     object_actions:
       agregar: [get, post]
 
+cartas:
+  class: sfDoctrineRouteCollection
+  options:
+    model: Carta
+
 homepage:
   url: /
   param:

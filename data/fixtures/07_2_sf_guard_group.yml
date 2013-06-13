@@ -20,6 +20,13 @@ sfGuardGroup:
       - usuarios_list
       - usuarios_view
       - usuarios_edit
+      - cargos_list
+      - cargos_view
+      - cargos_edit
+      - cartas_list
+      - cartas_view
+      - cartas_edit
+      - cartas_create
   secretaria_de_departamento:
     name: Secretaría de Departamento
     description: Secretaría del Departamento de Informática y Sistemas.
@@ -34,3 +41,10 @@ sfGuardGroup:
       - plantillas_edit
       - plantillas_create
       - plantillas_delete
+      - cargos_list
+      - cargos_view
+      - cargos_edit
+      - cartas_list
+      - cartas_view
+      - cartas_edit
+      - cartas_create

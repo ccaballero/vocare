@@ -64,3 +64,19 @@ sfGuardPermission:
   cargos_edit:
     name: cargos_edit
     description: Editar la información de un cargo y su asignación.
+  # permissions in cartas
+  cartas_list:
+    name: cartas_list
+    description: Listar los cartas disponibles para la fijación e impresión.
+  cartas_view:
+    name: cartas_view
+    description: Ver la información de una carta.
+  cartas_edit:
+    name: cartas_edit
+    description: Editar la informacion de una carta.
+  cartas_create:
+    name: cartas_create
+    description: Crear una nueva carta.
+  cartas_delete:
+    name: cartas_delete
+    description: Eliminar una carta.
