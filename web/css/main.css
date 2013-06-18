@@ -458,6 +458,24 @@ span {
     /*float: left;*/
 }
 
+#main .widget ul {
+    list-style-type: square;
+    list-style-position: inside;
+}
+
+#main .widget ul li {
+    width: 260px;
+    margin: 4px 0px;
+}
+
+#main .widget ul li ul {
+    margin-left: 20px;
+}
+
+#main .widget ul li ul li {
+    width: 220px;
+}
+
 #sf_admin_bar {
     display: inline-block;
     float: none;

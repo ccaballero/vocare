@@ -1,3 +1,29 @@
+Plantilla:
+  actAs: [Timestampable]
+  connection: doctrine
+  tableName: carta
+  columns:
+    id:
+      type: integer(4)
+      fixed: false
+      unsigned: true
+      primary: true
+      autoincrement: true
+    nombre:
+      type: string(128)
+      fixed: false
+      notnull: true
+    redaccion:
+      type: clob
+      fixed: false
+      notnull: true
+      default: ''
+    types:
+      type: clob
+      fixed: false
+      notnull: true
+      default: ''
+
 Carta:
   actAs: [Timestampable]
   connection: doctrine

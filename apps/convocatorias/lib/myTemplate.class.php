@@ -18,6 +18,37 @@ class myTemplate
         $this->object = $object;
     }
 
+    public function getTaxonomy() {
+        // preproceso el archivo para generar los foreach
+        $parts = preg_split('/(\[\[ | \]\])/', $this->template);
+        $structure = new StdClass();
+
+        $foreach_flag = false;
+        $foreach_element = '';
+        $foreach_components = new StdClass();
+
+        for ($i = 1; $i < count($parts); $i+=2) {
+            $tag = $parts[$i];
+
+            if (preg_match('/foreach [a-z]/', $tag)) {
+                $foreach_flag = true;
+                $foreach_element = substr($tag, 8);
+                $foreach_components = new StdClass();
+            } else if (preg_match('/endforeach/', $tag)) {
+                $foreach_flag = false;
+                $structure->$foreach_element = $foreach_components;
+            } else {
+                if ($foreach_flag) {
+                    $foreach_components->$tag = '';
+                } else {
+                    $structure->$tag = '';
+                }
+            }
+        }
+
+        return $structure;
+    }
+
     public function render() {
         // preproceso el archivo para generar los foreach
         $parts = preg_split('/(\[\[ | \]\])/', $this->template);

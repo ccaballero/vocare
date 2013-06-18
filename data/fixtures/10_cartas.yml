@@ -1,42 +1,83 @@
 Carta:
-  carta_1:
+  tribunal_meritos:
     nombre: Tribunal para la Revisión de Méritos
     redaccion: |
-      Cochabamba, 22 de noviembre de 2012
-      DPTO. INF-SIS 304/2012
-      
-      
-      
-      Señores:
-      Ing. Jimmy Villarroel Novillo
-      DOCENTE CARRERA DE SISTEMAS
-      Univ. Elmer Vargas
-      ESTUDIANTE ING. DE SISTEMAS
-      Presente.- 
-      
-      
-      Ref.: Tribunal para la Revisión de Méritos
-      
-      De mi consideración:
-      
-      Por la presente comunico a usted que ha sido designado como Tribunal
+      <p>Cochabamba, [[ fecha_carta ]]<br />
+      <strong>DPTO. INF-SIS 304/2012</strong></p>
+      <br />
+      <br />
+      <br />
+      <br />
+      <p><strong>[[ saludo ]]:</strong><br />
+      [[ foreach destinatarios ]]
+      [[ nombre ]]<br />
+      <strong class="upper">[[ cargo ]]</strong><br />
+      [[ endforeach ]]
+      Presente.-</p>
+      <br />
+      <br />
+      <p class="title"><strong>Ref.: [[ titulo ]]</strong></p>
+      <br />
+      <p>De mi consideración:</p>
+      <p>Por la presente comunico a usted que ha sido designado como Tribunal
       revisor de Méritos por la carrera de Ing. Sistemas, para la Convocatoria
       de Concurso de Méritos y Pruebas de Conocimientos para optar a las
       Auxiliaturas en Laboratorios de Computación, Mantenimiento y Desarrollo
       del Departamento de Informática – Sistemas, comunico también que el día
-      miércoles 28 de noviembre debe realizarse la publicación de los
-      habilitados hasta las 15:00 pm.
-      
-      Se solicita presentar los resultados en 3 ejemplares debidamente firmados
-      y además en formato digital.
-      
-      Sin otro particular y agradeciendo su cooperación me despido, saludando a
-      usted.
-      Atentamente,
-      
-      
-      
-      Lic. Henrry Villarroel Tapia
-      JEFE DPTO. INFORMÁTICA-SISTEMAS
-      
-      Cc.: Arch. 
+      [[ fecha_realizacion ]] debe realizarse la publicación de los
+      habilitados hasta las [[ hora_entrega ]].</p>
+      <p>Se solicita presentar los resultados en 3 ejemplares debidamente
+      firmados y además en formato digital.</p>
+      <br />
+      <p>Sin otro particular y agradeciendo su cooperación me despido, saludando
+      a usted.</p>
+      <p>Atentamente,</p>
+      <div class="firmas">
+          <div class="firma">
+              <div class="nombre">[[ remitente_nombre ]]</div>
+              <div class="cargo">[[ remitente_cargo ]]</div>
+          </div>
+      </div>
+      <br />
+      <p>Cc.: Arch.</p>
+  tribunal_conocimientos:
+    nombre: Tribunal de Conocimientos
+    redaccion: |
+      <p>Cochabamba, [[ fecha_carta ]]<br />
+      <strong>DPTO. INF-SIS 311/2012</strong></p>
+      <br />
+      <br />
+      <br />
+      <br />
+      <p><strong>[[ saludo ]]:</strong><br />
+      [[ foreach destinatarios ]]
+      [[ nombre ]]<br />
+      <strong class="upper">[[ cargo ]]</strong><br />
+      [[ endforeach ]]
+      Presente.-</p>
+      <br />
+      <br />
+      <p class="title"><strong>Ref.: [[ titulo ]]</strong></p>
+      <br />
+      <p>De mi consideración:</p>
+      <p>Por la presente comunico a usted que ha sido designado como Tribunal de
+      Conocimiento por la carrera de Ing. Sistemas en la materia de
+      <strong>[[ tematica ]]</strong>, para la Convocatoria a Concurso de
+      Méritos y Pruebas de Conocimientos para optar a las Auxiliatura en
+      Laboratorio de Computación, de Mantenimiento y Desarrollo del Departamento
+      de Informática – Sistemas, por lo cual solicito hacer llegar hasta el día
+      [[ fecha_material ]] el contenido de la materia a evaluarse y presentarse
+      el día [[ fecha_examen ]] a horas [[ hora_examen ]] en el laboratorio 2 del
+      departamento, las notas deberán ser entregadas 24 horas después del
+      examen.</p>
+      <p>Sin otro particular y agradeciendo su cooperación me despido, saludando
+      a usted.</p>
+      <p>Atentamente,</p>
+      <div class="firmas">
+          <div class="firma">
+              <div class="nombre">[[ remitente_nombre ]]</div>
+              <div class="cargo">[[ remitente_cargo ]]</div>
+          </div>
+      </div>
+      <br />
+      <p>Cc.: Arch.</p>

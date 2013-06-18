@@ -1,0 +1,41 @@
+#main #letter {
+    float: left;
+    border: 1px solid #000000;
+    width: 500px;
+    padding: 30px;
+    margin-top: 10px;
+    margin-left: 70px;
+    margin-bottom: 20px;
+    box-shadow: 1px 1px 4px #000000;
+}
+
+#main #letter p {
+    line-height: 1.5em;
+}
+
+#main #letter .title {
+    margin-left: 150px;
+}
+
+#main #letter .firmas {
+    text-align: center;
+}
+
+#main #letter .firmas .firma {
+    display: inline-block;
+    margin: 8.0em 1.5em 1.0em 1.5em;
+}
+
+#main #letter .firmas .firma .nombre {
+    text-align: center;
+}
+
+#main #letter .firmas .firma .cargo {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+#main #letter .upper {
+    text-transform: uppercase;
+}

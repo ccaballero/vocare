@@ -11,9 +11,17 @@ class cartasActions extends PlantillasDefault
             'edit' => 'Editar documento',
         ),
         'flash' => array(
-            'new' => 'Documento agregada exitosamente',
-            'edit' => 'Documento editada exitosamente',
-            'delete' => 'Documento eliminada exitosamente',
+            'new' => 'Documento agregado exitosamente',
+            'edit' => 'Documento editado exitosamente',
+            'delete' => 'Documento eliminado exitosamente',
         ),
     );
+
+    public function executeShow(sfWebRequest $request) {
+        $this->object = $this->getRoute()->getObject();
+        $this->redaccion = $this->object->getRedaccion();
+        $this->taxonomy = $this->object->getTaxonomy();
+
+        $this->forward404Unless($this->object);
+    }
 }
