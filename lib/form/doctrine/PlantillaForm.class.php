@@ -1,9 +1,10 @@
 <?php
 
-class CartaForm extends BaseCartaForm
+class PlantillaForm extends BasePlantillaForm
 {
     public function configure() {
         unset(
+            $this['types'],
             $this['created_at'],
             $this['updated_at']
         );

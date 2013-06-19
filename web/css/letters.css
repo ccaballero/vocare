@@ -7,10 +7,30 @@
     margin-left: 70px;
     margin-bottom: 20px;
     box-shadow: 1px 1px 4px #000000;
+    overflow: auto;
+}
+
+#main #letter h1 {
+    font-size: 16px;
+    text-align: center;
+}
+
+#main #letter h2 {
+    font-size: 14px;
+}
+
+#main #letter h3,
+#main #letter h4 {
+    font-size: 12px;
 }
 
 #main #letter p {
     line-height: 1.5em;
+}
+
+#main #letter table {
+    max-width: 500px;
+    overflow: hidden;
 }
 
 #main #letter .title {

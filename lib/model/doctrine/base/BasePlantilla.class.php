@@ -30,7 +30,7 @@ abstract class BasePlantilla extends sfDoctrineRecord
 {
     public function setTableDefinition()
     {
-        $this->setTableName('carta');
+        $this->setTableName('plantilla');
         $this->hasColumn('id', 'integer', 4, array(
              'type' => 'integer',
              'fixed' => 0,

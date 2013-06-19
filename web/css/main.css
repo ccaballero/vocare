@@ -284,7 +284,12 @@ span {
     margin-left: 210px;
 }
 
-#main form p.submit input[type="submit"] {
+#main form select {
+    margin-right: 8px;
+}
+
+/*#main form p.submit input[type="submit"] {*/
+#main form input[type="submit"] {
     border: none;
     background-color: #1A243B;
     color: #ffffff;

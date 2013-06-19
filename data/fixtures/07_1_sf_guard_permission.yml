@@ -64,19 +64,34 @@ sfGuardPermission:
   cargos_edit:
     name: cargos_edit
     description: Editar la información de un cargo y su asignación.
-  # permissions in cartas
-  cartas_list:
-    name: cartas_list
-    description: Listar los cartas disponibles para la fijación e impresión.
-  cartas_view:
-    name: cartas_view
-    description: Ver la información de una carta.
-  cartas_edit:
-    name: cartas_edit
-    description: Editar la informacion de una carta.
-  cartas_create:
-    name: cartas_create
-    description: Crear una nueva carta.
-  cartas_delete:
-    name: cartas_delete
-    description: Eliminar una carta.
+  # permissions in documentation
+  documentacion_list:
+    name: documentacion_list
+    description: Listar los documentos disponibles para la fijación e impresión.
+  documentacion_view:
+    name: documentacion_view
+    description: Ver la información de una documento.
+  documentacion_edit:
+    name: documentacion_edit
+    description: Editar la informacion de un documento.
+  documentacion_create:
+    name: documentacion_create
+    description: Crear un nuevo documento.
+  documentacion_delete:
+    name: documentacion_delete
+    description: Eliminar un documento.
+  documentacion_plantilla_list:
+    name: documentacion_plantilla_list
+    description: Listar las plantillas de documentación disponibles.
+  documentacion_plantilla_view:
+    name: documentacion_plantilla_view
+    description: Ver la información de una plantilla de documentación.
+  documentacion_plantilla_edit:
+    name: documentacion_plantilla_edit
+    description: Editar la información de una plantilla de documentación.
+  documentacion_plantilla_create:
+    name: documentacion_plantilla_create
+    description: Crear una nueva plantilla de documentación.
+  documentacion_plantilla_delete:
+    name: documentacion_plantilla_delete
+    description: Eliminar una plantilla de documentación.

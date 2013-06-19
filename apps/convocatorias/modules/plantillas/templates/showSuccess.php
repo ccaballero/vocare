@@ -6,9 +6,12 @@
 
 <div class="right widget">
     <h1>Variables establecidas</h1>
-    <?php echo stdClassPrint($sf_data->getRaw('taxonomy')) ?>
+    <?php echo renderFormTypes(
+        $sf_data->getRaw('taxonomy'),
+        url_for('plantillas_types', array('id' => $object->getId()))
+    ) ?>
 </div>
 
 <div class="clear"></div>
 
-[<?php echo link_to('Volver a la lista', url_for('cartas')) ?>]
+[<?php echo link_to('Volver a la lista', url_for('plantillas')) ?>]

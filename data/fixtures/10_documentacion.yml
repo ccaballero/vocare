@@ -1,4 +1,4 @@
-Carta:
+Plantilla:
   tribunal_meritos:
     nombre: Tribunal para la Revisión de Méritos
     redaccion: |
@@ -40,6 +40,20 @@ Carta:
       </div>
       <br />
       <p>Cc.: Arch.</p>
+    types: |
+      {
+          "fecha_carta":"date",
+          "saludo":"string",
+          "destinatarios": {
+              "nombre":"string",
+              "cargo":"string"
+          },
+          "titulo":"string",
+          "fecha_realizacion":"date",
+          "hora_entrega":"time",
+          "remitente_nombre":"string",
+          "remitente_cargo":"string"
+      }
   tribunal_conocimientos:
     nombre: Tribunal de Conocimientos
     redaccion: |
@@ -81,3 +95,19 @@ Carta:
       </div>
       <br />
       <p>Cc.: Arch.</p>
+    types: |
+      {
+          "fecha_carta":"date",
+          "saludo":"string",
+          "destinatarios": {
+              "nombre":"string",
+              "cargo":"string"
+          },
+          "titulo":"string",
+          "tematica":"string",
+          "fecha_material":"date",
+          "fecha_examen":"date",
+          "hora_entrega":"time",
+          "remitente_nombre":"string",
+          "remitente_cargo":"string"
+      }

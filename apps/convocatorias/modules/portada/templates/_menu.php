@@ -21,7 +21,7 @@
 
 <?php if ($sf_user->hasCredential('documentacion_list')): ?>
     <li><?php echo link_to(
-            __('Documentation'), '@cartas', array('accesskey' => '4')
+            __('Documentation'), '@documentacion', array('accesskey' => '4')
             ) ?></li>
 <?php endif; ?>
 

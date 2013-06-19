@@ -1,7 +1,7 @@
 Plantilla:
   actAs: [Timestampable]
   connection: doctrine
-  tableName: carta
+  tableName: plantilla
   columns:
     id:
       type: integer(4)
@@ -24,10 +24,10 @@ Plantilla:
       notnull: true
       default: ''
 
-Carta:
+Documentacion:
   actAs: [Timestampable]
   connection: doctrine
-  tableName: carta
+  tableName: documentacion
   columns:
     id:
       type: integer(4)
@@ -40,6 +40,11 @@ Carta:
       fixed: false
       notnull: true
     redaccion:
+      type: clob
+      fixed: false
+      notnull: true
+      default: ''
+    vars:
       type: clob
       fixed: false
       notnull: true

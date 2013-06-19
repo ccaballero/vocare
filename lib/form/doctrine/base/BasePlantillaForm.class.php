@@ -1,16 +1,16 @@
 <?php
 
 /**
- * Carta form base class.
+ * Plantilla form base class.
  *
- * @method Carta getObject() Returns the current form's model object
+ * @method Plantilla getObject() Returns the current form's model object
  *
  * @package    .
  * @subpackage form
  * @author     Your name here
  * @version    SVN: $Id: sfDoctrineFormGeneratedTemplate.php 29553 2010-05-20 14:33:00Z Kris.Wallsmith $
  */
-abstract class BaseCartaForm extends BaseFormDoctrine
+abstract class BasePlantillaForm extends BaseFormDoctrine
 {
   public function setup()
   {
@@ -18,6 +18,7 @@ abstract class BaseCartaForm extends BaseFormDoctrine
       'id'         => new sfWidgetFormInputHidden(),
       'nombre'     => new sfWidgetFormInputText(),
       'redaccion'  => new sfWidgetFormTextarea(),
+      'types'      => new sfWidgetFormTextarea(),
       'created_at' => new sfWidgetFormDateTime(),
       'updated_at' => new sfWidgetFormDateTime(),
     ));
@@ -26,11 +27,12 @@ abstract class BaseCartaForm extends BaseFormDoctrine
       'id'         => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
       'nombre'     => new sfValidatorString(array('max_length' => 128)),
       'redaccion'  => new sfValidatorString(array('required' => false)),
+      'types'      => new sfValidatorString(array('required' => false)),
       'created_at' => new sfValidatorDateTime(),
       'updated_at' => new sfValidatorDateTime(),
     ));
 
-    $this->widgetSchema->setNameFormat('carta[%s]');
+    $this->widgetSchema->setNameFormat('plantilla[%s]');
 
     $this->errorSchema = new sfValidatorErrorSchema($this->validatorSchema);
 
@@ -41,7 +43,7 @@ abstract class BaseCartaForm extends BaseFormDoctrine
 
   public function getModelName()
   {
-    return 'Carta';
+    return 'Plantilla';
   }
 
 }
