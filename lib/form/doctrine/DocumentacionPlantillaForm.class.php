@@ -1,6 +1,6 @@
 <?php
 
-class PlantillaForm extends BasePlantillaForm
+class DocumentacionPlantillaForm extends BaseDocumentacionPlantillaForm
 {
     public function configure() {
         unset(

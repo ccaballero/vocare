@@ -1,6 +1,6 @@
 <?php
 
-class Plantilla extends BasePlantilla
+class DocumentacionPlantilla extends BaseDocumentacionPlantilla
 {
     public function getTaxonomy() {
         $tpl = new myTemplate();

@@ -2,8 +2,8 @@
 
 class documentacionActions extends PlantillasDefault
 {
-    public $_table = 'documentacion';
-    public $_form = 'DocumentacionForm';
+    public $_table = 'DocumentacionVolumen';
+    public $_form = 'DocumentacionVolumenForm';
     public $_route_list = 'documentacion';
     public $_messages = array(
         'form' => array(

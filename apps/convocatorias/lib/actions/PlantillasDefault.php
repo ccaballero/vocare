@@ -27,8 +27,9 @@ class PlantillasDefault extends sfActions
     }
 
     public function executeEdit() {
+        $this->object = $this->getRoute()->getObject();
         $this->title = $this->_messages['form']['edit'];
-        $this->form = new $this->_form($this->getRoute()->getObject());
+        $this->form = new $this->_form($this->object);
 
         $this->setTemplate('form');
     }

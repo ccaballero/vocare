@@ -116,7 +116,7 @@ documentacion:
 plantillas:
   class: sfDoctrineRouteCollection
   options:
-    model:  Plantilla
+    model:  DocumentacionPlantilla
     object_actions:
       clonar: [post]
       types: [post]

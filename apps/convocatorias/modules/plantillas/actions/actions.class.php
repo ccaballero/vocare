@@ -2,8 +2,8 @@
 
 class plantillasActions extends PlantillasDefault
 {
-    public $_table = 'plantilla';
-    public $_form = 'PlantillaForm';
+    public $_table = 'DocumentacionPlantilla';
+    public $_form = 'DocumentacionPlantillaForm';
     public $_route_list = 'plantillas';
     public $_messages = array(
         'form' => array(
@@ -28,7 +28,7 @@ class plantillasActions extends PlantillasDefault
     public function executeClonar(sfWebRequest $request) {
         $object = $this->getRoute()->getObject();
 
-        $plantilla = new Plantilla();
+        $plantilla = new DocumentacionPlantilla();
         $plantilla->nombre = $object->getNombre() . ' (duplicado)';
         $plantilla->redaccion = $object->getRedaccion();
         $plantilla->types = $object->getTypes();
@@ -40,12 +40,14 @@ class plantillasActions extends PlantillasDefault
         $this->redirect($this->_route_list);
     }
 
-    public function executeTypes() {
+    public function executeTypes(sfWebRequest $request) {
         $object = $this->getRoute()->getObject();
         $this->forward404Unless($object);
 
-//        $cargos = $request->getParameter('cargos');
-        
+        $types = $request->getParameter('types');
+        $object->types = json_encode($types);
+        $object->save();
+
         $this->getUser()->setFlash('success', 'Los tipos de datos han sido '
                 . 'modificados exitosamente');
 

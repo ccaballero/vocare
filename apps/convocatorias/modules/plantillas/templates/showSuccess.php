@@ -1,5 +1,9 @@
 <h1><?php echo $object->getNombre() ?></h1>
 
+<p>[<?php echo link_to('Editar redacción',
+    url_for('plantillas_edit', array('id' => $object->getId()))
+) ?>]</p>
+
 <div id="letter">
     <?php echo specialEscape($sf_data->getRaw('redaccion')) ?>
 </div>
@@ -14,4 +18,4 @@
 
 <div class="clear"></div>
 
-[<?php echo link_to('Volver a la lista', url_for('plantillas')) ?>]
+<p>[<?php echo link_to('Volver a la lista', url_for('plantillas')) ?>]</p>

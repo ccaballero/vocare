@@ -1,7 +1,7 @@
-Plantilla:
+DocumentacionPlantilla:
   actAs: [Timestampable]
   connection: doctrine
-  tableName: plantilla
+  tableName: documentacion_plantilla
   columns:
     id:
       type: integer(4)
@@ -23,6 +23,38 @@ Plantilla:
       fixed: false
       notnull: true
       default: ''
+  relations:
+    Volumenes:
+      class: DocumentacionVolumen
+      local: id
+      foreign: plantilla_id
+      type: many
+
+DocumentacionVolumen:
+  actAs: [Timestampable]
+  connection: doctrine
+  tableName: documentacion_volumen
+  columns:
+    id:
+      type: integer(4)
+      fixed: false
+      unsigned: true
+      primary: true
+      autoincrement: true
+    plantilla_id:
+      type: integer(4)
+      fixed: false
+      unsigned: true
+  relations:
+    Plantilla:
+      local: plantilla_id
+      foreign: id
+      onDelete: cascade
+    Documentaciones:
+      class: Documentacion
+      local: id
+      foreign: volumen_id
+      type: many
 
 Documentacion:
   actAs: [Timestampable]
@@ -35,17 +67,25 @@ Documentacion:
       unsigned: true
       primary: true
       autoincrement: true
-    nombre:
-      type: string(128)
+    plantilla_id:
+      type: integer(4)
       fixed: false
-      notnull: true
-    redaccion:
-      type: clob
+      unsigned: true
+    volumen_id:
+      type: integer(4)
       fixed: false
-      notnull: true
-      default: ''
+      unsigned: true
     vars:
       type: clob
       fixed: false
       notnull: true
       default: ''
+  relations:
+    Plantilla:
+      local: plantilla_id
+      foreign: id
+      onDelete: cascade
+    Volumen:
+      local: volumen_id
+      foreign: id
+      onDelete: cascade

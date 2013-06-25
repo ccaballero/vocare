@@ -31,11 +31,6 @@
                     'Ver', 'documentacion_show', $documento
                 ) ?></li>
             <?php endif; ?>
-            <?php if ($sf_user->hasCredential('documentacion_edit')): ?>
-                <li><?php echo link_to(
-                    'Editar', 'documentacion_edit', $documento
-                ) ?></li>
-            <?php endif; ?>
             <?php if ($sf_user->hasCredential('documentacion_delete')): ?>
                 <li><?php echo link_to(
                     'Eliminar', 'documentacion_delete', $documento,

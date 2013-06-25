@@ -1,0 +1,30 @@
+DocumentacionVolumen:
+  volumen_1:
+    id: 1
+    plantilla_id: 1
+
+Documentacion:
+  carta_1:
+    id: 1
+    plantilla_id: 1
+    volumen_id: 1
+    vars: |
+        {
+            "fecha_carta":"22-11-2012",
+            "saludo":"Señores",
+            "destinatarios": [
+                {
+                    "nombre":"Lic. Vladimir Costas Jauregui",
+                    "cargo":"Docente Carrera de Informática"
+                },
+                {
+                    "nombre":"Univ. Héctor Cruz",
+                    "cargo":"Estudiante Ing. Informática"
+                },
+            },
+            "titulo":"Tribunal para la Revisión de Méritos",
+            "fecha_realizacion":"28 de noviembre",
+            "hora_entrega":"15:00",
+            "remitente_nombre":"Lic. Henrry Villarroel Tapia",
+            "remitente_cargo":"Jefe Dpto. Informática-Sistemas"
+        }

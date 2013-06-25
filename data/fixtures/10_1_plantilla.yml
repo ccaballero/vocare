@@ -1,5 +1,6 @@
-Plantilla:
+DocumentacionPlantilla:
   tribunal_meritos:
+    id: 1
     nombre: Tribunal para la Revisión de Méritos
     redaccion: |
       <p>Cochabamba, [[ fecha_carta ]]<br />
@@ -55,6 +56,7 @@ Plantilla:
           "remitente_cargo":"string"
       }
   tribunal_conocimientos:
+    id: 2
     nombre: Tribunal de Conocimientos
     redaccion: |
       <p>Cochabamba, [[ fecha_carta ]]<br />
