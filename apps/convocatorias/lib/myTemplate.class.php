@@ -128,7 +128,11 @@ class myTemplate
         $iterator = $object;
         foreach ($components as $component) {
             $method = 'get' . ucfirst($component);
-            $iterator = $iterator->$method();
+            if (method_exists($iterator, $method)) {
+                $iterator = $iterator->$method();
+            } else if (property_exists($iterator, $component)) {
+                $iterator = $iterator->$component;
+            }
         }
 
         return $iterator;

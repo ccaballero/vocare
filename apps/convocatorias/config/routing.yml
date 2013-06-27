@@ -109,7 +109,7 @@ cargos:
 documentacion:
   class: sfDoctrineRouteCollection
   options:
-    model: Documentacion
+    model: DocumentacionVolumen
 #    collection_actions:
 #      plantillas: [get]
 

@@ -17,6 +17,8 @@ abstract class BaseDocumentacionVolumenForm extends BaseFormDoctrine
     $this->setWidgets(array(
       'id'           => new sfWidgetFormInputHidden(),
       'plantilla_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('DocumentacionPlantilla'), 'add_empty' => true)),
+      'nombre'       => new sfWidgetFormInputText(),
+      'vars'         => new sfWidgetFormTextarea(),
       'created_at'   => new sfWidgetFormDateTime(),
       'updated_at'   => new sfWidgetFormDateTime(),
     ));
@@ -24,6 +26,8 @@ abstract class BaseDocumentacionVolumenForm extends BaseFormDoctrine
     $this->setValidators(array(
       'id'           => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
       'plantilla_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('DocumentacionPlantilla'), 'required' => false)),
+      'nombre'       => new sfValidatorString(array('max_length' => 128)),
+      'vars'         => new sfValidatorString(array('required' => false)),
       'created_at'   => new sfValidatorDateTime(),
       'updated_at'   => new sfValidatorDateTime(),
     ));

@@ -2,6 +2,16 @@ DocumentacionVolumen:
   volumen_1:
     id: 1
     plantilla_id: 1
+    nombre: 303-304 Tribunales de Méritos Lab INF-SIS
+    vars: |
+        {
+            "fecha_carta":"22-11-2012",
+            "saludo":"Se\u00f1ores",
+            "fecha_realizacion":"28 de noviembre",
+            "hora_entrega":"15:00",
+            "remitente_nombre":"Lic. Henrry Villarroel Tapia",
+            "remitente_cargo":"Jefe Dpto. Inform\u00e1tica-Sistemas"
+        }
 
 Documentacion:
   carta_1:
@@ -10,21 +20,31 @@ Documentacion:
     volumen_id: 1
     vars: |
         {
-            "fecha_carta":"22-11-2012",
-            "saludo":"Señores",
-            "destinatarios": [
+            "codigo":"303/2012",
+            "destinatarios":[
                 {
                     "nombre":"Lic. Vladimir Costas Jauregui",
-                    "cargo":"Docente Carrera de Informática"
-                },
+                    "cargo":"Docente Carrera de Inform\u00e1tica"
+                },{
+                    "nombre":"Univ. H\u00e9ctor Cruz",
+                    "cargo":"Estudiante Ing. Inform\u00e1tica"
+                }],
+            "carrera":"Ing. Inform\u00e1tica"
+        }
+  carta_2:
+    id: 2
+    plantilla_id: 1
+    volumen_id: 1
+    vars: |
+        {
+            "codigo":"304/2012",
+            "destinatarios":[
                 {
-                    "nombre":"Univ. Héctor Cruz",
-                    "cargo":"Estudiante Ing. Informática"
-                },
-            },
-            "titulo":"Tribunal para la Revisión de Méritos",
-            "fecha_realizacion":"28 de noviembre",
-            "hora_entrega":"15:00",
-            "remitente_nombre":"Lic. Henrry Villarroel Tapia",
-            "remitente_cargo":"Jefe Dpto. Informática-Sistemas"
+                    "nombre":"Ing. Jimmy Villarroel Novillo",
+                    "cargo":"Docente Carrera de Sistemas"
+                },{
+                    "nombre":"Univ. Elmer Vargas",
+                    "cargo":"Estudiante Ing. de Sistemas"
+                }],
+            "carrera":"Ing. Sistemas"
         }

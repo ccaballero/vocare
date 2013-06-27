@@ -24,7 +24,7 @@ DocumentacionPlantilla:
       notnull: true
       default: ''
   relations:
-    Volumenes:
+    DocumentacionVolumenes:
       class: DocumentacionVolumen
       local: id
       foreign: plantilla_id
@@ -45,8 +45,17 @@ DocumentacionVolumen:
       type: integer(4)
       fixed: false
       unsigned: true
+    nombre:
+      type: string(128)
+      fixed: false
+      notnull: true
+    vars:
+      type: clob
+      fixed: false
+      notnull: true
+      default: ''
   relations:
-    Plantilla:
+    DocumentacionPlantilla:
       local: plantilla_id
       foreign: id
       onDelete: cascade
@@ -81,11 +90,7 @@ Documentacion:
       notnull: true
       default: ''
   relations:
-    Plantilla:
-      local: plantilla_id
-      foreign: id
-      onDelete: cascade
-    Volumen:
+    DocumentacionVolumen:
       local: volumen_id
       foreign: id
       onDelete: cascade

@@ -1,6 +1,7 @@
 #main #letter {
     float: left;
     border: 1px solid #000000;
+    background-color: #ffffff;
     width: 500px;
     padding: 30px;
     margin-top: 10px;
@@ -26,6 +27,7 @@
 
 #main #letter p {
     line-height: 1.5em;
+    padding: 5px 0px;
 }
 
 #main #letter table {

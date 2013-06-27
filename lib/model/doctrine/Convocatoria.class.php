@@ -410,7 +410,7 @@ class Convocatoria extends BaseConvocatoria
     public function renderLastXHTML() {
         return $this->renderXHTML($this->getEnmienda($this->getMaxEnmienda()));
     }
-    
+
     public function renderXHTML($redaction) {
         $tpl = new myTemplate();
         if (!empty($redaction)) {

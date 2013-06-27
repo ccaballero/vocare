@@ -16,4 +16,12 @@ class documentacionActions extends PlantillasDefault
             'delete' => 'Documento eliminado exitosamente',
         ),
     );
+    
+    public function executeShow(\sfWebRequest $request) {
+        $volumen = $this->getRoute()->getObject();
+        $this->forward404Unless($volumen);
+        
+        $this->object = $volumen;
+        $this->previews = $volumen->renderXHTML();
+    }
 }

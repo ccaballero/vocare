@@ -9,17 +9,23 @@ Doctrine_Manager::getInstance()->bindComponent('DocumentacionVolumen', 'doctrine
  * 
  * @property integer $id
  * @property integer $plantilla_id
- * @property Doctrine_Collection $Documentaciones
+ * @property string $nombre
+ * @property clob $vars
  * @property DocumentacionPlantilla $DocumentacionPlantilla
+ * @property Doctrine_Collection $Documentaciones
  * 
  * @method integer                getId()                     Returns the current record's "id" value
  * @method integer                getPlantillaId()            Returns the current record's "plantilla_id" value
- * @method Doctrine_Collection    getDocumentaciones()        Returns the current record's "Documentaciones" collection
+ * @method string                 getNombre()                 Returns the current record's "nombre" value
+ * @method clob                   getVars()                   Returns the current record's "vars" value
  * @method DocumentacionPlantilla getDocumentacionPlantilla() Returns the current record's "DocumentacionPlantilla" value
+ * @method Doctrine_Collection    getDocumentaciones()        Returns the current record's "Documentaciones" collection
  * @method DocumentacionVolumen   setId()                     Sets the current record's "id" value
  * @method DocumentacionVolumen   setPlantillaId()            Sets the current record's "plantilla_id" value
- * @method DocumentacionVolumen   setDocumentaciones()        Sets the current record's "Documentaciones" collection
+ * @method DocumentacionVolumen   setNombre()                 Sets the current record's "nombre" value
+ * @method DocumentacionVolumen   setVars()                   Sets the current record's "vars" value
  * @method DocumentacionVolumen   setDocumentacionPlantilla() Sets the current record's "DocumentacionPlantilla" value
+ * @method DocumentacionVolumen   setDocumentaciones()        Sets the current record's "Documentaciones" collection
  * 
  * @package    .
  * @subpackage model
@@ -45,18 +51,31 @@ abstract class BaseDocumentacionVolumen extends sfDoctrineRecord
              'unsigned' => true,
              'length' => 4,
              ));
+        $this->hasColumn('nombre', 'string', 128, array(
+             'type' => 'string',
+             'fixed' => 0,
+             'notnull' => true,
+             'length' => 128,
+             ));
+        $this->hasColumn('vars', 'clob', null, array(
+             'type' => 'clob',
+             'fixed' => 0,
+             'notnull' => true,
+             'default' => '',
+             ));
     }
 
     public function setUp()
     {
         parent::setUp();
+        $this->hasOne('DocumentacionPlantilla', array(
+             'local' => 'plantilla_id',
+             'foreign' => 'id',
+             'onDelete' => 'cascade'));
+
         $this->hasMany('Documentacion as Documentaciones', array(
              'local' => 'id',
              'foreign' => 'volumen_id'));
-
-        $this->hasOne('DocumentacionPlantilla', array(
-             'local' => 'plantilla_id',
-             'foreign' => 'id'));
 
         $timestampable0 = new Doctrine_Template_Timestampable(array(
              ));
