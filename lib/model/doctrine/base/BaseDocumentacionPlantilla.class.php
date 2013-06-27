@@ -11,18 +11,34 @@ Doctrine_Manager::getInstance()->bindComponent('DocumentacionPlantilla', 'doctri
  * @property string $nombre
  * @property clob $redaccion
  * @property clob $types
- * @property Doctrine_Collection $DocumentacionVolumenes
+ * @property Doctrine_Collection $Documentacion
  * 
  * @method integer                getId()                     Returns the current record's "id" value
  * @method string                 getNombre()                 Returns the current record's "nombre" value
  * @method clob                   getRedaccion()              Returns the current record's "redaccion" value
  * @method clob                   getTypes()                  Returns the current record's "types" value
  * @method Doctrine_Collection    getDocumentacionVolumenes() Returns the current record's "DocumentacionVolumenes" collection
+ * @method Doctrine_Collection    getDocumentacion()          Returns the current record's "Documentacion" collection
  * @method DocumentacionPlantilla setId()                     Sets the current record's "id" value
  * @method DocumentacionPlantilla setNombre()                 Sets the current record's "nombre" value
  * @method DocumentacionPlantilla setRedaccion()              Sets the current record's "redaccion" value
  * @method DocumentacionPlantilla setTypes()                  Sets the current record's "types" value
  * @method DocumentacionPlantilla setDocumentacionVolumenes() Sets the current record's "DocumentacionVolumenes" collection
+ * @method DocumentacionPlantilla setDocumentacion()          Sets the current record's "Documentacion" collectionVolumenes
+ * @property Doctrine_Collection $Documentacion
+ * 
+ * @method integer                getId()                     Returns the current record's "id" value
+ * @method string                 getNombre()                 Returns the current record's "nombre" value
+ * @method clob                   getRedaccion()              Returns the current record's "redaccion" value
+ * @method clob                   getTypes()                  Returns the current record's "types" value
+ * @method Doctrine_Collection    getDocumentacionVolumenes() Returns the current record's "DocumentacionVolumenes" collection
+ * @method Doctrine_Collection    getDocumentacion()          Returns the current record's "Documentacion" collection
+ * @method DocumentacionPlantilla setId()                     Sets the current record's "id" value
+ * @method DocumentacionPlantilla setNombre()                 Sets the current record's "nombre" value
+ * @method DocumentacionPlantilla setRedaccion()              Sets the current record's "redaccion" value
+ * @method DocumentacionPlantilla setTypes()                  Sets the current record's "types" value
+ * @method DocumentacionPlantilla setDocumentacionVolumenes() Sets the current record's "DocumentacionVolumenes" collection
+ * @method DocumentacionPlantilla setDocumentacion()          Sets the current record's "Documentacion" collection
  * 
  * @package    .
  * @subpackage model
@@ -66,6 +82,10 @@ abstract class BaseDocumentacionPlantilla extends sfDoctrineRecord
     {
         parent::setUp();
         $this->hasMany('DocumentacionVolumen as DocumentacionVolumenes', array(
+             'local' => 'id',
+             'foreign' => 'plantilla_id'));
+
+        $this->hasMany('Documentacion', array(
              'local' => 'id',
              'foreign' => 'plantilla_id'));
 

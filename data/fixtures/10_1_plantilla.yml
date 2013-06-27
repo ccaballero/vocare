@@ -1,6 +1,5 @@
 DocumentacionPlantilla:
   tribunal_meritos:
-    id: 1
     nombre: Tribunal para la Revisión de Méritos
     redaccion: |
       <p>Cochabamba, [[ fecha_carta ]]<br />
@@ -57,24 +56,21 @@ DocumentacionPlantilla:
           "remitente_cargo":"string"
       }
   tribunal_conocimientos:
-    id: 2
-    nombre: Tribunal de Conocimientos
+    nombre: Tribunal de Conocimiento
     redaccion: |
       <p>Cochabamba, [[ fecha_carta ]]<br />
-      <strong>DPTO. INF-SIS 311/2012</strong></p>
+      <strong>DPTO. INF-SIS [[ codigo ]] </strong></p>
       <br />
       <br />
       <br />
       <br />
-      <p><strong>[[ saludo ]]:</strong><br />
-      [[ foreach destinatarios ]]
-      [[ nombre ]]<br />
-      <strong class="upper">[[ cargo ]]</strong><br />
-      [[ endforeach ]]
+      <p><strong>Señor:</strong><br />
+      [[ destinatario_nombre ]]<br />
+      <strong class="upper">[[ destinatario_cargo ]]</strong><br />
       Presente.-</p>
       <br />
       <br />
-      <p class="title"><strong>Ref.: [[ titulo ]]</strong></p>
+      <p class="title"><strong>Ref.: Tribunal de Conocimiento</strong></p>
       <br />
       <p>De mi consideración:</p>
       <p>Por la presente comunico a usted que ha sido designado como Tribunal de
@@ -84,9 +80,9 @@ DocumentacionPlantilla:
       Laboratorio de Computación, de Mantenimiento y Desarrollo del Departamento
       de Informática – Sistemas, por lo cual solicito hacer llegar hasta el día
       [[ fecha_material ]] el contenido de la materia a evaluarse y presentarse
-      el día [[ fecha_examen ]] a horas [[ hora_examen ]] en el laboratorio 2 del
-      departamento, las notas deberán ser entregadas 24 horas después del
-      examen.</p>
+      el día [[ fecha_examen ]] a horas [[ hora_examen ]] en el laboratorio
+      [[ numero_laboratorio ]] del departamento, las notas deberán ser
+      entregadas 24 horas después del examen.</p>
       <p>Sin otro particular y agradeciendo su cooperación me despido, saludando
       a usted.</p>
       <p>Atentamente,</p>
@@ -101,16 +97,14 @@ DocumentacionPlantilla:
     types: |
       {
           "fecha_carta":"date",
-          "saludo":"string",
-          "destinatarios": {
-              "nombre":"string",
-              "cargo":"string"
-          },
-          "titulo":"string",
+          "codigo":"string"
+          "destinatario_nombre":"string",
+          "destinatario_cargo":"string",
           "tematica":"string",
           "fecha_material":"date",
           "fecha_examen":"date",
-          "hora_entrega":"time",
+          "hora_examen":"time",
+          "numero_laboratorio":"integer"
           "remitente_nombre":"string",
           "remitente_cargo":"string"
       }

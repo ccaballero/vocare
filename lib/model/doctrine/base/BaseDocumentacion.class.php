@@ -12,17 +12,20 @@ Doctrine_Manager::getInstance()->bindComponent('Documentacion', 'doctrine');
  * @property integer $volumen_id
  * @property clob $vars
  * @property DocumentacionVolumen $DocumentacionVolumen
+ * @property DocumentacionPlantilla $DocumentacionPlantilla
  * 
- * @method integer              getId()                   Returns the current record's "id" value
- * @method integer              getPlantillaId()          Returns the current record's "plantilla_id" value
- * @method integer              getVolumenId()            Returns the current record's "volumen_id" value
- * @method clob                 getVars()                 Returns the current record's "vars" value
- * @method DocumentacionVolumen getDocumentacionVolumen() Returns the current record's "DocumentacionVolumen" value
- * @method Documentacion        setId()                   Sets the current record's "id" value
- * @method Documentacion        setPlantillaId()          Sets the current record's "plantilla_id" value
- * @method Documentacion        setVolumenId()            Sets the current record's "volumen_id" value
- * @method Documentacion        setVars()                 Sets the current record's "vars" value
- * @method Documentacion        setDocumentacionVolumen() Sets the current record's "DocumentacionVolumen" value
+ * @method integer                getId()                     Returns the current record's "id" value
+ * @method integer                getPlantillaId()            Returns the current record's "plantilla_id" value
+ * @method integer                getVolumenId()              Returns the current record's "volumen_id" value
+ * @method clob                   getVars()                   Returns the current record's "vars" value
+ * @method DocumentacionVolumen   getDocumentacionVolumen()   Returns the current record's "DocumentacionVolumen" value
+ * @method DocumentacionPlantilla getDocumentacionPlantilla() Returns the current record's "DocumentacionPlantilla" value
+ * @method Documentacion          setId()                     Sets the current record's "id" value
+ * @method Documentacion          setPlantillaId()            Sets the current record's "plantilla_id" value
+ * @method Documentacion          setVolumenId()              Sets the current record's "volumen_id" value
+ * @method Documentacion          setVars()                   Sets the current record's "vars" value
+ * @method Documentacion          setDocumentacionVolumen()   Sets the current record's "DocumentacionVolumen" value
+ * @method Documentacion          setDocumentacionPlantilla() Sets the current record's "DocumentacionPlantilla" value
  * 
  * @package    .
  * @subpackage model
@@ -67,6 +70,11 @@ abstract class BaseDocumentacion extends sfDoctrineRecord
         parent::setUp();
         $this->hasOne('DocumentacionVolumen', array(
              'local' => 'volumen_id',
+             'foreign' => 'id',
+             'onDelete' => 'cascade'));
+
+        $this->hasOne('DocumentacionPlantilla', array(
+             'local' => 'plantilla_id',
              'foreign' => 'id',
              'onDelete' => 'cascade'));
 

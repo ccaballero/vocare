@@ -94,3 +94,7 @@ Documentacion:
       local: volumen_id
       foreign: id
       onDelete: cascade
+    DocumentacionPlantilla:
+      local: plantilla_id
+      foreign: id
+      onDelete: cascade
