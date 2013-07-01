@@ -24,5 +24,7 @@ class documentacionActions extends PlantillasDefault
         $this->object = $volumen;
         $this->template = $volumen->getDocumentacionPlantilla();
         $this->previews = $volumen->renderXHTML();
+        
+        $this->tpl = $this->template->getTaxonomy();
     }
 }

@@ -19,9 +19,9 @@
             <div class="clear"></div>
         </div>
     	<div id="taxonomy" class="tab_contents">
-            <pre>
-                <?php print_r($template->getTaxonomy()) ?>
-            </pre>
+            <form>
+                <?php echo std_render($sf_data->getRaw('tpl')) ?>
+            </form>
         </div>
     	<div id="editor" class="tab_contents">
             <a name="editor"></a>

@@ -37,6 +37,7 @@ all:
       - ImageState
       - SpecialEscape
       - StdClassPrint
+      - StdRender
     #Form helper is out!.
     i18n: true
     default_culture: es_BO

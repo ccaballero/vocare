@@ -4,11 +4,11 @@
 </p>
 <p>
     <label>Variables globales:</label>
-    <textarea><?php echo $object->getVars() ?></textarea>
+    <?php echo std_render($object->getObjectVars()) ?>
 </p>
 <?php foreach ($object->getDocumentaciones() as $i => $documentacion): ?>
-<p>
-    <label>documentacion #<?php echo $i ?></label>
-    <textarea><?php echo $documentacion->getVars() ?></textarea>
-</p>
+    <p>
+        <label>Documentacion #<?php echo $i ?></label>
+        <?php echo std_render(json_decode($documentacion->getVars())) ?>
+    </p>
 <?php endforeach; ?>
