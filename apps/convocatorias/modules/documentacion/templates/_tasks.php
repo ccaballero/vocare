@@ -1,3 +1,4 @@
+<?php if (count($sf_data->getRaw('previews')) <> 0): ?>
 <div class="buttons">
     <ul>
         <li>
@@ -33,3 +34,4 @@
     </ul>
 </div>
 <div class="clear"></div>
+<?php endif; ?>

@@ -7,13 +7,13 @@ class documentacionActions extends PlantillasDefault
     public $_route_list = 'documentacion';
     public $_messages = array(
         'form' => array(
-            'new' => 'Agregar documento',
-            'edit' => 'Editar documento',
+            'new' => 'Agregar volumen de documentación',
+            'edit' => 'Editar propiedades del volumen',
         ),
         'flash' => array(
-            'new' => 'Documento agregado exitosamente',
-            'edit' => 'Documento editado exitosamente',
-            'delete' => 'Documento eliminado exitosamente',
+            'new' => 'Volumen agregado exitosamente',
+            'edit' => 'Volumen editado exitosamente',
+            'delete' => 'Volumen eliminado exitosamente',
         ),
     );
     
@@ -22,6 +22,7 @@ class documentacionActions extends PlantillasDefault
         $this->forward404Unless($volumen);
         
         $this->object = $volumen;
+        $this->template = $volumen->getDocumentacionPlantilla();
         $this->previews = $volumen->renderXHTML();
     }
 }

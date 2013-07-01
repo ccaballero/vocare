@@ -45,6 +45,7 @@ DocumentacionVolumen:
       type: integer(4)
       fixed: false
       unsigned: true
+      notnull: true
     nombre:
       type: string(128)
       fixed: false

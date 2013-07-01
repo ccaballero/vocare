@@ -49,6 +49,7 @@ abstract class BaseDocumentacionVolumen extends sfDoctrineRecord
              'type' => 'integer',
              'fixed' => 0,
              'unsigned' => true,
+             'notnull' => true,
              'length' => 4,
              ));
         $this->hasColumn('nombre', 'string', 128, array(

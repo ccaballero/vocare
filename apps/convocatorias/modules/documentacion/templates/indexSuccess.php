@@ -1,9 +1,29 @@
 <h1>Gestión de documentación</h1>
+<p>Aqui se encuentran concentradas las funciones necesarias para la generación
+automatica de grandes volumenes de documentación. Se requiere entender dos
+conceptos para manejar satisfactoriamente esta sección del sistema:</p>
+<dl>
+    <dt><strong>Plantilla de documentación</strong></dt>
+    <dd>
+        <p>Es un documento patrón, sobre el que pueden establecerse un conjunto
+        de partes que son cambiantes, pero que comparten el mismo diseño,
+        patrones, estilos, y contenido estatico.</p>
+    </dd>
+    <dt><strong>Volumen de documentación</strong></dt>
+    <dd>
+        <p>Se refiere al conjunto de documentos que usan una misma plantilla
+        pero que definen concretamente aquellas partes dinamicas de la
+        plantilla.</p>
+        <p>Una vez usted crea un volumen de documentación, puede definir los
+        documentos concretos que usted necesite.</p>
+    </dd>
+</dl>
 
+<h2>Volumenes de documentación</h2>
 <div class="tasks">
     <ul>
     <?php if ($sf_user->hasCredential('documentacion_create')): ?>
-        <li><?php echo link_to('Crear nueva documentación',
+        <li><?php echo link_to('Crear nuevo volumen de documentación',
             url_for('documentacion_new'), array('accesskey' => 'n')
         ) ?></li>
     <?php if ($sf_user->hasCredential('documentacion_plantilla_list')): ?>
@@ -28,7 +48,7 @@
             <ul>
             <?php if ($sf_user->hasCredential('documentacion_view')): ?>
                 <li><?php echo link_to(
-                    'Ver', 'documentacion_show', $documento
+                    'Examinar', 'documentacion_show', $documento
                 ) ?></li>
             <?php endif; ?>
             <?php if ($sf_user->hasCredential('documentacion_delete')): ?>

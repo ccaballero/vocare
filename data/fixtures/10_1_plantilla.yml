@@ -42,7 +42,7 @@ DocumentacionPlantilla:
       <p>Cc.: Arch.</p>
     types: |
       {
-          "fecha_carta":"date",
+          "fecha_carta":"string",
           "codigo":"string",
           "saludo":"string",
           "destinatarios": {
@@ -50,8 +50,8 @@ DocumentacionPlantilla:
               "cargo":"string"
           },
           "carrera":"string",
-          "fecha_realizacion":"date",
-          "hora_entrega":"time",
+          "fecha_realizacion":"string",
+          "hora_entrega":"string",
           "remitente_nombre":"string",
           "remitente_cargo":"string"
       }
@@ -96,15 +96,15 @@ DocumentacionPlantilla:
       <p>Cc.: Arch.</p>
     types: |
       {
-          "fecha_carta":"date",
+          "fecha_carta":"string",
           "codigo":"string"
           "destinatario_nombre":"string",
           "destinatario_cargo":"string",
           "tematica":"string",
-          "fecha_material":"date",
-          "fecha_examen":"date",
-          "hora_examen":"time",
-          "numero_laboratorio":"integer"
+          "fecha_material":"string",
+          "fecha_examen":"strings",
+          "hora_examen":"string",
+          "numero_laboratorio":"string"
           "remitente_nombre":"string",
           "remitente_cargo":"string"
       }

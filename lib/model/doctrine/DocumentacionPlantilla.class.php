@@ -2,6 +2,10 @@
 
 class DocumentacionPlantilla extends BaseDocumentacionPlantilla
 {
+    public function __toString() {
+        return $this->getNombre();
+    }
+
     public function getTaxonomy() {
         $tpl = new myTemplate();
 

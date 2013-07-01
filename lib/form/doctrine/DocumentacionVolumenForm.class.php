@@ -1,16 +1,23 @@
 <?php
 
-/**
- * DocumentacionVolumen form.
- *
- * @package    .
- * @subpackage form
- * @author     Your name here
- * @version    SVN: $Id: sfDoctrineFormTemplate.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
- */
 class DocumentacionVolumenForm extends BaseDocumentacionVolumenForm
 {
-  public function configure()
-  {
-  }
+    public function configure() {
+        unset(
+            $this['vars'],
+            $this['created_at'],
+            $this['updated_at']
+        );
+
+        $this->widgetSchema->setLabels(array(
+            'plantilla_id' => 'Plantilla (*):',
+            'nombre' => 'Nombre (*):',
+        ));
+
+        $this->widgetSchema['nombre']->setAttribute('class', 'focus');
+
+  	$decorator = new FormDecoratorDefault($this->getWidgetSchema());
+  	$this->widgetSchema->addFormFormatter('custom', $decorator);
+  	$this->widgetSchema->setFormFormatterName('custom');
+    }
 }
