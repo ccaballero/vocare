@@ -19,34 +19,30 @@ class myTemplate
     }
 
     public function getTaxonomy() {
-        // preproceso el archivo para generar los foreach
         $parts = preg_split('/(\[\[ | \]\])/', $this->template);
-        $structure = new StdClass();
-
-        $foreach_flag = false;
-        $foreach_element = '';
-        $foreach_components = new StdClass();
+        $root = new StdClass();
+        
+        $components = array($root);
+        $last_component = $root;
 
         for ($i = 1; $i < count($parts); $i+=2) {
             $tag = $parts[$i];
 
             if (preg_match('/foreach [a-z]/', $tag)) {
-                $foreach_flag = true;
-                $foreach_element = substr($tag, 8);
-                $foreach_components = new StdClass();
+                $element = substr($tag, 8);
+                $new_component = new StdClass();
+                $components[] = $new_component;
+                $last_component->$element = $new_component;
+                $last_component = $new_component;
             } else if (preg_match('/endforeach/', $tag)) {
-                $foreach_flag = false;
-                $structure->$foreach_element = $foreach_components;
+                array_pop($components);
+                $last_component = end($components);
             } else {
-                if ($foreach_flag) {
-                    $foreach_components->$tag = '';
-                } else {
-                    $structure->$tag = '';
-                }
+                $last_component->$tag = '';
             }
         }
 
-        return $structure;
+        return $root;
     }
 
     public function render() {

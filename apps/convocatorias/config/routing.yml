@@ -110,8 +110,6 @@ documentacion:
   class: sfDoctrineRouteCollection
   options:
     model: DocumentacionVolumen
-#    collection_actions:
-#      plantillas: [get]
 
 plantillas:
   class: sfDoctrineRouteCollection
@@ -119,7 +117,6 @@ plantillas:
     model:  DocumentacionPlantilla
     object_actions:
       clonar: [post]
-      types: [post]
 
 homepage:
   url: /
@@ -134,3 +131,6 @@ default_index:
 
 default:
   url: /:module/:action/*
+
+#    collection_actions:
+#      plantillas: [get]

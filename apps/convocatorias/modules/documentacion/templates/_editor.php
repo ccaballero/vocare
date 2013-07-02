@@ -4,11 +4,17 @@
 </p>
 <p>
     <label>Variables globales:</label>
-    <?php echo std_render($object->getObjectVars()) ?>
+    <?php include_partial('documentacion/escape', array(
+        'tpl' => $tpl,
+        'vars' => $object->getObjectVars()
+    )) ?>
 </p>
 <?php foreach ($object->getDocumentaciones() as $i => $documentacion): ?>
     <p>
         <label>Documentacion #<?php echo $i ?></label>
-        <?php echo std_render(json_decode($documentacion->getVars())) ?>
+        <?php include_partial('documentacion/escape', array(
+            'tpl' => $tpl,
+            'vars' => $documentacion->getObjectVars()
+        )) ?>
     </p>
 <?php endforeach; ?>

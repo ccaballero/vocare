@@ -26,7 +26,7 @@ class DocumentacionVolumen extends BaseDocumentacionVolumen
 
         return $compile;
     }
-    
+
     public function getObjectVars() {
         return json_decode($this->getVars());
     }

@@ -8,11 +8,11 @@ potencia que se gana a la hora de automatizar.</p>
 <?php if ($sf_user->hasCredential('documentacion_plantilla_create')): ?>
 <div class="tasks">
     <ul>
-        <li><?php echo link_to('Volver a la lista de volumenes',
-            url_for('documentacion')
-        ) ?></li>
         <li><?php echo link_to('Crear nueva plantilla de documentación',
             url_for('plantillas_new'), array('accesskey' => 'n')
+        ) ?></li>
+        <li><?php echo link_to('Volver a la lista de volumenes',
+            url_for('documentacion')
         ) ?></li>
     </ul>
 </div>

@@ -39,19 +39,4 @@ class plantillasActions extends PlantillasDefault
 
         $this->redirect($this->_route_list);
     }
-
-    public function executeTypes(sfWebRequest $request) {
-        $object = $this->getRoute()->getObject();
-        $this->forward404Unless($object);
-
-        $types = $request->getParameter('types');
-        $object->types = json_encode($types);
-        $object->save();
-
-        $this->getUser()->setFlash('success', 'Los tipos de datos han sido '
-                . 'modificados exitosamente');
-
-        $this->redirect($this->generateUrl('plantillas_show', array(
-            'id' => $object->getId())));
-    }
 }

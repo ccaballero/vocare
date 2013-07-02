@@ -18,16 +18,12 @@
             )) ?>
             <div class="clear"></div>
         </div>
-    	<div id="taxonomy" class="tab_contents">
-            <form>
-                <?php echo std_render($sf_data->getRaw('tpl')) ?>
-            </form>
-        </div>
     	<div id="editor" class="tab_contents">
             <a name="editor"></a>
             <form>
                 <?php include_partial('documentacion/editor', array(
                     'object' => $object,
+                    'tpl' => $tpl,
                 )) ?>
                 <p class="submit"><input type="submit" value="Registrar" /></p>
             </form>
