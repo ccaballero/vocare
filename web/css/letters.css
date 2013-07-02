@@ -61,26 +61,3 @@
 #main #letter .upper {
     text-transform: uppercase;
 }
-
-#main table.stretch {
-    width: auto;
-}
-
-#main table.stretch {}
-#main table.stretch tr {}
-#main table.stretch tr th {
-    width: 100px;
-    text-align: left;
-    padding-right: 10px;
-    font-weight: normal;
-}
-
-#main table.stretch tr td {
-    margin: 0px;
-    padding: 0px;
-}
-#main table.stretch tr td input[type="text"] {
-    padding: 3px;
-    width: 250px;
-    border: 1px solid #DDDDDD;
-}

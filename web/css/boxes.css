@@ -1,0 +1,41 @@
+.box {
+    border-radius: 5px;
+    border: 1px solid #DDDDDD;
+    background-color: #F0F0F0;
+}
+
+.box .title {
+    background-color: #DDDDDD;
+    padding: 2px 5px 2px 5px;
+}
+
+.box .title span {
+    font-weight: normal;
+    font-size: 11px;
+}
+
+.box .title .controls {
+    float: right;
+}
+
+.box_controls ul,
+.box .title .controls ul {
+    list-style-type: none;
+}
+
+.box .title .controls ul li {
+    display: inline-block;
+}
+
+.box_controls ul li a,
+#main .box .title .controls ul li a {
+    padding: 0px 3px;
+    color: #000000;
+    font-weight: normal;
+    font-size: 11px;
+}
+
+.box_controls {
+    background-color: #DDDDDD;
+    margin: 2px 0px;
+}

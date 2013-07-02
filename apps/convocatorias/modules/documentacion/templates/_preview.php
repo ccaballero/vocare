@@ -5,5 +5,8 @@
 </div>
 <?php endforeach; ?>
 <?php else: ?>
-<p>No se definio ningun documento aun.</p>
+<p>
+    No se definio ningun documento aún.<br />
+    Soyez le premier!
+</p>
 <?php endif; ?>
