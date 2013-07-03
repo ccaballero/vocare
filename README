@@ -6,5 +6,81 @@ Sistema para la publicación de convocatorias.
 Instalación:
 ------------
 
-Paso 1: 
+Paso 01:
+Ir al sitio de instalación.
+    cd /donde/quiera/que/se/encuentre
 
+Paso 02:
+Ejecutar el script necesario para la creación del conector de base de datos.
+    sh shell/database.sh
+
+Paso 03:
+Editar el archivo de configuración de la base de datos.
+    vim config/databases.yml
+
+Paso 04:
+Construir el esquema de la base de datos.
+    sh shell/models.sh
+
+Paso 05:
+Rellenar la base de datos con la información de la base de datos.
+    sh shell/data.sh
+
+Paso 06:
+Crear la carpeta de log.
+    mkdir log
+
+Paso 07:
+Colocar los permisos a las carpetas.
+    chmod 777 log
+    chmod 777 data/convocatorias
+
+Paso 08:
+Registrar un dominio de prueba.
+
+Para Windows: c:/Windows/System32/drivers/boot/host <- comprobar, porque no recuerdo
+Para GNU/Linux: /etc/hosts
+
+Agregar una linea mas o menos parecida a esta:
+    127.0.0.1       vocare.local            vocare
+
+Paso 09:
+Comprobar la resolucion de dominio:
+    ping vocare.loca
+
+Ejemplo de una salida correcta:
+    $ ping vocare.local
+    PING vocare.local (127.0.0.1) 56(84) bytes of data.
+    64 bytes from localhost (127.0.0.1): icmp_seq=1 ttl=64 time=0.071 ms
+    64 bytes from localhost (127.0.0.1): icmp_seq=2 ttl=64 time=0.075 ms
+    64 bytes from localhost (127.0.0.1): icmp_seq=3 ttl=64 time=0.073 ms
+
+Paso 10:
+Crear el host virtual para la ejecución del programa en el servidor web,
+dependiendo del sistema operativo y la configuración de su servidor esto puede
+variar un monton:
+
+Ejemplo en Apache:
+    <IfDefine DEFAULT_VHOST>
+        <VirtualHost *:80>
+            ServerName vocare.local
+            DocumentRoot /var/www/vocare.local/web/
+
+            <Directory "/var/www/vocare.local/">
+                Options Indexes FollowSymLinks
+                AllowOverride all
+                Allow from all
+            </Directory>
+        </VirtualHost>
+    </IfDefine>
+
+* Se asume que se instalo el sistema en la carpeta /var/www/vocare.local.
+
+Paso 11:
+Si todingo esta correcto, probar en el navegador.
+    links2 http://vocare.local
+
+
+
+
+// configuracion de correo electronico
