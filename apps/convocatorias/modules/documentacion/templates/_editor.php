@@ -3,45 +3,27 @@
     <input type="text" name="volumen" value="<?php echo $object->getNombre() ?>" />
 </p>
 
-<?php /*
-<p>
-    <label>Variables globales:</label>
-    <?php include_partial('documentacion/escape', array(
-        'tpl' => $tpl,
-        'vars' => $object->getObjectVars()
-    )) ?>
-</p>
-<?php foreach ($object->getDocumentaciones() as $i => $documentacion): ?>
-    <p>
-        <label>Documentacion #<?php echo $i ?></label>
-        <?php include_partial('documentacion/escape', array(
-            'tpl' => $tpl,
-            'vars' => $documentacion->getObjectVars()
-        )) ?>
-    </p>
-<?php endforeach; ?>
-*/ ?>
+<script type="text/javascript">
+    var tpl = <?php echo $sf_data->getRaw('tpl') ?>;
+</script>
 
 <div class="box">
     <div class="title">
-        <span>Documento #1</span>
+        <span class="text">#1</span>
         <div class="controls">
             <ul>
-                <li><a href="">_</a></li>
-                <li><a href="">o</a></li>
-                <li><a href="">x</a></li>
+                <li><a class="shrink" href="">_</a></li>
+                <li><a class="restore" href="">o</a></li>
+                <li><a class="close" href="">x</a></li>
             </ul>
         </div>
     </div>
-    <table>
-        <tr>
-            <th>i:</th>
-            <td><input type="text" /></td>
-        </tr>
-    </table>
+    <div class="content">
+        <p><label>i:</label><input type="text" /></p>
+    </div>
 </div>
 <div class="box_controls">
     <ul>
-        <li><a href="">+</a></li>
+        <li><a class="add" href="">+</a></li>
     </ul>
 </div>

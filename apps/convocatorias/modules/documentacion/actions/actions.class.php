@@ -22,9 +22,8 @@ class documentacionActions extends PlantillasDefault
         $this->forward404Unless($volumen);
         
         $this->object = $volumen;
-        $this->template = $volumen->getDocumentacionPlantilla();
         $this->previews = $volumen->renderXHTML();
         
-        $this->tpl = $this->template->getTaxonomy();
+        $this->tpl = $volumen->getTpl();
     }
 }

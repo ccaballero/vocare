@@ -2,16 +2,23 @@
     border-radius: 5px;
     border: 1px solid #DDDDDD;
     background-color: #F0F0F0;
+    display: inline-block;
+    margin: 3px;
+    box-shadow: 1px 1px 3px #666666;
 }
 
 .box .title {
     background-color: #DDDDDD;
-    padding: 2px 5px 2px 5px;
+    padding: 2px 5px 2px 6px;
 }
 
 .box .title span {
     font-weight: normal;
     font-size: 11px;
+}
+
+.box .content {
+    padding-right: 2px;
 }
 
 .box .title .controls {
@@ -27,15 +34,39 @@
     display: inline-block;
 }
 
-.box_controls ul li a,
+.box_controls {
+    padding: 4px 0px 2px 2px;
+}
+
+#main .box_controls ul li a,
 #main .box .title .controls ul li a {
-    padding: 0px 3px;
+    padding: 0px 0px 0px 3px;
     color: #000000;
     font-weight: normal;
     font-size: 11px;
 }
 
-.box_controls {
+#main .box_controls ul li a {
     background-color: #DDDDDD;
-    margin: 2px 0px;
+    padding-right: 3px;
+    padding-bottom: 2px;
+    border-radius: 3px;
+    box-shadow: 1px 1px 3px #666666 inset;
+}
+
+#main form .box .content {
+    padding-top: 2px;
+}
+
+#main form .box .content p {
+    margin: 0px;
+    padding: 0px 0px 2px 0px;
+}
+
+#main form .box .content p input[type="text"] {
+    border: 1px solid #DDDDDD;
+}
+
+#main form>div.box {
+    width: 100%;
 }
