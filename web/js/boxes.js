@@ -38,7 +38,43 @@ function Box(taxonomy){
         }
         return this.tpl_box.format(render)
     }
+    this.behaviors=function(){
+        $('.box_controls a.add').click(function(){
+            console.log('[add]')
+            return false
+        })
+        $('.controls a.close').click(function(){
+            $(this).parent()
+                   .parent()
+                   .parent()
+                   .parent()
+                   .parent()
+                   .remove()
+            return false
+        })
+        $('.controls a.restore').click(function(){
+            content=$(this).parent()
+                           .parent()
+                           .parent()
+                           .parent()
+                           .parent()
+                           .children('.content')
+                           .show()
+            return false
+        })
+        $('.controls a.shrink').click(function(){
+            content=$(this).parent()
+                           .parent()
+                           .parent()
+                           .parent()
+                           .parent()
+                           .children('.content')
+                           .hide()
+            return false
+        })
+    }
     this.show=function(){
         $('#box').html(this.render())
+        this.behaviors()
     }
 }
