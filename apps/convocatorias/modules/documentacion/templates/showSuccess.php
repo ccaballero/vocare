@@ -23,7 +23,7 @@
             <form>
                 <?php include_partial('documentacion/editor', array(
                     'object' => $object,
-                    'tpl' => $tpl,
+                    'docs' => $docs,
                 )) ?>
                 <p class="submit"><input type="submit" value="Registrar" /></p>
             </form>
