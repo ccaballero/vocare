@@ -1,10 +1,11 @@
 function Box(taxonomy){
+    this.tpl_div='<p><label>{0}:</label>&nbsp;</p>{1}';
     this.tpl_string='<p><label>{0}:</label>{1}</p>'
     this.tpl_input='<input type="text" value="{0}" />'
     this.tpl_box='\
 <div class="box">\
     <div class="title">\
-        <span class="text">#1</span>\
+        <span class="text">1</span>\
         <div class="controls">\
             <ul>\
                 <li><a class="shrink" href="">_</a></li>\
@@ -28,7 +29,7 @@ function Box(taxonomy){
                 case '[object Array]':
                     for(i=0;i<val.length;i++){
                         box = new Box(val[i])
-                        render+=this.tpl_string.format(key,box.render())
+                        render+=this.tpl_div.format(key,box.render())
                     }
                     break
                 default:
@@ -40,38 +41,53 @@ function Box(taxonomy){
     }
     this.behaviors=function(){
         $('.box_controls a.add').click(function(){
-            console.log('[add]')
+            box=$(this).parent().parent().parent().prev()
+            var new_box=box.clone(true)
+            
+            _ot = parseInt(new_box.children('.title').children('span.text').html())
+            new_box.children('.title').children('span.text').html(_ot+1)
+            
+            new_box.show().insertAfter(box)
             return false
         })
         $('.controls a.close').click(function(){
+            box=$(this).parent()
+                   .parent()
+                   .parent()
+                   .parent()
+                   .parent()
+            content=box.parent()
+            if(content.children('.box').length>1){
+                box.remove()
+            }else{
+                alert('debe quedarse al menos un elemento')
+            }
+            return false
+        })
+        $('.controls a.restore').click(function(){
             $(this).parent()
                    .parent()
                    .parent()
                    .parent()
                    .parent()
-                   .remove()
-            return false
-        })
-        $('.controls a.restore').click(function(){
-            content=$(this).parent()
-                           .parent()
-                           .parent()
-                           .parent()
-                           .parent()
-                           .children('.content')
-                           .show()
+                   .children('.content')
+                   .show()
             return false
         })
         $('.controls a.shrink').click(function(){
-            content=$(this).parent()
-                           .parent()
-                           .parent()
-                           .parent()
-                           .parent()
-                           .children('.content')
-                           .hide()
+            $(this).parent()
+                   .parent()
+                   .parent()
+                   .parent()
+                   .parent()
+                   .children('.content')
+                   .hide()
             return false
         })
+    }
+    this.printTpl=function(){
+        $('#tpl').html(this.render())
+        this.behaviors()
     }
     this.show=function(){
         $('#box').html(this.render())

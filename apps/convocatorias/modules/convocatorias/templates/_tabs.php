@@ -30,9 +30,11 @@
             </a>
         </li>
     <?php endif; ?>
+<?php /*
     <?php if ($tabs['letters']): ?>
         <li class="tab"><a href="#letters">Cartas</a></li>
     <?php endif; ?>
+ */ ?>
     <?php if ($tabs['results']): ?>
     	<li class="tab"><a href="#results">Resultados</a></li>
     <?php endif; ?>

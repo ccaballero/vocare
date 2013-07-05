@@ -6,9 +6,10 @@
 <script type="text/javascript" src="/js/boxes.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
-        var root=new Box(<?php echo $sf_data->getRaw('tpl') ?>)
-        root.show()
+        var empty_tpl=new Box(<?php echo $sf_data->getRaw('tpl') ?>)
+        empty_tpl.printTpl()
     })
 </script>
 
+<div id="tpl"></div>
 <div id="box"></div>
