@@ -4,7 +4,8 @@ var Behaviors=new(function(){
             box=$(this).parent().parent().parent().prev()
             var new_box=box.clone(true)
 
-            _ot = parseInt(new_box.children('.title').children('span.text').html())
+            _ot = parseInt(new_box.children('.title')
+                                  .children('span.text').html())
             new_box.children('.title').children('span.text').html(_ot+1)
 
             new_box.show().insertAfter(box)
@@ -70,7 +71,6 @@ function Box(taxonomy){
 </div>'
 
     this.taxonomy=taxonomy
-    this.data={}
     this.render=function(){
         var render=''
         for(var key in this.taxonomy){
@@ -89,7 +89,16 @@ function Box(taxonomy){
         }
         return this.tpl_box.format(render)
     }
-    this.hydrate=function(data){
-        this.data = data
-    }
 }
+
+var BoxManager=new(function(){
+    this.list={}
+    this.count=0
+    this.create=function(taxonomy){
+        this.list[++this.count]=new Box(taxonomy);
+        return this.list[this.count]
+    }
+    this.render=function(){
+        // TODO
+    }
+})()
