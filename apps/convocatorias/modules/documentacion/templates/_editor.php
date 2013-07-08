@@ -3,23 +3,41 @@
     <input type="text" name="volumen" value="<?php echo $object->getNombre() ?>" />
 </p>
 
+<div id="redaction">
+    <div class="tree">
+        <h1>Documentos</h1>
+        <ul></ul>
+        <p style="text-align: right; padding-top: 10px;">
+            <a href="">Agregar documento</a>
+        </p>
+    </div>
+    <div id="box"></div>
+</div>
+
 <script type="text/javascript">
     $(document).ready(function(){
-        BoxManager.create({"a":"1"})
-        
-//        boxes=[]
-//        boxes.push(<?php //include_partial('scape', array('object' => $object->getTpl())) ?>)
-//        boxes.push(<?php //include_partial('scape', array('object' => $object->getVars())) ?>)
-//
-//        str_boxes=''
-//        for(i=0;i<boxes.length;i++){
-//            box = new Box(boxes[i])
-//            str_boxes+='<hr/>'+box.render()
-//        }
-//
-//        $('#box').append(str_boxes)
-//        Behaviors.set()
+        var h=$('.tree').css('height')
+        $('#box').css('min-height',
+            parseInt(h.substring(0, h.length-2)) + 30);
+
+        BoxManager.add('Globales',
+            <?php include_partial('scape', array(
+                'object' => $object->getVars()
+            )) ?>)
+        BoxManager.add('Plantilla general',
+            <?php include_partial('scape', array(
+                'object' => $object->getTpl()
+            )) ?>)
+
+    <?php foreach ($docs as $i => $doc): ?>
+        BoxManager.add('Documento '+<?php echo $i ?>,
+            <?php include_partial('scape', array(
+                'object' => $doc->getVars()
+            )) ?>)
+    <?php endforeach; ?>
+
+        BoxManager.render('#box',0)
+        BoxManager.render_menu('.tree ul')
+        Behaviors.set()
     })
 </script>
-
-<div id="box"></div>

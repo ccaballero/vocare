@@ -1,3 +1,10 @@
+#box {
+    display:inline-block;
+    width: 690px;
+    min-height: 3.0em;
+    border: 1px solid #000000;
+}
+
 .box {
     border-radius: 5px;
     border: 1px solid #DDDDDD;
