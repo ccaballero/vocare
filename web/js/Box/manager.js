@@ -1,32 +1,30 @@
 var BoxManager=new(function(){
-    this.tpl_menu='\
-<li>\
-    <a onclick="return BoxManager.switch(\'{0}\',{1})">{2}</a>\
-</li>'
-
     this.list=[]
-    this.add=function(name,taxonomy){
-        this.list.push(new Box(name,taxonomy))
+    this.selector=''
+    this.selectorMenu=''
+    this.create=function(name,taxonomy,dropable){
+        this.list.push(new Box(name,taxonomy,dropable))
     }
-    this.renderAll=function(selector){
-        var render=''
-        for(i=0;i<this.list.length;i++){
-            render+=this.list[i].render(false)
-        }
-        $(selector).html(render)
+    this.render=function(count){
+        $(BoxManager.selector).html(this.list[count].render(false))
     }
-    this.render=function(selector,count){
-        $(selector).html(this.list[count].render(false))
+    this.switch=function(box){
+        BoxManager.render(box)
+        return false
     }
-    this.render_menu=function(selector_menu,selector){
-        var menu=''
-        for(i=0;i<this.list.length;i++){
-            menu+=this.tpl_menu.format(selector,i,this.list[i].name)
-        }
-        return $(selector_menu).html(menu)
+    this.menu=function(){
+        Menu.render(this.list,BoxManager.selectorMenu)
     }
-    this.switch=function(selector,box){
-        BoxManager.render(selector,box)
+    this.addDoc=function(title){
+        var taxonomy=this.list[0].taxonomy
+        var title=title+(this.list.length-2)
+        this.create(title,taxonomy,true)
+        this.menu()
+        return false
+    }
+    this.removeDoc=function(index){
+        this.list.splice(index,1)
+        this.menu()
         return false
     }
 })()

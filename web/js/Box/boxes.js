@@ -1,4 +1,4 @@
-function Box(name,taxonomy){
+function Box(name,taxonomy,dropable){
     this.tpl_div='<p><label>{0}:</label>&nbsp;</p>{1}'
     this.tpl_string='<p><label>{0}:</label>{1}</p>'
     this.tpl_input='<input type="text" value="{0}" />'
@@ -8,9 +8,12 @@ function Box(name,taxonomy){
         <span class="text">{0}</span>\
         <div class="controls">\
             <ul>\
-                <li><a class="shrink" href="">_</a></li>\
-                <li><a class="restore" href="">o</a></li>\
-                <li><a class="close" href="">x</a></li>\
+                <li><a class="shrink"\
+                       onclick="return Behaviors.shrink(this)">_</a></li>\
+                <li><a class="restore"\
+                       onclick="return Behaviors.restore(this)">o</a></li>\
+                <li><a class="close"\
+                       onclick="return Behaviors.close(this)">x</a></li>\
             </ul>\
         </div>\
     </div>\
@@ -18,11 +21,13 @@ function Box(name,taxonomy){
 </div>'
     this.tpl_add='\
 <div class="box_controls">\
-    <ul><li><a class="add" href="">+</a></li></ul>\
+    <ul>\
+        <li><a class="add" onclick="return Behaviors.add(this)">+</a></li>\
+    </ul>\
 </div>'
-
     this.name=name
     this.taxonomy=taxonomy
+    this.dropable=dropable
     this.render=function(flag_add){
         var render=''
         for(var key in this.taxonomy){

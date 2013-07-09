@@ -22,6 +22,7 @@ default:
     - format.js
     - Box/boxes.js
     - Box/behaviors.js
+    - Box/menu.js
     - Box/manager.js
     - convocatorias.js
 

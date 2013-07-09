@@ -54,4 +54,12 @@ class DocumentacionVolumen extends BaseDocumentacionVolumen
     public function getObjectVars() {
         return json_decode($this->getVars());
     }
+    
+    public function getVars() {
+        $vars = $this->_get('vars');
+        if (empty($vars)) {
+            $vars = $this->getTpl();
+        }
+        return $vars;
+    }
 }
