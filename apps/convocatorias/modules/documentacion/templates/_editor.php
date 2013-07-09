@@ -24,17 +24,17 @@
 
         BoxManager.selector='#box'
         BoxManager.selectorMenu='.tree ul'
-        BoxManager.create('Plantilla general',
+        BoxManager.create('tpl','Plantilla general',
             <?php include_partial('scape', array(
                 'object' => $object->getTpl()
             )) ?>,false)
-        BoxManager.create('Globales',
+        BoxManager.create('common','Globales',
             <?php include_partial('scape', array(
                 'object' => $object->getVars()
             )) ?>,false)
 
     <?php foreach ($docs as $i => $doc): ?>
-        BoxManager.create('Documento '+<?php echo $i ?>,
+        BoxManager.create('d<?php echo $i ?>','Documento '+<?php echo $i ?>,
             <?php include_partial('scape', array(
                 'object' => $doc->getVars()
             )) ?>,true)

@@ -2,8 +2,9 @@ var BoxManager=new(function(){
     this.list=[]
     this.selector=''
     this.selectorMenu=''
-    this.create=function(name,taxonomy,dropable){
-        this.list.push(new Box(name,taxonomy,dropable))
+    this.create=function(id,name,taxonomy,dropable){
+        var box=new Box(id,name,taxonomy,dropable)
+        this.list.push(box)
     }
     this.render=function(count){
         $(BoxManager.selector).html(this.list[count].render(false))
