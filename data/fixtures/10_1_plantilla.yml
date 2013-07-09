@@ -41,10 +41,20 @@ DocumentacionPlantilla:
       <br />
       <p>Cc.: Arch.</p>
     types: |
-      {"fecha_carta":"","codigo":"","saludo":"",
-      "destinatarios":{"nombre":"","cargo":""},"carrera":"",
-      "fecha_realizacion":"","hora_entrega":"",
-      "remitente_nombre":"","remitente_cargo":""}
+      {
+        "fecha_carta":"",
+        "codigo":"",
+        "saludo":"",
+        "destinatarios":{
+          "nombre":"",
+          "cargo":""
+        },
+        "carrera":"",
+        "fecha_realizacion":"",
+        "hora_entrega":"",
+        "remitente_nombre":"",
+        "remitente_cargo":""
+      }
   tribunal_conocimientos:
     nombre: Tribunal de Conocimiento
     redaccion: |
@@ -85,7 +95,16 @@ DocumentacionPlantilla:
       <br />
       <p>Cc.: Arch.</p>
     types: |
-      {"fecha_carta":"","codigo":"",
-      "destinatario_nombre":"","destinatario_cargo":"","tematica":"",
-      "fecha_material":"","fecha_examen":"","hora_examen":"",
-      "numero_laboratorio":"","remitente_nombre":"","remitente_cargo":""}
+      {
+        "fecha_carta":"",
+        "codigo":"",
+        "destinatario_nombre":"",
+        "destinatario_cargo":"",
+        "tematica":"",
+        "fecha_material":"",
+        "fecha_examen":"",
+        "hora_examen":"",
+        "numero_laboratorio":"",
+        "remitente_nombre":"",
+        "remitente_cargo":""
+      }

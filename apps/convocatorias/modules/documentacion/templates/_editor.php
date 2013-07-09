@@ -20,13 +20,13 @@
         $('#box').css('min-height',
             parseInt(h.substring(0, h.length-2)) + 30);
 
-        BoxManager.add('Globales',
-            <?php include_partial('scape', array(
-                'object' => $object->getVars()
-            )) ?>)
         BoxManager.add('Plantilla general',
             <?php include_partial('scape', array(
                 'object' => $object->getTpl()
+            )) ?>)
+        BoxManager.add('Globales',
+            <?php include_partial('scape', array(
+                'object' => $object->getVars()
             )) ?>)
 
     <?php foreach ($docs as $i => $doc): ?>
@@ -37,7 +37,7 @@
     <?php endforeach; ?>
 
         BoxManager.render('#box',0)
-        BoxManager.render_menu('.tree ul')
+        BoxManager.render_menu('.tree ul', '#box')
         Behaviors.set()
     })
 </script>
