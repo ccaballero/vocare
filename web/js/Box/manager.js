@@ -7,7 +7,18 @@ var BoxManager=new(function(){
         this.list.push(box)
     }
     this.render=function(count){
-        $(BoxManager.selector).html(this.list[count].render(false))
+        var box=this.list[count]
+        _box=$(BoxManager.selector+'>#box-'+box.id)
+        if(_box.exists()){
+            $(BoxManager.selector+'>.box:not(.hidden)').addClass('hidden')
+            _box.removeClass('hidden')
+        }else{
+            var render=this.list[count].render(false,true)
+            $(BoxManager.selector+'>.box').each(function(){
+                $(this).addClass('hidden')
+            })
+            $(BoxManager.selector).append(render)
+        }
     }
     this.switch=function(box){
         BoxManager.render(box)

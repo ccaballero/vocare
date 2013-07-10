@@ -47,6 +47,8 @@ function remove_li(selector){
 }
 
 $(document).ready(function(){
+    jQuery.fn.exists = function(){return this.length>0;}
+    
     $('input[type="text"].focus').focus()
     $('textarea.focus').focus()
     $('#signin_username').focus()
