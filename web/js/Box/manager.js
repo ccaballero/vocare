@@ -29,8 +29,9 @@ var BoxManager=new(function(){
     }
     this.addDoc=function(title){
         var taxonomy=this.list[0].taxonomy
-        var title=title+(this.list.length-2)
-        this.create(title,taxonomy,true)
+        var id=(this.list.length-2)
+        var title=title+id
+        this.create('d'+id,title,taxonomy,true)
         this.menu()
         return false
     }
