@@ -20,12 +20,20 @@
         </div>
     	<div id="editor" class="tab_contents">
             <a name="editor"></a>
-            <form>
+            <?php echo form_tag(
+                url_for('documentacion_redaccion',
+                array('id' => $object->getId()))
+            ) ?>
                 <?php include_partial('documentacion/editor', array(
                     'object' => $object,
                     'docs' => $docs,
                 )) ?>
-                <p class="submit"><input type="submit" value="Registrar" /></p>
+                <p class="submit">
+                    <input name="documentation"
+                           type="submit"
+                           value="Registrar"
+                           onsubmit="return Behaviors.processForm()" />
+                </p>
             </form>
         </div>
     </div>

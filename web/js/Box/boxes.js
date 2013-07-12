@@ -29,6 +29,7 @@ function Box(id,name,taxonomy,dropable){
     this.name=name
     this.taxonomy=taxonomy
     this.dropable=dropable
+    this.postVar='vars'
     this.render=function(flag_add,flag_root){
         return this._render(this.id,flag_add,flag_root)
     }

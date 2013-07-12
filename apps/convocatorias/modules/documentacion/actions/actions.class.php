@@ -25,4 +25,15 @@ class documentacionActions extends PlantillasDefault
         $this->docs = $volumen->getDocumentaciones();
         $this->previews = $volumen->renderXHTML();
     }
+    
+    public function executeRedaccion(sfWebRequest $request) {
+        $volumen = $this->getRoute()->getObject();
+        
+        $common = $request->getParameter('common');
+//        while() {
+        
+//        $vars = $request->getParameter
+//        var_dump($vars);
+//        die;
+    }
 }

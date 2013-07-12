@@ -14,9 +14,11 @@ var Menu=new(function(){
         for(i=0;i<boxes.length;i++){
             var box=boxes[i]
             if(box.dropable){
-                menu+=this.tpl_menu.format(i,boxes[i].name,this.tpl_controls.format(i))
+                menu+=this.tpl_menu.format(
+                    i,boxes[i].name,this.tpl_controls.format(i))
             }else{
-                menu+=this.tpl_menu.format(i,boxes[i].name,'')
+                menu+=this.tpl_menu.format(
+                    i,boxes[i].name,'')
             }
         }
         return $(selectorMenu).html(menu)

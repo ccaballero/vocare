@@ -110,6 +110,9 @@ documentacion:
   class: sfDoctrineRouteCollection
   options:
     model: DocumentacionVolumen
+    actions: [list, new, create, edit, update, show, delete]
+    object_actions:
+      redaccion: [post]
 
 plantillas:
   class: sfDoctrineRouteCollection

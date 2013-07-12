@@ -43,4 +43,8 @@ var Behaviors=new(function(){
             .hide()
         return false
     }
+    this.processForm=function(){
+        alert('procesando formulario')
+        return false
+    }
 })()
