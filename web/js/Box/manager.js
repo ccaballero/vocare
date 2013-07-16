@@ -1,42 +1,43 @@
 var BoxManager=new(function(){
-    this.list=[]
+    this.tpl_name='{0}_{1}'
     this.selector=''
     this.selectorMenu=''
-    this.create=function(id,name,taxonomy,dropable){
-        var box=new Box(id,name,taxonomy,dropable)
+    this.list=[]
+    this.counter=0
+    this.create=function(edit,name,title,taxonomy,dropable){
+        var id=this.counter++
+        var box=new Box(id,edit,this.tpl_name.format(name,id),title,taxonomy,dropable)
         this.list.push(box)
     }
-    this.render=function(count){
-        var box=this.list[count]
+    this.render=function(id){
+        var box=this.list[id]
         _box=$(BoxManager.selector+'>#box-'+box.id)
         if(_box.exists()){
             $(BoxManager.selector+'>.box:not(.hidden)').addClass('hidden')
             _box.removeClass('hidden')
         }else{
-            var render=this.list[count].render(false,true)
+            var render=this.list[id].render(false,true)
             $(BoxManager.selector+'>.box').each(function(){
                 $(this).addClass('hidden')
             })
             $(BoxManager.selector).append(render)
         }
     }
-    this.switch=function(box){
-        BoxManager.render(box)
+    this.switch=function(id){
+        BoxManager.render(id)
         return false
     }
     this.menu=function(){
         Menu.render(this.list,BoxManager.selectorMenu)
     }
     this.addDoc=function(title){
-        var taxonomy=this.list[0].taxonomy
-        var id=(this.list.length-2)
-        var title=title+id
-        this.create('d'+id,title,taxonomy,true)
+        var taxonomy=this.list[0].taxonomy // tpl taxonomy
+        this.create('','new',title,taxonomy,true)
         this.menu()
         return false
     }
     this.removeDoc=function(index){
-        this.list.splice(index,1)
+        delete this.list[index]
         this.menu()
         return false
     }

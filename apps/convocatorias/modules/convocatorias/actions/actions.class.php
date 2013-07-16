@@ -234,8 +234,8 @@ class convocatoriasActions extends PlantillasDefault
             $convocatoria_cargo->save();
         }
 
-        $this->getUser()->setFlash('success', 'La configuración de las firmas ha'
-            . ' sido registrada');
+        $this->getUser()->setFlash('success',
+            'La configuración de las firmas ha sido registrada');
         $this->redirect($this->generateUrl('convocatorias_show', array(
             'id' => $convocatoria->getId())));
     }

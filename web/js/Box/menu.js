@@ -8,17 +8,18 @@ var Menu=new(function(){
 <div class="right">\
     <a onclick="return BoxManager.removeDoc({0})">[eliminar]</a>\
 &nbsp;</div>'
-
     this.render=function(boxes,selectorMenu){
         var menu=''
         for(i=0;i<boxes.length;i++){
             var box=boxes[i]
-            if(box.dropable){
-                menu+=this.tpl_menu.format(
-                    i,boxes[i].name,this.tpl_controls.format(i))
-            }else{
-                menu+=this.tpl_menu.format(
-                    i,boxes[i].name,'')
+            if(typeof box !== 'undefined'){
+                if(box.dropable){
+                    menu+=this.tpl_menu.format(
+                        box.id,box.title,this.tpl_controls.format(box.id))
+                }else{
+                    menu+=this.tpl_menu.format(
+                        box.id,box.title,'')
+                }
             }
         }
         return $(selectorMenu).html(menu)

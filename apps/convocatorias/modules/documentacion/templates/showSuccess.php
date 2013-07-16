@@ -21,7 +21,7 @@
     	<div id="editor" class="tab_contents">
             <a name="editor"></a>
             <?php echo form_tag(
-                url_for('documentacion_redaccion',
+                url_for('documentacion_editar',
                 array('id' => $object->getId()))
             ) ?>
                 <?php include_partial('documentacion/editor', array(
@@ -31,8 +31,7 @@
                 <p class="submit">
                     <input name="documentation"
                            type="submit"
-                           value="Registrar"
-                           onsubmit="return Behaviors.processForm()" />
+                           value="Registrar" />
                 </p>
             </form>
         </div>

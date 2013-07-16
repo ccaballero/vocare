@@ -10,7 +10,7 @@
         <h1>Documentos</h1>
         <ul></ul>
         <p style="text-align: right; padding-top: 10px;">
-            <a onclick="return BoxManager.addDoc('Documento ')">[agregar]</a>
+            <a onclick="return BoxManager.addDoc('Nuevo documento')">[agregar]</a>
         </p>
     </div>
     <div id="box"></div>
@@ -21,20 +21,21 @@
         var h=$('.tree').css('height')
         $('#box').css('min-height',
             parseInt(h.substring(0, h.length-2)) + 30)
-
         BoxManager.selector='#box'
         BoxManager.selectorMenu='.tree ul'
-        BoxManager.create('tpl','Plantilla general',
+
+        BoxManager.create('','tpl','Plantilla general',
             <?php include_partial('scape', array(
                 'object' => $object->getTpl()
             )) ?>,false)
-        BoxManager.create('common','Globales',
+        BoxManager.create('','common','Globales',
             <?php include_partial('scape', array(
                 'object' => $object->getVars()
             )) ?>,false)
 
     <?php foreach ($docs as $i => $doc): ?>
-        BoxManager.create('d<?php echo $i ?>','Documento '+<?php echo $i ?>,
+        BoxManager.create(<?php echo $doc->getId() ?>,
+            'edit','Documento '+<?php echo $i ?>,
             <?php include_partial('scape', array(
                 'object' => $doc->getVars()
             )) ?>,true)

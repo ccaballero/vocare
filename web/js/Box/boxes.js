@@ -1,11 +1,13 @@
-function Box(id,name,taxonomy,dropable){
+function Box(id,edit,name,title,taxonomy,dropable){
     this.tpl_div='<p><label>{0}:</label>&nbsp;</p>{1}'
     this.tpl_string='<p><label>{0}:</label>{1}</p>'
     this.tpl_input='<input type="text" name="{0}" value="{1}" />'
+    this.tpl_hidden='<input type="hidden" name="{0}" value="{1}" />'
     this.tpl_box='\
 <div class="box"{0}>\
     <div class="title">\
-        <span class="text">{1}</span>\
+        {1}\
+        <span class="text">{2}</span>\
         <div class="controls">\
             <ul>\
                 <li><a class="shrink"\
@@ -17,7 +19,7 @@ function Box(id,name,taxonomy,dropable){
             </ul>\
         </div>\
     </div>\
-    <div class="content">{2}</div>\
+    <div class="content">{3}</div>\
 </div>'
     this.tpl_add='\
 <div class="box_controls">\
@@ -25,13 +27,14 @@ function Box(id,name,taxonomy,dropable){
         <li><a class="add" onclick="return Behaviors.add(this)">+</a></li>\
     </ul>\
 </div>'
-    this.id=id
+    this.id=id // generate in creation
+    this.edit=edit
     this.name=name
+    this.title=title
     this.taxonomy=taxonomy
     this.dropable=dropable
-    this.postVar='vars'
     this.render=function(flag_add,flag_root){
-        return this._render(this.id,flag_add,flag_root)
+        return this._render(this.name,flag_add,flag_root)
     }
     this._render=function(name,flag_add,flag_root){
         var render=''
@@ -41,7 +44,7 @@ function Box(id,name,taxonomy,dropable){
                 case '[object Array]':
                     boxes=''
                     for(i=0;i<val.length;i++){
-                        box=new Box(name+'['+key+'][]',i,val[i],false)
+                        box=new Box(i,'',name+'['+key+'][]',i,val[i],false)
                         flag=false
                         if((i+1)===val.length){
                             flag=true
@@ -57,10 +60,12 @@ function Box(id,name,taxonomy,dropable){
             }
         }
         var id_root=''
+        var hidden=''
         if(flag_root){
             id_root=' id="box-'+this.id+'"'
+            hidden=this.tpl_hidden.format(name+'[_doc]',this.edit)
         }
-        render=this.tpl_box.format(id_root,this.name,render)
+        render=this.tpl_box.format(id_root,hidden,this.title,render)
         if(flag_add){
             render+=this.tpl_add
         }

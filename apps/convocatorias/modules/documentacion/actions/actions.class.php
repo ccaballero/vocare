@@ -25,15 +25,30 @@ class documentacionActions extends PlantillasDefault
         $this->docs = $volumen->getDocumentaciones();
         $this->previews = $volumen->renderXHTML();
     }
-    
-    public function executeRedaccion(sfWebRequest $request) {
+
+    public function executeEditar(sfWebRequest $request) {
         $volumen = $this->getRoute()->getObject();
-        
-        $common = $request->getParameter('common');
-//        while() {
-        
-//        $vars = $request->getParameter
-//        var_dump($vars);
-//        die;
+
+        $holder = $request->getParameterHolder();
+        $all = $holder->getAll();
+
+        foreach ($all as $key => $element) {
+            switch ($key) {
+                case 'volumen':
+                    $volumen->setNombre($request->getParameter($key));
+                    break;
+                case 'common':
+                    $common = json_encode($request->getParameter($key));
+                    $volumen->setVars($common);
+                    break;
+            }
+        }
+
+        $volumen->save();
+
+        $this->getUser()->setFlash('success',
+            'La información de documentación ha sido registrada');
+        $this->redirect($this->generateUrl('documentacion_show', array(
+            'id' => $volumen->getId())));
     }
 }

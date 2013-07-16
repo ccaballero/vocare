@@ -33,6 +33,8 @@ class DocumentacionVolumen extends BaseDocumentacionVolumen
         $compile = array();
         $vars = json_decode($this->vars);
 
+        $meld = new Meld();
+        
         $tpl = new myTemplate();
         if (!empty($redaccion)) {
             $tpl->setTemplate($redaccion);
@@ -41,7 +43,7 @@ class DocumentacionVolumen extends BaseDocumentacionVolumen
                 $json = $documento->getVars();
                 $obj = json_decode($json);
 
-                $merge = (object)array_merge((array)$vars, (array)$obj);
+                $merge = $meld->join($vars, $obj);
 
                 $tpl->setObject($merge);
                 $compile[] = $tpl->render();
