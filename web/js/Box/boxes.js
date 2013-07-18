@@ -44,7 +44,7 @@ function Box(id,edit,name,title,taxonomy,dropable){
                 case '[object Array]':
                     boxes=''
                     for(i=0;i<val.length;i++){
-                        box=new Box(i,'',name+'['+key+'][]',i,val[i],false)
+                        box=new Box(i,'',name+'['+key+']['+i+']',i,val[i],false)
                         flag=false
                         if((i+1)===val.length){
                             flag=true

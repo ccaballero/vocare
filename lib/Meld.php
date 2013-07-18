@@ -42,10 +42,10 @@ class Meld
             return $value1;
         }
 
-        if (empty($value1)) {
-            return $value2;
+        if (empty($value2)) {
+            return $value1;
         }
 
-        return $value1;
+        return $value2;
     }
 }

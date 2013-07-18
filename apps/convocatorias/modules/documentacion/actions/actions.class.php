@@ -32,14 +32,43 @@ class documentacionActions extends PlantillasDefault
         $holder = $request->getParameterHolder();
         $all = $holder->getAll();
 
+        $model = new Documentacion();
+
         foreach ($all as $key => $element) {
-            switch ($key) {
+            list($type, $code) = explode('_', $key);
+            switch ($type) {
                 case 'volumen':
                     $volumen->setNombre($request->getParameter($key));
                     break;
                 case 'common':
-                    $common = json_encode($request->getParameter($key));
+                    $json = $request->getParameter($key);
+                    unset($json['_doc']);
+                    $common = json_encode($json);
                     $volumen->setVars($common);
+                    break;
+                case 'edit':
+                    $json = $request->getParameter($key);
+                    $id = $json['_doc'];
+                    unset($json['_doc']);
+
+                    $documentation = $model->getByIdAndVolumen(
+                        $id, $volumen->getId());
+
+                    $doc = json_encode($json);
+                    $documentation->setVars($doc);
+                    $documentation->save();
+                    break;
+                case 'new':
+                    $json = $request->getParameter($key);
+                    $id = $json['_doc'];
+                    unset($json['_doc']);
+
+                    $documentation = new Documentacion();
+                    $documentation->plantilla_id = $volumen->plantilla_id;
+                    $documentation->volumen_id = $volumen->id;
+                    $documentation->vars = json_encode($json);
+                    $documentation->save();
+
                     break;
             }
         }

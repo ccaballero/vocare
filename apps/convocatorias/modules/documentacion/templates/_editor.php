@@ -1,7 +1,7 @@
 <p>
     <label>Nombre del volumen:</label>
     <input type="text"
-           name="volumen"
+           name="volumen_"
            value="<?php echo $object->getNombre() ?>" />
 </p>
 

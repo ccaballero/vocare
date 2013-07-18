@@ -3,8 +3,11 @@ var Behaviors=new(function(){
         box=$(element).parent().parent().parent().prev()
         var new_box=box.clone(true)
         _ot = parseInt(new_box.children('.title')
-                              .children('span.text').html())
-        new_box.children('.title').children('span.text').html(_ot+1)
+                              .children('span.text')
+                              .html())
+        new_box.children('.title')
+               .children('span.text')
+               .html(_ot+1)
         new_box.show().insertAfter(box)
         return false
     }
