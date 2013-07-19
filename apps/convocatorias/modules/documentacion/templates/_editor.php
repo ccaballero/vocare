@@ -3,14 +3,19 @@
     <input type="text"
            name="volumen_"
            value="<?php echo $object->getNombre() ?>" />
+    <input type="hidden"
+           name="delete_docs"
+           value="" />
 </p>
 
 <div id="redaction">
     <div class="tree">
         <h1>Documentos</h1>
         <ul></ul>
-        <p style="text-align: right; padding-top: 10px;">
-            <a onclick="return BoxManager.addDoc('Nuevo documento')">[agregar]</a>
+        <p class="right">
+            <a onclick="return BoxManager.addDoc('Nuevo documento')">
+                [agregar]
+            </a>
         </p>
     </div>
     <div id="box"></div>

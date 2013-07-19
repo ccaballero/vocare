@@ -48,11 +48,11 @@ function remove_li(selector){
 
 $(document).ready(function(){
     jQuery.fn.exists = function(){return this.length>0;}
-    
+
     $('input[type="text"].focus').focus()
     $('textarea.focus').focus()
     $('#signin_username').focus()
-    
+
     $('.closeable').click(function(){
         $(this).parent().fadeOut()
         return false
@@ -129,10 +129,18 @@ $(document).ready(function(){
         }
         enumerate_checks()
     })
-    
+
     // flash messenger close
     $('#messages .close a').click(function(){
         $(this).parents('#messages').fadeOut()
         return false
+    })
+
+    // documentation process
+    $('#documentation_form').submit(function() {
+        $('input[name="delete_docs"]').attr(
+            'value', BoxManager.remove.join('|')
+        )
+        return true
     })
 })

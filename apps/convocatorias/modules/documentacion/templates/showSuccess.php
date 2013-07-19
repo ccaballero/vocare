@@ -20,10 +20,12 @@
         </div>
     	<div id="editor" class="tab_contents">
             <a name="editor"></a>
-            <?php echo form_tag(
-                url_for('documentacion_editar',
-                array('id' => $object->getId()))
-            ) ?>
+            <form method="post"
+                  id="documentation_form"
+                  action="<?php echo url_for(
+                    'documentacion_editar', array(
+                        'id' => $object->getId()
+                    )) ?>">
                 <?php include_partial('documentacion/editor', array(
                     'object' => $object,
                     'docs' => $docs,

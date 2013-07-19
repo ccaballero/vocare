@@ -29,47 +29,51 @@ class documentacionActions extends PlantillasDefault
     public function executeEditar(sfWebRequest $request) {
         $volumen = $this->getRoute()->getObject();
 
+        $docs = array();
+        $_docs = $volumen->getDocumentaciones();
+        foreach ($_docs as $_doc) {
+            $docs[$_doc->getId()] = $_doc;
+        }
+
         $holder = $request->getParameterHolder();
         $all = $holder->getAll();
 
-        $model = new Documentacion();
-
         foreach ($all as $key => $element) {
-            list($type, $code) = explode('_', $key);
-            switch ($type) {
-                case 'volumen':
-                    $volumen->setNombre($request->getParameter($key));
-                    break;
-                case 'common':
-                    $json = $request->getParameter($key);
-                    unset($json['_doc']);
-                    $common = json_encode($json);
-                    $volumen->setVars($common);
-                    break;
-                case 'edit':
-                    $json = $request->getParameter($key);
-                    $id = $json['_doc'];
-                    unset($json['_doc']);
+            if (preg_match('/.+_.*/', $key)) {
+                list($type, $code) = explode('_', $key);
 
-                    $documentation = $model->getByIdAndVolumen(
-                        $id, $volumen->getId());
-
-                    $doc = json_encode($json);
-                    $documentation->setVars($doc);
-                    $documentation->save();
-                    break;
-                case 'new':
-                    $json = $request->getParameter($key);
-                    $id = $json['_doc'];
-                    unset($json['_doc']);
-
-                    $documentation = new Documentacion();
-                    $documentation->plantilla_id = $volumen->plantilla_id;
-                    $documentation->volumen_id = $volumen->id;
-                    $documentation->vars = json_encode($json);
-                    $documentation->save();
-
-                    break;
+                $param = $element;
+                if (is_array($param) && isset($param['_doc'])) {
+                    $id = intval($param['_doc']);
+                    unset($param['_doc']);
+                }
+                switch ($type) {
+                    case 'volumen':
+                        $volumen->setNombre($param);
+                        break;
+                    case 'common':
+                        $volumen->setVars(json_encode($param));
+                        break;
+                    case 'edit':
+                        $doc = $docs[$id];
+                        $doc->setVars(json_encode($param));
+                        $doc->save();
+                        break;
+                    case 'new':
+                        $documentation = new Documentacion();
+                        $documentation->plantilla_id = $volumen->plantilla_id;
+                        $documentation->volumen_id = $volumen->id;
+                        $documentation->vars = json_encode($param);
+                        $documentation->save();
+                        break;
+                    case 'delete':
+                        $ids = explode('|', $param);
+                        foreach ($ids as $id) {
+                            $doc = $docs[$id];
+                            $doc->delete();
+                        }
+                        break;
+                }
             }
         }
 

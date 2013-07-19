@@ -3,6 +3,7 @@ var BoxManager=new(function(){
     this.selector=''
     this.selectorMenu=''
     this.list=[]
+    this.remove=[]
     this.counter=0
     this.create=function(edit,name,title,taxonomy,dropable){
         var id=this.counter++
@@ -31,12 +32,13 @@ var BoxManager=new(function(){
         Menu.render(this.list,BoxManager.selectorMenu)
     }
     this.addDoc=function(title){
-        var taxonomy=this.list[0].taxonomy // tpl taxonomy
+        var taxonomy=this.list[0].taxonomy
         this.create('','new',title,taxonomy,true)
         this.menu()
         return false
     }
     this.removeDoc=function(index){
+        this.remove.push(this.list[index].edit)
         delete this.list[index]
         this.menu()
         return false
