@@ -24,7 +24,7 @@ function Box(id,edit,name,title,taxonomy,dropable){
     this.tpl_add='\
 <div class="box_controls">\
     <ul>\
-        <li><a class="add" onclick="return Behaviors.add(this)">+</a></li>\
+        <li><a class="add" onclick="return Behaviors.add(this,{0})">+</a></li>\
     </ul>\
 </div>'
     this.id=id // generate in creation
@@ -33,10 +33,10 @@ function Box(id,edit,name,title,taxonomy,dropable){
     this.title=title
     this.taxonomy=taxonomy
     this.dropable=dropable
-    this.render=function(flag_add,flag_root){
-        return this._render(this.name,flag_add,flag_root)
+    this.render=function(flag_add,flag_root,level){
+        return this._render(this.name,flag_add,flag_root,level)
     }
-    this._render=function(name,flag_add,flag_root){
+    this._render=function(name,flag_add,flag_root,level){
         var render=''
         for(var key in this.taxonomy){
             var val=this.taxonomy[key]
@@ -49,7 +49,7 @@ function Box(id,edit,name,title,taxonomy,dropable){
                         if((i+1)===val.length){
                             flag=true
                         }
-                        boxes+=box.render(flag,false)
+                        boxes+=box.render(flag,false,level+1)
                     }
                     render+=this.tpl_div.format(key,boxes)
                     break
@@ -67,7 +67,7 @@ function Box(id,edit,name,title,taxonomy,dropable){
         }
         render=this.tpl_box.format(id_root,hidden,this.title,render)
         if(flag_add){
-            render+=this.tpl_add
+            render+=this.tpl_add.format(level);
         }
         return render
     }

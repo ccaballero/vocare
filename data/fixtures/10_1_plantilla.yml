@@ -1,6 +1,55 @@
 DocumentacionPlantilla:
-  tribunal_meritos:
-    nombre: Tribunal para la Revisión de Méritos
+  2012_tribunal_conocimientos:
+    nombre: Tribunal de Conocimiento (Convocatoria 2012)
+    redaccion: |
+      <p>Cochabamba, [[ fecha_carta ]]<br />
+      <strong>DPTO. INF-SIS [[ codigo ]] </strong></p>
+      <br />
+      <br />
+      <br />
+      <br />
+      <p><strong>Señor:</strong><br />
+      [[ destinatario_nombre ]]<br />
+      <strong class="upper">[[ destinatario_cargo ]]</strong><br />
+      Presente.-</p>
+      <br />
+      <br />
+      <p class="title"><strong>Ref.: Tribunal de Conocimiento</strong></p>
+      <br />
+      <p>De mi consideración:</p>
+      <p>Por la presente comunico a usted que ha sido designado como Tribunal de
+      Conocimiento por la carrera de Ing. Sistemas en la materia de
+      <strong>[[ tematica ]]</strong>, para la Convocatoria a Concurso de
+      Méritos y Pruebas de Conocimientos para optar a las Auxiliaturas en
+      Laboratorio de Computación, de Mantenimiento y Desarrollo del Departamento
+      de Informática – Sistemas, por lo cual solicito presentarse
+      el día [[ fecha_examen ]] a horas [[ hora_examen ]], las notas deberán ser
+      entregadas 24 horas después del examen.</p>
+      <p>Sin otro particular y agradeciendo su cooperación me despido, saludando
+      a usted.</p>
+      <p>Atentamente,</p>
+      <div class="firmas">
+          <div class="firma">
+              <div class="nombre">[[ remitente_nombre ]]</div>
+              <div class="cargo">[[ remitente_cargo ]]</div>
+          </div>
+      </div>
+      <br />
+      <p>Cc.: Arch.</p>
+    types: |
+      {
+        "fecha_carta":"",
+        "codigo":"",
+        "destinatario_nombre":"",
+        "destinatario_cargo":"",
+        "tematica":"",
+        "fecha_examen":"",
+        "hora_examen":"",
+        "remitente_nombre":"",
+        "remitente_cargo":""
+      }
+  2013_tribunal_meritos:
+    nombre: Tribunal para la Revisión de Méritos (Convocatoria 2013)
     redaccion: |
       <p>Cochabamba, [[ fecha_carta ]]<br />
       <strong>DPTO. INF-SIS [[ codigo ]]</strong></p>
@@ -16,7 +65,8 @@ DocumentacionPlantilla:
       Presente.-</p>
       <br />
       <br />
-      <p class="title"><strong>Ref.: Tribunal para la Revisión de Meritos</strong></p>
+      <p class="title"><strong>Ref.: Tribunal para la Revisión de
+      Meritos</strong></p>
       <br />
       <p>De mi consideración:</p>
       <p>Por la presente comunico a usted que ha sido designado como Tribunal
@@ -55,8 +105,8 @@ DocumentacionPlantilla:
         "remitente_nombre":"",
         "remitente_cargo":""
       }
-  tribunal_conocimientos:
-    nombre: Tribunal de Conocimiento
+  2013_tribunal_conocimientos:
+    nombre: Tribunal de Conocimiento (Convocatoria 2013)
     redaccion: |
       <p>Cochabamba, [[ fecha_carta ]]<br />
       <strong>DPTO. INF-SIS [[ codigo ]] </strong></p>
@@ -107,4 +157,56 @@ DocumentacionPlantilla:
         "numero_laboratorio":"",
         "remitente_nombre":"",
         "remitente_cargo":""
+      }
+  carta_solicitud:
+    nombre: Modelo de Carta de Solicitud
+    redaccion: |
+      <p>Cochabamba, [[ fecha_carta ]]<br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <p><strong>Señor:</strong><br />
+      [[ destinatario_nombre ]]<br />
+      <strong class="upper">[[ destinatario_cargo ]]</strong><br />
+      Presente.-</p>
+      <br />
+      <br />
+      <p class="title"><strong>Ref.: Solicitud de participación en el proceso de
+      selección de auxiliares</strong></p>
+      <br />
+      <p>Estimado Lic. Henrry Frank Villarroel Tapia:</p>
+      <p>A tiempo de saludarlo y desearle éxito en las funciones que desempeña,
+      aprovecho la oportunidad para presentarme como postulante al cargo de:</p>
+      [[ foreach items ]]
+          <p class="center">
+            [[ nombre ]] ([[ codigo ]])<br />
+            Item Nro: [[ numero ]]
+          </p>
+      [[ endforeach ]]
+      <p>Sin otro particular y a la espera de una respuesta favorable a esta
+      solicitud, me despido de usted.</p>
+      <p>Atentamente,</p>
+      <div class="firmas">
+          <div class="firma">
+              <div class="nombre">[[ remitente_nombre ]]</div>
+              <div class="ci">[[ remitente_ci ]]</div>
+              <div class="telfs">[[ remitente_telefonos ]]</div>
+              <div class="email">[[ remitente_email ]]</div>
+          </div>
+      </div>
+    types: |
+      {
+        "fecha_carta":"",
+        "destinatario_nombre":"",
+        "destinatario_cargo":"",
+        "items":{
+            "nombre":"",
+            "codigo":"",
+            "numero":""
+        }
+        "remitente_nombre":"",
+        "remitente_ci":"",
+        "remitente_telefonos":"",
+        "remitente_email":""
       }

@@ -17,7 +17,7 @@ var BoxManager=new(function(){
             $(BoxManager.selector+'>.box:not(.hidden)').addClass('hidden')
             _box.removeClass('hidden')
         }else{
-            var render=this.list[id].render(false,true)
+            var render=this.list[id].render(false,true,0)
             $(BoxManager.selector+'>.box').each(function(){
                 $(this).addClass('hidden')
             })

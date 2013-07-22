@@ -1,0 +1,71 @@
+DocumentacionVolumen:
+  volumen_1:
+    DocumentacionPlantilla: 2012_tribunal_conocimientos
+    nombre: 142-149 Tribunal de Conocimiento de Lab. INF-SIS
+    vars: |
+      {
+        "fecha_carta":"3 de Julio de 2012",
+        "codigo":"",
+        "destinatario_nombre":"",
+        "destinatario_cargo":"Docente Dpto. Inform\u00e1tica-Sistemas",
+        "tematica":"",
+        "fecha_examen":"",
+        "hora_examen":"",
+        "remitente_nombre":"Lic. Henrry Villarroel Tapia",
+        "remitente_cargo":"Jefe Dpto. Inform\u00e1tica-Sistemas"
+      }
+  volumen_2:
+    DocumentacionPlantilla: 2013_tribunal_meritos
+    nombre: 303-304 Tribunales de Méritos Lab. INF-SIS
+    vars: |
+      {
+        "fecha_carta":"22 de Noviembre de 2012",
+        "codigo":"",
+        "saludo":"Se\u00f1ores",
+        "destinatarios":
+        [{
+          "nombre":"",
+          "cargo":""
+        }],
+        "carrera":"",
+        "fecha_realizacion":"28 de noviembre",
+        "hora_entrega":"15:00",
+        "remitente_nombre":"Lic. Henrry Villarroel Tapia",
+        "remitente_cargo":"Jefe Dpto. Inform\u00e1tica-Sistemas"
+      }
+  volumen_3:
+    DocumentacionPlantilla: 2013_tribunal_conocimientos
+    nombre: 311-312 Tribunal de Conocimiento Lab. INF-SIS
+    vars: |
+      {
+        "fecha_carta":"29 de Noviembre de 2012",
+        "codigo":"",
+        "destinatario_nombre":"",
+        "destinatario_cargo":"Docente Dpto. Inform\u00e1tica-Sistemas",
+        "tematica":"",
+        "fecha_material":"29 de Noviembre",
+        "fecha_examen":"",
+        "hora_examen":"",
+        "numero_laboratorio":"2",
+        "remitente_nombre":"Lic. Henrry Villarroel Tapia",
+        "remitente_cargo":"Jefe Dpto. Inform\u00e1tica-Sistemas"
+      }
+  volumen_4:
+    DocumentacionPlantilla: carta_solicitud
+    nombre: Modelo de Carta de Solicitud
+    vars: |
+      {
+        "fecha_carta":"",
+        "destinatario_nombre":"",
+        "destinatario_cargo":"",
+        "items":
+        [{
+            "nombre":"",
+            "codigo":"",
+            "numero":""
+        }],
+        "remitente_nombre":"",
+        "remitente_ci":"",
+        "remitente_telefonos":"",
+        "remitente_email":""
+      }

@@ -39,6 +39,10 @@
     margin-left: 150px;
 }
 
+#main #letter .center {
+    text-align: center;
+}
+
 #main #letter .firmas {
     text-align: center;
 }

@@ -1,5 +1,5 @@
 var Behaviors=new(function(){
-    this.add=function(element){
+    this.add=function(element,level){
         box=$(element).parent().parent().parent().prev()
         var new_box=box.clone(true)
         _ot = parseInt(new_box.children('.title')
@@ -9,6 +9,12 @@ var Behaviors=new(function(){
                .children('span.text')
                .html(_ot+1)
         new_box.show().insertAfter(box)
+        new_box.find('input[type="text"]').each(function(index,element){
+            var j=(2*level)-1
+            var parts=$(this).attr('name').split('][')
+            parts[j]=parseInt(parts[j])+1
+            $(this).attr('name',parts.join(']['))
+        })
         return false
     }
     this.close=function(element){

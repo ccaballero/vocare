@@ -37,7 +37,6 @@ class documentacionActions extends PlantillasDefault
 
         $holder = $request->getParameterHolder();
         $all = $holder->getAll();
-
         foreach ($all as $key => $element) {
             if (preg_match('/.+_.*/', $key)) {
                 list($type, $code) = explode('_', $key);
@@ -67,10 +66,12 @@ class documentacionActions extends PlantillasDefault
                         $documentation->save();
                         break;
                     case 'delete':
-                        $ids = explode('|', $param);
-                        foreach ($ids as $id) {
-                            $doc = $docs[$id];
-                            $doc->delete();
+                        if (!empty($param)) {
+                            $ids = explode('|', $param);
+                            foreach ($ids as $id) {
+                                $doc = $docs[$id];
+                                $doc->delete();
+                            }
                         }
                         break;
                 }
