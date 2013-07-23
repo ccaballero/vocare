@@ -4,7 +4,7 @@
         <li>
             <?php echo link_to(
                 image_tag('/img/page_white_text.png'),
-                'convocatorias_texto',
+                'documentacion_texto',
                 $object, array(
                     'target' => '_blank',
                     'alt' => 'Generar documento TXT',
@@ -14,7 +14,7 @@
         <li>
             <?php echo link_to(
                 image_tag('/img/page_code.png'),
-                'convocatorias_latex',
+                'documentacion_latex',
                 $object, array(
                     'target' => '_blank',
                     'alt' => 'Generar documento LATEX',
@@ -24,7 +24,7 @@
         <li>
             <?php echo link_to(
                 image_tag('/img/page_white_acrobat.png'),
-                'convocatorias_pdf',
+                'documentacion_pdf',
                 $object, array(
                     'target' => '_blank',
                     'alt' => 'Generar documento PDF',

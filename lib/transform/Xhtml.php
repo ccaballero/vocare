@@ -1,6 +1,6 @@
 <?php
 
-class myTemplate
+class Xhtml
 {
     private $template;
     private $object;
@@ -21,7 +21,7 @@ class myTemplate
     public function getTaxonomy() {
         $parts = preg_split('/(\[\[ | \]\])/', $this->template);
         $root = new StdClass();
-        
+
         $components = array($root);
         $last_component = $root;
 
@@ -45,7 +45,7 @@ class myTemplate
         return $root;
     }
 
-    public function render() {
+    public function compile() {
         // preproceso el archivo para generar los foreach
         $parts = preg_split('/(\[\[ | \]\])/', $this->template);
 
@@ -62,7 +62,8 @@ class myTemplate
 
                 $foreach_flag = true;
                 $foreach_start = $i;
-                $foreach_collection = $this->getProperty($this->object, $element);
+                $foreach_collection = $this->getProperty(
+                    $this->object, $element);
                 $foreach_components = array();
 
                 $parts[$i] = '';
@@ -74,7 +75,8 @@ class myTemplate
                 for ($j = 0; $j < count($transpose); $j++) {
                     $res = '';
                     for ($k = 0; $k < count($transpose[$j]); $k++) {
-                        $res .= $parts[$foreach_start + (2 * $k) + 1] . $transpose[$j][$k];
+                        $res .= $parts[$foreach_start + (2 * $k) + 1]
+                             . $transpose[$j][$k];
                     }
                     $res .= $parts[$i - 1];
                     $resume[] = $res;
@@ -135,5 +137,30 @@ class myTemplate
         }
 
         return $iterator;
+    }
+
+    public static function render($text, $vars, $scape) {
+        $compile = '';
+        $tpl = new Xhtml();
+        $specialEscape = new SpecialEscape();
+
+        if (!empty($text)) {
+            $tpl->setTemplate($text);
+            $tpl->setObject($vars);
+
+            $compile = $tpl->compile();
+            if ($scape) {
+                $compile = $specialEscape->specialEscape($compile);
+            }
+        }
+
+        return $compile;
+    }
+    
+    public static function save($text, $vars, $scape, $destination) {
+        $render = Xhtml::render($text, $vars, $scape);
+        $content = '<vocare>' . $render . '</vocare>';
+        
+        return file_put_contents($destination, $content);
     }
 }

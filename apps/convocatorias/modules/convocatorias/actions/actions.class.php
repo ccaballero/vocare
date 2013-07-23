@@ -55,7 +55,7 @@ class convocatoriasActions extends PlantillasDefault
 
         // This is the part where I talk to templating
         if (!empty($this->redaction)) {
-            $this->preview = $convocatoria->renderXHTML($this->redaction);
+            $this->preview = Xhtml::render($this->redaction, $this->object);
         } else {
             $this->preview = null;
             $this->max_enmienda = 0;
@@ -105,49 +105,47 @@ class convocatoriasActions extends PlantillasDefault
         return parent::processForm($request, $form, $flash);
     }
 
-    public function renderXSLT($xslt, $mime = 'text/plain; charset=utf-8') {
-        $convocatoria = $this->getRoute()->getObject();
-
-        $this->setLayout(false);
-        sfConfig::set('sf_web_debug', false);
-
-        $this->getResponse()->clearHttpHeaders();
-        $this->getResponse()->setHttpHeader('Pragma: public', true);
-        $this->getResponse()->setContentType($mime);
-
-        $this->getResponse()->sendHttpHeaders();
-        $this->getResponse()->setContent($convocatoria->render($xslt));
-
-        return sfView::NONE;
-    }
-
     public function executeTexto() {
-        return $this->renderXSLT('transform-txt');
+        $convocatoria = $this->getRoute()->getObject();
+        return $this->sendContent(
+            Xslt::render(
+                'transform-txt',
+                $convocatoria->getXmlMaxEnmienda()
+            )
+        );
     }
 
     public function executeLatex() {
-        return $this->renderXSLT('transform-latex');
+        $convocatoria = $this->getRoute()->getObject();
+        return $this->sendContent(
+            Xslt::render(
+                'transform-latex',
+                $convocatoria->getXmlMaxEnmienda()
+            )
+        );
     }
 
     public function executePdf() {
         $convocatoria = $this->getRoute()->getObject();
-        $pdf_file = $convocatoria->compilePDF();
+        $filename = $convocatoria->getId() . '_'
+            . $convocatoria->getMaxEnmienda();
 
-        $this->setLayout(false);
-        sfConfig::set('sf_web_debug', false);
+        Xslt::save(
+            'transform-latex',
+            $convocatoria->getXmlMaxEnmienda(),
+            $filename . '.tex'
+        );
 
-        $this->forward404Unless(file_exists($pdf_file));
-
-        $this->getResponse()->clearHttpHeaders();
-        $this->getResponse()->setHttpHeader('Pragma: public', true);
-        $this->getResponse()->setHttpHeader('Content-Disposition',
-            'attachment; filename="convocatoria_' . basename($pdf_file) . '"');
-        $this->getResponse()->setContentType('application/pdf');
-
-        $this->getResponse()->sendHttpHeaders();
-        $this->getResponse()->setContent(readfile($pdf_file));
-
-        return sfView::NONE;
+        $result = PdfLatex::compile($filename);
+        if (!empty($result)) {
+            return $this->sendContent(
+                readfile($result),
+                'application/pdf',
+                'convocatoria_' . $convocatoria->getGestion() . '.pdf'
+            );
+        } else {
+            return $this->sendContent('compilación fallida!!');
+        }
     }
 
     // questions related by redaction of text in convocatorias
@@ -185,20 +183,10 @@ class convocatoriasActions extends PlantillasDefault
         }
 
         // This is the part where I talk to templating
-        $tpl = new myTemplate();
-        $tpl->setTemplate($texto_redaccion);
-        $tpl->setObject($convocatoria);
-
-        $render = $tpl->render();
-        $specialEscape = new SpecialEscape();
-        $escape = $specialEscape->specialEscape($render);
-
-        $dirbase = sfConfig::get('app_dir_generation');
-        $filename = $convocatoria->getId() . '_' . $numero_enmienda . '.xml';
-
-        $destination = $dirbase . '/' . $filename;
-        $content = '<vocare>' . $escape . '</vocare>';
-        $result = file_put_contents($destination, $content);
+        $destination = sfConfig::get('app_dir_generation') . '/'
+            . $convocatoria->getId() . '_' . $numero_enmienda . '.xml';
+        $result = Xhtml::save(
+            $texto_redaccion, $convocatoria, true, $destination);
 
         if ($result) {
             $this->getUser()->setFlash('success', 'La redacción de la '
@@ -337,7 +325,10 @@ class convocatoriasActions extends PlantillasDefault
                 ->setBody($content)
                 ->setContentType('text/html');
 
-            $this->getMailer()->send($message);
+            try {
+                $this->getMailer()->send($message);
+            } catch (Exception $e) {}
+            // Transporm exception, who care
         }
     }
 
@@ -363,7 +354,6 @@ class convocatoriasActions extends PlantillasDefault
             $this->emailTitle($title),
             $this->emailContent($title)
         );
-
         $this->actionChange('promover');
     }
 

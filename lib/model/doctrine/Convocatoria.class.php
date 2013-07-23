@@ -407,71 +407,15 @@ class Convocatoria extends BaseConvocatoria
         );
     }
 
-    public function renderLastXHTML() {
-        return $this->renderXHTML($this->getEnmienda($this->getMaxEnmienda()));
+    public function lastEnmienda() {
+        return $this->getEnmienda($this->getMaxEnmienda());
     }
 
-    public function renderXHTML($redaction) {
-        $tpl = new myTemplate();
-        if (!empty($redaction)) {
-            $tpl->setTemplate($redaction);
-            $tpl->setObject($this);
-            return $tpl->render();
-        }
+    public function getXmlMaxEnmienda() {
+        $dirbase = sfConfig::get('app_dir_generation');
+        $filename = $this->getId() . '_' . $this->getMaxEnmienda() . '.xml';
 
-        return '';
-    }
-
-    public function render($xslt) {
-        $dirbase1 = sfConfig::get('app_dir_generation');
-        $filename1 = $this->getId() . '_' . $this->getMaxEnmienda() . '.xml';
-
-        $dirbase2 = sfConfig::get('app_xslt_transforms');
-        $filename2 = $xslt . '.xslt';
-
-        $xslDoc = new DOMDocument();
-        $xslDoc->load("$dirbase2/$filename2");
-
-        $xmlDoc = new DOMDocument();
-        $xmlDoc->loadXML(
-            str_replace('&nbsp;', '', file_get_contents("$dirbase1/$filename1"))
-        );
-
-        $proc = new XSLTProcessor();
-        $proc->importStylesheet($xslDoc);
-
-        try {
-            ob_start();
-            $proc->transformToURI($xmlDoc, 'php://output');
-            $output = ob_get_contents();
-            ob_clean();
-
-            return $output;
-        } catch (Exception $e) {
-            $e->printStackTrace();
-        }
-    }
-
-    public function renderToFile($xslt, $destination) {
-        $output = $this->render($xslt);
-        $result = file_put_contents($destination, $output);
-        return $result;
-    }
-
-    public function compilePDF() {
-        $latex_dir = sfConfig::get('app_dir_generation');
-        $filename = $this->getId() . '_' . $this->getMaxEnmienda();
-
-        $tex_file = "$latex_dir/$filename.tex";
-        $pdf_file = "$latex_dir/$filename.pdf";
-
-        // generate the latex file
-        $result = $this->renderToFile('transform-latex', "$latex_dir/$filename.tex");
-        if ($result) {
-            $pdflatex = sfConfig::get('app_pdflatex');
-            exec("$pdflatex -output-directory $latex_dir $tex_file");
-            return $pdf_file;
-        }
+        return file_get_contents($dirbase . '/' . $filename);
     }
 }
 

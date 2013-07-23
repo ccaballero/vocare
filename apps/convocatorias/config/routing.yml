@@ -113,6 +113,10 @@ documentacion:
     actions: [list, new, create, show, delete]
     object_actions:
       editar: [post]
+      # document generation
+      texto: [get]
+      latex: [get]
+      pdf: [get]
 
 plantillas:
   class: sfDoctrineRouteCollection

@@ -17,63 +17,6 @@ para la gestión I/2012 - II/2012.</p>
         <th>Nombre de la Auxiliatura</th>
         <th>Código de la Auxiliatura</th>
     </tr>
-
-    <tr>
-        <td class="text-right">1</td>
-        <td class="text-center">7 Aux.</td>
-        <td class="text-center">80 Hrs/mes</td>
-        <td>Administrador de Laboratorio de Cómputo</td>
-        <td class="text-center">LCO-ADM</td>
-    </tr>
-
-    <tr>
-        <td class="text-right">2</td>
-        <td class="text-center">3 Aux.</td>
-        <td class="text-center">80 Hrs/mes</td>
-        <td>Administrador de Laboratorio de Desarrollo</td>
-        <td class="text-center">LDS-ADM</td>
-    </tr>
-
-    <tr>
-        <td class="text-right">3</td>
-        <td class="text-center">2 Aux.</td>
-        <td class="text-center">56 Hrs/mes</td>
-        <td>Auxiliar de Laboratorio de Desarrollo</td>
-        <td class="text-center">LDS-AUX</td>
-    </tr>
-
-    <tr>
-        <td class="text-right">4</td>
-        <td class="text-center">1 Aux.</td>
-        <td class="text-center">80 Hrs/mes</td>
-        <td>Administrador de Laboratorio de Mantenimiento de Software</td>
-        <td class="text-center">LM-ADM-SW</td>
-    </tr>
-
-    <tr>
-        <td class="text-right">5</td>
-        <td class="text-center">4 Aux.</td>
-        <td class="text-center">32 Hrs/mes</td>
-        <td>Auxiliar de Laboratorio de Mantenimiento de Software y Hardware</td>
-        <td class="text-center">LM-AUX-SW</td>
-    </tr>
-
-    <tr>
-        <td class="text-right">6</td>
-        <td class="text-center">1 Aux.</td>
-        <td class="text-center">80 Hrs/mes</td>
-        <td>Administrador de Laboratorio de Mantenimiento de Hardware</td>
-        <td class="text-center">LM-ADM-HW</td>
-    </tr>
-
-    <tr>
-        <td class="text-right">7</td>
-        <td class="text-center">4 Aux.</td>
-        <td class="text-center">32 Hrs/mes</td>
-        <td>Auxiliar de Laboratorio de Mantenimiento de Hardware</td>
-        <td class="text-center">LM-AUX-HW</td>
-    </tr>
-
     <tr>
         <td class="text-right">Total</td>
         <td class="text-center">22 Aux.</td>

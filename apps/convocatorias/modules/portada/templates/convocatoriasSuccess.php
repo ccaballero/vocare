@@ -5,7 +5,9 @@
 <?php foreach ($vigentes as $convocatoria): ?>
     <?php include_partial('convocatoria_medium', array(
         'convocatoria' => $convocatoria,
-        'preview' => $convocatoria->renderLastXHTML(),
+        'preview' => Xhtml::render(
+            $convocatoria->lastEnmienda(), $convocatoria, false
+        ),
     )) ?>
 <?php endforeach; ?>
 <?php else: ?>
@@ -17,7 +19,9 @@
 <?php foreach ($finalizadas as $convocatoria): ?>
     <?php include_partial('convocatoria_medium', array(
         'convocatoria' => $convocatoria,
-        'preview' => $convocatoria->renderLastXHTML(),
+        'preview' => Xhtml::render(
+            $convocatoria->lastEnmienda(), $convocatoria, false
+        ),
     )) ?>
 <?php endforeach; ?>
 <?php else: ?>

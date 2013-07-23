@@ -5,8 +5,10 @@
     <div id="preview" class="redaction">
         <?php include_partial('convocatorias/preview', array(
                 'object' => $convocatoria,
-                'preview' => $convocatoria->renderLastXHTML(),
-            )) ?>
+                'preview' => Xhtml::render(
+                    $convocatoria->lastEnmienda(), $convocatoria, false
+                )
+        )) ?>
     </div>
     <div class="information">
         <?php include_partial('convocatorias/tasks', array(

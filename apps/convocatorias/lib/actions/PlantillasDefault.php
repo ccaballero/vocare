@@ -83,4 +83,22 @@ class PlantillasDefault extends sfActions
 
         return $form;
     }
+
+    protected function sendContent($content,
+            $mime = 'text/plain; charset=utf-8',
+            $filename) {
+        $this->setLayout(false);
+        sfConfig::set('sf_web_debug', false);
+
+        $this->getResponse()->clearHttpHeaders();
+        $this->getResponse()->setHttpHeader('Pragma: public', true);
+        $this->getResponse()->setHttpHeader('Content-Disposition',
+            'attachment; filename="' . $filename . '"');
+        $this->getResponse()->setContentType($mime);
+
+        $this->getResponse()->sendHttpHeaders();
+        $this->getResponse()->setContent($content);
+
+        return sfView::NONE;
+    }
 }
