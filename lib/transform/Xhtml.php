@@ -163,4 +163,10 @@ class Xhtml
         
         return file_put_contents($destination, $content);
     }
+    
+    public static function taxonomy($text) {
+        $tpl = new Xhtml();
+        $tpl->setTemplate($text);
+        return $tpl->getTaxonomy();
+    }
 }

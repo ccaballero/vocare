@@ -1,7 +1,7 @@
 <?php
 
-class documentacionActions extends PlantillasDefault
-{
+class documentacionActions extends PlantillasDefault {
+
     public $_table = 'DocumentacionVolumen';
     public $_form = 'DocumentacionVolumenForm';
     public $_route_list = 'documentacion';
@@ -21,9 +21,19 @@ class documentacionActions extends PlantillasDefault
         $volumen = $this->getRoute()->getObject();
         $this->forward404Unless($volumen);
 
+        $previews = array();
+        $redaccion = $volumen->getRedaccion();
+        $common = json_decode($volumen->vars);
+
+        foreach ($volumen->getDocumentaciones() as $doc) {
+            $obj = json_decode($doc->getVars());
+            $vars = Meld::join($common, $obj);
+            $previews[] = Xhtml::render($redaccion, $vars, true);
+        }
+
         $this->object = $volumen;
         $this->docs = $volumen->getDocumentaciones();
-        $this->previews = $volumen->renderXHTML();
+        $this->previews = $previews;
     }
 
     public function executeEditar(sfWebRequest $request) {
@@ -80,9 +90,9 @@ class documentacionActions extends PlantillasDefault
 
         $volumen->save();
 
-        $this->getUser()->setFlash('success',
-            'La información de documentación ha sido registrada');
+        $this->getUser()->setFlash('success', 'La información de documentación ha sido registrada');
         $this->redirect($this->generateUrl('documentacion_show', array(
-            'id' => $volumen->getId())));
+                    'id' => $volumen->getId())));
     }
+
 }

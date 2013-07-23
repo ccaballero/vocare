@@ -2,17 +2,17 @@
 
 class Meld
 {
-    public function join($element1, $element2) {
+    public static function join($element1, $element2) {
         if (is_object($element1)) {
-            return (object)$this->arrays((array)$element1, (array)$element2);
+            return (object)Meld::arrays((array)$element1, (array)$element2);
         } else if (is_array($element1)) {
-            return $this->arrays($element1, $element2);
+            return Meld::arrays($element1, $element2);
         } else {
-            return $this->primitives($element1, $element2);
+            return Meld::primitives($element1, $element2);
         }
     }
 
-    public function arrays($array1, $array2) {
+    public static function arrays($array1, $array2) {
         if (!is_array($array1) || !is_array($array2)) {
             return $array1;
         }
@@ -29,7 +29,7 @@ class Meld
                 if (empty($value1)) {
                     $join[$key] = $value2;
                 } else {
-                    $join[$key] = $this->join($value1, $value2);
+                    $join[$key] = Meld::join($value1, $value2);
                 }
             }
         }
@@ -37,7 +37,7 @@ class Meld
         return $join;
     }
 
-    public function primitives($value1, $value2) {
+    public static function primitives($value1, $value2) {
         if (gettype($value1) <> gettype($value2)) {
             return $value1;
         }

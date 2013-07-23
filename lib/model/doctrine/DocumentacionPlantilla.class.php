@@ -7,27 +7,11 @@ class DocumentacionPlantilla extends BaseDocumentacionPlantilla
     }
 
     public function save(Doctrine_Connection $conn = null) {
-        $tpl = new myTemplate();
-        $tpl->setTemplate($this->getRedaccion());
-
-        $taxonomy = $tpl->getTaxonomy();
+        $taxonomy = Xhtml::taxonomy($this->getRedaccion());
         $json_taxonomy = json_encode($taxonomy);
         $this->setTypes($json_taxonomy);
 
         parent::save();
-    }
-
-    public function getTaxonomy() {
-        $tpl = new myTemplate();
-
-        $redaction = $this->getRedaccion();
-        if (!empty($redaction)) {
-            $tpl->setTemplate($redaction);
-
-            return $tpl->getTaxonomy();
-        }
-
-        return array();
     }
 
 //    private function fillTypes($taxonomy, $types) {

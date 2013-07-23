@@ -20,7 +20,7 @@ class plantillasActions extends PlantillasDefault
     public function executeShow(sfWebRequest $request) {
         $this->object = $this->getRoute()->getObject();
         $this->redaccion = $this->object->getRedaccion();
-        $this->taxonomy = $this->object->getTaxonomy();
+        $this->taxonomy = Xhtml::taxonomy($this->object->getRedaccion());
 
         $this->forward404Unless($this->object);
     }
