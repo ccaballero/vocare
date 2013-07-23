@@ -51,18 +51,18 @@ class documentacionActions extends PlantillasDefault
                         $volumen->setNombre($param);
                         break;
                     case 'common':
-                        $volumen->setVars(json_encode($param));
+                        $volumen->setVars($this->transformJSON($param));
                         break;
                     case 'edit':
                         $doc = $docs[$id];
-                        $doc->setVars(json_encode($param));
+                        $doc->setVars($this->transformJSON($param));
                         $doc->save();
                         break;
                     case 'new':
                         $documentation = new Documentacion();
                         $documentation->plantilla_id = $volumen->plantilla_id;
                         $documentation->volumen_id = $volumen->id;
-                        $documentation->vars = json_encode($param);
+                        $documentation->vars = $this->transformJSON($param);
                         $documentation->save();
                         break;
                     case 'delete':
@@ -84,5 +84,34 @@ class documentacionActions extends PlantillasDefault
             'La información de documentación ha sido registrada');
         $this->redirect($this->generateUrl('documentacion_show', array(
             'id' => $volumen->getId())));
+    }
+    
+    private function transformJSON($object) {
+        if (is_array($object)) {
+            $array = array();
+            if ($this->isArray($object)) {
+                foreach ($object as $value) {
+                    $array[] = $this->transformJSON($value);
+                }
+                return '[' . implode(',', $array) . ']';
+            } else {
+                foreach ($object as $key => $value) {
+                    $array[] = '"' . $key . '":' . $this->transformJSON($value);
+                }
+                return '{' . implode(',', $array) . '}';
+            }
+        } else {
+            return '"' . $object . '"';
+        }
+    }
+    
+    private function isArray($object) {
+        $keys = array_keys($object);
+        foreach ($keys as $key) {
+            if (!is_int($key)) {
+                return false;
+            }
+        }
+        return true;
     }
 }
