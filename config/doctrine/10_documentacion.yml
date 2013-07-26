@@ -5,29 +5,25 @@ DocumentacionPlantilla:
   columns:
     id:
       type: integer(4)
-      fixed: false
       unsigned: true
       primary: true
       autoincrement: true
-    nombre:
+    label:
       type: string(128)
-      fixed: false
       notnull: true
-    redaccion:
+    redaction:
       type: clob
-      fixed: false
       notnull: true
       default: ''
     types:
       type: clob
-      fixed: false
       notnull: true
       default: ''
   relations:
-    DocumentacionVolumenes:
+    Volumenes:
       class: DocumentacionVolumen
       local: id
-      foreign: plantilla_id
+      foreign: template_id
       type: many
 
 DocumentacionVolumen:
@@ -37,65 +33,63 @@ DocumentacionVolumen:
   columns:
     id:
       type: integer(4)
-      fixed: false
       unsigned: true
       primary: true
       autoincrement: true
-    plantilla_id:
+    template_id:
       type: integer(4)
-      fixed: false
       unsigned: true
-      notnull: true
-    nombre:
+      primary: false
+    label:
       type: string(128)
-      fixed: false
       notnull: true
     vars:
       type: clob
-      fixed: false
       notnull: true
       default: ''
   relations:
-    DocumentacionPlantilla:
-      local: plantilla_id
+    Template:
+      local: template_id
       foreign: id
-      onDelete: cascade
-    Documentaciones:
+      foreignAlias: Volumenes
+      foreignType: many
+      type: one
+    Documents:
       class: Documentacion
       local: id
       foreign: volumen_id
       type: many
 
 Documentacion:
+  options:
+    symfony:
+      form: false
+      filter: false
   actAs: [Timestampable]
   connection: doctrine
   tableName: documentacion
   columns:
     id:
       type: integer(4)
-      fixed: false
       unsigned: true
       primary: true
       autoincrement: true
-    plantilla_id:
+    template_id:
       type: integer(4)
-      fixed: false
       unsigned: true
+      primary: true
     volumen_id:
       type: integer(4)
-      fixed: false
       unsigned: true
+      primary: true
     vars:
       type: clob
-      fixed: false
       notnull: true
       default: ''
   relations:
-    DocumentacionVolumen:
+    Volumen:
       local: volumen_id
       foreign: id
-      onDelete: cascade
-    DocumentacionPlantilla:
-      local: plantilla_id
-      foreign: id
-      onDelete: cascade
+      foreignAlias: Documents
+      foreignType: many
+      type: one

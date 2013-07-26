@@ -19,8 +19,8 @@ class plantillasActions extends PlantillasDefault
 
     public function executeShow(sfWebRequest $request) {
         $this->object = $this->getRoute()->getObject();
-        $this->redaccion = $this->object->getRedaccion();
-        $this->taxonomy = Xhtml::taxonomy($this->object->getRedaccion());
+        $this->redaction = $this->object->getRedaction();
+        $this->taxonomy = Xhtml::taxonomy($this->object->getRedaction());
 
         $this->forward404Unless($this->object);
     }
@@ -28,11 +28,11 @@ class plantillasActions extends PlantillasDefault
     public function executeClonar(sfWebRequest $request) {
         $object = $this->getRoute()->getObject();
 
-        $plantilla = new DocumentacionPlantilla();
-        $plantilla->nombre = $object->getNombre() . ' (duplicado)';
-        $plantilla->redaccion = $object->getRedaccion();
-        $plantilla->types = $object->getTypes();
-        $plantilla->save();
+        $template = new DocumentacionPlantilla();
+        $template->label = $object->getLabel() . ' (duplicado)';
+        $template->redaction = $object->getRedaction();
+        $template->types = $object->getTypes();
+        $template->save();
 
         $this->getUser()->setFlash('success', 'La plantilla de documentación '
                 . 'a sido duplicada exitosamente');

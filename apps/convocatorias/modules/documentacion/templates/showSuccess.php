@@ -1,4 +1,4 @@
-<h1><?php echo $object->getNombre() ?></h1>
+<h1><?php echo $object ?></h1>
 
 <div id="tabber">
     <?php include_partial('documentacion/tabs', array(
@@ -28,7 +28,7 @@
                     )) ?>">
                 <?php include_partial('documentacion/editor', array(
                     'object' => $object,
-                    'docs' => $docs,
+                    'documents' => $documents,
                 )) ?>
                 <p class="submit">
                     <input name="documentation"

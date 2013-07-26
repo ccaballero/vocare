@@ -1,7 +1,7 @@
 DocumentacionPlantilla:
   2012_tribunal_conocimientos:
-    nombre: Tribunal de Conocimiento (Convocatoria 2012)
-    redaccion: |
+    label: Tribunal de Conocimiento (Convocatoria 2012)
+    redaction: |
       <p>Cochabamba, [[ fecha_carta ]]<br />
       <strong>DPTO. INF-SIS [[ codigo ]] </strong></p>
       <br />
@@ -49,8 +49,8 @@ DocumentacionPlantilla:
         "remitente_cargo":""
       }
   2013_tribunal_meritos:
-    nombre: Tribunal para la Revisión de Méritos (Convocatoria 2013)
-    redaccion: |
+    label: Tribunal para la Revisión de Méritos (Convocatoria 2013)
+    redaction: |
       <p>Cochabamba, [[ fecha_carta ]]<br />
       <strong>DPTO. INF-SIS [[ codigo ]]</strong></p>
       <br />
@@ -106,8 +106,8 @@ DocumentacionPlantilla:
         "remitente_cargo":""
       }
   2013_tribunal_conocimientos:
-    nombre: Tribunal de Conocimiento (Convocatoria 2013)
-    redaccion: |
+    label: Tribunal de Conocimiento (Convocatoria 2013)
+    redaction: |
       <p>Cochabamba, [[ fecha_carta ]]<br />
       <strong>DPTO. INF-SIS [[ codigo ]] </strong></p>
       <br />
@@ -159,8 +159,8 @@ DocumentacionPlantilla:
         "remitente_cargo":""
       }
   carta_solicitud:
-    nombre: Modelo de Carta de Solicitud
-    redaccion: |
+    label: Modelo de Carta de Solicitud
+    redaction: |
       <p>Cochabamba, [[ fecha_carta ]]<br />
       <br />
       <br />

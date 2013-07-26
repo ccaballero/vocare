@@ -3,12 +3,12 @@
 class DocumentacionVolumen extends BaseDocumentacionVolumen
 {
     public function __toString() {
-        return $this->getNombre();
+        return $this->getLabel();
     }
 
     public function getTpl() {
         $plantilla = $this->getDocumentacionPlantilla();
-        $taxonomy = Xhtml::taxonomy($plantilla->getRedaccion());
+        $taxonomy = Xhtml::taxonomy($plantilla->getRedaction());
         $json_taxonomy = json_encode($taxonomy);
 
         // transform the taxonomy in a concrete structure
@@ -22,8 +22,8 @@ class DocumentacionVolumen extends BaseDocumentacionVolumen
         return $transform;
     }
 
-    public function getRedaccion() {
-        return $this->getDocumentacionPlantilla()->redaccion;
+    public function getRedaction() {
+        return $this->getDocumentacionPlantilla()->redaction;
     }
 
     public function getObjectVars() {

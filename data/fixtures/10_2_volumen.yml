@@ -1,7 +1,7 @@
 DocumentacionVolumen:
   volumen_1:
     DocumentacionPlantilla: 2012_tribunal_conocimientos
-    nombre: 142-149 Tribunal de Conocimiento de Lab. INF-SIS
+    label: 142-149 Tribunal de Conocimiento de Lab. INF-SIS
     vars: |
       {
         "fecha_carta":"3 de Julio de 2012",
@@ -16,7 +16,7 @@ DocumentacionVolumen:
       }
   volumen_2:
     DocumentacionPlantilla: 2013_tribunal_meritos
-    nombre: 303-304 Tribunales de Méritos Lab. INF-SIS
+    label: 303-304 Tribunales de Méritos Lab. INF-SIS
     vars: |
       {
         "fecha_carta":"22 de Noviembre de 2012",
@@ -35,7 +35,7 @@ DocumentacionVolumen:
       }
   volumen_3:
     DocumentacionPlantilla: 2013_tribunal_conocimientos
-    nombre: 311-312 Tribunal de Conocimiento Lab. INF-SIS
+    label: 311-312 Tribunal de Conocimiento Lab. INF-SIS
     vars: |
       {
         "fecha_carta":"29 de Noviembre de 2012",
@@ -52,7 +52,7 @@ DocumentacionVolumen:
       }
   volumen_4:
     DocumentacionPlantilla: carta_solicitud
-    nombre: Modelo de Carta de Solicitud
+    label: Modelo de Carta de Solicitud
     vars: |
       {
         "fecha_carta":"",

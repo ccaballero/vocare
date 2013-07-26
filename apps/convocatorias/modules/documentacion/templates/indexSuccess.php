@@ -43,7 +43,7 @@ conceptos para manejar satisfactoriamente esta sección del sistema:</p>
 <?php if (count($list) != 0): ?>
 <?php foreach ($list as $i => $documento): ?>
     <tr class="<?php echo fmod($i, 2) ? 'even' : 'odd' ?>">
-        <td><?php echo $documento->getNombre() ?></td>
+        <td><?php echo $documento ?></td>
         <td>
             <ul>
             <?php if ($sf_user->hasCredential('documentacion_view')): ?>

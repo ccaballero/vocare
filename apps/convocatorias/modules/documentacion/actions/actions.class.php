@@ -22,17 +22,17 @@ class documentacionActions extends PlantillasDefault {
         $this->forward404Unless($volumen);
 
         $previews = array();
-        $redaccion = $volumen->getRedaccion();
+        $redaction = $volumen->getRedaction();
         $common = json_decode($volumen->vars);
 
-        foreach ($volumen->getDocumentaciones() as $doc) {
+        foreach ($volumen->getDocuments() as $doc) {
             $obj = json_decode($doc->getVars());
             $vars = Meld::join($common, $obj);
-            $previews[] = Xhtml::render($redaccion, $vars, true);
+            $previews[] = Xhtml::render($redaction, $vars, true);
         }
 
         $this->object = $volumen;
-        $this->docs = $volumen->getDocumentaciones();
+        $this->documents = $volumen->getDocuments();
         $this->previews = $previews;
     }
 
@@ -40,7 +40,7 @@ class documentacionActions extends PlantillasDefault {
         $volumen = $this->getRoute()->getObject();
 
         $docs = array();
-        $_docs = $volumen->getDocumentaciones();
+        $_docs = $volumen->getDocuments();
         foreach ($_docs as $_doc) {
             $docs[$_doc->getId()] = $_doc;
         }
@@ -58,7 +58,7 @@ class documentacionActions extends PlantillasDefault {
                 }
                 switch ($type) {
                     case 'volumen':
-                        $volumen->setNombre($param);
+                        $volumen->setLabel($param);
                         break;
                     case 'common':
                         $volumen->setVars(JsonTransform::transform($param));
@@ -70,7 +70,7 @@ class documentacionActions extends PlantillasDefault {
                         break;
                     case 'new':
                         $documentation = new Documentacion();
-                        $documentation->plantilla_id = $volumen->plantilla_id;
+                        $documentation->template_id = $volumen->template_id;
                         $documentation->volumen_id = $volumen->id;
                         $documentation->vars = JsonTransform::transform($param);
                         $documentation->save();

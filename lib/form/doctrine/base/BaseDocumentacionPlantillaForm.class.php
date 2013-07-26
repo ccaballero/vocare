@@ -16,8 +16,8 @@ abstract class BaseDocumentacionPlantillaForm extends BaseFormDoctrine
   {
     $this->setWidgets(array(
       'id'         => new sfWidgetFormInputHidden(),
-      'nombre'     => new sfWidgetFormInputText(),
-      'redaccion'  => new sfWidgetFormTextarea(),
+      'label'      => new sfWidgetFormInputText(),
+      'redaction'  => new sfWidgetFormTextarea(),
       'types'      => new sfWidgetFormTextarea(),
       'created_at' => new sfWidgetFormDateTime(),
       'updated_at' => new sfWidgetFormDateTime(),
@@ -25,8 +25,8 @@ abstract class BaseDocumentacionPlantillaForm extends BaseFormDoctrine
 
     $this->setValidators(array(
       'id'         => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
-      'nombre'     => new sfValidatorString(array('max_length' => 128)),
-      'redaccion'  => new sfValidatorString(array('required' => false)),
+      'label'      => new sfValidatorString(array('max_length' => 128)),
+      'redaction'  => new sfValidatorString(array('required' => false)),
       'types'      => new sfValidatorString(array('required' => false)),
       'created_at' => new sfValidatorDateTime(),
       'updated_at' => new sfValidatorDateTime(),

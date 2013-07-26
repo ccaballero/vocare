@@ -10,12 +10,12 @@ class DocumentacionPlantillaForm extends BaseDocumentacionPlantillaForm
         );
 
         $this->widgetSchema->setLabels(array(
-            'nombre' => 'Título (*):',
-            'redaccion' => 'Redacción:',
+            'label' => 'Título (*):',
+            'redaction' => 'Redacción:',
         ));
 
-        $this->widgetSchema['nombre']->setAttribute('class', 'focus');
-        $this->widgetSchema['redaccion']->setAttribute('class', 'middle-area');
+        $this->widgetSchema['label']->setAttribute('class', 'focus');
+        $this->widgetSchema['redaction']->setAttribute('class', 'middle-area');
 
   	$decorator = new FormDecoratorDefault($this->getWidgetSchema());
   	$this->widgetSchema->addFormFormatter('custom', $decorator);

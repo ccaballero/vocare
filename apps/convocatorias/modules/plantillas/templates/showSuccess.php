@@ -1,11 +1,11 @@
-<h1><?php echo $object->getNombre() ?></h1>
+<h1><?php echo $object ?></h1>
 
 <p>[<?php echo link_to('Editar redacción',
 url_for('plantillas_edit', array('id' => $object->getId()))) ?>]&nbsp;
 [<?php echo link_to('Volver a la lista', url_for('plantillas')) ?>]</p>
 
 <div id="letter">
-    <?php echo specialEscape($sf_data->getRaw('redaccion')) ?>
+    <?php echo specialEscape($sf_data->getRaw('redaction')) ?>
 </div>
 
 <div class="right widget">

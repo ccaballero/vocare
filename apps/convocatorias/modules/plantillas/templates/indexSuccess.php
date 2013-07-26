@@ -25,7 +25,7 @@ potencia que se gana a la hora de automatizar.</p>
     </tr>
 <?php foreach ($list as $i => $plantilla): ?>
     <tr class="<?php echo fmod($i, 2) ? 'even' : 'odd' ?>">
-        <td><?php echo $plantilla->getNombre() ?></td>
+        <td><?php echo $plantilla ?></td>
         <td>
             <ul>
         <?php if ($sf_user->hasCredential('documentacion_plantilla_view')): ?>

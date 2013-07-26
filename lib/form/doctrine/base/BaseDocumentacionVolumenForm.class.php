@@ -15,21 +15,21 @@ abstract class BaseDocumentacionVolumenForm extends BaseFormDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'id'           => new sfWidgetFormInputHidden(),
-      'plantilla_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('DocumentacionPlantilla'), 'add_empty' => false)),
-      'nombre'       => new sfWidgetFormInputText(),
-      'vars'         => new sfWidgetFormTextarea(),
-      'created_at'   => new sfWidgetFormDateTime(),
-      'updated_at'   => new sfWidgetFormDateTime(),
+      'id'          => new sfWidgetFormInputHidden(),
+      'template_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('DocumentacionPlantilla'), 'add_empty' => true)),
+      'label'       => new sfWidgetFormInputText(),
+      'vars'        => new sfWidgetFormTextarea(),
+      'created_at'  => new sfWidgetFormDateTime(),
+      'updated_at'  => new sfWidgetFormDateTime(),
     ));
 
     $this->setValidators(array(
-      'id'           => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
-      'plantilla_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('DocumentacionPlantilla'))),
-      'nombre'       => new sfValidatorString(array('max_length' => 128)),
-      'vars'         => new sfValidatorString(array('required' => false)),
-      'created_at'   => new sfValidatorDateTime(),
-      'updated_at'   => new sfValidatorDateTime(),
+      'id'          => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
+      'template_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('DocumentacionPlantilla'), 'required' => false)),
+      'label'       => new sfValidatorString(array('max_length' => 128)),
+      'vars'        => new sfValidatorString(array('required' => false)),
+      'created_at'  => new sfValidatorDateTime(),
+      'updated_at'  => new sfValidatorDateTime(),
     ));
 
     $this->widgetSchema->setNameFormat('documentacion_volumen[%s]');

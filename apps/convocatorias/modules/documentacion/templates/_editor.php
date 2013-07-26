@@ -2,7 +2,7 @@
     <label>Nombre del volumen:</label>
     <input type="text"
            name="volumen_"
-           value="<?php echo $object->getNombre() ?>" />
+           value="<?php echo $object ?>" />
     <input type="hidden"
            name="delete_docs"
            value="" />
@@ -38,7 +38,7 @@
                 'object' => $object->getVars()
             )) ?>,false)
 
-    <?php foreach ($docs as $i => $doc): ?>
+    <?php foreach ($documents as $i => $doc): ?>
         BoxManager.create(<?php echo $doc->getId() ?>,
             'edit','Documento '+<?php echo $i ?>,
             <?php include_partial('scape', array(

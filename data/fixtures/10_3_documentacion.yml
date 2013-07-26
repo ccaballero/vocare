@@ -1,6 +1,5 @@
 Documentacion:
   carta_2012_01:
-    DocumentacionPlantilla: 2012_tribunal_conocimientos
     DocumentacionVolumen: volumen_1
     vars: |
       {
@@ -15,7 +14,6 @@ Documentacion:
         "remitente_cargo":""
       }
   carta_2012_02:
-    DocumentacionPlantilla: 2012_tribunal_conocimientos
     DocumentacionVolumen: volumen_1
     vars: |
       {
@@ -30,7 +28,6 @@ Documentacion:
         "remitente_cargo":""
       }
   carta_2012_03:
-    DocumentacionPlantilla: 2012_tribunal_conocimientos
     DocumentacionVolumen: volumen_1
     vars: |
       {
@@ -45,7 +42,6 @@ Documentacion:
         "remitente_cargo":""
       }
   carta_2012_04:
-    DocumentacionPlantilla: 2012_tribunal_conocimientos
     DocumentacionVolumen: volumen_1
     vars: |
       {
@@ -60,7 +56,6 @@ Documentacion:
         "remitente_cargo":""
       }
   carta_2012_05:
-    DocumentacionPlantilla: 2012_tribunal_conocimientos
     DocumentacionVolumen: volumen_1
     vars: |
       {
@@ -75,7 +70,6 @@ Documentacion:
         "remitente_cargo":""
       }
   carta_2012_06:
-    DocumentacionPlantilla: 2012_tribunal_conocimientos
     DocumentacionVolumen: volumen_1
     vars: |
       {
@@ -90,7 +84,6 @@ Documentacion:
         "remitente_cargo":""
       }
   carta_2012_07:
-    DocumentacionPlantilla: 2012_tribunal_conocimientos
     DocumentacionVolumen: volumen_1
     vars: |
       {
@@ -105,7 +98,6 @@ Documentacion:
         "remitente_cargo":""
       }
   carta_2012_08:
-    DocumentacionPlantilla: 2012_tribunal_conocimientos
     DocumentacionVolumen: volumen_1
     vars: |
       {
@@ -120,7 +112,6 @@ Documentacion:
         "remitente_cargo":""
       }
   carta_2012_09:
-    DocumentacionPlantilla: 2012_tribunal_conocimientos
     DocumentacionVolumen: volumen_1
     vars: |
       {
@@ -135,7 +126,6 @@ Documentacion:
         "remitente_cargo":""
       }
   carta_2012_10:
-    DocumentacionPlantilla: 2012_tribunal_conocimientos
     DocumentacionVolumen: volumen_1
     vars: |
       {
@@ -150,7 +140,6 @@ Documentacion:
         "remitente_cargo":""
       }
   carta_2012_11:
-    DocumentacionPlantilla: 2012_tribunal_conocimientos
     DocumentacionVolumen: volumen_1
     vars: |
       {
@@ -165,7 +154,6 @@ Documentacion:
         "remitente_cargo":""
       }
   carta_2012_12:
-    DocumentacionPlantilla: 2012_tribunal_conocimientos
     DocumentacionVolumen: volumen_1
     vars: |
       {
@@ -180,7 +168,6 @@ Documentacion:
         "remitente_cargo":""
       }
   carta_2012_13:
-    DocumentacionPlantilla: 2012_tribunal_conocimientos
     DocumentacionVolumen: volumen_1
     vars: |
       {
@@ -195,7 +182,6 @@ Documentacion:
         "remitente_cargo":""
       }
   carta_2012_14:
-    DocumentacionPlantilla: 2012_tribunal_conocimientos
     DocumentacionVolumen: volumen_1
     vars: |
       {
@@ -210,7 +196,6 @@ Documentacion:
         "remitente_cargo":""
       }
   carta_2012_15:
-    DocumentacionPlantilla: 2012_tribunal_conocimientos
     DocumentacionVolumen: volumen_1
     vars: |
       {
@@ -225,7 +210,6 @@ Documentacion:
         "remitente_cargo":""
       }
   carta_2012_16:
-    DocumentacionPlantilla: 2012_tribunal_conocimientos
     DocumentacionVolumen: volumen_1
     vars: |
       {
@@ -240,7 +224,6 @@ Documentacion:
         "remitente_cargo":""
       }
   carta_2013_01:
-    DocumentacionPlantilla: 2013_tribunal_meritos
     DocumentacionVolumen: volumen_2
     vars: |
       {
@@ -262,7 +245,6 @@ Documentacion:
         "remitente_cargo":""
       }
   carta_2013_02:
-    DocumentacionPlantilla: 2013_tribunal_meritos
     DocumentacionVolumen: volumen_2
     vars: |
       {
@@ -284,7 +266,6 @@ Documentacion:
         "remitente_cargo":""
       }
   carta_2013_03:
-    DocumentacionPlantilla: 2013_tribunal_conocimientos
     DocumentacionVolumen: volumen_3
     vars: |
       {
@@ -301,7 +282,6 @@ Documentacion:
         "remitente_cargo":""
       }
   carta_2013_04:
-    DocumentacionPlantilla: 2013_tribunal_conocimientos
     DocumentacionVolumen: volumen_3
     vars: |
       {
@@ -318,7 +298,6 @@ Documentacion:
         "remitente_cargo":""
       }
   carta_2013_05:
-    DocumentacionPlantilla: 2013_tribunal_conocimientos
     DocumentacionVolumen: volumen_3
     vars: |
       {
@@ -335,7 +314,6 @@ Documentacion:
         "remitente_cargo":""
       }
   carta_2013_06:
-    DocumentacionPlantilla: 2013_tribunal_conocimientos
     DocumentacionVolumen: volumen_3
     vars: |
       {
@@ -352,7 +330,6 @@ Documentacion:
         "remitente_cargo":""
       }
   carta_2013_07:
-    DocumentacionPlantilla: 2013_tribunal_conocimientos
     DocumentacionVolumen: volumen_3
     vars: |
       {
@@ -369,7 +346,6 @@ Documentacion:
         "remitente_cargo":""
       }
   carta_2013_08:
-    DocumentacionPlantilla: 2013_tribunal_conocimientos
     DocumentacionVolumen: volumen_3
     vars: |
       {
@@ -386,7 +362,6 @@ Documentacion:
         "remitente_cargo":""
       }
   carta_2013_09:
-    DocumentacionPlantilla: 2013_tribunal_conocimientos
     DocumentacionVolumen: volumen_3
     vars: |
       {
@@ -403,7 +378,6 @@ Documentacion:
         "remitente_cargo":""
       }
   carta_2013_10:
-    DocumentacionPlantilla: 2013_tribunal_conocimientos
     DocumentacionVolumen: volumen_3
     vars: |
       {
@@ -420,7 +394,6 @@ Documentacion:
         "remitente_cargo":""
       }
   carta_2013_11:
-    DocumentacionPlantilla: 2013_tribunal_conocimientos
     DocumentacionVolumen: volumen_3
     vars: |
       {
@@ -437,7 +410,6 @@ Documentacion:
         "remitente_cargo":""
       }
   carta_2013_12:
-    DocumentacionPlantilla: 2013_tribunal_conocimientos
     DocumentacionVolumen: volumen_3
     vars: |
       {
@@ -454,7 +426,6 @@ Documentacion:
         "remitente_cargo":""
       }
   carta_2013_13:
-    DocumentacionPlantilla: 2013_tribunal_conocimientos
     DocumentacionVolumen: volumen_3
     vars: |
       {
@@ -471,7 +442,6 @@ Documentacion:
         "remitente_cargo":""
       }
   carta_2013_14:
-    DocumentacionPlantilla: 2013_tribunal_conocimientos
     DocumentacionVolumen: volumen_3
     vars: |
       {
@@ -488,7 +458,6 @@ Documentacion:
         "remitente_cargo":""
       }
   carta_solicitud:
-    DocumentacionPlantilla: carta_solicitud
     DocumentacionVolumen: volumen_4
     vars: |
       {

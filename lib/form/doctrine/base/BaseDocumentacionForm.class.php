@@ -15,21 +15,21 @@ abstract class BaseDocumentacionForm extends BaseFormDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'id'           => new sfWidgetFormInputHidden(),
-      'plantilla_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('DocumentacionPlantilla'), 'add_empty' => true)),
-      'volumen_id'   => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('DocumentacionVolumen'), 'add_empty' => true)),
-      'vars'         => new sfWidgetFormTextarea(),
-      'created_at'   => new sfWidgetFormDateTime(),
-      'updated_at'   => new sfWidgetFormDateTime(),
+      'id'          => new sfWidgetFormInputHidden(),
+      'template_id' => new sfWidgetFormInputHidden(),
+      'volumen_id'  => new sfWidgetFormInputHidden(),
+      'vars'        => new sfWidgetFormTextarea(),
+      'created_at'  => new sfWidgetFormDateTime(),
+      'updated_at'  => new sfWidgetFormDateTime(),
     ));
 
     $this->setValidators(array(
-      'id'           => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
-      'plantilla_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('DocumentacionPlantilla'), 'required' => false)),
-      'volumen_id'   => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('DocumentacionVolumen'), 'required' => false)),
-      'vars'         => new sfValidatorString(array('required' => false)),
-      'created_at'   => new sfValidatorDateTime(),
-      'updated_at'   => new sfValidatorDateTime(),
+      'id'          => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
+      'template_id' => new sfValidatorChoice(array('choices' => array($this->getObject()->get('template_id')), 'empty_value' => $this->getObject()->get('template_id'), 'required' => false)),
+      'volumen_id'  => new sfValidatorChoice(array('choices' => array($this->getObject()->get('volumen_id')), 'empty_value' => $this->getObject()->get('volumen_id'), 'required' => false)),
+      'vars'        => new sfValidatorString(array('required' => false)),
+      'created_at'  => new sfValidatorDateTime(),
+      'updated_at'  => new sfValidatorDateTime(),
     ));
 
     $this->widgetSchema->setNameFormat('documentacion[%s]');
