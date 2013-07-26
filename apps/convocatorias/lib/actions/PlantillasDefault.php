@@ -86,15 +86,19 @@ class PlantillasDefault extends sfActions
 
     protected function sendContent($content,
             $mime = 'text/plain; charset=utf-8',
-            $filename) {
+            $filename = '') {
         $this->setLayout(false);
         sfConfig::set('sf_web_debug', false);
 
         $this->getResponse()->clearHttpHeaders();
         $this->getResponse()->setHttpHeader('Pragma: public', true);
-        $this->getResponse()->setHttpHeader('Content-Disposition',
-            'attachment; filename="' . $filename . '"');
-        $this->getResponse()->setContentType($mime);
+        if (!empty($mime)) {
+            $this->getResponse()->setContentType($mime);
+        }
+        if (!empty($filename)) {
+            $this->getResponse()->setHttpHeader('Content-Disposition',
+                'attachment; filename="' . $filename . '"');
+        }
 
         $this->getResponse()->sendHttpHeaders();
         $this->getResponse()->setContent($content);

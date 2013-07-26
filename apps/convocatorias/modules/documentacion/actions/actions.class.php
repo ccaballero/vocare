@@ -95,4 +95,14 @@ class documentacionActions extends PlantillasDefault {
                     'id' => $volumen->getId())));
     }
 
+    public function executeTexto() {
+        $volumen = $this->getRoute()->getObject();
+//        return $this->sendContent(
+//            Xslt::render(
+//                'transform-txt',
+//                Xhtml::render($text, $vars, $scape)
+//                $convocatoria->getXmlMaxEnmienda()
+//            )
+//        );
+    }
 }
