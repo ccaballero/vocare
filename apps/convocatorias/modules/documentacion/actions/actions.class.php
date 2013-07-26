@@ -21,19 +21,9 @@ class documentacionActions extends PlantillasDefault {
         $volumen = $this->getRoute()->getObject();
         $this->forward404Unless($volumen);
 
-        $previews = array();
-        $redaction = $volumen->getRedaction();
-        $common = json_decode($volumen->vars);
-
-        foreach ($volumen->getDocuments() as $doc) {
-            $obj = json_decode($doc->getVars());
-            $vars = Meld::join($common, $obj);
-            $previews[] = Xhtml::render($redaction, $vars, true);
-        }
-
         $this->object = $volumen;
         $this->documents = $volumen->getDocuments();
-        $this->previews = $previews;
+        $this->previews = $volumen->getPreview();
     }
 
     public function executeEditar(sfWebRequest $request) {
@@ -97,12 +87,56 @@ class documentacionActions extends PlantillasDefault {
 
     public function executeTexto() {
         $volumen = $this->getRoute()->getObject();
-//        return $this->sendContent(
-//            Xslt::render(
-//                'transform-txt',
-//                Xhtml::render($text, $vars, $scape)
-//                $convocatoria->getXmlMaxEnmienda()
-//            )
-//        );
+        $this->forward404Unless($volumen);
+
+        $xml = '<volumen><letter>'
+             . implode('</letter><letter>', $volumen->getPreview())
+             . '</letter></volumen>';
+
+        return $this->sendContent(
+            Xslt::render(
+                'transform-txt',
+                $xml
+            )
+        );
+    }
+
+    public function executeLatex() {
+        $volumen = $this->getRoute()->getObject();
+        $this->forward404Unless($volumen);
+
+        $xml = '<volumen><letter>'
+             . implode('</letter><letter>', $volumen->getPreview())
+             . '</letter></volumen>';
+
+        return $this->sendContent(
+            Xslt::render(
+                'transform-latex',
+                $xml
+            )
+        );
+    }
+
+    public function executePdf() {
+        $volumen = $this->getRoute()->getObject();
+        $this->forward404Unless($volumen);
+
+        $xml = '<volumen><letter>'
+             . implode('</letter><letter>', $volumen->getPreview())
+             . '</letter></volumen>';
+
+        $filename = 'documentacion/' . $volumen->getId();
+        Xslt::save('transform-latex', $xml, $filename . '.tex');
+
+        $result = PdfLatex::compile($filename);
+        if (!empty($result)) {
+//            return $this->sendContent(
+//                readfile($result),
+//                'application/pdf',
+//                'convocatoria_' . $convocatoria->getGestion() . '.pdf'
+//            );
+        } else {
+            return $this->sendContent('compilación fallida!!');
+        }
     }
 }

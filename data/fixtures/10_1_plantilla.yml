@@ -161,7 +161,7 @@ DocumentacionPlantilla:
   carta_solicitud:
     label: Modelo de Carta de Solicitud
     redaction: |
-      <p>Cochabamba, [[ fecha_carta ]]<br />
+      <p>Cochabamba, [[ fecha_carta ]]</p>
       <br />
       <br />
       <br />

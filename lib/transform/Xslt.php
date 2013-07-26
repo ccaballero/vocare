@@ -63,6 +63,7 @@ class Xslt
     public static function save($xslt, $xml, $filename) {
         $render = Xslt::render($xslt, $xml);
         $dir_generation = sfConfig::get('app_dir_generation');
-        return file_put_contents($dir_generation . '/' . $filename, $render);
+        $file_generate = $dir_generation . '/' . $filename;
+        return file_put_contents($file_generate, $render);
     }
 }

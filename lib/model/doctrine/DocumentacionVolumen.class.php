@@ -21,6 +21,20 @@ class DocumentacionVolumen extends BaseDocumentacionVolumen
 
         return $transform;
     }
+    
+    public function getPreview() {
+        $previews = array();
+        $redaction = $this->getRedaction();
+        $common = json_decode($this->vars);
+
+        foreach ($this->getDocuments() as $document) {
+            $obj = json_decode($document->getVars());
+            $vars = Meld::join($common, $obj);
+            $previews[] = Xhtml::render($redaction, $vars, true);
+        }
+
+        return $previews;
+    }
 
     public function getRedaction() {
         return $this->getDocumentacionPlantilla()->redaction;
