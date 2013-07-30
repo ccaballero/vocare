@@ -6,6 +6,11 @@
     #ffffff
 */
 
+@font-face {
+    font-family: 'Helvetica';
+    src: url('/fonts/HelveticaLTStd-Light.otf');
+}
+
 * {
     font-family: "Lucida Sans","Lucida Grande","Lucida Sans Unicode",sans-serif;
     font-size: 12px;
@@ -58,10 +63,11 @@ span {
 }
 
 #menu ul li a {
+    font-family: Helvetica, Helvetica Neue, Arial, sans-serif;
+    font-size: 11px;
     color: #FFFFFF;
     float: left;
     padding: 8px 8px;
-    font-size: 11px;
 }
 
 /* Propiedades del menu inferior */
