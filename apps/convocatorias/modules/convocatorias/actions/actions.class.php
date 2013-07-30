@@ -107,6 +107,7 @@ class convocatoriasActions extends PlantillasDefault
 
     public function executeTexto() {
         $convocatoria = $this->getRoute()->getObject();
+
         return $this->sendContent(
             Xslt::render(
                 'transform-txt',
@@ -127,7 +128,7 @@ class convocatoriasActions extends PlantillasDefault
 
     public function executePdf() {
         $convocatoria = $this->getRoute()->getObject();
-        $filename = $convocatoria->getId() . '_'
+        $filename = '/' . $convocatoria->getId() . '_'
             . $convocatoria->getMaxEnmienda();
 
         Xslt::save(

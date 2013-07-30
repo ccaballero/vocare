@@ -413,9 +413,12 @@ class Convocatoria extends BaseConvocatoria
 
     public function getXmlMaxEnmienda() {
         $dirbase = sfConfig::get('app_dir_generation');
-        $filename = $this->getId() . '_' . $this->getMaxEnmienda() . '.xml';
+        $filename = '/' . $this->getId() . '_' . $this->getMaxEnmienda() . '.xml';
 
-        return file_get_contents($dirbase . '/' . $filename);
+        if (!file_exists($dirbase . $filename)) {
+            return;
+        }
+        return file_get_contents($dirbase . $filename);
     }
 }
 
