@@ -139,7 +139,7 @@ class Xhtml
         return $iterator;
     }
 
-    public static function render($text, $vars, $scape) {
+    public static function render($text, $vars, $scape = false) {
         $compile = '';
         $tpl = new Xhtml();
         $specialEscape = new SpecialEscape();
@@ -156,14 +156,14 @@ class Xhtml
 
         return $compile;
     }
-    
+
     public static function save($text, $vars, $scape, $destination) {
         $render = Xhtml::render($text, $vars, $scape);
         $content = '<vocare>' . $render . '</vocare>';
-        
+
         return file_put_contents($destination, $content);
     }
-    
+
     public static function taxonomy($text) {
         $tpl = new Xhtml();
         $tpl->setTemplate($text);

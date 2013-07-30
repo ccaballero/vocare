@@ -2,6 +2,13 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
     <xsl:output method="text" />
     <xsl:strip-space elements="*"/>
+
+    <xsl:template match="letter">
+        <xsl:text>----------------------------------------</xsl:text>
+        <xsl:text>----------------------------------------</xsl:text>
+        <xsl:text>&#xA;</xsl:text>
+        <xsl:apply-templates />
+    </xsl:template>
     
     <xsl:template match="h1|h3|h4">
         <xsl:value-of select="." />
@@ -17,8 +24,12 @@
     </xsl:template>
 
     <xsl:template match="p">
-        <xsl:value-of select="normalize-space()" />
+        <xsl:apply-templates />
         <xsl:text>&#xA;</xsl:text>
+        <xsl:text>&#xA;</xsl:text>
+    </xsl:template>
+    
+    <xsl:template match="br">
         <xsl:text>&#xA;</xsl:text>
     </xsl:template>
 

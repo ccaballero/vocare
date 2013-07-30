@@ -111,7 +111,7 @@ class documentacionActions extends PlantillasDefault {
 
         return $this->sendContent(
             Xslt::render(
-                'transform-latex',
+                'transform-latex-letter',
                 $xml
             )
         );
@@ -125,16 +125,16 @@ class documentacionActions extends PlantillasDefault {
              . implode('</letter><letter>', $volumen->getPreview())
              . '</letter></volumen>';
 
-        $filename = 'documentacion/' . $volumen->getId();
-        Xslt::save('transform-latex', $xml, $filename . '.tex');
+        $filename = '/documentacion/' . $volumen->getId();
+        Xslt::save('transform-latex-letter', $xml, $filename . '.tex');
 
         $result = PdfLatex::compile($filename);
         if (!empty($result)) {
-//            return $this->sendContent(
-//                readfile($result),
-//                'application/pdf',
-//                'convocatoria_' . $convocatoria->getGestion() . '.pdf'
-//            );
+            return $this->sendContent(
+                readfile($result),
+                'application/pdf',
+                $volumen->getLabel() . '.pdf'
+            );
         } else {
             return $this->sendContent('compilación fallida!!');
         }

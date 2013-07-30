@@ -4,14 +4,14 @@
     <xsl:strip-space elements="*" />
 
     <xsl:template match="/">
-        <xsl:text>\documentclass[letterpaper,11pt]{article}</xsl:text>
+        <xsl:text>\documentclass[letterpaper,11pt]{letter}</xsl:text>
         <xsl:text>&#xA;</xsl:text>
         <xsl:text>&#xA;</xsl:text>
         <xsl:text>\usepackage[spanish]{babel}</xsl:text>
         <xsl:text>&#xA;</xsl:text>
         <xsl:text>\usepackage[utf8]{inputenc}</xsl:text>
         <xsl:text>&#xA;</xsl:text>
-        <xsl:text>\usepackage[left=2.5cm,top=2cm,right=2.5cm,bottom=2cm]{geometry}</xsl:text>
+        <xsl:text>\usepackage[left=4.5cm,top=3.5cm,right=4.5cm,bottom=2cm]{geometry}</xsl:text>
         <xsl:text>&#xA;</xsl:text>
         <xsl:text>\usepackage{enumerate}</xsl:text>
         <xsl:text>&#xA;</xsl:text>
@@ -19,59 +19,45 @@
         <xsl:text>&#xA;</xsl:text>
         <xsl:text>\usepackage{url}</xsl:text>
         <xsl:text>&#xA;</xsl:text>
+        <xsl:text>\pagestyle{empty}</xsl:text>
         <xsl:text>&#xA;</xsl:text>
-        <xsl:text>\title{</xsl:text>
-        <xsl:apply-templates select="//h1" mode="pre-process" />
-        <xsl:text>}</xsl:text>
-        <xsl:text>&#xA;</xsl:text>
-        <xsl:text>\date{}</xsl:text>
         <xsl:text>&#xA;</xsl:text>
         <xsl:text>\begin{document}</xsl:text>
         <xsl:text>&#xA;</xsl:text>
-        <xsl:text>&#xA;</xsl:text>
-        <xsl:text>\maketitle</xsl:text>
-        <xsl:text>&#xA;</xsl:text>
         <xsl:apply-templates select="*" />
-        <xsl:text>&#xA;</xsl:text>
         <xsl:text>\end{document}</xsl:text>
     </xsl:template>
 
-    <xsl:template match="h1" mode="pre-process">
+    <xsl:template match="letter">
         <xsl:apply-templates />
-        <xsl:text>\\</xsl:text>
-    </xsl:template>
-
-    <xsl:template match="h1"></xsl:template>
-
-    <xsl:template match="h2">
-        <xsl:text>\section{</xsl:text>
-        <xsl:apply-templates />
-        <xsl:text>}</xsl:text>
-        <xsl:text>&#xA;</xsl:text>
-    </xsl:template>
-
-    <xsl:template match="h3">
-        <xsl:text>\subsection{</xsl:text>
-        <xsl:apply-templates />
-        <xsl:text>}</xsl:text>
-        <xsl:text>&#xA;</xsl:text>
-    </xsl:template>
-
-    <xsl:template match="h4">
-        <xsl:text>\subsubsection{</xsl:text>
-        <xsl:apply-templates />
-        <xsl:text>}</xsl:text>
+        <xsl:text>\newpage</xsl:text>
         <xsl:text>&#xA;</xsl:text>
     </xsl:template>
 
     <xsl:template match="p">
         <xsl:apply-templates />
+        <xsl:text>\\</xsl:text>
         <xsl:text>&#xA;</xsl:text>
+    </xsl:template>
+    
+    <xsl:template match="p[@class='title']">
+        <xsl:text>\begin{center}</xsl:text>
+        <xsl:text>&#xA;</xsl:text>
+        <xsl:text>\underline{</xsl:text>
+        <xsl:apply-templates />
+        <xsl:text>}</xsl:text>
+        <xsl:text>&#xA;</xsl:text>
+        <xsl:text>\end{center}</xsl:text>
         <xsl:text>&#xA;</xsl:text>
     </xsl:template>
 
     <xsl:template match="p" mode="inside-li">
         <xsl:apply-templates />
+    </xsl:template>
+
+    <xsl:template match="br">
+        <xsl:text>~\\</xsl:text>
+        <xsl:text>&#xA;</xsl:text>
     </xsl:template>
 
     <xsl:template match="table">
@@ -170,12 +156,18 @@
         <xsl:text>&#xA;</xsl:text>
         <xsl:apply-templates select="div[@class='firma']" />
     </xsl:template>
+    
+    <xsl:template match="div[@class='firmas']/div[@class='firma']/div">
+        <xsl:apply-templates />
+        <xsl:text>\\</xsl:text>
+        <xsl:text>&#xA;</xsl:text>
+    </xsl:template>
 
     <xsl:template match="div[@class='firmas']/div[@class='firma']">
         <xsl:if test="position() mod 2 = 1">
+            <xsl:text>\vspace{3.5cm}</xsl:text>
             <xsl:text>&#xA;</xsl:text>
-            <xsl:text>\vspace{4cm}</xsl:text>
-            <xsl:text>&#xA;</xsl:text>
+            <xsl:text>\begin{center}</xsl:text>
             <xsl:text>&#xA;</xsl:text>
         </xsl:if>
         <xsl:text>\begin{minipage}[b]{0.5\textwidth}</xsl:text>
@@ -186,17 +178,19 @@
         <xsl:value-of select="div[@class='nombre']" />
         <xsl:text>}\\</xsl:text>
         <xsl:text>&#xA;</xsl:text>
-        <xsl:value-of select="div[@class='cargo']" />
-        <xsl:text>\\</xsl:text>
-        <xsl:text>&#xA;</xsl:text>
+        <xsl:apply-templates select="div[@class!='nombre']" />
         <xsl:text>\end{center}</xsl:text>
         <xsl:text>&#xA;</xsl:text>
         <xsl:text>\end{minipage}</xsl:text>
         <xsl:text>&#xA;</xsl:text>
+        <xsl:if test="position() mod 2 = 1">
+            <xsl:text>\end{center}</xsl:text>
+            <xsl:text>&#xA;</xsl:text>
+        </xsl:if>
     </xsl:template>
 
     <xsl:template match="strong">
-        <xsl:text>\textbf{</xsl:text>
+        <xsl:text> \textbf{</xsl:text>
         <xsl:apply-templates />
         <xsl:text>}</xsl:text>
     </xsl:template>
