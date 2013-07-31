@@ -92,6 +92,7 @@ class Convocatoria extends BaseConvocatoria
             case 'promover':
                 if ($this->estado == 'emitido') {
                     $this->estado = 'vigente';
+                    $this->publicacion = date('Y-m-d');
                 } else if ($this->estado == 'borrador') {
                     $this->estado = 'emitido';
                 }
@@ -178,13 +179,14 @@ class Convocatoria extends BaseConvocatoria
     }
 
     public function getPublicacion() {
+        $estado = $this->_get('estado');
+        if (!in_array($estado, array('vigente', 'finalizado'))) {
+            return 'aún sin publicar';
+        }
+
         include_once realpath(dirname(__FILE__)
             . '/../../../apps/convocatorias/lib/helper/PrettyDateHelper.php');
-
         $publicacion = $this->_get('publicacion');
-        if (empty($publicacion)) {
-            $publicacion = date('Y-m-d');
-        }
         return pretty_date($publicacion);
     }
 
@@ -226,7 +228,7 @@ class Convocatoria extends BaseConvocatoria
         if (empty($array[0]['MAX'])) {
             return 0;
         } else {
-            return $array[0]['MAX'];
+            return intval($array[0]['MAX']);
         }
     }
 
@@ -237,6 +239,31 @@ class Convocatoria extends BaseConvocatoria
           ->andWhere('cr.numero_enmienda = ?', $numero_enmienda);
 
         return $q->fetchOne();
+    }
+
+    public function lastEnmienda() {
+        return $this->getEnmienda($this->getMaxEnmienda());
+    }
+
+    public function lastEnmiendaXML() {
+        $dirbase = sfConfig::get('app_dir_generation');
+        $filename = '/' . $this->getId() . '_' . $this->getMaxEnmienda() . '.xml';
+
+        if (!file_exists($dirbase . $filename)) {
+            if(!$this->saveXML()) {
+                return;
+            }
+        }
+        return file_get_contents($dirbase . $filename);
+    }
+
+    public function saveXML() {
+        // This is the part where I talk to templating
+        $destination = sfConfig::get('app_dir_generation') . '/'
+            . $this->getId() . '_' . $this->getMaxEnmienda() . '.xml';
+        $enmienda = $this->lastEnmienda();
+
+        return Xhtml::save($enmienda->redaccion, $this, true, $destination);
     }
 
     public function getFirmas() {
@@ -405,20 +432,6 @@ class Convocatoria extends BaseConvocatoria
             'result' => 2,
             'message' => '',
         );
-    }
-
-    public function lastEnmienda() {
-        return $this->getEnmienda($this->getMaxEnmienda());
-    }
-
-    public function getXmlMaxEnmienda() {
-        $dirbase = sfConfig::get('app_dir_generation');
-        $filename = '/' . $this->getId() . '_' . $this->getMaxEnmienda() . '.xml';
-
-        if (!file_exists($dirbase . $filename)) {
-            return;
-        }
-        return file_get_contents($dirbase . $filename);
     }
 }
 

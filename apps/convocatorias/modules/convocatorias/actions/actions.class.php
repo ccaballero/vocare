@@ -18,16 +18,25 @@ class convocatoriasActions extends PlantillasDefault
     );
 
     public function executeIndex() {
-        $convocatoria = new Convocatoria();
-        $this->list = $convocatoria->listAll();
+        $model_convocatorias = new Convocatoria();
+        $list = $model_convocatorias->listAll();
+        $filtered_list = array();
+        
+        foreach ($list as $element) {
+            if ($this->getUser()->canView($element)) {
+                $filtered_list[] = $element;
+            }
+        }
+        
+        $this->list = $filtered_list;
     }
 
     public function executeShow(sfWebRequest $request) {
-        $convocatoria = $this->getRoute()->getObject();
-        $this->forward404Unless($convocatoria);
+        $this->object = $this->getRoute()->getObject();
+        $this->forward404Unless($this->object);
 
         // This is the part for renderer control, Can I say this?
-        $state = $convocatoria->getEstado();
+        $state = $this->object->getEstado();
 
         // permission control
         if (!$this->getUser()->hasCredential('convocatorias_view')
@@ -36,22 +45,21 @@ class convocatoriasActions extends PlantillasDefault
         }
 
         // Settings of editor form
-        $this->form = new ConvocatoriaForm($convocatoria);
+        $this->form = new ConvocatoriaForm($this->object);
         $this->form->removeFocus();
 
-        $this->form->fetchRequerimientos($convocatoria);
-        $this->form->fetchRequisitos($convocatoria);
-        $this->form->fetchDocumentos($convocatoria);
-        $this->form->fetchEventos($convocatoria);
+        $this->form->fetchRequerimientos($this->object);
+        $this->form->fetchRequisitos($this->object);
+        $this->form->fetchDocumentos($this->object);
+        $this->form->fetchEventos($this->object);
 
         // And this is the part for redactions
-        $this->max_enmienda = $convocatoria->getMaxEnmienda();
-        $this->redaction = $convocatoria->getEnmienda($this->max_enmienda);
+        $this->max_enmienda = $this->object->getMaxEnmienda();
+        $this->redaction = $this->object->getEnmienda($this->max_enmienda);
 
         // And this is the part for listing of convocatorias (I need to say
         //convocatorias in english, but don't
-        $this->list = $convocatoria->listRedactions();
-        $this->object = $convocatoria;
+        $this->list = $this->object->listRedactions();
 
         // This is the part where I talk to templating
         if (!empty($this->redaction)) {
@@ -63,8 +71,8 @@ class convocatoriasActions extends PlantillasDefault
 
         // This is the part when I build the roles for signatures
         $cargos = new Cargo();
-        $this->signatures = $cargos->listAll($convocatoria);
-        $this->notifications = $convocatoria->getNotificaciones();
+        $this->signatures = $cargos->listAll($this->object);
+        $this->notifications = $this->object->getNotificaciones();
 
         // This is the part when I generate the groups for a convocatoria
         // I hate that i can't translate the word convocatoria
@@ -80,7 +88,7 @@ class convocatoriasActions extends PlantillasDefault
 
         foreach ($this->groups as $grupo) {
             $roles[$grupo->getId()] = $assignments->getUsuarios(
-                $convocatoria, $grupo);
+                $this->object, $grupo);
         }
         $this->roles = $roles;
 
@@ -106,34 +114,33 @@ class convocatoriasActions extends PlantillasDefault
     }
 
     public function executeTexto() {
-        $convocatoria = $this->getRoute()->getObject();
-
+        $this->object = $this->getRoute()->getObject();
         return $this->sendContent(
             Xslt::render(
                 'transform-txt',
-                $convocatoria->getXmlMaxEnmienda()
+                $this->object->lastEnmiendaXML()
             )
         );
     }
 
     public function executeLatex() {
-        $convocatoria = $this->getRoute()->getObject();
+        $this->object = $this->getRoute()->getObject();
         return $this->sendContent(
             Xslt::render(
                 'transform-latex',
-                $convocatoria->getXmlMaxEnmienda()
+                $this->object->lastEnmiendaXML()
             )
         );
     }
 
     public function executePdf() {
-        $convocatoria = $this->getRoute()->getObject();
-        $filename = '/' . $convocatoria->getId() . '_'
-            . $convocatoria->getMaxEnmienda();
+        $this->object = $this->getRoute()->getObject();
+        $filename = '/' . $this->object->getId() . '_'
+            . $this->object->getMaxEnmienda();
 
         Xslt::save(
             'transform-latex',
-            $convocatoria->getXmlMaxEnmienda(),
+            $this->object->lastEnmiendaXML(),
             $filename . '.tex'
         );
 
@@ -142,7 +149,7 @@ class convocatoriasActions extends PlantillasDefault
             return $this->sendContent(
                 readfile($result),
                 'application/pdf',
-                'convocatoria_' . $convocatoria->getGestion() . '.pdf'
+                'convocatoria_' . $this->object->getGestion() . '.pdf'
             );
         } else {
             return $this->sendContent('compilación fallida!!');
@@ -151,20 +158,20 @@ class convocatoriasActions extends PlantillasDefault
 
     // questions related by redaction of text in convocatorias
     public function executeRedaccion(sfWebRequest $request) {
-        $convocatoria = $this->getRoute()->getObject();
-        $estado = $convocatoria->getEstado();
-        $redacciones = $convocatoria->getRedacciones();
+        $this->object = $this->getRoute()->getObject();
+        $estado = $this->object->getEstado();
+        $redacciones = $this->object->getRedacciones();
 
         $texto_redaccion = $request->getParameter('redaction');
-        $numero_enmienda = 1;
+        $numero_enmienda = $this->object->getMaxEnmienda();
 
         if ($estado == 'emitido' || count($redacciones) == 0) {
             if ($estado == 'emitido') {
-                $numero_enmienda = intval($convocatoria->getMaxEnmienda()) + 1;
+                $numero_enmienda++;
             }
 
             $cr = new ConvocatoriaRedaccion();
-            $cr->Convocatoria = $convocatoria;
+            $cr->Convocatoria = $this->object;
             $cr->redaccion = $texto_redaccion;
             $cr->numero_enmienda = $numero_enmienda;
             $cr->save();
@@ -183,12 +190,7 @@ class convocatoriasActions extends PlantillasDefault
             }
         }
 
-        // This is the part where I talk to templating
-        $destination = sfConfig::get('app_dir_generation') . '/'
-            . $convocatoria->getId() . '_' . $numero_enmienda . '.xml';
-        $result = Xhtml::save(
-            $texto_redaccion, $convocatoria, true, $destination);
-
+        $result = $this->object->saveXML();
         if ($result) {
             $this->getUser()->setFlash('success', 'La redacción de la '
                 . 'convocatoria acaba de ser editada');
@@ -198,7 +200,7 @@ class convocatoriasActions extends PlantillasDefault
         }
 
         $this->redirect($this->generateUrl('convocatorias_show', array(
-            'id' => $convocatoria->getId())));
+            'id' => $this->object->getId())));
     }
 
     public function executeFirmas(sfWebRequest $request) {
@@ -212,25 +214,26 @@ class convocatoriasActions extends PlantillasDefault
         // delete the old registers
         Doctrine_Query::create()
             ->delete('ConvocatoriaCargo cc')
-            ->where('cc.convocatoria_id = ?', $convocatoria->getId())
+            ->where('cc.convocatoria_id = ?', $this->object->getId())
             ->execute();
 
         foreach ($cargos as $id => $peso) {
             $convocatoria_cargo = new ConvocatoriaCargo();
-            $convocatoria_cargo->convocatoria_id = $convocatoria->getId();
+            $convocatoria_cargo->convocatoria_id = $this->object->getId();
             $convocatoria_cargo->cargo_id = $id;
             $convocatoria_cargo->numero_orden = $counter++;
             $convocatoria_cargo->save();
         }
 
+        $convocatoria->saveXML();
         $this->getUser()->setFlash('success',
             'La configuración de las firmas ha sido registrada');
         $this->redirect($this->generateUrl('convocatorias_show', array(
-            'id' => $convocatoria->getId())));
+            'id' => $this->object->getId())));
     }
 
     public function executeNotificaciones(sfWebRequest $request) {
-        $convocatoria = $this->getRoute()->getObject();
+        $this->object = $this->getRoute()->getObject();
 
         $notifications = $request->getParameter('notifications');
 
@@ -238,14 +241,14 @@ class convocatoriasActions extends PlantillasDefault
         $encargados = $notifications['encargado'];
         $emails = $notifications['email'];
 
-        $convocatoria->removeNotifications();
+        $this->object->removeNotifications();
 
         for ($i = 0; $i < count($encargados); $i++) {
             if (!empty($cargos[$i])
                 && !empty($encargados[$i])
                 && !empty($emails[$i])) {
                 $conv_notification = new ConvocatoriaNotificacion();
-                $conv_notification->convocatoria_id = $convocatoria->getId();
+                $conv_notification->convocatoria_id = $this->object->getId();
                 $conv_notification->cargo = $cargos[$i];
                 $conv_notification->encargado = $encargados[$i];
                 $conv_notification->email= $emails[$i];
@@ -256,14 +259,14 @@ class convocatoriasActions extends PlantillasDefault
         $this->getUser()->setFlash('success', 'La configuración de las' .
             ' notificaciones ha sido registrada.');
         $this->redirect($this->generateUrl('convocatorias_show', array(
-            'id' => $convocatoria->getId())) . '#viewers');
+            'id' => $this->object->getId())) . '#viewers');
     }
 
     public function executeCargos(sfWebRequest $request) {
-        $convocatoria = $this->getRoute()->getObject();
+        $this->object = $this->getRoute()->getObject();
         $roles = $request->getParameter('roles');
 
-        $convocatoria->removeRoles();
+        $this->object->removeRoles();
 
         foreach ($roles as $id_group => $users) {
             $users = array_unique($users);
@@ -271,7 +274,7 @@ class convocatoriasActions extends PlantillasDefault
                 $usuario = new UsuarioGrupoConvocatoria();
                 $usuario->user_id = $id_user;
                 $usuario->grupo_id = $id_group;
-                $usuario->convocatoria_id = $convocatoria->getId();
+                $usuario->convocatoria_id = $this->object->getId();
                 $usuario->save();
             }
         }
@@ -279,7 +282,7 @@ class convocatoriasActions extends PlantillasDefault
         $this->getUser()->setFlash('success', 'La configuración de los' .
             ' cargos ha sido registrada.');
         $this->redirect($this->generateUrl('convocatorias_show', array(
-            'id' => $convocatoria->getId())) . '#users');
+            'id' => $this->object->getId())) . '#users');
     }
 
     // method for generalization of actions over convocatorias or whatever.
@@ -287,31 +290,30 @@ class convocatoriasActions extends PlantillasDefault
         $object = $this->getRoute()->getObject();
         $message = $object->executeTransform($action);
         $this->getUser()->setFlash('notice', $message);
-        $this->redirect($this->_route_list);
     }
 
     private function emailTitle($operation) {
-        $convocatoria = $this->getRoute()->getObject();
+        $this->object = $this->getRoute()->getObject();
         $tpl = 'Sistema de Convocatorias [convocatoria %s fue %s]';
-        return sprintf($tpl, $convocatoria->getGestion(), $operation);
+        return sprintf($tpl, $this->object->getGestion(), $operation);
     }
 
     private function emailContent($operation) {
-        $convocatoria = $this->getRoute()->getObject();
+        $this->object = $this->getRoute()->getObject();
         return $this->getPartial(
             'convocatorias/email_notification',
             array(
-                'convocatoria' => $convocatoria,
+                'convocatoria' => $this->object,
                 'user' => $this->getUser(),
                 'operation' => $operation,
             ));
     }
 
     private function emailNotification($title, $content) {
-        $convocatoria = $this->getRoute()->getObject();
+        $this->object = $this->getRoute()->getObject();
 
         // notifications of subscribers
-        $subscribers = $convocatoria->getNotificaciones();
+        $subscribers = $this->object->getNotificaciones();
         $to = array();
         foreach ($subscribers as $subscriber) {
             $to[$subscriber->getEmail()] = $subscriber->getEncargado();
@@ -339,13 +341,15 @@ class convocatoriasActions extends PlantillasDefault
             $this->emailTitle('eliminada'),
             $this->emailContent('eliminada')
         );
+
         $this->actionChange('eliminar');
+        $this->redirect($this->_route_list);
     }
 
     // state transition (promover)
     public function executePromover() {
-        $convocatoria = $this->getRoute()->getObject();
-        if ($convocatoria->getEstado() == 'borrador') {
+        $this->object = $this->getRoute()->getObject();
+        if ($this->object->getEstado() == 'borrador') {
             $title = 'emitida';
         } else {
             $title = 'publicada';
@@ -355,7 +359,10 @@ class convocatoriasActions extends PlantillasDefault
             $this->emailTitle($title),
             $this->emailContent($title)
         );
+
         $this->actionChange('promover');
+        $this->redirect($this->generateUrl('convocatorias_show', array(
+            'id' => $this->object->getId())) . '#preview');
     }
 
     public function executeAnular() {
@@ -363,18 +370,20 @@ class convocatoriasActions extends PlantillasDefault
             $this->emailTitle('anulada'),
             $this->emailContent('anulada')
         );
-        // Notificar a los postulantes, si es que existen
-        // acerca de la anulacion.
 
         $this->actionChange('anular');
+        $this->redirect($this->_route_list);
     }
 
     public function executeFinalizar() {
+        $this->object = $this->getRoute()->getObject();
         $this->emailNotification(
             $this->emailTitle('finalizada'),
             $this->emailContent('finalizada')
         );
 
         $this->actionChange('finalizar');
+        $this->redirect($this->generateUrl('convocatorias_show', array(
+            'id' => $this->object->getId())) . '#preview');
     }
 }

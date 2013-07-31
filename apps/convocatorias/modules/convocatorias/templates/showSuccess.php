@@ -31,6 +31,7 @@
             <a name="preview"></a>
             <?php include_partial('convocatorias/tasks', array(
                 'object' => $object,
+                'preview' => $preview,
                 'flags' => array(false, true, true, true),
             )) ?>
             <?php include_partial('convocatorias/preview', array(

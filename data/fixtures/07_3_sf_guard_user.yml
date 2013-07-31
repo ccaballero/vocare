@@ -26,81 +26,95 @@ sfGuardUser:
     email_address:  asdf02@cs.umss.edu.bo
     username:       vcostas
     password:       asdf
+    Groups:         [ integrante_de_comision ]
   hcruz:
     first_name:     Univ. Héctor
     last_name:      Cruz
     email_address:  asdf03@cs.umss.edu.bo
     username:       hcruz
     password:       asdf
+    Groups:         [ integrante_de_comision ]
   jvillarroel:
     first_name:     Ing. Jimmy
     last_name:      Villarroel Novillo
     email_address:  asdf04@cs.umss.edu.bo
     username:       jvillarroel
     password:       asdf
+    Groups:         [ integrante_de_comision ]
   evargas:
     first_name:     Univ. Elmer
     last_name:      Vargas
     email_address:  asdf05@cs.umss.edu.bo
     username:       evargas
     password:       asdf
+    Groups:         [ integrante_de_comision ]
   mvia:
     first_name:     Lic. Marcelo
     last_name:      Via
     email_address:  asdf06@cs.umss.edu.bo
     username:       mvia
     password:       asdf
+    Groups:         [ integrante_de_comision ]
   gcussi:
     first_name:     Lic. Grover
     last_name:      Cussi Nicolás
     email_address:  asdf07@cs.umss.edu.bo
     username:       gcussi
     password:       asdf
+    Groups:         [ integrante_de_comision ]
   sacha:
     first_name:     Ing. Samuel
     last_name:      Achá Pérez
     email_address:  asdf08@cs.umss.edu.bo
     username:       sacha
     password:       asdf
+    Groups:         [ integrante_de_comision ]
   afiorilo:
     first_name:     Ing. Américo
     last_name:      Fiorilo Lozada
     email_address:  asdf09@cs.umss.edu.bo
     username:       afiorilo
     password:       asdf
+    Groups:         [ integrante_de_comision ]
   lagreda:
     first_name:     Ing. Luis
     last_name:      Agreda Corrales
     email_address:  asdf10@cs.umss.edu.bo
     username:       lagreda
     password:       asdf
+    Groups:         [ integrante_de_comision ]
   vmontaño:
     first_name:     Lic. Victor Hugo
     last_name:      Montaño Quiroga
     email_address:  asdf11@cs.umss.edu.bo
     username:       vmontaño
     password:       asdf
+    Groups:         [ integrante_de_comision ]
   rjaldin:
     first_name:     Lic. Rolando
     last_name:      Jaldín Rosales
     email_address:  asdf12@cs.umss.edu.bo
     username:       rjaldin
     password:       asdf
+    Groups:         [ integrante_de_comision ]
   rtorrico:
     first_name:     Lic. Rosemary
     last_name:      Torrico Bascopé
     email_address:  asdf13@cs.umss.edu.bo
     username:       rtorrico
     password:       asdf
+    Groups:         [ integrante_de_comision ]
   bcalancha:
     first_name:     Lic. Boris
     last_name:      Calancha Navia
     email_address:  asdf14@cs.umss.edu.bo
     username:       bcalancha
     password:       asdf
+    Groups:         [ integrante_de_comision ]
   avargas:
     first_name:     Lic. Aidee
     last_name:      Vargas Colque
     email_address:  asdf15@cs.umss.edu.bo
     username:       avargas
     password:       asdf
+    Groups:         [ integrante_de_comision ]

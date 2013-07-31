@@ -4,7 +4,11 @@ sfGuardGroup:
     description: Maxima autoridad del Departamento de Informática y Sistemas.
     Permissions:
       - convocatorias_list
-      - convocatorias_view
+      - convocatorias_view_borrador
+      - convocatorias_view_emitido
+      - convocatorias_view_anulado
+      - convocatorias_view_vigente
+      - convocatorias_view_finalizado
       - convocatorias_edit
       - convocatorias_create
       - convocatorias_role
@@ -35,7 +39,11 @@ sfGuardGroup:
     description: Secretaría del Departamento de Informática y Sistemas.
     Permissions:
       - convocatorias_list
-      - convocatorias_view
+      - convocatorias_view_borrador
+      - convocatorias_view_emitido
+      - convocatorias_view_anulado
+      - convocatorias_view_vigente
+      - convocatorias_view_finalizado
       - convocatorias_edit
       - convocatorias_create
       - convocatorias_role
@@ -54,3 +62,12 @@ sfGuardGroup:
       - documentacion_plantilla_edit
       - documentacion_plantilla_create
       - documentacion_plantilla_delete
+  integrante_de_comision:
+    name: Integrante de Comisión
+    description: |
+      Integrante de alguna comisión de revision de revision para una
+      convocatoria.
+    Permissions:
+      - convocatorias_list
+      - convocatorias_view_vigente
+      - convocatorias_view_finalizado

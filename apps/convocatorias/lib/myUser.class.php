@@ -31,4 +31,10 @@ class myUser extends sfGuardSecurityUser
     public function getFullname() {
         return $this->getGuard()->getFullName();
     }
+    
+    public function canView($convocatoria) {
+        $state = $convocatoria->getEstado();
+        $permission = 'convocatorias_view_' . strtolower($state);
+        return $this->hasCredential($permission);
+    }
 }

@@ -28,7 +28,7 @@ pdf:
   is_secure: false
 redaccion:
   credentials:
-    - convocatorias_view
+    - convocatorias_edit
 eliminar:
   credentials:
     - convocatorias_eliminar

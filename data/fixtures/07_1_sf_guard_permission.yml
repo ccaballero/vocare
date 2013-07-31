@@ -3,9 +3,24 @@ sfGuardPermission:
   convocatorias_list:
     name: convocatorias_list
     description: Listar las convocatorias registradas en el sistema.
-  convocatorias_view:
-    name: convocatorias_view
-    description: Ver la información detallada de una convocatoria.
+  convocatorias_view_borrador:
+    name: convocatorias_view_borrador
+    description: Ver la información detallada de una convocatoria en estado borrador.
+  convocatorias_view_emitido:
+    name: convocatorias_view_emitido
+    description: Ver la información detallada de una convocatoria en estado emitido.
+  convocatorias_view_anulado:
+    name: convocatorias_view_anulado
+    description: Ver la información detallada de una convocatoria en estado anulado.
+  convocatorias_view_vigente:
+    name: convocatorias_view_vigente
+    description: Ver la información detallada de una convocatoria en estado vigente.
+  convocatorias_view_finalizado:
+    name: convocatorias_view_finalizado
+    description: Ver la información detallada de una convocatoria en estado finalizado.
+  convocatorias_view_eliminado:
+    name: convocatorias_view_eliminado
+    description: Ver la información detallada de una convocatoria en estado eliminado.
   convocatorias_edit:
     name: convocatorias_edit
     description: Editar la información de una convocatoria.

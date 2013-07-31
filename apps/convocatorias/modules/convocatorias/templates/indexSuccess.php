@@ -20,10 +20,14 @@
         <th>Convocatoria</th>
         <th>Estado</th>
         <th>&nbsp;</th>
-        <th colspan="<?php echo Convocatoria::$OPERACIONES_POSIBLES ?>">&nbsp;</th>
+        <th colspan="<?php echo Convocatoria::$OPERACIONES_POSIBLES ?>">
+            &nbsp;
+        </th>
     </tr>
 <?php if (count($list) == 0): ?>
-    <tr class="even"><td colspan="4">No existen convocatorias registradas.</td></tr>
+    <tr class="even">
+        <td colspan="4">No existen convocatorias registradas.</td>
+    </tr>
 <?php else: ?>
     <?php foreach ($list as $i => $convocatoria): ?>
         <tr class="<?php echo fmod($i, 2) ? 'even' : 'odd' ?>">
@@ -35,22 +39,26 @@
                 <?php echo image_state($convocatoria->validateState()) ?>
             </td>
             <td class="text-center">
-            <?php if ($sf_user->hasCredential('convocatorias_view')): ?>
+            <?php if ($sf_user->canView($convocatoria)): ?>
                 <?php echo link_to(
                     'Examinar', 'convocatorias_show', $convocatoria
                 ) ?>
             <?php endif; ?>
             </td>
-        <?php foreach ($convocatoria->getOperacionesPosibles() as $operacion => $propiedades): ?>
+        <?php foreach ($convocatoria->getOperacionesPosibles()
+                as $operacion => $propiedades): ?>
             <td class="text-center">
             <?php if ($convocatoria->hasOperacion($operacion) &&
                       $sf_user->hasCredential('convocatorias_' . $operacion) &&
                       $convocatoria->validateOperation($operacion) == 2): ?>
                 <?php echo link_to(
-                    ucfirst($propiedades[0]), 'convocatorias_' . $operacion, $convocatoria, array(
-                        'method' => 'post',
-                        'confirm' => $propiedades[1]
-                    )) ?>
+                        ucfirst($propiedades[0]),
+                        'convocatorias_' . $operacion,
+                        $convocatoria,
+                        array(
+                            'method' => 'post',
+                            'confirm' => $propiedades[1]
+                        )) ?>
             <?php else: ?>
                 <span class="disabled"><?php echo ucfirst($operacion) ?></span>
             <?php endif; ?>

@@ -1,3 +1,4 @@
+<?php if (!empty($preview)): ?>
 <div class="buttons">
     <ul>
     <?php if ($flags[0]): ?>
@@ -51,3 +52,4 @@
     </ul>
 </div>
 <div class="clear"></div>
+<?php endif; ?>
