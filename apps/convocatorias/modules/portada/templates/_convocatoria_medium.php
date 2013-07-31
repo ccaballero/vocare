@@ -13,6 +13,7 @@
     <div class="information">
         <?php include_partial('convocatorias/tasks', array(
                 'object' => $convocatoria,
+                'preview' => true,
                 'flags' => array(true, true, false, true),
             )) ?>
         <p><label>Gestión:</label><?php echo $convocatoria->getGestion() ?></p>

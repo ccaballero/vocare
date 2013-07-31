@@ -12,10 +12,10 @@ Ir al sitio de instalación.
 
 Paso 02:
 Ejecutar el script necesario para la creación del conector de base de datos.
-    sh shell/database.sh
+    sh shell/database.sh $HOST $DB $USER $PASS
 
 Paso 03:
-Editar el archivo de configuración de la base de datos.
+Editar y revisar el archivo de configuración de la base de datos.
     vim config/databases.yml
 
 Paso 04:
@@ -34,11 +34,12 @@ Paso 07:
 Colocar los permisos a las carpetas.
     chmod 777 log
     chmod 777 data/convocatorias
+    chmod 777 data/convocatorias/documentacion
 
 Paso 08:
 Registrar un dominio de prueba.
 
-Para Windows: c:/Windows/System32/drivers/boot/host <- comprobar, porque no recuerdo
+Para Windows: c:/Windows/System32/drivers/boot/host <- comprobar, ni idea!
 Para GNU/Linux: /etc/hosts
 
 Agregar una linea mas o menos parecida a esta:
@@ -46,7 +47,7 @@ Agregar una linea mas o menos parecida a esta:
 
 Paso 09:
 Comprobar la resolucion de dominio:
-    ping vocare.loca
+    ping vocare.local
 
 Ejemplo de una salida correcta:
     $ ping vocare.local
@@ -64,23 +65,34 @@ Ejemplo en Apache:
     <IfDefine DEFAULT_VHOST>
         <VirtualHost *:80>
             ServerName vocare.local
-            DocumentRoot /var/www/vocare.local/web/
+            DocumentRoot /var/www/vocare.local/web
 
-            <Directory "/var/www/vocare.local/">
-                Options Indexes FollowSymLinks
+            LogLevel debug
+            ErrorLog /var/log/vocare/error.log
+            CustomLog /var/log/vocare/access.log combined
+
+            <Directory "/var/www/vocare.local/web">
+                Options +Indexes FollowSymLinks
+                DirectoryIndex index.php
                 AllowOverride all
+                Order allow,deny
                 Allow from all
+            </Directory>
+
+            Alias /sf /opt/symfony/data/web/sf
+            <Directory "/opt/symfony/data/web/sf">
+                AllowOverride All
+                Allow from All
             </Directory>
         </VirtualHost>
     </IfDefine>
 
 * Se asume que se instalo el sistema en la carpeta /var/www/vocare.local.
+* Se asume que tiene sus librerias symfony en /opt/symfony
 
 Paso 11:
 Si todingo esta correcto, probar en el navegador.
     links2 http://vocare.local
 
-
-
-
 // configuracion de correo electronico
+// configuracion de latex

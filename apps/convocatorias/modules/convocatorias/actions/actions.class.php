@@ -39,7 +39,7 @@ class convocatoriasActions extends PlantillasDefault
         $state = $this->object->getEstado();
 
         // permission control
-        if (!$this->getUser()->hasCredential('convocatorias_view')
+        if (!$this->getUser()->canView($this->object)
             && !in_array($state, array('vigente', 'finalizado'))) {
             $this->forward404();
         }
