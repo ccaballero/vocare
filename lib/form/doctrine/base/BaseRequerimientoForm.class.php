@@ -23,6 +23,7 @@ abstract class BaseRequerimientoForm extends BaseFormDoctrine
       'created_at'         => new sfWidgetFormDateTime(),
       'updated_at'         => new sfWidgetFormDateTime(),
       'convocatorias_list' => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Convocatoria')),
+      'requerimiento_list' => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Postulante')),
     ));
 
     $this->setValidators(array(
@@ -34,6 +35,7 @@ abstract class BaseRequerimientoForm extends BaseFormDoctrine
       'created_at'         => new sfValidatorDateTime(),
       'updated_at'         => new sfValidatorDateTime(),
       'convocatorias_list' => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Convocatoria', 'required' => false)),
+      'requerimiento_list' => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Postulante', 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('requerimiento[%s]');
@@ -59,11 +61,17 @@ abstract class BaseRequerimientoForm extends BaseFormDoctrine
       $this->setDefault('convocatorias_list', $this->object->Convocatorias->getPrimaryKeys());
     }
 
+    if (isset($this->widgetSchema['requerimiento_list']))
+    {
+      $this->setDefault('requerimiento_list', $this->object->Requerimiento->getPrimaryKeys());
+    }
+
   }
 
   protected function doSave($con = null)
   {
     $this->saveConvocatoriasList($con);
+    $this->saveRequerimientoList($con);
 
     parent::doSave($con);
   }
@@ -103,6 +111,44 @@ abstract class BaseRequerimientoForm extends BaseFormDoctrine
     if (count($link))
     {
       $this->object->link('Convocatorias', array_values($link));
+    }
+  }
+
+  public function saveRequerimientoList($con = null)
+  {
+    if (!$this->isValid())
+    {
+      throw $this->getErrorSchema();
+    }
+
+    if (!isset($this->widgetSchema['requerimiento_list']))
+    {
+      // somebody has unset this widget
+      return;
+    }
+
+    if (null === $con)
+    {
+      $con = $this->getConnection();
+    }
+
+    $existing = $this->object->Requerimiento->getPrimaryKeys();
+    $values = $this->getValue('requerimiento_list');
+    if (!is_array($values))
+    {
+      $values = array();
+    }
+
+    $unlink = array_diff($existing, $values);
+    if (count($unlink))
+    {
+      $this->object->unlink('Requerimiento', array_values($unlink));
+    }
+
+    $link = array_diff($values, $existing);
+    if (count($link))
+    {
+      $this->object->link('Requerimiento', array_values($link));
     }
   }
 

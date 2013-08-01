@@ -16,4 +16,14 @@ class ConvocatoriaRequisitoTable extends Doctrine_Table
     {
         return Doctrine_Core::getTable('ConvocatoriaRequisito');
     }
+    
+    public function getRequisitos()
+     {
+        global $c;
+        $q = Doctrine_Query::create()
+              -> from('Requisito r')
+              ->innerJoin('r.ConvocatoriaRequisito cr')
+              -> where('cr.convocatoria_id = ?', $c);
+        return $q->execute();  
+     }
 }

@@ -1,0 +1,78 @@
+/* 
+    Document   : postulaciones
+    Created on : 18-07-2013, 10:27:04 AM
+    Author     : usuario
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/*Postulacines*/
+.el_contenedor {
+    border: 1px solid #999;
+    border-top: none;
+    overflow: hidden;
+    clear: both;
+    float: left; width: 100%;
+    background: #fff;
+}
+.el_contenido {
+    padding: 20px;
+    font-size: 1.2em;
+}
+ul.pestañas {
+    margin: 0;
+    padding: 0;
+    float: left;
+    list-style: none;
+    height: 32px;
+    border-bottom: 1px solid #999;
+    border-left: 1px solid #999;
+    width: 100%;
+}
+ul.pestañas li {
+    float: left;
+    margin: 0;
+    padding: 0;
+    height: 31px;
+    line-height: 31px;
+    border: 1px solid #999;
+    border-left: none;
+    margin-bottom: -1px;
+    overflow: hidden;
+    position: relative;
+    background: #e0e0e0;
+}
+ul.pestañas li a {
+    text-decoration: none;
+    color: #000;
+    display: block;
+    font-size: 1.2em;
+    padding: 0 20px;
+    border: 1px solid #fff;
+    outline: none;
+}
+ul.pestañas li a:hover {
+    background: #ccc;
+}
+html ul.pestañas li.active, html ul.pestañas li.active a:hover  {
+    background: #fff;
+    border-bottom: 1px solid #fff;
+}
+
+.marco {
+    margin: 15px 15px 15px 0px;
+    border: 1px solid #999;
+    border-top: 1px solid #999;
+    padding: 10px 30px 30px 30px;
+    /*padding-left: 255px;
+    overflow: hidden;*/
+    clear: both;
+    float: left; width: 60%;
+    background: #fff;
+    /*alignment-adjust: central;*/
+    position: relative;
+    left: 200px;
+    text-align: justify;
+}
+
+

@@ -11,15 +11,21 @@ Doctrine_Manager::getInstance()->bindComponent('Documento', 'doctrine');
  * @property string $texto
  * @property Doctrine_Collection $Convocatorias
  * @property Doctrine_Collection $ConvocatoriaDocumentos
+ * @property Doctrine_Collection $Documento
+ * @property Doctrine_Collection $PostulanteDocumento
  * 
  * @method integer             getId()                     Returns the current record's "id" value
  * @method string              getTexto()                  Returns the current record's "texto" value
  * @method Doctrine_Collection getConvocatorias()          Returns the current record's "Convocatorias" collection
  * @method Doctrine_Collection getConvocatoriaDocumentos() Returns the current record's "ConvocatoriaDocumentos" collection
+ * @method Doctrine_Collection getDocumento()              Returns the current record's "Documento" collection
+ * @method Doctrine_Collection getPostulanteDocumento()    Returns the current record's "PostulanteDocumento" collection
  * @method Documento           setId()                     Sets the current record's "id" value
  * @method Documento           setTexto()                  Sets the current record's "texto" value
  * @method Documento           setConvocatorias()          Sets the current record's "Convocatorias" collection
  * @method Documento           setConvocatoriaDocumentos() Sets the current record's "ConvocatoriaDocumentos" collection
+ * @method Documento           setDocumento()              Sets the current record's "Documento" collection
+ * @method Documento           setPostulanteDocumento()    Sets the current record's "PostulanteDocumento" collection
  * 
  * @package    .
  * @subpackage model
@@ -56,6 +62,15 @@ abstract class BaseDocumento extends sfDoctrineRecord
              'foreign' => 'convocatoria_id'));
 
         $this->hasMany('ConvocatoriaDocumento as ConvocatoriaDocumentos', array(
+             'local' => 'id',
+             'foreign' => 'documento_id'));
+
+        $this->hasMany('Postulante as Documento', array(
+             'refClass' => 'PostulanteDocumento',
+             'local' => 'documento_id',
+             'foreign' => 'postulante_id'));
+
+        $this->hasMany('PostulanteDocumento', array(
              'local' => 'id',
              'foreign' => 'documento_id'));
 

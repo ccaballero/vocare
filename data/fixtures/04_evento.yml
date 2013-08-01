@@ -1,9 +1,16 @@
 Evento:
   evento_1:
+    nombre: publicacion
     descripcion: Publicación de convocatoria.
   evento_2:
+    nombre: presentacion
     descripcion: Presentación de documentos.
   evento_3:
+    nombre: pruebas
     descripcion: Publicación de rol de pruebas practicas y de conocimientos.
   evento_4:
+    nombre: resultados
     descripcion: Publicación de resultados.
+  evento_5:
+    nombre: envio
+    descripcion: Fecha limite de envio de formularios de postulación.

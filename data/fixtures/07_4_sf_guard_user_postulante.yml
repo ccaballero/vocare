@@ -1,0 +1,29 @@
+sfGuardUser:
+  bdelgadillo:
+    first_name:     Britany
+    last_name:      Delgadillo Ortiz
+    email_address:  asdf16@cs.umss.edu.bo
+    username:       bdelgadillo
+    password:       asdf
+    Groups:         [ postulante ]
+  gsandoval:
+    first_name:     Genesis
+    last_name:      Sandoval Valdez
+    email_address:  asdf17@cs.umss.edu.bo
+    username:       gsandoval
+    password:       asdf
+    Groups:         [ postulante ]
+  gsoto:
+    first_name:     Gabriela
+    last_name:      Soto Soliz
+    email_address:  asdf18@cs.umss.edu.bo
+    username:       gsoto
+    password:       asdf
+    Groups:         [ postulante ]
+  vsanchez:
+    first_name:     Victor
+    last_name:      Sanchez Rodriguez
+    email_address:  asdf19@cs.umss.edu.bo
+    username:       vsanchez
+    password:       asdf
+    Groups:         [ postulante ]

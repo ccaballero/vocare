@@ -9,6 +9,10 @@ Evento:
       unsigned: true
       primary: true
       autoincrement: true
+    nombre:
+      type: string(255)
+      fixed: false
+      notnull: true
     descripcion:
       type: string()
       fixed: false

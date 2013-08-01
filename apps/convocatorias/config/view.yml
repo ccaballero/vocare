@@ -12,6 +12,7 @@ default:
   stylesheets:
    - main.css
    - convocatorias.css
+   - postulaciones.css
    - letters.css
    - boxes.css
    - smoothness/jquery-ui-1.10.1.custom.min.css
@@ -25,6 +26,7 @@ default:
     - Box/menu.js
     - Box/manager.js
     - convocatorias.js
+    - postulaciones.js
 
   has_layout: true
   layout: layout

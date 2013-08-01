@@ -62,6 +62,7 @@ sfGuardGroup:
       - documentacion_plantilla_edit
       - documentacion_plantilla_create
       - documentacion_plantilla_delete
+      - postulantes_list
   integrante_de_comision:
     name: Integrante de Comisión
     description: |
@@ -71,3 +72,8 @@ sfGuardGroup:
       - convocatorias_list
       - convocatorias_view_vigente
       - convocatorias_view_finalizado
+  postulante:
+    name: Postulante
+    description: Estudiante regular que desea postular a una convocatoria.
+    Permissions:
+      - postulante_create

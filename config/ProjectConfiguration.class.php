@@ -11,6 +11,7 @@ class ProjectConfiguration extends sfProjectConfiguration
         array(
             'sfDoctrinePlugin',
             'sfDoctrineGuardPlugin',
+            'sfTCPDFPlugin',
         )
     );
   }

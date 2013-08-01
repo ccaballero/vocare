@@ -22,6 +22,10 @@
                 <target>Plantillas</target>
             </trans-unit>
             <trans-unit>
+                <source>Aplicattions</source>
+                <target>Postulaciones</target>
+            </trans-unit>
+            <trans-unit>
                 <source>Login</source>
                 <target>Ingresar</target>
             </trans-unit>

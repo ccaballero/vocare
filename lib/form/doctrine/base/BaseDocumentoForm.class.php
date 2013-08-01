@@ -20,6 +20,7 @@ abstract class BaseDocumentoForm extends BaseFormDoctrine
       'created_at'         => new sfWidgetFormDateTime(),
       'updated_at'         => new sfWidgetFormDateTime(),
       'convocatorias_list' => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Convocatoria')),
+      'documento_list'     => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Postulante')),
     ));
 
     $this->setValidators(array(
@@ -28,6 +29,7 @@ abstract class BaseDocumentoForm extends BaseFormDoctrine
       'created_at'         => new sfValidatorDateTime(),
       'updated_at'         => new sfValidatorDateTime(),
       'convocatorias_list' => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Convocatoria', 'required' => false)),
+      'documento_list'     => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Postulante', 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('documento[%s]');
@@ -53,11 +55,17 @@ abstract class BaseDocumentoForm extends BaseFormDoctrine
       $this->setDefault('convocatorias_list', $this->object->Convocatorias->getPrimaryKeys());
     }
 
+    if (isset($this->widgetSchema['documento_list']))
+    {
+      $this->setDefault('documento_list', $this->object->Documento->getPrimaryKeys());
+    }
+
   }
 
   protected function doSave($con = null)
   {
     $this->saveConvocatoriasList($con);
+    $this->saveDocumentoList($con);
 
     parent::doSave($con);
   }
@@ -97,6 +105,44 @@ abstract class BaseDocumentoForm extends BaseFormDoctrine
     if (count($link))
     {
       $this->object->link('Convocatorias', array_values($link));
+    }
+  }
+
+  public function saveDocumentoList($con = null)
+  {
+    if (!$this->isValid())
+    {
+      throw $this->getErrorSchema();
+    }
+
+    if (!isset($this->widgetSchema['documento_list']))
+    {
+      // somebody has unset this widget
+      return;
+    }
+
+    if (null === $con)
+    {
+      $con = $this->getConnection();
+    }
+
+    $existing = $this->object->Documento->getPrimaryKeys();
+    $values = $this->getValue('documento_list');
+    if (!is_array($values))
+    {
+      $values = array();
+    }
+
+    $unlink = array_diff($existing, $values);
+    if (count($unlink))
+    {
+      $this->object->unlink('Documento', array_values($unlink));
+    }
+
+    $link = array_diff($values, $existing);
+    if (count($link))
+    {
+      $this->object->link('Documento', array_values($link));
     }
   }
 

@@ -110,3 +110,10 @@ sfGuardPermission:
   documentacion_plantilla_delete:
     name: documentacion_plantilla_delete
     description: Eliminar una plantilla de documentación.
+  # permission in postulantes
+  postulantes_list:
+    name: postulantes_list
+    description: Lista los postulantes
+  postulante_create:
+    name: postulante_create
+    description: Crea un nuevo postulante

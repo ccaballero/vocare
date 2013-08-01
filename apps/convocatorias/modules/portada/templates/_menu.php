@@ -25,4 +25,15 @@
             ) ?></li>
 <?php endif; ?>
 
+<?php if ($sf_user->hasCredential('postulantes_list')): ?>
+    <li><?php echo link_to(
+            __('Aplicattions'), '@postulaciones', array('accesskey' => '5')
+            ) ?></li>
+<?php else: ?>
+    <?php if ($sf_user->hascredential('postulante_create')): ?>
+        <li><?php echo link_to(
+            __('Aplicattions'), '@postulaciones', array('accesskey' => '5')
+            ) ?></li>
+    <?php endif; ?>
+<?php endif; ?>
 </ul>

@@ -1,0 +1,167 @@
+Postulante:
+  actAs: [Timestampable]
+  connection: doctrine
+  tableName: postulante
+  columns:
+    id:
+      type: integer(4)
+      fixed: false
+      unsigned: true
+      primary: true
+      autoincrement: true
+    user_id:
+      type: integer(4)
+    convocatoria_id:
+      type: integer(4)
+    nombre: 
+      type: string(25)
+      fixed: false
+      notnull: true
+      default: ''
+    apellido_paterno:
+      type: string(25)
+      fixed: false
+      notnull: true
+      default: ''
+    apellido_materno:
+      type: string(25)
+      fixed: false
+      notnull: true
+      default: ''
+    ci:
+      type: integer(10)
+      fixed: false
+      notnull: true
+      default: ''
+    cod_sis:
+      type: integer(10)
+      fixed: false
+      notnull: true
+      default: ''
+    email: 
+      type: string(255)
+      fixed: true
+      notnull: true
+      unique: true
+    telefono:
+      type: integer(10)
+      fixed: false
+      notnull: true
+      default: ''
+    direccion:
+      type: string(25)
+      fixed: false
+      notnull: true
+      default: ''
+    numero_hojas:
+      type: integer(4)
+      fixed: false
+      notnull: true
+      default: ''
+    estado:
+      type: enum(15)
+      fixed: false
+      ##pendiente por pre-registro de postulante, inscrito cuando entrega
+      ##sus documentos a la secretaria, la secretaria lo da de alta por asi decirlo.
+      values:
+        - Pendiente
+        - Inscrito
+        - Inhabilitado
+        - Habilitado
+      default: Pendiente
+      notnull: true
+    observacion:
+      type: string()
+      fixed: false
+      notnull: true
+      default: ''
+  relations:
+    User: 
+      class: sfGuardUser
+      local: user_id
+      foreign: id
+      foreignType: one
+      type: many
+    Convocatoria:
+      class: Convocatoria
+      local: convocatoria_id
+      foreign: id
+      foreignAlias: Convocatoria
+      foreignType: one 
+      type: many
+    Requerimiento:
+      class: Requerimiento
+      refClass: PostulanteRequerimiento
+      foreignAlias: Requerimiento
+    Requisito:
+      class: Requisito
+      refClass: PostulanteRequisito
+      foreignAlias: Requisito
+    Documento:
+      class: Documento
+      refClass: PostulanteDocumento
+      foreignAlias: Documento
+      
+PostulanteRequerimiento:
+  connection: doctrine
+  tableName: postulante_requerimiento
+  columns:
+    postulante_id:
+      type: integer(4)
+      fixed: false
+      unsigned: true
+      primary: true
+    requerimiento_id:
+      type: integer(4)
+      fixed: false
+      unsigned: true
+      primary: true
+  relations:
+    Postulante:
+      foreignAlias: PostulanteRequerimientos
+      onDelete: CASCADE
+    Requerimiento:
+      foreignAlias: PostulanteRequerimientos
+      onDelete: CASCADE 
+PostulanteRequisito:
+  connection: doctrine
+  tableName: postulante_requisito
+  columns:
+    postulante_id:
+      type: integer(4)
+      fixed: false
+      unsigned: true
+      primary: true
+    requisito_id:
+      type: integer(4)
+      fixed: false
+      unsigned: true
+      primary: true
+  relations:
+    Postulante:
+      foreignAlias: PostulanteRequisito
+      onDelete: CASCADE
+    Requisito:
+      foreignAlias: PostulanteRequisito
+      onDelete: CASCADE
+PostulanteDocumento:
+  connection: doctrine
+  tableName: postulante_documento
+  columns:
+    postulante_id:
+      type: integer(4)
+      fixed: false
+      unsigned: true
+      primary: true
+    documento_id:
+      type: integer(4)
+      fixed: false
+      unsigned: true
+      primary: true
+  relations:
+    Postulante:
+      foreignAlias: PostulanteDocumento
+      onDelete: CASCADE
+    Documento:
+      foreignAlias: PostulanteDocumento
+      onDelete: CASCADE

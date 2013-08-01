@@ -16,4 +16,14 @@ class ConvocatoriaDocumentoTable extends Doctrine_Table
     {
         return Doctrine_Core::getTable('ConvocatoriaDocumento');
     }
+    
+    public function getDocumentos()
+     {
+        global $c;
+        $q = Doctrine_Query::create()
+              -> from('Documento d')
+              ->innerJoin('d.ConvocatoriaDocumento cd')
+              -> where('cd.convocatoria_id = ?', $c);
+        return $q->execute();  
+     }
 }
