@@ -10,12 +10,8 @@ Doctrine_Manager::getInstance()->bindComponent('Postulante', 'doctrine');
  * @property integer $id
  * @property integer $user_id
  * @property integer $convocatoria_id
- * @property string $nombre
- * @property string $apellido_paterno
- * @property string $apellido_materno
- * @property integer $ci
+ * @property varchar $ci
  * @property integer $cod_sis
- * @property string $email
  * @property integer $telefono
  * @property string $direccion
  * @property integer $numero_hojas
@@ -33,12 +29,8 @@ Doctrine_Manager::getInstance()->bindComponent('Postulante', 'doctrine');
  * @method integer             getId()                       Returns the current record's "id" value
  * @method integer             getUserId()                   Returns the current record's "user_id" value
  * @method integer             getConvocatoriaId()           Returns the current record's "convocatoria_id" value
- * @method string              getNombre()                   Returns the current record's "nombre" value
- * @method string              getApellidoPaterno()          Returns the current record's "apellido_paterno" value
- * @method string              getApellidoMaterno()          Returns the current record's "apellido_materno" value
- * @method integer             getCi()                       Returns the current record's "ci" value
+ * @method varchar             getCi()                       Returns the current record's "ci" value
  * @method integer             getCodSis()                   Returns the current record's "cod_sis" value
- * @method string              getEmail()                    Returns the current record's "email" value
  * @method integer             getTelefono()                 Returns the current record's "telefono" value
  * @method string              getDireccion()                Returns the current record's "direccion" value
  * @method integer             getNumeroHojas()              Returns the current record's "numero_hojas" value
@@ -55,12 +47,8 @@ Doctrine_Manager::getInstance()->bindComponent('Postulante', 'doctrine');
  * @method Postulante          setId()                       Sets the current record's "id" value
  * @method Postulante          setUserId()                   Sets the current record's "user_id" value
  * @method Postulante          setConvocatoriaId()           Sets the current record's "convocatoria_id" value
- * @method Postulante          setNombre()                   Sets the current record's "nombre" value
- * @method Postulante          setApellidoPaterno()          Sets the current record's "apellido_paterno" value
- * @method Postulante          setApellidoMaterno()          Sets the current record's "apellido_materno" value
  * @method Postulante          setCi()                       Sets the current record's "ci" value
  * @method Postulante          setCodSis()                   Sets the current record's "cod_sis" value
- * @method Postulante          setEmail()                    Sets the current record's "email" value
  * @method Postulante          setTelefono()                 Sets the current record's "telefono" value
  * @method Postulante          setDireccion()                Sets the current record's "direccion" value
  * @method Postulante          setNumeroHojas()              Sets the current record's "numero_hojas" value
@@ -93,55 +81,28 @@ abstract class BasePostulante extends sfDoctrineRecord
              'autoincrement' => true,
              'length' => 4,
              ));
-        $this->hasColumn('user_id', 'integer', 4, array(
+        $this->hasColumn('user_id', 'integer', null, array(
              'type' => 'integer',
-             'length' => 4,
+             'primary' => true,
              ));
         $this->hasColumn('convocatoria_id', 'integer', 4, array(
              'type' => 'integer',
+             'fixed' => 0,
+             'unsigned' => true,
+             'primary' => true,
              'length' => 4,
              ));
-        $this->hasColumn('nombre', 'string', 25, array(
-             'type' => 'string',
+        $this->hasColumn('ci', 'varchar', 12, array(
+             'type' => 'varchar',
              'fixed' => 0,
              'notnull' => true,
-             'default' => '',
-             'length' => 25,
+             'length' => 12,
              ));
-        $this->hasColumn('apellido_paterno', 'string', 25, array(
-             'type' => 'string',
-             'fixed' => 0,
-             'notnull' => true,
-             'default' => '',
-             'length' => 25,
-             ));
-        $this->hasColumn('apellido_materno', 'string', 25, array(
-             'type' => 'string',
-             'fixed' => 0,
-             'notnull' => true,
-             'default' => '',
-             'length' => 25,
-             ));
-        $this->hasColumn('ci', 'integer', 10, array(
+        $this->hasColumn('cod_sis', 'integer', 9, array(
              'type' => 'integer',
              'fixed' => 0,
              'notnull' => true,
-             'default' => '',
-             'length' => 10,
-             ));
-        $this->hasColumn('cod_sis', 'integer', 10, array(
-             'type' => 'integer',
-             'fixed' => 0,
-             'notnull' => true,
-             'default' => '',
-             'length' => 10,
-             ));
-        $this->hasColumn('email', 'string', 255, array(
-             'type' => 'string',
-             'fixed' => 1,
-             'notnull' => true,
-             'unique' => true,
-             'length' => 255,
+             'length' => 9,
              ));
         $this->hasColumn('telefono', 'integer', 10, array(
              'type' => 'integer',
@@ -164,19 +125,19 @@ abstract class BasePostulante extends sfDoctrineRecord
              'default' => '',
              'length' => 4,
              ));
-        $this->hasColumn('estado', 'enum', 15, array(
+        $this->hasColumn('estado', 'enum', 12, array(
              'type' => 'enum',
              'fixed' => 0,
              'values' => 
              array(
-              0 => 'Pendiente',
-              1 => 'Inscrito',
-              2 => 'Inhabilitado',
-              3 => 'Habilitado',
+              0 => 'pendiente',
+              1 => 'inscrito',
+              2 => 'inhabilitado',
+              3 => 'habilitado',
              ),
-             'default' => 'Pendiente',
+             'default' => 'pendiente',
              'notnull' => true,
-             'length' => 15,
+             'length' => 12,
              ));
         $this->hasColumn('observacion', 'string', null, array(
              'type' => 'string',

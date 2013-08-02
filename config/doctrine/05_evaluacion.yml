@@ -17,7 +17,7 @@ Evaluacion:
       type: string(128)
       fixed: false
       notnull: true
-      
+
 #Evaluacion:
 #  actAs:
 #    Timestampable:
@@ -72,4 +72,3 @@ Evaluacion:
 #      default: ''
 #      notnull: true
 #      autoincrement: false
-      

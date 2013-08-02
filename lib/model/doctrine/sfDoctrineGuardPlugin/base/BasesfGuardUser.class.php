@@ -22,7 +22,7 @@
  * @property sfGuardRememberKey $RememberKeys
  * @property sfGuardForgotPassword $ForgotPassword
  * @property UsuarioGrupoConvocatoria $UsuarioGrupoConvocatoria
- * @property Postulante $Postulante
+ * @property Postulacion $Postulacion
  * 
  * @method string                   getFirstName()                Returns the current record's "first_name" value
  * @method string                   getLastName()                 Returns the current record's "last_name" value
@@ -41,7 +41,7 @@
  * @method sfGuardRememberKey       getRememberKeys()             Returns the current record's "RememberKeys" value
  * @method sfGuardForgotPassword    getForgotPassword()           Returns the current record's "ForgotPassword" value
  * @method UsuarioGrupoConvocatoria getUsuarioGrupoConvocatoria() Returns the current record's "UsuarioGrupoConvocatoria" value
- * @method Postulante               getPostulante()               Returns the current record's "Postulante" value
+ * @method Postulacion              getPostulacion()              Returns the current record's "Postulacion" value
  * @method sfGuardUser              setFirstName()                Sets the current record's "first_name" value
  * @method sfGuardUser              setLastName()                 Sets the current record's "last_name" value
  * @method sfGuardUser              setEmailAddress()             Sets the current record's "email_address" value
@@ -59,7 +59,7 @@
  * @method sfGuardUser              setRememberKeys()             Sets the current record's "RememberKeys" value
  * @method sfGuardUser              setForgotPassword()           Sets the current record's "ForgotPassword" value
  * @method sfGuardUser              setUsuarioGrupoConvocatoria() Sets the current record's "UsuarioGrupoConvocatoria" value
- * @method sfGuardUser              setPostulante()               Sets the current record's "Postulante" value
+ * @method sfGuardUser              setPostulacion()              Sets the current record's "Postulacion" value
  * 
  * @package    .
  * @subpackage model
@@ -159,7 +159,7 @@ abstract class BasesfGuardUser extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'user_id'));
 
-        $this->hasOne('Postulante', array(
+        $this->hasOne('Postulacion', array(
              'local' => 'id',
              'foreign' => 'user_id'));
 

@@ -672,7 +672,7 @@ ConvocatoriaRedaccion:
       [[ foreach convocatoriaEventos ]]
           <tr>
               <td>[[ evento.descripcion ]]</td>
-              <td class="text-center">[[ fecha ]]</td>
+              <td class="text-center">[[ prettyFecha ]]</td>
           </tr>
       [[ endforeach ]]
       </table>
@@ -683,7 +683,7 @@ ConvocatoriaRedaccion:
       necesidades propias de cada laboratorio.</p>
 
       <div class="fecha">
-          <p>Cochabamba, [[ publicacion ]].</p>
+          <p>Cochabamba, [[ prettyPublicacion ]].</p>
       </div>
 
       <div class="firmas">

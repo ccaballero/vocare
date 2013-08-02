@@ -13,4 +13,3 @@ Requisito:
       type: string()
       fixed: false
       notnull: true
-      

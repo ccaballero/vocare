@@ -13,4 +13,3 @@ Documento:
       type: string()
       fixed: false
       notnull: true
-      

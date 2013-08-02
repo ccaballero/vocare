@@ -178,7 +178,7 @@ class Convocatoria extends BaseConvocatoria
         return $q->execute();
     }
 
-    public function getPublicacion() {
+    public function getPrettyPublicacion() {
         $estado = $this->_get('estado');
         if (!in_array($estado, array('vigente', 'finalizado'))) {
             return 'aún sin publicar';

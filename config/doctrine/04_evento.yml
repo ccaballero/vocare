@@ -17,4 +17,3 @@ Evento:
       type: string()
       fixed: false
       notnull: true
-      

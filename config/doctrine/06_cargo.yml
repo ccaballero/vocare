@@ -38,7 +38,7 @@ CargoEncargado:
     fecha:
       type: date
       fixed: false
-      notnull: true  
+      notnull: true
   relations:
     Cargo:
       local: cargo_id

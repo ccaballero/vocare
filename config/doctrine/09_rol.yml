@@ -68,7 +68,7 @@ UsuarioGrupoConvocatoria:
        local: user_id
        foreign: id
        foreignType: one
-       onDelete: CASCADE  
+       onDelete: CASCADE
     Grupo:
       class: Grupo
       local: grupo_id
