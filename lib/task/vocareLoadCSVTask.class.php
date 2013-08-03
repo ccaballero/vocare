@@ -88,7 +88,7 @@ EOF;
             $user->setIsSuperAdmin(false);
             $user->save();
         }
-        
+
         fclose($fd);
     }
 
