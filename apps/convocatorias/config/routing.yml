@@ -72,6 +72,8 @@ convocatorias:
       firmas: [post]
       notificaciones: [post]
       cargos: [post]
+      # postulations tabs
+      postular: [get, post]
 
 requerimientos:
   class: sfDoctrineRouteCollection

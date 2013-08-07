@@ -83,12 +83,12 @@
             )) ?>
         </div>
     <?php endif; ?>
-    <?php if ($tabs['postulant']): ?>
-        <div id="postulant" class="tab_contents">
-            <a name="postulant"></a>
+    <?php if ($tabs['postulants']): ?>
+        <div id="postulants" class="tab_contents">
+            <a name="postulants"></a>
             <?php include_partial('postulantes/form', array(
-                'form' => $postulant_form,
                 'object' => $object,
+                'form' => $postulants,
             )) ?>
         </div>
     <?php endif; ?>
@@ -100,3 +100,9 @@
     <?php endif; ?>
     </div>
 </div>
+<?php if (isset($tab_click)): ?>
+<script>
+    $(document).ready(function(){
+        $('a[href="#<?php echo $tab_click ?>"]').click()})
+</script>
+<?php endif; ?>

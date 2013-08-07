@@ -30,10 +30,14 @@
             </a>
         </li>
     <?php endif; ?>
-    <?php if ($tabs['postulant']): ?>
-        <li class="tab"><a href="#postulant">Postulación</a></li>
+    <?php if ($tabs['postulants']): ?>
+        <li class="tab">
+            <a href="#postulants">Postulación</a>
+        </li>
     <?php endif; ?>
     <?php if ($tabs['results']): ?>
-    	<li class="tab"><a href="#results">Resultados</a></li>
+    	<li class="tab">
+            <a href="#results">Resultados</a>
+        </li>
     <?php endif; ?>
 </ul>

@@ -50,8 +50,7 @@ class convocatoriasActions extends PlantillasDefault
             $this->redactions['redaction']);
         $this->notifications = $this->_renderShowNotifications($this->object);
         $this->users = $this->_renderShowUsers($this->object);
-
-        $this->postulant_form = new PostulanteForm();
+        $this->postulants = $this->_renderShowPostulants($this->object);
 
         $this->tabs = array(
             'preview' => true,
@@ -59,9 +58,11 @@ class convocatoriasActions extends PlantillasDefault
             'redaction' => ($state == 'borrador') || ($state == 'emitido'),
             'viewers' => ($state == 'borrador' || ($state == 'emitido')),
             'users' => ($state == 'emitido'),
-            'postulant' => ($state == 'vigente'),
+            'postulants' => ($state == 'vigente'),
             'results' => ($state == 'vigente') || ($state == 'finalizado'),
         );
+        
+        $this->tab_click = 'preview';
     }
 
     protected function _renderShowEditor($object) {
@@ -122,12 +123,16 @@ class convocatoriasActions extends PlantillasDefault
                 Doctrine::getTable('UsuarioGrupoConvocatoria')->getUsuarios(
                     $object, $grupo);
         }
-        
+
         return array(
             'users' => $users,
             'groups' => $groups,
             'roles' => $roles,
         );
+    }
+    
+    protected function _renderShowPostulants($object) {
+        return new PostulanteForm();
     }
 
     protected function processForm(sfWebRequest $request,
@@ -414,29 +419,31 @@ class convocatoriasActions extends PlantillasDefault
             'id' => $this->object->getId())) . '#preview');
     }
 
-    /* implicit method, what that fuck!! */
-    private function _formPostular($request) {
-        $this->object = $this->getRoute()->getObject();
+    public function executePostular($request) {
+        $this->executeShow($request);
 
-        $form = new PostulanteForm();
-        $form->bind(
-            $request->getParameter($form->getName()),
-            $request->getFiles($form->getName())
-        );
+        $this->postulant_form = new PostulanteForm();
+//        $this->postulant_form->bind(
+//            $request->getParameter($this->postulant_form->getName()),
+//            $request->getFiles($this->postulant_form->getName())
+//        );
 
-        if ($form->isValid()) {
-            $form->save();
-
-            if (!empty($flash)) {
-                $this->getUser()->setFlash('success', $flash);
-            }
-            $this->redirect($this->generateUrl('convocatorias_show', array(
-                'id' => $this->object->getId())) . '#preview');
-        } else {
-            $this->getUser()->setFlash('error',
-                'Se encontraron algunos errores en el formulario');
-            $this->redirect($this->generateUrl('convocatorias_show', array(
-                'id' => $this->object->getId())) . '#postulant');
-        }
+        $this->tab_click = 'postulant';
+        $this->setTemplate('show');
+//
+//        if ($form->isValid()) {
+//            $form->save();
+//
+//            if (!empty($flash)) {
+//                $this->getUser()->setFlash('success', $flash);
+//            }
+//            $this->redirect($this->generateUrl('convocatorias_show', array(
+//                'id' => $this->object->getId())) . '#preview');
+//        } else {
+//            $this->getUser()->setFlash('error',
+//                'Se encontraron algunos errores en el formulario');
+//            $this->redirect($this->generateUrl('convocatorias_show', array(
+//                'id' => $this->object->getId())) . '#postulant');
+//        }
     }
 }
