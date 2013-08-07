@@ -19,6 +19,7 @@
         </p>
     </div>
     <div id="box"></div>
+    <div class="clear"></div>
 </div>
 
 <script type="text/javascript">
