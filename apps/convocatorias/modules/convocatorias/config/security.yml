@@ -41,3 +41,5 @@ anular:
 finalizar:
   credentials:
     - convocatorias_finalizar
+postular:
+  is_secure: false

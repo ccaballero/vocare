@@ -3,11 +3,12 @@
 class RequerimientoForm extends BaseRequerimientoForm
 {
     public function configure() {
-        unset(
-            $this['created_at'],
-            $this['updated_at'],
-            $this['convocatorias_list']
-        );
+        $this->useFields(array(
+            'codigo',
+            'nombre',
+            'texto',
+            'horas_academicas',
+        ));
 
         $this->widgetSchema->setLabels(array(
             'codigo' => 'Código (*):',

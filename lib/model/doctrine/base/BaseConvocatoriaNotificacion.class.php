@@ -58,6 +58,11 @@ abstract class BaseConvocatoriaNotificacion extends sfDoctrineRecord
              'notnull' => true,
              'length' => 255,
              ));
+
+        $this->option('symfony', array(
+             'form' => false,
+             'filter' => false,
+             ));
     }
 
     public function setUp()

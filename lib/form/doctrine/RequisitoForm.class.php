@@ -3,13 +3,9 @@
 class RequisitoForm extends BaseRequisitoForm
 {
     public function configure() {
-        unset(
-            $this['created_at'],
-            $this['updated_at'],
-            $this['convocatorias_list']
-        );
-        
-        unset($this['created_at'], $this['updated_at']);
+        $this->useFields(array(
+            'texto',
+        ));
 
         $this->widgetSchema->setLabels(array(
             'texto' => 'Descripción (*):',
@@ -22,4 +18,3 @@ class RequisitoForm extends BaseRequisitoForm
   	$this->widgetSchema->setFormFormatterName('custom');
     }
 }
- 

@@ -3,12 +3,10 @@
 class EventoForm extends BaseEventoForm
 {
     public function configure() {
-        unset(
-            $this['created_at'],
-            $this['updated_at'],
-            $this['convocatorias_list']
-        );
-        
+        $this->useFields(array(
+            'descripcion',
+        ));
+
         $this->widgetSchema->setLabels(array(
             'descripcion' => 'Descripción (*):',
         ));

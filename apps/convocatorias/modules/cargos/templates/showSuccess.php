@@ -28,7 +28,10 @@
 </table>
 
 <div class="hidden-box">
-    <?php echo form_tag(url_for('cargos_agregar', array('id' => $object->getId()))) ?>
+    <?php echo form_tag(
+        url_for('cargos_agregar', array(
+            'id' => $object->getId())
+    )) ?>
         <?php echo $form ?>
         <p class="submit">
             <input type="submit" value="Registrar" />

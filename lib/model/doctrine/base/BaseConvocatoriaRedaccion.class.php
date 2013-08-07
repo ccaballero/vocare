@@ -51,6 +51,11 @@ abstract class BaseConvocatoriaRedaccion extends sfDoctrineRecord
              'notnull' => true,
              'default' => '',
              ));
+
+        $this->option('symfony', array(
+             'form' => false,
+             'filter' => false,
+             ));
     }
 
     public function setUp()

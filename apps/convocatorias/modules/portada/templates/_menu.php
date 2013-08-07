@@ -24,7 +24,7 @@
             __('Documentation'), '@documentacion', array('accesskey' => '4')
             ) ?></li>
 <?php endif; ?>
-
+<?php /*
 <?php if ($sf_user->hasCredential('postulantes_list')): ?>
     <li><?php echo link_to(
             __('Aplicattions'), '@postulaciones', array('accesskey' => '5')
@@ -36,4 +36,5 @@
             ) ?></li>
     <?php endif; ?>
 <?php endif; ?>
+ */ ?>
 </ul>

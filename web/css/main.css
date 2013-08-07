@@ -258,7 +258,8 @@ span {
 
 #main form p table tr td label {
     text-align: left;
-    width: 200px;
+/*    width: 200px;*/
+    width: auto;
 }
 
 #main form p input[type="text"],

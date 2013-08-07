@@ -66,6 +66,10 @@ Convocatoria:
       type: main
 
 ConvocatoriaRequerimiento:
+  options:
+    symfony:
+      form: false
+      filter: false
   connection: doctrine
   tableName: convocatoria_requerimiento
   columns:
@@ -100,6 +104,10 @@ ConvocatoriaRequerimiento:
       onDelete: CASCADE
 
 ConvocatoriaRequisito:
+  options:
+    symfony:
+      form: false
+      filter: false
   connection: doctrine
   tableName: convocatoria_requisito
   columns:
@@ -128,6 +136,10 @@ ConvocatoriaRequisito:
       onDelete: CASCADE
 
 ConvocatoriaDocumento:
+  options:
+    symfony:
+      form: false
+      filter: false
   connection: doctrine
   tableName: convocatoria_documento
   columns:
@@ -156,6 +168,10 @@ ConvocatoriaDocumento:
       onDelete: CASCADE
 
 ConvocatoriaEvento:
+  options:
+    symfony:
+      form: false
+      filter: false
   connection: doctrine
   tableName: convocatoria_evento
   columns:
@@ -182,6 +198,10 @@ ConvocatoriaEvento:
       onDelete: CASCADE
 
 ConvocatoriaEvaluacion:
+  options:
+    symfony:
+      form: false
+      filter: false
   connection: doctrine
   tableName: convocatoria_evaluacion
   columns:
@@ -204,6 +224,10 @@ ConvocatoriaEvaluacion:
       onDelete: CASCADE
 
 ConvocatoriaRequerimientoEvaluacion:
+  options:
+    symfony:
+      form: false
+      filter: false
   connection: doctrine
   tableName: convocatoria_requerimiento_evaluacion
   columns:
@@ -234,6 +258,10 @@ ConvocatoriaRequerimientoEvaluacion:
       onDelete: CASCADE
 
 ConvocatoriaRedaccion:
+  options:
+    symfony:
+      form: false
+      filter: false
   connection: doctrine
   tableName: convocatoria_redaccion
   columns:
@@ -259,6 +287,10 @@ ConvocatoriaRedaccion:
       onDelete: cascade
 
 ConvocatoriaCargo:
+  options:
+    symfony:
+      form: false
+      filter: false
   connection: doctrine
   tableName: convocatoria_cargo
   columns:
@@ -287,6 +319,10 @@ ConvocatoriaCargo:
       onDelete: CASCADE
 
 ConvocatoriaNotificacion:
+  options:
+    symfony:
+      form: false
+      filter: false
   connection: doctrine
   tableName: convocatoria_notificacion
   columns:

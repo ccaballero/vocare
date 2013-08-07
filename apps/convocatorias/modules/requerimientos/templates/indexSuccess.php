@@ -6,6 +6,9 @@
         <li><?php echo link_to('Crear nuevo requerimiento',
             url_for('requerimientos_new'), array('accesskey' => 'n')
         ) ?></li>
+        <li><?php echo link_to('Administración de plantillas',
+            url_for('portada/plantillas'), array('accesskey' => 'p')
+        ) ?></li>
     </ul>
 </div>
 <?php endif; ?>

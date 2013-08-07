@@ -15,51 +15,49 @@ abstract class BasePostulanteForm extends BaseFormDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'id'                 => new sfWidgetFormInputHidden(),
-      'user_id'            => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('User'), 'add_empty' => true)),
-      'convocatoria_id'    => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Convocatoria'), 'add_empty' => true)),
-      'nombre'             => new sfWidgetFormInputText(),
-      'apellido_paterno'   => new sfWidgetFormInputText(),
-      'apellido_materno'   => new sfWidgetFormInputText(),
-      'ci'                 => new sfWidgetFormInputText(),
-      'cod_sis'            => new sfWidgetFormInputText(),
-      'email'              => new sfWidgetFormInputText(),
-      'telefono'           => new sfWidgetFormInputText(),
-      'direccion'          => new sfWidgetFormInputText(),
-      'numero_hojas'       => new sfWidgetFormInputText(),
-      'estado'             => new sfWidgetFormChoice(array('choices' => array('Pendiente' => 'Pendiente', 'Inscrito' => 'Inscrito', 'Inhabilitado' => 'Inhabilitado', 'Habilitado' => 'Habilitado'))),
-      'observacion'        => new sfWidgetFormTextarea(),
-      'created_at'         => new sfWidgetFormDateTime(),
-      'updated_at'         => new sfWidgetFormDateTime(),
-      'requerimiento_list' => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Requerimiento')),
-      'requisito_list'     => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Requisito')),
-      'documento_list'     => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Documento')),
+      'id'                  => new sfWidgetFormInputHidden(),
+      'convocatoria_id'     => new sfWidgetFormInputHidden(),
+      'apellidos'           => new sfWidgetFormInputText(),
+      'nombres'             => new sfWidgetFormInputText(),
+      'ci'                  => new sfWidgetFormInputText(),
+      'sis'                 => new sfWidgetFormInputText(),
+      'correo_electronico'  => new sfWidgetFormInputText(),
+      'telefono'            => new sfWidgetFormInputText(),
+      'direccion'           => new sfWidgetFormInputText(),
+      'numero_hojas'        => new sfWidgetFormInputText(),
+      'fecha_entrega'       => new sfWidgetFormInputText(),
+      'estado'              => new sfWidgetFormChoice(array('choices' => array('pendiente' => 'pendiente', 'inscrito' => 'inscrito', 'inhabilitado' => 'inhabilitado', 'habilitado' => 'habilitado'))),
+      'observacion'         => new sfWidgetFormTextarea(),
+      'created_at'          => new sfWidgetFormDateTime(),
+      'updated_at'          => new sfWidgetFormDateTime(),
+      'requerimientos_list' => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Requerimiento')),
+      'requisitos_list'     => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Requisito')),
+      'documentos_list'     => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Documento')),
     ));
 
     $this->setValidators(array(
-      'id'                 => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
-      'user_id'            => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('User'), 'required' => false)),
-      'convocatoria_id'    => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Convocatoria'), 'required' => false)),
-      'nombre'             => new sfValidatorString(array('max_length' => 25, 'required' => false)),
-      'apellido_paterno'   => new sfValidatorString(array('max_length' => 25, 'required' => false)),
-      'apellido_materno'   => new sfValidatorString(array('max_length' => 25, 'required' => false)),
-      'ci'                 => new sfValidatorInteger(array('required' => false)),
-      'cod_sis'            => new sfValidatorInteger(array('required' => false)),
-      'email'              => new sfValidatorString(array('max_length' => 255)),
-      'telefono'           => new sfValidatorInteger(array('required' => false)),
-      'direccion'          => new sfValidatorString(array('max_length' => 25, 'required' => false)),
-      'numero_hojas'       => new sfValidatorInteger(array('required' => false)),
-      'estado'             => new sfValidatorChoice(array('choices' => array(0 => 'Pendiente', 1 => 'Inscrito', 2 => 'Inhabilitado', 3 => 'Habilitado'), 'required' => false)),
-      'observacion'        => new sfValidatorString(array('required' => false)),
-      'created_at'         => new sfValidatorDateTime(),
-      'updated_at'         => new sfValidatorDateTime(),
-      'requerimiento_list' => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Requerimiento', 'required' => false)),
-      'requisito_list'     => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Requisito', 'required' => false)),
-      'documento_list'     => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Documento', 'required' => false)),
+      'id'                  => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
+      'convocatoria_id'     => new sfValidatorChoice(array('choices' => array($this->getObject()->get('convocatoria_id')), 'empty_value' => $this->getObject()->get('convocatoria_id'), 'required' => false)),
+      'apellidos'           => new sfValidatorString(array('max_length' => 32)),
+      'nombres'             => new sfValidatorString(array('max_length' => 32)),
+      'ci'                  => new sfValidatorString(array('max_length' => 16)),
+      'sis'                 => new sfValidatorString(array('max_length' => 9)),
+      'correo_electronico'  => new sfValidatorString(array('max_length' => 255)),
+      'telefono'            => new sfValidatorString(array('max_length' => 32, 'required' => false)),
+      'direccion'           => new sfValidatorString(array('max_length' => 32, 'required' => false)),
+      'numero_hojas'        => new sfValidatorInteger(array('required' => false)),
+      'fecha_entrega'       => new sfValidatorPass(array('required' => false)),
+      'estado'              => new sfValidatorChoice(array('choices' => array(0 => 'pendiente', 1 => 'inscrito', 2 => 'inhabilitado', 3 => 'habilitado'), 'required' => false)),
+      'observacion'         => new sfValidatorString(array('required' => false)),
+      'created_at'          => new sfValidatorDateTime(),
+      'updated_at'          => new sfValidatorDateTime(),
+      'requerimientos_list' => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Requerimiento', 'required' => false)),
+      'requisitos_list'     => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Requisito', 'required' => false)),
+      'documentos_list'     => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Documento', 'required' => false)),
     ));
 
     $this->validatorSchema->setPostValidator(
-      new sfValidatorDoctrineUnique(array('model' => 'Postulante', 'column' => array('email')))
+      new sfValidatorDoctrineUnique(array('model' => 'Postulante', 'column' => array('correo_electronico')))
     );
 
     $this->widgetSchema->setNameFormat('postulante[%s]');
@@ -80,40 +78,40 @@ abstract class BasePostulanteForm extends BaseFormDoctrine
   {
     parent::updateDefaultsFromObject();
 
-    if (isset($this->widgetSchema['requerimiento_list']))
+    if (isset($this->widgetSchema['requerimientos_list']))
     {
-      $this->setDefault('requerimiento_list', $this->object->Requerimiento->getPrimaryKeys());
+      $this->setDefault('requerimientos_list', $this->object->Requerimientos->getPrimaryKeys());
     }
 
-    if (isset($this->widgetSchema['requisito_list']))
+    if (isset($this->widgetSchema['requisitos_list']))
     {
-      $this->setDefault('requisito_list', $this->object->Requisito->getPrimaryKeys());
+      $this->setDefault('requisitos_list', $this->object->Requisitos->getPrimaryKeys());
     }
 
-    if (isset($this->widgetSchema['documento_list']))
+    if (isset($this->widgetSchema['documentos_list']))
     {
-      $this->setDefault('documento_list', $this->object->Documento->getPrimaryKeys());
+      $this->setDefault('documentos_list', $this->object->Documentos->getPrimaryKeys());
     }
 
   }
 
   protected function doSave($con = null)
   {
-    $this->saveRequerimientoList($con);
-    $this->saveRequisitoList($con);
-    $this->saveDocumentoList($con);
+    $this->saveRequerimientosList($con);
+    $this->saveRequisitosList($con);
+    $this->saveDocumentosList($con);
 
     parent::doSave($con);
   }
 
-  public function saveRequerimientoList($con = null)
+  public function saveRequerimientosList($con = null)
   {
     if (!$this->isValid())
     {
       throw $this->getErrorSchema();
     }
 
-    if (!isset($this->widgetSchema['requerimiento_list']))
+    if (!isset($this->widgetSchema['requerimientos_list']))
     {
       // somebody has unset this widget
       return;
@@ -124,8 +122,8 @@ abstract class BasePostulanteForm extends BaseFormDoctrine
       $con = $this->getConnection();
     }
 
-    $existing = $this->object->Requerimiento->getPrimaryKeys();
-    $values = $this->getValue('requerimiento_list');
+    $existing = $this->object->Requerimientos->getPrimaryKeys();
+    $values = $this->getValue('requerimientos_list');
     if (!is_array($values))
     {
       $values = array();
@@ -134,24 +132,24 @@ abstract class BasePostulanteForm extends BaseFormDoctrine
     $unlink = array_diff($existing, $values);
     if (count($unlink))
     {
-      $this->object->unlink('Requerimiento', array_values($unlink));
+      $this->object->unlink('Requerimientos', array_values($unlink));
     }
 
     $link = array_diff($values, $existing);
     if (count($link))
     {
-      $this->object->link('Requerimiento', array_values($link));
+      $this->object->link('Requerimientos', array_values($link));
     }
   }
 
-  public function saveRequisitoList($con = null)
+  public function saveRequisitosList($con = null)
   {
     if (!$this->isValid())
     {
       throw $this->getErrorSchema();
     }
 
-    if (!isset($this->widgetSchema['requisito_list']))
+    if (!isset($this->widgetSchema['requisitos_list']))
     {
       // somebody has unset this widget
       return;
@@ -162,8 +160,8 @@ abstract class BasePostulanteForm extends BaseFormDoctrine
       $con = $this->getConnection();
     }
 
-    $existing = $this->object->Requisito->getPrimaryKeys();
-    $values = $this->getValue('requisito_list');
+    $existing = $this->object->Requisitos->getPrimaryKeys();
+    $values = $this->getValue('requisitos_list');
     if (!is_array($values))
     {
       $values = array();
@@ -172,24 +170,24 @@ abstract class BasePostulanteForm extends BaseFormDoctrine
     $unlink = array_diff($existing, $values);
     if (count($unlink))
     {
-      $this->object->unlink('Requisito', array_values($unlink));
+      $this->object->unlink('Requisitos', array_values($unlink));
     }
 
     $link = array_diff($values, $existing);
     if (count($link))
     {
-      $this->object->link('Requisito', array_values($link));
+      $this->object->link('Requisitos', array_values($link));
     }
   }
 
-  public function saveDocumentoList($con = null)
+  public function saveDocumentosList($con = null)
   {
     if (!$this->isValid())
     {
       throw $this->getErrorSchema();
     }
 
-    if (!isset($this->widgetSchema['documento_list']))
+    if (!isset($this->widgetSchema['documentos_list']))
     {
       // somebody has unset this widget
       return;
@@ -200,8 +198,8 @@ abstract class BasePostulanteForm extends BaseFormDoctrine
       $con = $this->getConnection();
     }
 
-    $existing = $this->object->Documento->getPrimaryKeys();
-    $values = $this->getValue('documento_list');
+    $existing = $this->object->Documentos->getPrimaryKeys();
+    $values = $this->getValue('documentos_list');
     if (!is_array($values))
     {
       $values = array();
@@ -210,13 +208,13 @@ abstract class BasePostulanteForm extends BaseFormDoctrine
     $unlink = array_diff($existing, $values);
     if (count($unlink))
     {
-      $this->object->unlink('Documento', array_values($unlink));
+      $this->object->unlink('Documentos', array_values($unlink));
     }
 
     $link = array_diff($values, $existing);
     if (count($link))
     {
-      $this->object->link('Documento', array_values($link));
+      $this->object->link('Documentos', array_values($link));
     }
   }
 

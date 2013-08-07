@@ -6,6 +6,9 @@
         <li><?php echo link_to('Crear nuevo evento',
             url_for('eventos_new'), array('accesskey' => 'n')
         ) ?></li>
+        <li><?php echo link_to('Administración de plantillas',
+            url_for('portada/plantillas'), array('accesskey' => 'p')
+        ) ?></li>
     </ul>
 </div>
 <?php endif; ?>

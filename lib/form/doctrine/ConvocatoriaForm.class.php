@@ -3,18 +3,16 @@
 class ConvocatoriaForm extends BaseConvocatoriaForm
 {
     public function configure() {
-        unset(
-            $this['publicacion'],
-            $this['redaccion'],
-            $this['cargos_list'],
-            $this['evaluaciones_list'],
-            $this['created_at'],
-            $this['updated_at'],
-            $this['estado']
-        );
+        $this->useFields(array(
+            'gestion',
+            'requerimientos_list',
+            'requisitos_list',
+            'documentos_list',
+            'eventos_list',
+        ));
 
         $this->widgetSchema->setLabels(array(
-            'gestion' => 'Gestión:',
+            'gestion' => 'Gestión (*):',
             'requerimientos_list' => 'Requerimientos:',
             'requisitos_list' => 'Requisitos:',
             'documentos_list' => 'Documentos:',
@@ -120,7 +118,7 @@ class ConvocatoriaForm extends BaseConvocatoriaForm
             }
 
             $append = '<input type="text" name="requisitos[' . $item
-                . ']" class="text-center" style="width:36px"' . $value . '/>';
+                . ']" class="text-right" style="width:36px"' . $value . '/>';
 
             $result .= '<tr><td style="width:16px">' . $input['input']
                     . '</td><td style="width:36px">' . $append
@@ -146,7 +144,7 @@ class ConvocatoriaForm extends BaseConvocatoriaForm
             }
 
             $append = '<input type="text" name="documentos[' . $item
-                . ']" class="text-center" style="width:36px"' . $value . '/>';
+                . ']" class="text-right" style="width:36px"' . $value . '/>';
 
             $result .= '<tr><td style="width:16px">' . $input['input']
                     . '</td><td style="width:36px">' . $append
@@ -241,7 +239,7 @@ class ConvocatoriaForm extends BaseConvocatoriaForm
     public function setEventos($eventos) {
         $this->eventos = $eventos;
     }
-    
+
     public function fetchEventos($convocatoria) {
         $q = Doctrine_Query::create()
             ->from('ConvocatoriaEvento ce')

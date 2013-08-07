@@ -267,8 +267,7 @@ class Convocatoria extends BaseConvocatoria
     }
 
     public function getFirmas() {
-        $cargos = new Cargo();
-        $lista_cargos = $cargos->listAll($this);
+        $lista_cargos = Doctrine::getTable('Cargo')->listAll($this);
 
         $firmas = array();
         foreach ($lista_cargos as $cargo) {
@@ -432,6 +431,10 @@ class Convocatoria extends BaseConvocatoria
             'result' => 2,
             'message' => '',
         );
+    }
+    
+    public function esVigente() {
+        return $this->getEstado() === 'vigente';
     }
 }
 

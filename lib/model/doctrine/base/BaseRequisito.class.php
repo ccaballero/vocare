@@ -12,20 +12,20 @@ Doctrine_Manager::getInstance()->bindComponent('Requisito', 'doctrine');
  * @property Doctrine_Collection $Convocatorias
  * @property Doctrine_Collection $ConvocatoriaRequisitos
  * @property Doctrine_Collection $Requisito
- * @property Doctrine_Collection $PostulacionRequisito
+ * @property Doctrine_Collection $PostulanteRequisito
  * 
  * @method integer             getId()                     Returns the current record's "id" value
  * @method string              getTexto()                  Returns the current record's "texto" value
  * @method Doctrine_Collection getConvocatorias()          Returns the current record's "Convocatorias" collection
  * @method Doctrine_Collection getConvocatoriaRequisitos() Returns the current record's "ConvocatoriaRequisitos" collection
  * @method Doctrine_Collection getRequisito()              Returns the current record's "Requisito" collection
- * @method Doctrine_Collection getPostulacionRequisito()   Returns the current record's "PostulacionRequisito" collection
+ * @method Doctrine_Collection getPostulanteRequisito()    Returns the current record's "PostulanteRequisito" collection
  * @method Requisito           setId()                     Sets the current record's "id" value
  * @method Requisito           setTexto()                  Sets the current record's "texto" value
  * @method Requisito           setConvocatorias()          Sets the current record's "Convocatorias" collection
  * @method Requisito           setConvocatoriaRequisitos() Sets the current record's "ConvocatoriaRequisitos" collection
  * @method Requisito           setRequisito()              Sets the current record's "Requisito" collection
- * @method Requisito           setPostulacionRequisito()   Sets the current record's "PostulacionRequisito" collection
+ * @method Requisito           setPostulanteRequisito()    Sets the current record's "PostulanteRequisito" collection
  * 
  * @package    .
  * @subpackage model
@@ -65,12 +65,12 @@ abstract class BaseRequisito extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'requisito_id'));
 
-        $this->hasMany('Postulacion as Requisito', array(
-             'refClass' => 'PostulacionRequisito',
+        $this->hasMany('Postulante as Requisito', array(
+             'refClass' => 'PostulanteRequisito',
              'local' => 'requisito_id',
-             'foreign' => 'postulacion_id'));
+             'foreign' => 'postulante_id'));
 
-        $this->hasMany('PostulacionRequisito', array(
+        $this->hasMany('PostulanteRequisito', array(
              'local' => 'id',
              'foreign' => 'requisito_id'));
 

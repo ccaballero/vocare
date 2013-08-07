@@ -67,6 +67,11 @@ abstract class BaseConvocatoriaRequerimiento extends sfDoctrineRecord
              'default' => 0,
              'length' => 4,
              ));
+
+        $this->option('symfony', array(
+             'form' => false,
+             'filter' => false,
+             ));
     }
 
     public function setUp()

@@ -52,17 +52,11 @@ sf_guard_forgot_password_change:
   requirements:
     sf_method: [get, post]
 
-#sf_guard_register:
-#  url: /registro
-#  param:
-#    module: sfGuardRegister
-#    action: index
-
 convocatorias:
   class: sfDoctrineRouteCollection
   options:
     model: Convocatoria
-    actions: [list, new, create, edit, update, show, delete]
+    actions: [list, new, create, edit, show, update, delete]
     object_actions:
       # document generation
       texto: [get]
@@ -125,54 +119,51 @@ plantillas:
     object_actions:
       clonar: [post]
 
-postulaciones:
-  class: sfDoctrineRouteCollection
-  options:
-    model: Postulante
+#postulantes_new:
+#  url: /convocatoria/:convocatoria/postular
+#  class: sfDoctrineRoute
+#  options:
+#    model: Postulante
+#    type: object
+#  param:
+#    module: postulantes
+#    action: new
+#  requirements:
+#    sf_method: [get]
 
-postulaciones_new_postulante:
-  url: /postulaciones/new/:convocatoria/:requerimiento
-  class: sfDoctrineRoute
-  options:
-    model: Postulante
-    type: object
-  param:
-    module: postulaciones
-    action: new
-
-postulaciones_list:
-  url: /postulaciones/list/:postulantes/
-  class: sfDoctrineRoute
-  options:
-    model: Postulante
-    type: object
-  param:
-    module: postulaciones
-    action: list
-  requirements:
-    sf_method: get
-
-postulaciones_edit:
-  url: /postulaciones/edit/:id/
-  class: sfDoctrineRoute
-  options:
-    model: Postulante
-    type: object
-  param:
-    module: postulaciones
-    action: edit
-  requirements:
-    sf_method: get
-
-postulaciones_buscar:
-  url: /postulaciones/:convocatoria/
-  class: sfDoctrineRoute
-  options:
-    model: Postulante
-    type: object
-  param:
-    module: postulaciones
-    action: buscar
+#postulaciones_list:
+#  url: /postulaciones/list/:postulantes/
+#  class: sfDoctrineRoute
+#  options:
+#    model: Postulante
+#    type: object
+#  param:
+#    module: postulaciones
+#    action: list
+#  requirements:
+#    sf_method: get
+#
+#postulaciones_edit:
+#  url: /postulaciones/edit/:id/
+#  class: sfDoctrineRoute
+#  options:
+#    model: Postulante
+#    type: object
+#  param:
+#    module: postulaciones
+#    action: edit
+#  requirements:
+#    sf_method: get
+#
+#postulaciones_buscar:
+#  url: /postulaciones/:convocatoria/
+#  class: sfDoctrineRoute
+#  options:
+#    model: Postulante
+#    type: object
+#  param:
+#    module: postulaciones
+#    action: buscar
 
 homepage:
   url: /

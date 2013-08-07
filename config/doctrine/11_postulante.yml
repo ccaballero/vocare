@@ -1,7 +1,7 @@
-Postulacion:
+Postulante:
   actAs: [Timestampable]
   connection: doctrine
-  tableName: postulacion
+  tableName: postulante
   columns:
     id:
       type: integer(4)
@@ -9,22 +9,31 @@ Postulacion:
       unsigned: true
       primary: true
       autoincrement: true
-    user_id:
-      type: integer
-      primary: true
     convocatoria_id:
       type: integer(4)
       fixed: false
       unsigned: true
       primary: true
+    apellidos:
+      type: string(32)
+      fixed: false
+      notnull: true
+    nombres:
+      type: string(32)
+      fixed: false
+      notnull: true
     ci:
       type: string(16)
       fixed: false
       notnull: true
-    cod_sis:
+    sis:
       type: string(9)
       fixed: false
       notnull: true
+    correo_electronico:
+      type: string(255)
+      notnull: true
+      unique: true
     telefono:
       type: string(32)
       fixed: false
@@ -41,6 +50,10 @@ Postulacion:
       fixed: false
       notnull: true
       default: 0
+    fecha_entrega:
+      type: datetime
+      fixed: false
+      notnull: false
     estado:
       type: enum(12)
       fixed: false
@@ -57,12 +70,6 @@ Postulacion:
       notnull: true
       default: ''
   relations:
-    User:
-      class: sfGuardUser
-      local: user_id
-      foreign: id
-      foreignType: one
-      type: many
     Convocatoria:
       class: Convocatoria
       local: convocatoria_id
@@ -70,24 +77,28 @@ Postulacion:
       foreignAlias: Convocatoria
       foreignType: one
       type: many
-    Requerimiento:
+    Requerimientos:
       class: Requerimiento
-      refClass: PostulacionRequerimiento
+      refClass: PostulanteRequerimiento
       foreignAlias: Requerimiento
-    Requisito:
+    Requisitos:
       class: Requisito
-      refClass: PostulacionRequisito
+      refClass: PostulanteRequisito
       foreignAlias: Requisito
-    Documento:
+    Documentos:
       class: Documento
-      refClass: PostulacionDocumento
+      refClass: PostulanteDocumento
       foreignAlias: Documento
 
-PostulacionRequerimiento:
+PostulanteRequerimiento:
+  options:
+    symfony:
+      form: false
+      filter: false
   connection: doctrine
-  tableName: postulacion_requerimiento
+  tableName: postulante_requerimiento
   columns:
-    postulacion_id:
+    postulante_id:
       type: integer(4)
       fixed: false
       unsigned: true
@@ -98,18 +109,22 @@ PostulacionRequerimiento:
       unsigned: true
       primary: true
   relations:
-    Postulacion:
-      foreignAlias: PostulacionRequerimientos
+    Postulante:
+      foreignAlias: PostulanteRequerimientos
       onDelete: CASCADE
     Requerimiento:
-      foreignAlias: PostulacionRequerimientos
+      foreignAlias: PostulanteRequerimientos
       onDelete: CASCADE
 
-PostulacionRequisito:
+PostulanteRequisito:
+  options:
+    symfony:
+      form: false
+      filter: false
   connection: doctrine
-  tableName: postulacion_requisito
+  tableName: postulante_requisito
   columns:
-    postulacion_id:
+    postulante_id:
       type: integer(4)
       fixed: false
       unsigned: true
@@ -120,18 +135,22 @@ PostulacionRequisito:
       unsigned: true
       primary: true
   relations:
-    Postulacion:
-      foreignAlias: PostulacionRequisito
+    Postulante:
+      foreignAlias: PostulanteRequisito
       onDelete: CASCADE
     Requisito:
-      foreignAlias: PostulacionRequisito
+      foreignAlias: PostulanteRequisito
       onDelete: CASCADE
 
-PostulacionDocumento:
+PostulanteDocumento:
+  options:
+    symfony:
+      form: false
+      filter: false
   connection: doctrine
-  tableName: postulacion_documento
+  tableName: postulante_documento
   columns:
-    postulacion_id:
+    postulante_id:
       type: integer(4)
       fixed: false
       unsigned: true
@@ -142,9 +161,9 @@ PostulacionDocumento:
       unsigned: true
       primary: true
   relations:
-    Postulacion:
-      foreignAlias: PostulacionDocumento
+    Postulante:
+      foreignAlias: PostulanteDocumento
       onDelete: CASCADE
     Documento:
-      foreignAlias: PostulacionDocumento
+      foreignAlias: PostulanteDocumento
       onDelete: CASCADE

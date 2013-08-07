@@ -27,7 +27,7 @@ Doctrine_Manager::getInstance()->bindComponent('Convocatoria', 'doctrine');
  * @property Doctrine_Collection $ConvocatoriaRequerimientoEvaluaciones
  * @property Doctrine_Collection $ConvocatoriaCargos
  * @property Doctrine_Collection $UsuarioGrupoConvocatoria
- * @property Postulacion $Convocatoria
+ * @property Postulante $Convocatoria
  * 
  * @method integer             getId()                                    Returns the current record's "id" value
  * @method string              getGestion()                               Returns the current record's "gestion" value
@@ -49,7 +49,7 @@ Doctrine_Manager::getInstance()->bindComponent('Convocatoria', 'doctrine');
  * @method Doctrine_Collection getConvocatoriaRequerimientoEvaluaciones() Returns the current record's "ConvocatoriaRequerimientoEvaluaciones" collection
  * @method Doctrine_Collection getConvocatoriaCargos()                    Returns the current record's "ConvocatoriaCargos" collection
  * @method Doctrine_Collection getUsuarioGrupoConvocatoria()              Returns the current record's "UsuarioGrupoConvocatoria" collection
- * @method Postulacion         getConvocatoria()                          Returns the current record's "Convocatoria" value
+ * @method Postulante          getConvocatoria()                          Returns the current record's "Convocatoria" value
  * @method Convocatoria        setId()                                    Sets the current record's "id" value
  * @method Convocatoria        setGestion()                               Sets the current record's "gestion" value
  * @method Convocatoria        setEstado()                                Sets the current record's "estado" value
@@ -192,7 +192,7 @@ abstract class BaseConvocatoria extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'convocatoria_id'));
 
-        $this->hasOne('Postulacion as Convocatoria', array(
+        $this->hasOne('Postulante as Convocatoria', array(
              'local' => 'id',
              'foreign' => 'convocatoria_id'));
 

@@ -37,4 +37,11 @@ class myUser extends sfGuardSecurityUser
         $permission = 'convocatorias_view_' . strtolower($state);
         return $this->hasCredential($permission);
     }
+    
+    public function canChangeState($convocatoria) {
+        return $this->hasCredential('convocatorias_eliminar')
+            || $this->hasCredential('convocatorias_promover')
+            || $this->hasCredential('convocatorias_finalizar')
+            || $this->hasCredential('convocatorias_anular');
+    }
 }

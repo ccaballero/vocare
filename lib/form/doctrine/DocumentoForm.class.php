@@ -3,12 +3,10 @@
 class DocumentoForm extends BaseDocumentoForm
 {
     public function configure() {
-        unset(
-            $this['created_at'],
-            $this['updated_at'],
-            $this['convocatorias_list']
-        );
-        
+        $this->useFields(array(
+            'texto',
+        ));
+
         $this->widgetSchema->setLabels(array(
             'texto' => 'Descripción (*):',
         ));

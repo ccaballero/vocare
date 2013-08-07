@@ -1,6 +1,7 @@
 <h1><?php echo $object->getGestion() ?></h1>
 <p><?php echo '(' . $object->getEstado() . ')' ?></p>
 
+<?php if ($sf_user->canChangeState($object)): ?>
 <div class="states">
     <ul>
     <?php foreach ($object->getOperacionesPosibles() as $op => $pr): ?>
@@ -18,6 +19,7 @@
     <?php endforeach; ?>
     </ul>
 </div>
+<?php endif; ?>
 
 <div id="tabber">
     <?php include_partial('convocatorias/tabs', array(
@@ -55,8 +57,8 @@
             <a name="redaction"></a>
             <?php include_partial('convocatorias/redactions', array(
                 'object' => $object,
-                'list' => $list,
-                'redaction' => $redaction,
+                'redactions' => $redactions['redactions'],
+                'redaction' => $redactions['redaction'],
             )) ?>
         </div>
     <?php endif; ?>
@@ -65,8 +67,8 @@
             <a name="viewers"></a>
             <?php include_partial('convocatorias/notifications', array(
                 'object' => $object,
-                'signatures' => $signatures,
-                'notifications' => $notifications,
+                'signatures' => $notifications['signatures'],
+                'notifications' => $notifications['notifications'],
             )) ?>
         </div>
     <?php endif; ?>
@@ -75,16 +77,19 @@
             <a name="users"></a>
             <?php include_partial('convocatorias/users', array(
                 'object' => $object,
-                'groups' => $groups,
-                'users'  => $users,
-                'roles'  => $roles,
+                'users'  => $users['users'],
+                'groups' => $users['groups'],
+                'roles'  => $users['roles'],
             )) ?>
         </div>
     <?php endif; ?>
-    <?php if ($tabs['letters']): ?>
-        <div id="letters" class="tab_contents">
-            <a name="letters"></a>
-            <h1>Envio de cartas</h1>
+    <?php if ($tabs['postulant']): ?>
+        <div id="postulant" class="tab_contents">
+            <a name="postulant"></a>
+            <?php include_partial('postulantes/form', array(
+                'form' => $postulant_form,
+                'object' => $object,
+            )) ?>
         </div>
     <?php endif; ?>
     <?php if ($tabs['results']): ?>

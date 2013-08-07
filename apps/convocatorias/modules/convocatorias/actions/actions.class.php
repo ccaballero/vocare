@@ -21,13 +21,13 @@ class convocatoriasActions extends PlantillasDefault
         $model_convocatorias = new Convocatoria();
         $list = $model_convocatorias->listAll();
         $filtered_list = array();
-        
+
         foreach ($list as $element) {
             if ($this->getUser()->canView($element)) {
                 $filtered_list[] = $element;
             }
         }
-        
+
         $this->list = $filtered_list;
     }
 
@@ -44,53 +44,14 @@ class convocatoriasActions extends PlantillasDefault
             $this->forward404();
         }
 
-        // Settings of editor form
-        $this->form = new ConvocatoriaForm($this->object);
-        $this->form->removeFocus();
+        $this->form = $this->_renderShowEditor($this->object);
+        $this->redactions = $this->_renderShowRedaction($this->object);
+        $this->preview = $this->_renderShowPreview($this->object,
+            $this->redactions['redaction']);
+        $this->notifications = $this->_renderShowNotifications($this->object);
+        $this->users = $this->_renderShowUsers($this->object);
 
-        $this->form->fetchRequerimientos($this->object);
-        $this->form->fetchRequisitos($this->object);
-        $this->form->fetchDocumentos($this->object);
-        $this->form->fetchEventos($this->object);
-
-        // And this is the part for redactions
-        $this->max_enmienda = $this->object->getMaxEnmienda();
-        $this->redaction = $this->object->getEnmienda($this->max_enmienda);
-
-        // And this is the part for listing of convocatorias (I need to say
-        //convocatorias in english, but don't
-        $this->list = $this->object->listRedactions();
-
-        // This is the part where I talk to templating
-        if (!empty($this->redaction)) {
-            $this->preview = Xhtml::render($this->redaction, $this->object);
-        } else {
-            $this->preview = null;
-            $this->max_enmienda = 0;
-        }
-
-        // This is the part when I build the roles for signatures
-        $cargos = new Cargo();
-        $this->signatures = $cargos->listAll($this->object);
-        $this->notifications = $this->object->getNotificaciones();
-
-        // This is the part when I generate the groups for a convocatoria
-        // I hate that i can't translate the word convocatoria
-        $this->users = Doctrine_Core::getTable('sfGuardUser')
-             ->createQuery('u')
-             ->execute();
-        $this->groups = Doctrine_Core::getTable('Grupo')
-             ->createQuery('g')
-             ->execute();
-
-        $roles = array();
-        $assignments = new UsuarioGrupoConvocatoria();
-
-        foreach ($this->groups as $grupo) {
-            $roles[$grupo->getId()] = $assignments->getUsuarios(
-                $this->object, $grupo);
-        }
-        $this->roles = $roles;
+        $this->postulant_form = new PostulanteForm();
 
         $this->tabs = array(
             'preview' => true,
@@ -98,8 +59,74 @@ class convocatoriasActions extends PlantillasDefault
             'redaction' => ($state == 'borrador') || ($state == 'emitido'),
             'viewers' => ($state == 'borrador' || ($state == 'emitido')),
             'users' => ($state == 'emitido'),
-            'letters' => ($state == 'emitido'),
+            'postulant' => ($state == 'vigente'),
             'results' => ($state == 'vigente') || ($state == 'finalizado'),
+        );
+    }
+
+    protected function _renderShowEditor($object) {
+        // Settings of editor form
+        $form = new ConvocatoriaForm($object);
+        $form->removeFocus();
+
+        $form->fetchRequerimientos($object);
+        $form->fetchRequisitos($object);
+        $form->fetchDocumentos($object);
+        $form->fetchEventos($object);
+
+        return $form;
+    }
+
+    protected function _renderShowRedaction($object) {
+        return array(
+            // And this is the part for listing of convocatorias (I need to say
+            //convocatorias in english, but don't
+            'redactions' => $this->object->listRedactions(),
+            // And this is the part for redactions
+            'redaction' => $object->getEnmienda($object->getMaxEnmienda()),
+        );
+    }
+
+    protected function _renderShowPreview($object, $redaction = '') {
+        if (empty($redaction)) {
+            $redaction = $object->getEnmienda($object->getMaxEnmienda());
+        }
+
+        // This is the part where I talk to templating
+        if (!empty($redaction)) {
+            return Xhtml::render($redaction, $object);
+        }
+    }
+
+    protected function _renderShowNotifications($object) {
+        // This is the part when I build the roles for signatures
+        return array(
+            'signatures' => Doctrine::getTable('Cargo')->listAll($object),
+            'notifications' => $object->getNotificaciones(),
+        );
+    }
+
+    protected function _renderShowUsers($object) {
+        // This is the part when I generate the groups for a convocatoria
+        // I hate that i can't translate the word convocatoria
+        $users = Doctrine_Core::getTable('sfGuardUser')
+             ->createQuery('u')
+             ->execute();
+        $groups = Doctrine_Core::getTable('Grupo')
+             ->createQuery('g')
+             ->execute();
+
+        $roles = array();
+        foreach ($groups as $grupo) {
+            $roles[$grupo->getId()] =
+                Doctrine::getTable('UsuarioGrupoConvocatoria')->getUsuarios(
+                    $object, $grupo);
+        }
+        
+        return array(
+            'users' => $users,
+            'groups' => $groups,
+            'roles' => $roles,
         );
     }
 
@@ -204,7 +231,7 @@ class convocatoriasActions extends PlantillasDefault
     }
 
     public function executeFirmas(sfWebRequest $request) {
-        $convocatoria = $this->getRoute()->getObject();
+        $this->object = $this->getRoute()->getObject();
         $cargos = $request->getParameter('cargos');
 
         // sort by numero_orden
@@ -225,7 +252,7 @@ class convocatoriasActions extends PlantillasDefault
             $convocatoria_cargo->save();
         }
 
-        $convocatoria->saveXML();
+        $this->object->saveXML();
         $this->getUser()->setFlash('success',
             'La configuración de las firmas ha sido registrada');
         $this->redirect($this->generateUrl('convocatorias_show', array(
@@ -385,5 +412,31 @@ class convocatoriasActions extends PlantillasDefault
         $this->actionChange('finalizar');
         $this->redirect($this->generateUrl('convocatorias_show', array(
             'id' => $this->object->getId())) . '#preview');
+    }
+
+    /* implicit method, what that fuck!! */
+    private function _formPostular($request) {
+        $this->object = $this->getRoute()->getObject();
+
+        $form = new PostulanteForm();
+        $form->bind(
+            $request->getParameter($form->getName()),
+            $request->getFiles($form->getName())
+        );
+
+        if ($form->isValid()) {
+            $form->save();
+
+            if (!empty($flash)) {
+                $this->getUser()->setFlash('success', $flash);
+            }
+            $this->redirect($this->generateUrl('convocatorias_show', array(
+                'id' => $this->object->getId())) . '#preview');
+        } else {
+            $this->getUser()->setFlash('error',
+                'Se encontraron algunos errores en el formulario');
+            $this->redirect($this->generateUrl('convocatorias_show', array(
+                'id' => $this->object->getId())) . '#postulant');
+        }
     }
 }

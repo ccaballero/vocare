@@ -53,6 +53,11 @@ abstract class BaseConvocatoriaEvento extends sfDoctrineRecord
              'fixed' => 0,
              'notnull' => true,
              ));
+
+        $this->option('symfony', array(
+             'form' => false,
+             'filter' => false,
+             ));
     }
 
     public function setUp()

@@ -9,11 +9,11 @@ generador de plantillas muy versatil.</p>
 <div class="tree">
     <h1>Modelos de redacción</h1>
     <script type="text/javascript">var redacciones = {};</script>
-<?php if (count($list) == 0): ?>
+<?php if (count($redactions) == 0): ?>
     <p>No se encontro ningun modelo de redacción utilizable.</p>
 <?php else: ?>
     <ul>
-    <?php foreach ($list as $convocatoria): ?>
+    <?php foreach ($redactions as $convocatoria): ?>
         <li>
             <span class="title">
                 <?php echo $convocatoria['gestion'] ?>

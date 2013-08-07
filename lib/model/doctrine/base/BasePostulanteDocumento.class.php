@@ -45,6 +45,11 @@ abstract class BasePostulanteDocumento extends sfDoctrineRecord
              'primary' => true,
              'length' => 4,
              ));
+
+        $this->option('symfony', array(
+             'form' => false,
+             'filter' => false,
+             ));
     }
 
     public function setUp()
