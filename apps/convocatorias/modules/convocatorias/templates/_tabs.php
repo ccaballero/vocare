@@ -6,9 +6,9 @@
           && $sf_user->hasCredential('convocatorias_edit')): ?>
     	<li class="tab"><a href="#editor">Edición</a></li>
     <?php endif; ?>
-    <?php if ($tabs['redaction']): ?>
+    <?php if ($tabs['redactions']): ?>
     	<li class="tab">
-            <a href="#redaction">
+            <a href="#redactions">
                 Redacción
                 <?php echo image_state($object->validateRedaction()) ?>
             </a>

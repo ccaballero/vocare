@@ -52,9 +52,9 @@
             </form>
         </div>
     <?php endif; ?>
-    <?php if ($tabs['redaction']): ?>
-        <div id="redaction" class="tab_contents">
-            <a name="redaction"></a>
+    <?php if ($tabs['redactions']): ?>
+        <div id="redactions" class="tab_contents">
+            <a name="redactions"></a>
             <?php include_partial('convocatorias/redactions', array(
                 'object' => $object,
                 'redactions' => $redactions['redactions'],
@@ -62,9 +62,9 @@
             )) ?>
         </div>
     <?php endif; ?>
-    <?php if ($tabs['viewers']): ?>
-        <div id="viewers" class="tab_contents">
-            <a name="viewers"></a>
+    <?php if ($tabs['notifications']): ?>
+        <div id="notifications" class="tab_contents">
+            <a name="notifications"></a>
             <?php include_partial('convocatorias/notifications', array(
                 'object' => $object,
                 'signatures' => $notifications['signatures'],
@@ -95,7 +95,6 @@
     <?php if ($tabs['results']): ?>
         <div id="results" class="tab_contents">
             <a name="results"></a>
-            <h1>Resultados</h1>
         </div>
     <?php endif; ?>
     </div>

@@ -48,22 +48,36 @@ class convocatoriasActions extends PlantillasDefault
         $this->tabs = array(
             'preview' => true,
             'editor' => ($state == 'borrador') || ($state == 'emitido'),
-            'redaction' => ($state == 'borrador') || ($state == 'emitido'),
-            'viewers' => ($state == 'borrador' || ($state == 'emitido')),
+            'redactions' => ($state == 'borrador') || ($state == 'emitido'),
+            'notifications' => ($state == 'borrador' || ($state == 'emitido')),
             'users' => ($state == 'emitido'),
             'postulants' => ($state == 'vigente'),
             'results' => ($state == 'vigente') || ($state == 'finalizado'),
         );
         $this->tab_click = 'preview';
-        
-        $this->form = $this->_renderShowEditor($this->object);
-        $this->redactions = $this->_renderShowRedaction($this->object);
-        $this->preview = $this->_renderShowPreview($this->object,
-            $this->redactions['redaction']);
-        $this->notifications = $this->_renderShowNotifications($this->object);
-        $this->users = $this->_renderShowUsers($this->object);
-        $this->postulants = $this->_renderShowPostulants($this->object);
 
+        if ($this->tabs['editor']) {
+            $this->form = $this->_renderShowEditor($this->object);
+        }
+        if ($this->tabs['redactions']) {
+            $this->redactions = $this->_renderShowRedaction($this->object);
+        }
+        if ($this->tabs['preview']) {
+            $redaction =
+                isset($this->redactions) ? $this->redactions['redaction'] : '';
+            $this->preview =
+                $this->_renderShowPreview($this->object, $redaction);
+        }
+        if ($this->tabs['notifications']) {
+            $this->notifications =
+                $this->_renderShowNotifications($this->object);
+        }
+        if ($this->tabs['users']) {
+            $this->users = $this->_renderShowUsers($this->object);
+        }
+        if ($this->tabs['postulants']) {
+            $this->postulants = $this->_renderShowPostulants($this->object);
+        }
     }
 
     protected function _renderShowEditor($object) {
