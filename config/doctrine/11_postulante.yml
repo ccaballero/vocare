@@ -13,7 +13,6 @@ Postulante:
       type: integer(4)
       fixed: false
       unsigned: true
-      primary: true
     apellidos:
       type: string(32)
       fixed: false
@@ -75,20 +74,20 @@ Postulante:
       local: convocatoria_id
       foreign: id
       foreignAlias: Convocatoria
-      foreignType: one
-      type: many
+      foreignType: many
+      type: one
     Requerimientos:
       class: Requerimiento
       refClass: PostulanteRequerimiento
-      foreignAlias: Requerimiento
+      foreignAlias: Postulantes
     Requisitos:
       class: Requisito
       refClass: PostulanteRequisito
-      foreignAlias: Requisito
+      foreignAlias: Postulantes
     Documentos:
       class: Documento
       refClass: PostulanteDocumento
-      foreignAlias: Documento
+      foreignAlias: Postulantes
 
 PostulanteRequerimiento:
   options:
@@ -136,10 +135,10 @@ PostulanteRequisito:
       primary: true
   relations:
     Postulante:
-      foreignAlias: PostulanteRequisito
+      foreignAlias: PostulanteRequisitos
       onDelete: CASCADE
     Requisito:
-      foreignAlias: PostulanteRequisito
+      foreignAlias: PostulanteRequisitos
       onDelete: CASCADE
 
 PostulanteDocumento:
@@ -162,8 +161,8 @@ PostulanteDocumento:
       primary: true
   relations:
     Postulante:
-      foreignAlias: PostulanteDocumento
+      foreignAlias: PostulanteDocumentos
       onDelete: CASCADE
     Documento:
-      foreignAlias: PostulanteDocumento
+      foreignAlias: PostulanteDocumentos
       onDelete: CASCADE

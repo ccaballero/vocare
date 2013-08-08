@@ -26,7 +26,7 @@
                     <a href="<?php echo url_for(
                         'convocatorias_show', array(
                             'id' => $convocatoria->getId()
-                        )) ?>#postulant">Postularse ahora!!</a>
+                        )) ?>#postulants">Postularse ahora!!</a>
                 </li>
             </ul>
         </div>

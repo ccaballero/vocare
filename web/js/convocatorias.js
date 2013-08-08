@@ -91,25 +91,6 @@ $(document).ready(function(){
     $.datepicker.setDefaults($.datepicker.regional['es'])
     $('.datepicker').datepicker()
 
-    // tabber section
-//    $('.tab_contents').hide()
-    $('#tabber ul#tabs li a').click(function(){
-        var activeTab = $(this).attr('href')
-        $('#tabber ul li a').removeClass('active')
-        $(this).addClass('active')
-        $('#tabber .tab_details .tab_contents').hide()
-        $(activeTab).fadeIn()
-    })
-    if(window.location.hash!==''){
-//        $('a[href="#'+window.location.hash+'"]').click()
-        $(window.location.hash).fadeIn()
-        $('#tabber .tab a[href="'+window.location.hash+'"]').addClass('active')
-    }else{
-        $('.tab_contents:first').fadeIn()
-        $('#tabber .tab a[href="#preview"]').addClass('active')
-    }
-    // end tabber
-
     // this is the part when I copy redactions in convocatorias
     $('a.clipboard').click(function(){
         redaccion=$(this).attr('name')

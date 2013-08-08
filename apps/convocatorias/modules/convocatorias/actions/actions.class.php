@@ -61,7 +61,7 @@ class convocatoriasActions extends PlantillasDefault
             'postulants' => ($state == 'vigente'),
             'results' => ($state == 'vigente') || ($state == 'finalizado'),
         );
-        
+
         $this->tab_click = 'preview';
     }
 
@@ -130,7 +130,7 @@ class convocatoriasActions extends PlantillasDefault
             'roles' => $roles,
         );
     }
-    
+
     protected function _renderShowPostulants($object) {
         return new PostulanteForm();
     }
@@ -422,28 +422,28 @@ class convocatoriasActions extends PlantillasDefault
     public function executePostular($request) {
         $this->executeShow($request);
 
-        $this->postulant_form = new PostulanteForm();
-//        $this->postulant_form->bind(
-//            $request->getParameter($this->postulant_form->getName()),
-//            $request->getFiles($this->postulant_form->getName())
-//        );
+        $form = new PostulanteForm();
+        if ($request->isMethod('post')) {
+            $form->bind(
+                $request->getParameter($form->getName()),
+                $request->getFiles($form->getName())
+            );
 
-        $this->tab_click = 'postulant';
+            if ($form->isValid()) {
+                $form->setConvocatoria($this->object);
+                $form->save();
+
+                $this->getUser()->setFlash('success', 'Postulación exitosa');
+                $this->redirect($this->generateUrl('convocatorias_show', array(
+                    'id' => $this->object->getId())));
+            }
+
+            $this->getUser()->setFlash('error',
+                'Se encontraron algunos errores en el formulario');
+        }
+
+        $this->postulants = $form;
+        $this->tab_click = 'postulants';
         $this->setTemplate('show');
-//
-//        if ($form->isValid()) {
-//            $form->save();
-//
-//            if (!empty($flash)) {
-//                $this->getUser()->setFlash('success', $flash);
-//            }
-//            $this->redirect($this->generateUrl('convocatorias_show', array(
-//                'id' => $this->object->getId())) . '#preview');
-//        } else {
-//            $this->getUser()->setFlash('error',
-//                'Se encontraron algunos errores en el formulario');
-//            $this->redirect($this->generateUrl('convocatorias_show', array(
-//                'id' => $this->object->getId())) . '#postulant');
-//        }
     }
 }

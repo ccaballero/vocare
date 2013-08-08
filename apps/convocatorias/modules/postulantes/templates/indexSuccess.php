@@ -10,7 +10,7 @@
         <?php } else { ?>
             <th>Reporte Final</th>
         <?php } ?>
-    </tr>
+        </tr>
     <?php foreach ($convocatorias as $i => $convocatoria): ?>
         <tr class="even">
             <td class ="text-left">
@@ -38,18 +38,18 @@
             </td>
             <?php if (!($sf_user->hasCredential('documentacion_list'))) { ?>
                 <td class ="text-center">
-                    <a href=" <?php echo url_for('postulaciones/new?convocatoria=' . $convocatoria->getId()) ?>">postular</a>
+                    <a href=" <?php echo url_for('postulantes/new?convocatoria=' . $convocatoria->getId()) ?>">postular</a>
                 </td>
                 <td class ="text-center">
-                    <a href=" <?php echo url_for('postulaciones/buscar?convocatoria=' . $convocatoria->getId()) ?>">Revisar</a>
+                    <a href=" <?php echo url_for('postulantes/buscar?convocatoria=' . $convocatoria->getId()) ?>">Revisar</a>
                 </td>
             <?php } else { ?>
 
                 <td class ="text-center">
-                    <a href=" <?php echo url_for('postulaciones/list?convocatoria=' . $convocatoria->getId()) ?>">ver Postulantes</a>
+                    <a href=" <?php echo url_for('postulantes/list?convocatoria=' . $convocatoria->getId()) ?>">ver Postulantes</a>
                 </td>
                 <td class ="text-center">
-                    <a href=" <?php echo url_for('postulaciones/pdf?convocatoria=' . $convocatoria->getId()) ?>">Generar</a>
+                    <a href=" <?php echo url_for('postulantes/pdf?convocatoria=' . $convocatoria->getId()) ?>">Generar</a>
                 </td>
             <?php } ?>
         </tr>

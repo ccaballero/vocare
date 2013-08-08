@@ -11,21 +11,21 @@ Doctrine_Manager::getInstance()->bindComponent('Requisito', 'doctrine');
  * @property string $texto
  * @property Doctrine_Collection $Convocatorias
  * @property Doctrine_Collection $ConvocatoriaRequisitos
- * @property Doctrine_Collection $Requisito
- * @property Doctrine_Collection $PostulanteRequisito
+ * @property Doctrine_Collection $Postulantes
+ * @property Doctrine_Collection $PostulanteRequisitos
  * 
  * @method integer             getId()                     Returns the current record's "id" value
  * @method string              getTexto()                  Returns the current record's "texto" value
  * @method Doctrine_Collection getConvocatorias()          Returns the current record's "Convocatorias" collection
  * @method Doctrine_Collection getConvocatoriaRequisitos() Returns the current record's "ConvocatoriaRequisitos" collection
- * @method Doctrine_Collection getRequisito()              Returns the current record's "Requisito" collection
- * @method Doctrine_Collection getPostulanteRequisito()    Returns the current record's "PostulanteRequisito" collection
+ * @method Doctrine_Collection getPostulantes()            Returns the current record's "Postulantes" collection
+ * @method Doctrine_Collection getPostulanteRequisitos()   Returns the current record's "PostulanteRequisitos" collection
  * @method Requisito           setId()                     Sets the current record's "id" value
  * @method Requisito           setTexto()                  Sets the current record's "texto" value
  * @method Requisito           setConvocatorias()          Sets the current record's "Convocatorias" collection
  * @method Requisito           setConvocatoriaRequisitos() Sets the current record's "ConvocatoriaRequisitos" collection
- * @method Requisito           setRequisito()              Sets the current record's "Requisito" collection
- * @method Requisito           setPostulanteRequisito()    Sets the current record's "PostulanteRequisito" collection
+ * @method Requisito           setPostulantes()            Sets the current record's "Postulantes" collection
+ * @method Requisito           setPostulanteRequisitos()   Sets the current record's "PostulanteRequisitos" collection
  * 
  * @package    .
  * @subpackage model
@@ -65,12 +65,12 @@ abstract class BaseRequisito extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'requisito_id'));
 
-        $this->hasMany('Postulante as Requisito', array(
+        $this->hasMany('Postulante as Postulantes', array(
              'refClass' => 'PostulanteRequisito',
              'local' => 'requisito_id',
              'foreign' => 'postulante_id'));
 
-        $this->hasMany('PostulanteRequisito', array(
+        $this->hasMany('PostulanteRequisito as PostulanteRequisitos', array(
              'local' => 'id',
              'foreign' => 'requisito_id'));
 

@@ -63,7 +63,7 @@ Convocatoria:
       class: ConvocatoriaNotificacion
       local: id
       foreign: convocatoria_id
-      type: main
+      type: many
 
 ConvocatoriaRequerimiento:
   options:

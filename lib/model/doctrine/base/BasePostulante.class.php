@@ -20,13 +20,13 @@ Doctrine_Manager::getInstance()->bindComponent('Postulante', 'doctrine');
  * @property datetime $fecha_entrega
  * @property enum $estado
  * @property string $observacion
- * @property Doctrine_Collection $Convocatoria
+ * @property Convocatoria $Convocatoria
  * @property Doctrine_Collection $Requerimientos
  * @property Doctrine_Collection $Requisitos
  * @property Doctrine_Collection $Documentos
  * @property Doctrine_Collection $PostulanteRequerimientos
- * @property Doctrine_Collection $PostulanteRequisito
- * @property Doctrine_Collection $PostulanteDocumento
+ * @property Doctrine_Collection $PostulanteRequisitos
+ * @property Doctrine_Collection $PostulanteDocumentos
  * 
  * @method integer             getId()                       Returns the current record's "id" value
  * @method integer             getConvocatoriaId()           Returns the current record's "convocatoria_id" value
@@ -41,13 +41,13 @@ Doctrine_Manager::getInstance()->bindComponent('Postulante', 'doctrine');
  * @method datetime            getFechaEntrega()             Returns the current record's "fecha_entrega" value
  * @method enum                getEstado()                   Returns the current record's "estado" value
  * @method string              getObservacion()              Returns the current record's "observacion" value
- * @method Doctrine_Collection getConvocatoria()             Returns the current record's "Convocatoria" collection
+ * @method Convocatoria        getConvocatoria()             Returns the current record's "Convocatoria" value
  * @method Doctrine_Collection getRequerimientos()           Returns the current record's "Requerimientos" collection
  * @method Doctrine_Collection getRequisitos()               Returns the current record's "Requisitos" collection
  * @method Doctrine_Collection getDocumentos()               Returns the current record's "Documentos" collection
  * @method Doctrine_Collection getPostulanteRequerimientos() Returns the current record's "PostulanteRequerimientos" collection
- * @method Doctrine_Collection getPostulanteRequisito()      Returns the current record's "PostulanteRequisito" collection
- * @method Doctrine_Collection getPostulanteDocumento()      Returns the current record's "PostulanteDocumento" collection
+ * @method Doctrine_Collection getPostulanteRequisitos()     Returns the current record's "PostulanteRequisitos" collection
+ * @method Doctrine_Collection getPostulanteDocumentos()     Returns the current record's "PostulanteDocumentos" collection
  * @method Postulante          setId()                       Sets the current record's "id" value
  * @method Postulante          setConvocatoriaId()           Sets the current record's "convocatoria_id" value
  * @method Postulante          setApellidos()                Sets the current record's "apellidos" value
@@ -61,13 +61,13 @@ Doctrine_Manager::getInstance()->bindComponent('Postulante', 'doctrine');
  * @method Postulante          setFechaEntrega()             Sets the current record's "fecha_entrega" value
  * @method Postulante          setEstado()                   Sets the current record's "estado" value
  * @method Postulante          setObservacion()              Sets the current record's "observacion" value
- * @method Postulante          setConvocatoria()             Sets the current record's "Convocatoria" collection
+ * @method Postulante          setConvocatoria()             Sets the current record's "Convocatoria" value
  * @method Postulante          setRequerimientos()           Sets the current record's "Requerimientos" collection
  * @method Postulante          setRequisitos()               Sets the current record's "Requisitos" collection
  * @method Postulante          setDocumentos()               Sets the current record's "Documentos" collection
  * @method Postulante          setPostulanteRequerimientos() Sets the current record's "PostulanteRequerimientos" collection
- * @method Postulante          setPostulanteRequisito()      Sets the current record's "PostulanteRequisito" collection
- * @method Postulante          setPostulanteDocumento()      Sets the current record's "PostulanteDocumento" collection
+ * @method Postulante          setPostulanteRequisitos()     Sets the current record's "PostulanteRequisitos" collection
+ * @method Postulante          setPostulanteDocumentos()     Sets the current record's "PostulanteDocumentos" collection
  * 
  * @package    .
  * @subpackage model
@@ -91,7 +91,6 @@ abstract class BasePostulante extends sfDoctrineRecord
              'type' => 'integer',
              'fixed' => 0,
              'unsigned' => true,
-             'primary' => true,
              'length' => 4,
              ));
         $this->hasColumn('apellidos', 'string', 32, array(
@@ -177,7 +176,7 @@ abstract class BasePostulante extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        $this->hasMany('Convocatoria', array(
+        $this->hasOne('Convocatoria', array(
              'local' => 'convocatoria_id',
              'foreign' => 'id'));
 
@@ -200,11 +199,11 @@ abstract class BasePostulante extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'postulante_id'));
 
-        $this->hasMany('PostulanteRequisito', array(
+        $this->hasMany('PostulanteRequisito as PostulanteRequisitos', array(
              'local' => 'id',
              'foreign' => 'postulante_id'));
 
-        $this->hasMany('PostulanteDocumento', array(
+        $this->hasMany('PostulanteDocumento as PostulanteDocumentos', array(
              'local' => 'id',
              'foreign' => 'postulante_id'));
 

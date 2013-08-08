@@ -32,7 +32,7 @@
     <?php endif; ?>
     <?php if ($tabs['postulants']): ?>
         <li class="tab">
-            <a href="#postulants">Postulación</a>
+            <a href="#postulants">Postulaciones</a>
         </li>
     <?php endif; ?>
     <?php if ($tabs['results']): ?>

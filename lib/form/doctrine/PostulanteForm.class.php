@@ -61,4 +61,8 @@ class PostulanteForm extends BasePostulanteForm
         $result .= '</table>';
         return $result;
     }
+
+    public function setConvocatoria($convocatoria) {
+        $this->object->Convocatoria = $convocatoria;
+    }
 }

@@ -16,7 +16,7 @@ abstract class BasePostulanteForm extends BaseFormDoctrine
   {
     $this->setWidgets(array(
       'id'                  => new sfWidgetFormInputHidden(),
-      'convocatoria_id'     => new sfWidgetFormInputHidden(),
+      'convocatoria_id'     => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Convocatoria'), 'add_empty' => true)),
       'apellidos'           => new sfWidgetFormInputText(),
       'nombres'             => new sfWidgetFormInputText(),
       'ci'                  => new sfWidgetFormInputText(),
@@ -37,7 +37,7 @@ abstract class BasePostulanteForm extends BaseFormDoctrine
 
     $this->setValidators(array(
       'id'                  => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
-      'convocatoria_id'     => new sfValidatorChoice(array('choices' => array($this->getObject()->get('convocatoria_id')), 'empty_value' => $this->getObject()->get('convocatoria_id'), 'required' => false)),
+      'convocatoria_id'     => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Convocatoria'), 'required' => false)),
       'apellidos'           => new sfValidatorString(array('max_length' => 32)),
       'nombres'             => new sfValidatorString(array('max_length' => 32)),
       'ci'                  => new sfValidatorString(array('max_length' => 16)),

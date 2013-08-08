@@ -6,23 +6,19 @@
     <dl>
         <dt><strong>Como postulante</strong></dt>
         <dd>
-            <p>Puedes pedir una cuenta en la secretaria de la carrera de
-            informática y sistemas, de modo que puedas realizar seguimiento de
-            todo el proceso de convocatoria a la que fuiste asignado.</p>
-            <p>Si ya participaste de una convocatoria anterior, puedes ir a la
-            secretaria de la carrera de informática y sistemas, y pedir la
-            asignación de tu cuenta a una nueva convocatoria.</p>
-            <p>Según la etapa en la que se encuentra la convocatoria, tu puedes
-            ir viendo un conjunto de opciones, que fueron construidas para
+            <p>Puedes revisar el conjunto de convocatorias vigentes, y
+            postularte en aquellas en las que tu desees.</p>
+            <p>Según la etapa en la que se encuentra la convocatoria, puedes ir
+            viendo un conjunto de opciones, que fueron construidas para
             facilitar el proceso para todos los postulantes.</p>
         </dd>
-        <dt><strong>Como parte de una comisión</strong></dt>
+        <dt><strong>Como integrante de alguna comisión</strong></dt>
         <dd>
             <p>Si formas parte de una comision, la cuenta que te ha sido
             asignada, servirá para facilitar los procesos en los cuales se
             requiere información fiable, completa, veráz, y al dia.</p>
             <p>Si perteneces a la comisión de meritos, podrás ir marcando las
-            condicionales requeridas segun las especificaciones de la
+            condicionales requeridas según las especificaciones de la
             convocatoria, ademas de ver e imprimir reportes de este proceso en
             multiples formatos.</p>
             <p>Si perteneces a una comisión de evaluación de conocimientos,

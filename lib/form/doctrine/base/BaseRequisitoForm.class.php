@@ -20,7 +20,7 @@ abstract class BaseRequisitoForm extends BaseFormDoctrine
       'created_at'         => new sfWidgetFormDateTime(),
       'updated_at'         => new sfWidgetFormDateTime(),
       'convocatorias_list' => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Convocatoria')),
-      'requisito_list'     => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Postulante')),
+      'postulantes_list'   => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Postulante')),
     ));
 
     $this->setValidators(array(
@@ -29,7 +29,7 @@ abstract class BaseRequisitoForm extends BaseFormDoctrine
       'created_at'         => new sfValidatorDateTime(),
       'updated_at'         => new sfValidatorDateTime(),
       'convocatorias_list' => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Convocatoria', 'required' => false)),
-      'requisito_list'     => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Postulante', 'required' => false)),
+      'postulantes_list'   => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Postulante', 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('requisito[%s]');
@@ -55,9 +55,9 @@ abstract class BaseRequisitoForm extends BaseFormDoctrine
       $this->setDefault('convocatorias_list', $this->object->Convocatorias->getPrimaryKeys());
     }
 
-    if (isset($this->widgetSchema['requisito_list']))
+    if (isset($this->widgetSchema['postulantes_list']))
     {
-      $this->setDefault('requisito_list', $this->object->Requisito->getPrimaryKeys());
+      $this->setDefault('postulantes_list', $this->object->Postulantes->getPrimaryKeys());
     }
 
   }
@@ -65,7 +65,7 @@ abstract class BaseRequisitoForm extends BaseFormDoctrine
   protected function doSave($con = null)
   {
     $this->saveConvocatoriasList($con);
-    $this->saveRequisitoList($con);
+    $this->savePostulantesList($con);
 
     parent::doSave($con);
   }
@@ -108,14 +108,14 @@ abstract class BaseRequisitoForm extends BaseFormDoctrine
     }
   }
 
-  public function saveRequisitoList($con = null)
+  public function savePostulantesList($con = null)
   {
     if (!$this->isValid())
     {
       throw $this->getErrorSchema();
     }
 
-    if (!isset($this->widgetSchema['requisito_list']))
+    if (!isset($this->widgetSchema['postulantes_list']))
     {
       // somebody has unset this widget
       return;
@@ -126,8 +126,8 @@ abstract class BaseRequisitoForm extends BaseFormDoctrine
       $con = $this->getConnection();
     }
 
-    $existing = $this->object->Requisito->getPrimaryKeys();
-    $values = $this->getValue('requisito_list');
+    $existing = $this->object->Postulantes->getPrimaryKeys();
+    $values = $this->getValue('postulantes_list');
     if (!is_array($values))
     {
       $values = array();
@@ -136,13 +136,13 @@ abstract class BaseRequisitoForm extends BaseFormDoctrine
     $unlink = array_diff($existing, $values);
     if (count($unlink))
     {
-      $this->object->unlink('Requisito', array_values($unlink));
+      $this->object->unlink('Postulantes', array_values($unlink));
     }
 
     $link = array_diff($values, $existing);
     if (count($link))
     {
-      $this->object->link('Requisito', array_values($link));
+      $this->object->link('Postulantes', array_values($link));
     }
   }
 

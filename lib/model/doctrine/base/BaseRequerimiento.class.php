@@ -15,7 +15,7 @@ Doctrine_Manager::getInstance()->bindComponent('Requerimiento', 'doctrine');
  * @property Doctrine_Collection $Convocatorias
  * @property Doctrine_Collection $ConvocatoriaRequerimientos
  * @property Doctrine_Collection $ConvocatoriaRequerimientoEvaluaciones
- * @property Doctrine_Collection $Requerimiento
+ * @property Doctrine_Collection $Postulantes
  * @property Doctrine_Collection $PostulanteRequerimientos
  * 
  * @method integer             getId()                                    Returns the current record's "id" value
@@ -26,7 +26,7 @@ Doctrine_Manager::getInstance()->bindComponent('Requerimiento', 'doctrine');
  * @method Doctrine_Collection getConvocatorias()                         Returns the current record's "Convocatorias" collection
  * @method Doctrine_Collection getConvocatoriaRequerimientos()            Returns the current record's "ConvocatoriaRequerimientos" collection
  * @method Doctrine_Collection getConvocatoriaRequerimientoEvaluaciones() Returns the current record's "ConvocatoriaRequerimientoEvaluaciones" collection
- * @method Doctrine_Collection getRequerimiento()                         Returns the current record's "Requerimiento" collection
+ * @method Doctrine_Collection getPostulantes()                           Returns the current record's "Postulantes" collection
  * @method Doctrine_Collection getPostulanteRequerimientos()              Returns the current record's "PostulanteRequerimientos" collection
  * @method Requerimiento       setId()                                    Sets the current record's "id" value
  * @method Requerimiento       setCodigo()                                Sets the current record's "codigo" value
@@ -36,7 +36,7 @@ Doctrine_Manager::getInstance()->bindComponent('Requerimiento', 'doctrine');
  * @method Requerimiento       setConvocatorias()                         Sets the current record's "Convocatorias" collection
  * @method Requerimiento       setConvocatoriaRequerimientos()            Sets the current record's "ConvocatoriaRequerimientos" collection
  * @method Requerimiento       setConvocatoriaRequerimientoEvaluaciones() Sets the current record's "ConvocatoriaRequerimientoEvaluaciones" collection
- * @method Requerimiento       setRequerimiento()                         Sets the current record's "Requerimiento" collection
+ * @method Requerimiento       setPostulantes()                           Sets the current record's "Postulantes" collection
  * @method Requerimiento       setPostulanteRequerimientos()              Sets the current record's "PostulanteRequerimientos" collection
  * 
  * @package    .
@@ -101,7 +101,7 @@ abstract class BaseRequerimiento extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'requerimiento_id'));
 
-        $this->hasMany('Postulante as Requerimiento', array(
+        $this->hasMany('Postulante as Postulantes', array(
              'refClass' => 'PostulanteRequerimiento',
              'local' => 'requerimiento_id',
              'foreign' => 'postulante_id'));

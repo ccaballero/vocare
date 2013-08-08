@@ -20,7 +20,7 @@ abstract class BaseDocumentoForm extends BaseFormDoctrine
       'created_at'         => new sfWidgetFormDateTime(),
       'updated_at'         => new sfWidgetFormDateTime(),
       'convocatorias_list' => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Convocatoria')),
-      'documento_list'     => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Postulante')),
+      'postulantes_list'   => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Postulante')),
     ));
 
     $this->setValidators(array(
@@ -29,7 +29,7 @@ abstract class BaseDocumentoForm extends BaseFormDoctrine
       'created_at'         => new sfValidatorDateTime(),
       'updated_at'         => new sfValidatorDateTime(),
       'convocatorias_list' => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Convocatoria', 'required' => false)),
-      'documento_list'     => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Postulante', 'required' => false)),
+      'postulantes_list'   => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Postulante', 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('documento[%s]');
@@ -55,9 +55,9 @@ abstract class BaseDocumentoForm extends BaseFormDoctrine
       $this->setDefault('convocatorias_list', $this->object->Convocatorias->getPrimaryKeys());
     }
 
-    if (isset($this->widgetSchema['documento_list']))
+    if (isset($this->widgetSchema['postulantes_list']))
     {
-      $this->setDefault('documento_list', $this->object->Documento->getPrimaryKeys());
+      $this->setDefault('postulantes_list', $this->object->Postulantes->getPrimaryKeys());
     }
 
   }
@@ -65,7 +65,7 @@ abstract class BaseDocumentoForm extends BaseFormDoctrine
   protected function doSave($con = null)
   {
     $this->saveConvocatoriasList($con);
-    $this->saveDocumentoList($con);
+    $this->savePostulantesList($con);
 
     parent::doSave($con);
   }
@@ -108,14 +108,14 @@ abstract class BaseDocumentoForm extends BaseFormDoctrine
     }
   }
 
-  public function saveDocumentoList($con = null)
+  public function savePostulantesList($con = null)
   {
     if (!$this->isValid())
     {
       throw $this->getErrorSchema();
     }
 
-    if (!isset($this->widgetSchema['documento_list']))
+    if (!isset($this->widgetSchema['postulantes_list']))
     {
       // somebody has unset this widget
       return;
@@ -126,8 +126,8 @@ abstract class BaseDocumentoForm extends BaseFormDoctrine
       $con = $this->getConnection();
     }
 
-    $existing = $this->object->Documento->getPrimaryKeys();
-    $values = $this->getValue('documento_list');
+    $existing = $this->object->Postulantes->getPrimaryKeys();
+    $values = $this->getValue('postulantes_list');
     if (!is_array($values))
     {
       $values = array();
@@ -136,13 +136,13 @@ abstract class BaseDocumentoForm extends BaseFormDoctrine
     $unlink = array_diff($existing, $values);
     if (count($unlink))
     {
-      $this->object->unlink('Documento', array_values($unlink));
+      $this->object->unlink('Postulantes', array_values($unlink));
     }
 
     $link = array_diff($values, $existing);
     if (count($link))
     {
-      $this->object->link('Documento', array_values($link));
+      $this->object->link('Postulantes', array_values($link));
     }
   }
 

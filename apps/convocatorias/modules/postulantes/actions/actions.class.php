@@ -1,7 +1,11 @@
 <?php
 
-class postulantesActions extends PlantillasDefault
+class postulantesActions extends sfActions
 {
+    public function executeIndex(sfWebRequest $request) {
+//        $this->setTemplate(__FILE__ . '/../../convocatorias/templates/show');
+    }
+
 //    public function executeIndex(sfWebRequest $request) {
 //        $qCv = Doctrine_Query::create()
 //                ->from('Convocatoria c')
@@ -27,7 +31,7 @@ class postulantesActions extends PlantillasDefault
 //                ->andWhere('c.estado=?', 'vigente');
 //        $this->fechaPreEvento = $qCepre->execute();
 //    }
-
+//
 //    public function executeNew(sfWebRequest $request) {
 //        $this->idc = $request->getParameter('convocatoria');
 //
@@ -107,14 +111,14 @@ class postulantesActions extends PlantillasDefault
 //            }
 //        }
 //    }
-
+//
 //    public function executeCreate(sfWebRequest $request) {
 //        $this->form = new PostulanteForm();
 //        $this->processForm($request, $this->form);
 //        $this->setTemplate('new');
 //    }
-
-    //Editar los campos de un postulante
+//
+//    //Editar los campos de un postulante
 //    public function executeEdit(sfWebRequest $request) {
 //
 //        /*Seleccion de la convocatoria para establecer el parametro global
@@ -135,21 +139,21 @@ class postulantesActions extends PlantillasDefault
 //
 //        $this->form = new PostulanteForm($this->getRoute()->getObject());
 //    }
-
+//
 //    public function executeUpdate(sfWebRequest $request) {
 //        $this->form = new PostulanteForm($this->getRoute()->getObject());
 //        $this->processForm($request, $this->form);
 //        $this->setTemplate('edit');
 //    }
-
-    //Aun no funciona
+//
+//    //Aun no funciona
 //    public function executeDelete(sfWebRequest $request) {
 //        $request->checkCSRFProtection();
 //        $job = $this->getRoute()->getObject();
 //        $job->delete();
 //        $this->redirect('postulaciones/index');
 //    }
-
+//
 //    protected function processForm(sfWebRequest $request, sfForm $form) {
 //        $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName())
 //        );
@@ -160,7 +164,7 @@ class postulantesActions extends PlantillasDefault
 //        }else
 //            echo "formulario no valido";
 //    }
-
+//
 //    public function executeShow(sfWebRequest $request) {
 //        $this->postulante = Doctrine::getTable('Postulante')->find($request->getParameter('id'));
 //        $q = Doctrine_Query::create()
@@ -171,7 +175,7 @@ class postulantesActions extends PlantillasDefault
 //
 //        $this->forward404Unless($this->postulante);
 //    }
-
+//
 //    public function executeList(sfWebRequest $request) {
 //        $this->convocatoria = $request->getParameter('convocatoria');
 //        $q = Doctrine_Query::create()
@@ -205,7 +209,7 @@ class postulantesActions extends PlantillasDefault
 //                ->where('cr.convocatoria_id=?',  $this->convocatoria);
 //        $this->requerimientos = $q->execute();
 //    }
-
+//
 //    public function executeBuscar(sfWebRequest $request) {
 //        $user = $this->getUser()->getGuardUser();
 //
@@ -217,7 +221,7 @@ class postulantesActions extends PlantillasDefault
 //                ->addwhere('convocatoria_id=?', $this->convocatoria_id);
 //        $this->postulante = $q->execute();
 //    }
-
+//
 //    public function executeBuscarPostulante(sfWebRequest $request){
 //
 //        /*Datos necesarios para buscar a un postulante
@@ -236,7 +240,7 @@ class postulantesActions extends PlantillasDefault
 //        $this->buscado = $q->execute();
 //
 //    }
-
+//
 //    public function executePdfGeneral(sfWebRequest $request) {
 //        $id_convocatoria = $request->getParameter('convocatoria');
 //        $q = Doctrine_Query::create()
@@ -294,7 +298,7 @@ class postulantesActions extends PlantillasDefault
 //
 //        $this->redirect('postulaciones/index');
 //    }
-
+//
 //     public function executePdfItems(sfWebRequest $request) {
 //        $id_convocatoria = $request->getParameter('convocatoria');
 //        $id_requerimiento = $request->getParameter('requerimiento');
@@ -359,7 +363,7 @@ class postulantesActions extends PlantillasDefault
 //
 //        $this->redirect('postulaciones/list');
 //    }
-
+//
 //    public function executePdfEstado(sfWebRequest $request) {
 //        $id_convocatoria = $request->getParameter('convocatoria');
 //        $estado = $request->getParameter('estado');
