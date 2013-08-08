@@ -19,10 +19,8 @@
     <tr class="header">
         <th>Convocatoria</th>
         <th>Estado</th>
-        <th>&nbsp;</th>
-        <th colspan="<?php echo Convocatoria::$OPERACIONES_POSIBLES ?>">
-            &nbsp;
-        </th>
+        <th colspan="4">Operaciones</th>
+        <th colspan="2">Acciones</th>
     </tr>
 <?php if (count($list) == 0): ?>
     <tr class="even">
@@ -37,13 +35,6 @@
             <td class="text-center">
                 <?php echo ucfirst($convocatoria->getEstado()) ?>
                 <?php echo image_state($convocatoria->validateState()) ?>
-            </td>
-            <td class="text-center">
-            <?php if ($sf_user->canView($convocatoria)): ?>
-                <?php echo link_to(
-                    'Examinar', 'convocatorias_show', $convocatoria
-                ) ?>
-            <?php endif; ?>
             </td>
         <?php foreach ($convocatoria->getOperacionesPosibles()
                 as $operacion => $propiedades): ?>
@@ -64,6 +55,25 @@
             <?php endif; ?>
             </td>
         <?php endforeach; ?>
+            <td class="text-center">
+            <?php if ($sf_user->canView($convocatoria)): ?>
+                <?php echo link_to(
+                    'Examinar', 'convocatorias_show', $convocatoria
+                ) ?>
+            <?php else: ?>
+                <span class="disabled">Examinar</span>
+            <?php endif; ?>
+            </td>
+            <td class="text-center">
+            <?php if ($convocatoria->esVigente()): ?>
+                <?php echo link_to('Postulaciones', url_for(
+                        'postulantes',
+                        array('convocatoria' => $convocatoria['id'])
+                    )) ?>
+            <?php else: ?>
+                <span class="disabled">Postulaciones</span>
+            <?php endif; ?>
+            </td>
         </tr>
     <?php endforeach; ?>
 <?php endif; ?>

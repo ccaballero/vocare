@@ -1,60 +1,41 @@
-<h1>Convocatorias Vigentes</h1>
-<table>
-    <tr class ="header ">
-        <th>Convocatoria</th>
-        <th>Fecha de publicacion</th>
-        <th>Fecha ultima de presentacion</th> 
-        <th>Accion</th>
-        <?php if (!($sf_user->hasCredential('documentacion_list'))) { ?>
-            <th>Estado de Postulacion</th>
-        <?php } else { ?>
-            <th>Reporte Final</th>
-        <?php } ?>
-        </tr>
-    <?php foreach ($convocatorias as $i => $convocatoria): ?>
-        <tr class="even">
-            <td class ="text-left">
-                <?php
-                echo $convocatoria->getGestion();
-                $auxPu = true;
-                $auxPre = true;
-                ?>
-            </td>
-            <td class ="text-center">
-                <?php
-                while ($auxPu) {
-                    echo $fechaPuEvento[$i]->getFecha($i);
-                    $auxPu = false;
-                }
-                ?>
-            </td>
-            <td class ="text-center">
-                <?php
-                while ($auxPre) {
-                    echo $fechaPreEvento[$i]->getFecha($i);
-                    $auxPre = false;
-                }
-                ?>
-            </td>
-            <?php if (!($sf_user->hasCredential('documentacion_list'))) { ?>
-                <td class ="text-center">
-                    <a href=" <?php echo url_for('postulantes/new?convocatoria=' . $convocatoria->getId()) ?>">postular</a>
-                </td>
-                <td class ="text-center">
-                    <a href=" <?php echo url_for('postulantes/buscar?convocatoria=' . $convocatoria->getId()) ?>">Revisar</a>
-                </td>
-            <?php } else { ?>
+<h1><?php echo $convocatoria->getGestion() ?></h1>
+<p><?php echo '(' . $convocatoria->getEstado() . ')' ?></p>
 
-                <td class ="text-center">
-                    <a href=" <?php echo url_for('postulantes/list?convocatoria=' . $convocatoria->getId()) ?>">ver Postulantes</a>
-                </td>
-                <td class ="text-center">
-                    <a href=" <?php echo url_for('postulantes/pdf?convocatoria=' . $convocatoria->getId()) ?>">Generar</a>
-                </td>
-            <?php } ?>
-        </tr>
-    <?php endforeach; ?>
-</table>
+<div id="tabber">
+    <?php include_partial('postulantes/tabs', array(
+        'tabs' => $tabs,
+    )) ?>
 
+    <div class="tab_details">
+    <?php if ($tabs['list']): ?>
+        <div id="list" class="tab_contents">
+            <a name="list"></a>
+        </div>
+    <?php endif; ?>
+</div>
+<?php if (isset($tab_click)): ?>
+<script>
+$(document).ready(function(){
+    $('#tabber ul#tabs li a').click(function(){
+        var activeTab = $(this).attr('href')
+        $('#tabber ul li a').removeClass('active')
+        $(this).addClass('active')
+        $('#tabber .tab_details .tab_contents').hide()
+        $(activeTab).fadeIn()
+        $(window).scrollTop(0)
+        return false
+    })
+    $('.tab_contents').hide()
+    $('.tab_contents:first').fadeIn()
+    $('#tabber .tab a:first').addClass('active')
 
-
+    var tab_needed='#<?php echo $tab_click; ?>'
+    var hash=window.location.hash
+    if(hash!==''){
+        tab_needed=hash
+    }
+    $('a[href="'+tab_needed+'"]').click()
+    $(window).scrollTop(0)
+})
+</script>
+<?php endif; ?>

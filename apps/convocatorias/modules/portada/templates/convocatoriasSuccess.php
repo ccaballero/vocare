@@ -15,7 +15,7 @@
 <?php endif; ?>
 
 <h2>Convocatorias finalizadas</h2>
-<?php if (count($vigentes) <> 0): ?>
+<?php if (count($finalizadas) <> 0): ?>
 <?php foreach ($finalizadas as $convocatoria): ?>
     <?php include_partial('convocatoria_medium', array(
         'convocatoria' => $convocatoria,

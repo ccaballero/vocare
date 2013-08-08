@@ -2,8 +2,33 @@
 
 class postulantesActions extends sfActions
 {
+    protected function getConvocatoria(sfWebRequest $request) {
+        $id_convocatoria = $request->getParameter('convocatoria');
+        $convocatoria =
+            Doctrine::getTable('Convocatoria')->find($id_convocatoria);
+
+        // Existence validation
+        $this->forward404Unless($convocatoria);
+
+        // State validation
+        if (!$this->getUser()->canView($convocatoria)
+            || !$convocatoria->esVigente()) {
+            $this->forward404();
+        }
+
+        return $convocatoria;
+    }
+
     public function executeIndex(sfWebRequest $request) {
-//        $this->setTemplate(__FILE__ . '/../../convocatorias/templates/show');
+        $this->convocatoria = $this->getConvocatoria($request);
+        
+        // tabs renderization
+        $this->tabs = array(
+            'list' => true,
+            'reception' => true,
+            'habilitation' => true,
+        );
+        $this->tab_click = 'list';
     }
 
 //    public function executeIndex(sfWebRequest $request) {

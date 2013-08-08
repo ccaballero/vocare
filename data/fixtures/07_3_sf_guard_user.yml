@@ -15,7 +15,7 @@ sfGuardUser:
     Groups:         [ jefe_de_departamento ]
   secretaria:
     first_name:     Fabiola
-    last_name:      Rodriguez Caballero
+    last_name:      Rojas Caballero
     email_address:  asdf01@cs.umss.edu.bo
     username:       secretaria
     password:       asdf

@@ -2,8 +2,6 @@
 
 class Convocatoria extends BaseConvocatoria
 {
-    public static $OPERACIONES_POSIBLES = 5;
-
     protected $_estados_posibles = array(
         'borrador',
         'emitido',

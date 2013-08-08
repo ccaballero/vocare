@@ -38,7 +38,7 @@ span {
 .text-right { text-align: right; }
 
 .bold { font-weight: bold; }
-.disabled { color: #b0b0b0; }
+.disabled { color: #c0c0c0; font-weight: normal; }
 
 /* Propiedades para la barra de principal de enlaces */
 #menu {
