@@ -44,14 +44,7 @@ class convocatoriasActions extends PlantillasDefault
             $this->forward404();
         }
 
-        $this->form = $this->_renderShowEditor($this->object);
-        $this->redactions = $this->_renderShowRedaction($this->object);
-        $this->preview = $this->_renderShowPreview($this->object,
-            $this->redactions['redaction']);
-        $this->notifications = $this->_renderShowNotifications($this->object);
-        $this->users = $this->_renderShowUsers($this->object);
-        $this->postulants = $this->_renderShowPostulants($this->object);
-
+        // tabs renderization
         $this->tabs = array(
             'preview' => true,
             'editor' => ($state == 'borrador') || ($state == 'emitido'),
@@ -61,8 +54,16 @@ class convocatoriasActions extends PlantillasDefault
             'postulants' => ($state == 'vigente'),
             'results' => ($state == 'vigente') || ($state == 'finalizado'),
         );
-
         $this->tab_click = 'preview';
+        
+        $this->form = $this->_renderShowEditor($this->object);
+        $this->redactions = $this->_renderShowRedaction($this->object);
+        $this->preview = $this->_renderShowPreview($this->object,
+            $this->redactions['redaction']);
+        $this->notifications = $this->_renderShowNotifications($this->object);
+        $this->users = $this->_renderShowUsers($this->object);
+        $this->postulants = $this->_renderShowPostulants($this->object);
+
     }
 
     protected function _renderShowEditor($object) {

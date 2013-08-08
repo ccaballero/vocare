@@ -14,9 +14,9 @@
             </a>
         </li>
     <?php endif; ?>
-    <?php if ($tabs['viewers']): ?>
+    <?php if ($tabs['notifications']): ?>
     	<li class="tab">
-            <a href="#viewers">
+            <a href="#notifications">
                 Notificaciones
                 <?php echo image_state($object->validateNotification()) ?>
             </a>
