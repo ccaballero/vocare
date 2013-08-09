@@ -8,9 +8,6 @@ class vocareLoadCSVTask extends sfBaseTask
             new sfCommandArgument('csv_file',
                 sfCommandArgument::REQUIRED,
                 'The CSV file for parsing'),
-            new sfCommandArgument('type',
-                sfCommandArgument::REQUIRED,
-                'If the file is registration, reception, or habilitation'),
         ));
 
         $this->addOptions(array(
@@ -38,60 +35,99 @@ EOF;
         $databaseManager = new sfDatabaseManager($this->configuration);
 
         $csv = $arguments['csv_file'];
-        $type = $arguments['type'];
 
         if (!file_exists($csv)) {
             $this->logSection('vocare', sprintf('File "%s" not found', $csv));
             return;
         }
 
-        switch($type) {
-            case 'registration':
-                $this->parseRegistration($csv);
-                break;
-            case 'reception':
-                $this->parseReception($csv);
-                break;
-            case 'habilitation':
-                $this->parseHabilitation($csv);
-                break;
+        $matches = array();
+        preg_match(
+            '/(?P<convocatoria>\d+)_(?P<type>\w+).csv/',
+            basename($csv), $matches);
+
+        if (!isset($matches['convocatoria']) ||
+            !isset($matches['type'])) {
+            $this->logSection(
+                'vocare', 'El archivo no posee el estandar adecuado');
+            return;
         }
 
-        $this->logSection('vocare', sprintf('Create user "%s"', $arguments['username']));
+        $id_convocatoria = intval($matches['convocatoria']);
+        $convocatoria =
+            Doctrine::getTable('Convocatoria')->find($id_convocatoria);
+
+        if (empty($convocatoria)) {
+            $this->logSection(
+                'vocare', 'La convocatoria no existe');
+            return;
+        }
+
+        $type = intval($matches['type']);
+        switch($type) {
+            case 'postulantes':
+                $this->parseRegistration($csv, $convocatoria);
+                break;
+            case 'reception':
+                $this->parseReception($csv, $convocatoria);
+                break;
+            case 'habilitation':
+                $this->parseHabilitation($csv, $convocatoria);
+                break;
+        }
     }
 
-    private function parseRegistration($csv) {
+    private function parseRegistration($csv, $convocatoria) {
         $fd = fopen($csv, 'r');
 
         // header of csv
-        fgetcsv($fd, 0, "\t");
+        $headers = fgetcsv($fd, 0, ",");
+        var_dump($headers);
 
-        echo '>>  convocatorias cargando información de registro .... ';
+        echo '>>  convocatorias cargando información de registro .... ' . PHP_EOL;
+        echo 'APE_PATERNO     ';
+        echo 'APE_MATERNO     ';
+        echo 'NOMBRES             ';
+        echo 'CI           ';
+        echo 'SIS       ';
+        echo 'EMAIL                                        ';
+        echo '1 2 3 4 5 6 7' . PHP_EOL;
 
         // content of csv
         while (($csv = fgetcsv($fd, 0, ",")) !== false) {
             // get the data
-            $last_name = $csv[0];
-            $first_name = $csv[1];
-            $email_address = $csv[2];
-            $translit = explode(' ', iconv('UTF-8', 'ASCII//TRANSLIT', $last_name));
-            $username = substr(strtolower($first_name), 0, 1) . strtolower($translit[0]);
-            $password = 'asdf';
+            echo str_pad($csv[ 0], 16);
+            echo str_pad($csv[ 1], 16);
+            echo str_pad($csv[ 2], 20);
+            echo str_pad($csv[ 3], 13);
+            echo str_pad($csv[ 4], 10);
+            echo str_pad($csv[ 5], 45);
+            echo str_pad($csv[ 8], 2);
+            echo str_pad($csv[ 9], 2);
+            echo str_pad($csv[10], 2);
+            echo str_pad($csv[11], 2);
+            echo str_pad($csv[12], 2);
+            echo str_pad($csv[13], 2);
+            echo str_pad($csv[14], 2);
+            echo PHP_EOL;
 
-            $user = new sfGuardUser();
-            $user->setEmailAddress($email_address);
-            $user->setUsername($username);
-            $user->setPassword($password);
-            $user->setFirstName($first_name);
-            $user->setLastName($last_name);
-            $user->setIsActive(true);
-            $user->setIsSuperAdmin(false);
-            $user->save();
+            $postulante = new Postulante();
+
+            $postulante->Convocatoria = $convocatoria;
+            $postulante->apellido_paterno = trim($csv[0]);
+            $postulante->apellido_materno = trim($csv[1]);
+            $postulante->nombres = trim($csv[2]);
+            $postulante->ci = trim($csv[3]);
+            $postulante->sis = trim($csv[4]);
+            $postulante->correo_electronico = trim($csv[5]);
+            $postulante->telefono = trim($csv[6]);
+            $postulante->direccion = trim($csv[7]);
+            $postulante->save();
         }
 
         fclose($fd);
     }
 
-    private function parseReception() {}
-    private function parseHabilitation() {}
+    private function parseReception($csv, $convocatoria) {}
+    private function parseHabilitation($csv, $convocatoria) {}
 }

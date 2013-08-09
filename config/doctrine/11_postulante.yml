@@ -13,7 +13,11 @@ Postulante:
       type: integer(4)
       fixed: false
       unsigned: true
-    apellidos:
+    apellido_paterno:
+      type: string(32)
+      fixed: false
+      notnull: true
+    apellido_materno:
       type: string(32)
       fixed: false
       notnull: true
@@ -31,8 +35,8 @@ Postulante:
       notnull: true
     correo_electronico:
       type: string(255)
+      fixed: false
       notnull: true
-      unique: true
     telefono:
       type: string(32)
       fixed: false

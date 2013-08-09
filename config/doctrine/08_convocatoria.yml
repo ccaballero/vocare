@@ -64,6 +64,11 @@ Convocatoria:
       local: id
       foreign: convocatoria_id
       type: many
+    Postulantes:
+      class: Postulante
+      local: id
+      foreign: convocatoria_id
+      type: many
 
 ConvocatoriaRequerimiento:
   options:

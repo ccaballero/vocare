@@ -9,7 +9,8 @@ Doctrine_Manager::getInstance()->bindComponent('Postulante', 'doctrine');
  * 
  * @property integer $id
  * @property integer $convocatoria_id
- * @property string $apellidos
+ * @property string $apellido_paterno
+ * @property string $apellido_materno
  * @property string $nombres
  * @property string $ci
  * @property string $sis
@@ -30,7 +31,8 @@ Doctrine_Manager::getInstance()->bindComponent('Postulante', 'doctrine');
  * 
  * @method integer             getId()                       Returns the current record's "id" value
  * @method integer             getConvocatoriaId()           Returns the current record's "convocatoria_id" value
- * @method string              getApellidos()                Returns the current record's "apellidos" value
+ * @method string              getApellidoPaterno()          Returns the current record's "apellido_paterno" value
+ * @method string              getApellidoMaterno()          Returns the current record's "apellido_materno" value
  * @method string              getNombres()                  Returns the current record's "nombres" value
  * @method string              getCi()                       Returns the current record's "ci" value
  * @method string              getSis()                      Returns the current record's "sis" value
@@ -50,7 +52,8 @@ Doctrine_Manager::getInstance()->bindComponent('Postulante', 'doctrine');
  * @method Doctrine_Collection getPostulanteDocumentos()     Returns the current record's "PostulanteDocumentos" collection
  * @method Postulante          setId()                       Sets the current record's "id" value
  * @method Postulante          setConvocatoriaId()           Sets the current record's "convocatoria_id" value
- * @method Postulante          setApellidos()                Sets the current record's "apellidos" value
+ * @method Postulante          setApellidoPaterno()          Sets the current record's "apellido_paterno" value
+ * @method Postulante          setApellidoMaterno()          Sets the current record's "apellido_materno" value
  * @method Postulante          setNombres()                  Sets the current record's "nombres" value
  * @method Postulante          setCi()                       Sets the current record's "ci" value
  * @method Postulante          setSis()                      Sets the current record's "sis" value
@@ -93,7 +96,13 @@ abstract class BasePostulante extends sfDoctrineRecord
              'unsigned' => true,
              'length' => 4,
              ));
-        $this->hasColumn('apellidos', 'string', 32, array(
+        $this->hasColumn('apellido_paterno', 'string', 32, array(
+             'type' => 'string',
+             'fixed' => 0,
+             'notnull' => true,
+             'length' => 32,
+             ));
+        $this->hasColumn('apellido_materno', 'string', 32, array(
              'type' => 'string',
              'fixed' => 0,
              'notnull' => true,
@@ -119,8 +128,8 @@ abstract class BasePostulante extends sfDoctrineRecord
              ));
         $this->hasColumn('correo_electronico', 'string', 255, array(
              'type' => 'string',
+             'fixed' => 0,
              'notnull' => true,
-             'unique' => true,
              'length' => 255,
              ));
         $this->hasColumn('telefono', 'string', 32, array(

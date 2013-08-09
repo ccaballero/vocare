@@ -4,7 +4,8 @@ class PostulanteForm extends BasePostulanteForm
 {
     public function configure() {
         $this->useFields(array(
-            'apellidos',
+            'apellido_paterno',
+            'apellido_materno',
             'nombres',
             'ci',
             'sis',
@@ -15,7 +16,8 @@ class PostulanteForm extends BasePostulanteForm
         ));
 
         $this->widgetSchema->setLabels(array(
-            'apellidos' => 'Apellidos (*):',
+            'apellido_paterno' => 'Apellido Paterno:',
+            'apellido_materno' => 'Apellido Materno:',
             'nombres' => 'Nombres (*):',
             'ci' => 'Nro. de carnet de Identidad (*):',
             'sis' => 'Codigo SIS (*):',
@@ -25,7 +27,7 @@ class PostulanteForm extends BasePostulanteForm
             'requerimientos_list' => 'Ítems a los que se postula:',
         ));
 
-        $this->widgetSchema['apellidos']->setAttribute('class', 'focus');
+        $this->widgetSchema['apellido_paterno']->setAttribute('class', 'focus');
 
         $this->widgetSchema['requerimientos_list']->setOption(
             'renderer_class', 'sfWidgetFormSelectCheckbox');

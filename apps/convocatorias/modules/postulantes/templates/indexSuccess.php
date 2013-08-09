@@ -10,6 +10,10 @@
     <?php if ($tabs['list']): ?>
         <div id="list" class="tab_contents">
             <a name="list"></a>
+            <?php include_partial('postulantes/list', array(
+                'postulantes' => $postulants['postulantes'],
+                'requerimientos' => $postulants['requerimientos'],
+            )) ?>
         </div>
     <?php endif; ?>
 </div>

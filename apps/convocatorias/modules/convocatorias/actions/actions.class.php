@@ -51,7 +51,8 @@ class convocatoriasActions extends PlantillasDefault
             'redactions' => ($state == 'borrador') || ($state == 'emitido'),
             'notifications' => ($state == 'borrador' || ($state == 'emitido')),
             'users' => ($state == 'emitido'),
-            'postulants' => ($state == 'vigente'),
+            'postulants' => ($state == 'vigente'
+                && !$this->getUser()->isAuthenticated()),
             'results' => ($state == 'vigente') || ($state == 'finalizado'),
         );
         $this->tab_click = 'preview';

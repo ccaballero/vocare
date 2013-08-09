@@ -19,316 +19,15 @@ Doctrine_Manager::getInstance()->bindComponent('Convocatoria', 'doctrine');
  * @property Doctrine_Collection $Evaluaciones
  * @property Doctrine_Collection $Cargos
  * @property Doctrine_Collection $Notificaciones
- * @property Doctrine_Collection $Convocatoria
- * 
- * @method integer             getId()                                    Returns the current record's "id" value
- * @method string              getGestion()                               Returns the current record's "gestion" value
- * @method enum                getEstado()                                Returns the current record's "estado" value
- * @method date                getPublicacion()                           Returns the current record's "publicacion" value
- * @method Doctrine_Collection getRedacciones()                           Returns the current record's "Redacciones" collection
- * @method Doctrine_Collection getRequerimientos()                        Returns the current record's "Requerimientos" collection
- * @method Doctrine_Collection getRequisitos()                            Returns the current record's "Requisitos" collection
- * @method Doctrine_Collection getDocumentos()                            Returns the current record's "Documentos" collection
- * @method Doctrine_Collection getEventos()                               Returns the current record's "Eventos" collection
- * @method Doctrine_Collection getEvaluaciones()                          Returns the current record's "Evaluaciones" collection
- * @method Doctrine_Collection getCargos()                                Returns the current record's "Cargos" collection
- * @method Doctrine_Collection getNotificaciones()                        Returns the current record's "Notificaciones" collection
- * @method Doctrine_Collection getConvocatoriaRequerimientos()            Returns the current record's "ConvocatoriaRequerimientos" collection
- * @method Doctrine_Collection getConvocatoriaRequisitos()                Returns the current record's "ConvocatoriaRequisitos" collection
- * @method Doctrine_Collection getConvocatoriaDocumentos()                Returns the current record's "ConvocatoriaDocumentos" collection
- * @method Doctrine_Collection getConvocatoriaEventos()                   Returns the current record's "ConvocatoriaEventos" collection
- * @method Doctrine_Collection getConvocatoriaEvaluaciones()              Returns the current record's "ConvocatoriaEvaluaciones" collection
- * @method Doctrine_Collection getConvocatoriaRequerimientoEvaluaciones() Returns the current record's "ConvocatoriaRequerimientoEvaluaciones" collection
- * @method Doctrine_Collection getConvocatoriaCargos()                    Returns the current record's "ConvocatoriaCargos" collection
- * @method Doctrine_Collection getUsuarioGrupoConvocatoria()              Returns the current record's "UsuarioGrupoConvocatoria" collection
- * @method Doctrine_Collection getConvocatoria()                          Returns the current record's "Convocatoria" collection
- * @method Convocatoria        setId()                                    Sets the current record's "id" value
- * @method Convocatoria        setGestion()                               Sets the current record's "gestion" value
- * @method Convocatoria        setEstado()                                Sets the current record's "estado" value
- * @method Convocatoria        setPublicacion()                           Sets the current record's "publicacion" value
- * @method Convocatoria        setRedacciones()                           Sets the current record's "Redacciones" collection
- * @method Convocatoria        setRequerimientos()                        Sets the current record's "Requerimientos" collection
- * @method Convocatoria        setRequisitos()                            Sets the current record's "Requisitos" collection
- * @method Convocatoria        setDocumentos()                            Sets the current record's "Documentos" collection
- * @method Convocatoria        setEventos()                               Sets the current record's "Eventos" collection
- * @method Convocatoria        setEvaluaciones()                          Sets the current record's "Evaluaciones" collection
- * @method Convocatoria        setCargos()                                Sets the current record's "Cargos" collection
- * @method Convocatoria        setNotificaciones()                        Sets the current record's "Notificaciones" collection
- * @method Convocatoria        setConvocatoriaRequerimientos()            Sets the current record's "ConvocatoriaRequerimientos" collection
- * @method Convocatoria        setConvocatoriaRequisitos()                Sets the current record's "ConvocatoriaRequisitos" collection
- * @method Convocatoria        setConvocatoriaDocumentos()                Sets the current record's "ConvocatoriaDocumentos" collection
- * @method Convocatoria        setConvocatoriaEventos()                   Sets the current record's "ConvocatoriaEventos" collection
- * @method Convocatoria        setConvocatoriaEvaluaciones()              Sets the current record's "ConvocatoriaEvaluaciones" collection
- * @method Convocatoria        setConvocatoriaRequerimientoEvaluaciones() Sets the current record's "ConvocatoriaRequerimientoEvaluaciones" collection
- * @method Convocatoria        setConvocatoriaCargos()                    Sets the current record's "ConvocatoriaCargos" collection
- * @method Convocatoria        setUsuarioGrupoConvocatoria()              Sets the current record's "UsuarioGrupoConvocatoria" collection
- * @method Convocatoria        setConvocatoria()                          Sets the current record's "Convocatoria" collectionRequerimientos
- * @property Doctrine_Collection $Convocatoria
- * 
- * @method integer             getId()                                    Returns the current record's "id" value
- * @method string              getGestion()                               Returns the current record's "gestion" value
- * @method enum                getEstado()                                Returns the current record's "estado" value
- * @method date                getPublicacion()                           Returns the current record's "publicacion" value
- * @method Doctrine_Collection getRedacciones()                           Returns the current record's "Redacciones" collection
- * @method Doctrine_Collection getRequerimientos()                        Returns the current record's "Requerimientos" collection
- * @method Doctrine_Collection getRequisitos()                            Returns the current record's "Requisitos" collection
- * @method Doctrine_Collection getDocumentos()                            Returns the current record's "Documentos" collection
- * @method Doctrine_Collection getEventos()                               Returns the current record's "Eventos" collection
- * @method Doctrine_Collection getEvaluaciones()                          Returns the current record's "Evaluaciones" collection
- * @method Doctrine_Collection getCargos()                                Returns the current record's "Cargos" collection
- * @method Doctrine_Collection getNotificaciones()                        Returns the current record's "Notificaciones" collection
- * @method Doctrine_Collection getConvocatoriaRequerimientos()            Returns the current record's "ConvocatoriaRequerimientos" collection
- * @method Doctrine_Collection getConvocatoriaRequisitos()                Returns the current record's "ConvocatoriaRequisitos" collection
- * @method Doctrine_Collection getConvocatoriaDocumentos()                Returns the current record's "ConvocatoriaDocumentos" collection
- * @method Doctrine_Collection getConvocatoriaEventos()                   Returns the current record's "ConvocatoriaEventos" collection
- * @method Doctrine_Collection getConvocatoriaEvaluaciones()              Returns the current record's "ConvocatoriaEvaluaciones" collection
- * @method Doctrine_Collection getConvocatoriaRequerimientoEvaluaciones() Returns the current record's "ConvocatoriaRequerimientoEvaluaciones" collection
- * @method Doctrine_Collection getConvocatoriaCargos()                    Returns the current record's "ConvocatoriaCargos" collection
- * @method Doctrine_Collection getUsuarioGrupoConvocatoria()              Returns the current record's "UsuarioGrupoConvocatoria" collection
- * @method Doctrine_Collection getConvocatoria()                          Returns the current record's "Convocatoria" collection
- * @method Convocatoria        setId()                                    Sets the current record's "id" value
- * @method Convocatoria        setGestion()                               Sets the current record's "gestion" value
- * @method Convocatoria        setEstado()                                Sets the current record's "estado" value
- * @method Convocatoria        setPublicacion()                           Sets the current record's "publicacion" value
- * @method Convocatoria        setRedacciones()                           Sets the current record's "Redacciones" collection
- * @method Convocatoria        setRequerimientos()                        Sets the current record's "Requerimientos" collection
- * @method Convocatoria        setRequisitos()                            Sets the current record's "Requisitos" collection
- * @method Convocatoria        setDocumentos()                            Sets the current record's "Documentos" collection
- * @method Convocatoria        setEventos()                               Sets the current record's "Eventos" collection
- * @method Convocatoria        setEvaluaciones()                          Sets the current record's "Evaluaciones" collection
- * @method Convocatoria        setCargos()                                Sets the current record's "Cargos" collection
- * @method Convocatoria        setNotificaciones()                        Sets the current record's "Notificaciones" collection
- * @method Convocatoria        setConvocatoriaRequerimientos()            Sets the current record's "ConvocatoriaRequerimientos" collection
- * @method Convocatoria        setConvocatoriaRequisitos()                Sets the current record's "ConvocatoriaRequisitos" collection
- * @method Convocatoria        setConvocatoriaDocumentos()                Sets the current record's "ConvocatoriaDocumentos" collection
- * @method Convocatoria        setConvocatoriaEventos()                   Sets the current record's "ConvocatoriaEventos" collection
- * @method Convocatoria        setConvocatoriaEvaluaciones()              Sets the current record's "ConvocatoriaEvaluaciones" collection
- * @method Convocatoria        setConvocatoriaRequerimientoEvaluaciones() Sets the current record's "ConvocatoriaRequerimientoEvaluaciones" collection
- * @method Convocatoria        setConvocatoriaCargos()                    Sets the current record's "ConvocatoriaCargos" collection
- * @method Convocatoria        setUsuarioGrupoConvocatoria()              Sets the current record's "UsuarioGrupoConvocatoria" collection
- * @method Convocatoria        setConvocatoria()                          Sets the current record's "Convocatoria" collectionRequisitos
- * @property Doctrine_Collection $Convocatoria
- * 
- * @method integer             getId()                                    Returns the current record's "id" value
- * @method string              getGestion()                               Returns the current record's "gestion" value
- * @method enum                getEstado()                                Returns the current record's "estado" value
- * @method date                getPublicacion()                           Returns the current record's "publicacion" value
- * @method Doctrine_Collection getRedacciones()                           Returns the current record's "Redacciones" collection
- * @method Doctrine_Collection getRequerimientos()                        Returns the current record's "Requerimientos" collection
- * @method Doctrine_Collection getRequisitos()                            Returns the current record's "Requisitos" collection
- * @method Doctrine_Collection getDocumentos()                            Returns the current record's "Documentos" collection
- * @method Doctrine_Collection getEventos()                               Returns the current record's "Eventos" collection
- * @method Doctrine_Collection getEvaluaciones()                          Returns the current record's "Evaluaciones" collection
- * @method Doctrine_Collection getCargos()                                Returns the current record's "Cargos" collection
- * @method Doctrine_Collection getNotificaciones()                        Returns the current record's "Notificaciones" collection
- * @method Doctrine_Collection getConvocatoriaRequerimientos()            Returns the current record's "ConvocatoriaRequerimientos" collection
- * @method Doctrine_Collection getConvocatoriaRequisitos()                Returns the current record's "ConvocatoriaRequisitos" collection
- * @method Doctrine_Collection getConvocatoriaDocumentos()                Returns the current record's "ConvocatoriaDocumentos" collection
- * @method Doctrine_Collection getConvocatoriaEventos()                   Returns the current record's "ConvocatoriaEventos" collection
- * @method Doctrine_Collection getConvocatoriaEvaluaciones()              Returns the current record's "ConvocatoriaEvaluaciones" collection
- * @method Doctrine_Collection getConvocatoriaRequerimientoEvaluaciones() Returns the current record's "ConvocatoriaRequerimientoEvaluaciones" collection
- * @method Doctrine_Collection getConvocatoriaCargos()                    Returns the current record's "ConvocatoriaCargos" collection
- * @method Doctrine_Collection getUsuarioGrupoConvocatoria()              Returns the current record's "UsuarioGrupoConvocatoria" collection
- * @method Doctrine_Collection getConvocatoria()                          Returns the current record's "Convocatoria" collection
- * @method Convocatoria        setId()                                    Sets the current record's "id" value
- * @method Convocatoria        setGestion()                               Sets the current record's "gestion" value
- * @method Convocatoria        setEstado()                                Sets the current record's "estado" value
- * @method Convocatoria        setPublicacion()                           Sets the current record's "publicacion" value
- * @method Convocatoria        setRedacciones()                           Sets the current record's "Redacciones" collection
- * @method Convocatoria        setRequerimientos()                        Sets the current record's "Requerimientos" collection
- * @method Convocatoria        setRequisitos()                            Sets the current record's "Requisitos" collection
- * @method Convocatoria        setDocumentos()                            Sets the current record's "Documentos" collection
- * @method Convocatoria        setEventos()                               Sets the current record's "Eventos" collection
- * @method Convocatoria        setEvaluaciones()                          Sets the current record's "Evaluaciones" collection
- * @method Convocatoria        setCargos()                                Sets the current record's "Cargos" collection
- * @method Convocatoria        setNotificaciones()                        Sets the current record's "Notificaciones" collection
- * @method Convocatoria        setConvocatoriaRequerimientos()            Sets the current record's "ConvocatoriaRequerimientos" collection
- * @method Convocatoria        setConvocatoriaRequisitos()                Sets the current record's "ConvocatoriaRequisitos" collection
- * @method Convocatoria        setConvocatoriaDocumentos()                Sets the current record's "ConvocatoriaDocumentos" collection
- * @method Convocatoria        setConvocatoriaEventos()                   Sets the current record's "ConvocatoriaEventos" collection
- * @method Convocatoria        setConvocatoriaEvaluaciones()              Sets the current record's "ConvocatoriaEvaluaciones" collection
- * @method Convocatoria        setConvocatoriaRequerimientoEvaluaciones() Sets the current record's "ConvocatoriaRequerimientoEvaluaciones" collection
- * @method Convocatoria        setConvocatoriaCargos()                    Sets the current record's "ConvocatoriaCargos" collection
- * @method Convocatoria        setUsuarioGrupoConvocatoria()              Sets the current record's "UsuarioGrupoConvocatoria" collection
- * @method Convocatoria        setConvocatoria()                          Sets the current record's "Convocatoria" collectionDocumentos
- * @property Doctrine_Collection $Convocatoria
- * 
- * @method integer             getId()                                    Returns the current record's "id" value
- * @method string              getGestion()                               Returns the current record's "gestion" value
- * @method enum                getEstado()                                Returns the current record's "estado" value
- * @method date                getPublicacion()                           Returns the current record's "publicacion" value
- * @method Doctrine_Collection getRedacciones()                           Returns the current record's "Redacciones" collection
- * @method Doctrine_Collection getRequerimientos()                        Returns the current record's "Requerimientos" collection
- * @method Doctrine_Collection getRequisitos()                            Returns the current record's "Requisitos" collection
- * @method Doctrine_Collection getDocumentos()                            Returns the current record's "Documentos" collection
- * @method Doctrine_Collection getEventos()                               Returns the current record's "Eventos" collection
- * @method Doctrine_Collection getEvaluaciones()                          Returns the current record's "Evaluaciones" collection
- * @method Doctrine_Collection getCargos()                                Returns the current record's "Cargos" collection
- * @method Doctrine_Collection getNotificaciones()                        Returns the current record's "Notificaciones" collection
- * @method Doctrine_Collection getConvocatoriaRequerimientos()            Returns the current record's "ConvocatoriaRequerimientos" collection
- * @method Doctrine_Collection getConvocatoriaRequisitos()                Returns the current record's "ConvocatoriaRequisitos" collection
- * @method Doctrine_Collection getConvocatoriaDocumentos()                Returns the current record's "ConvocatoriaDocumentos" collection
- * @method Doctrine_Collection getConvocatoriaEventos()                   Returns the current record's "ConvocatoriaEventos" collection
- * @method Doctrine_Collection getConvocatoriaEvaluaciones()              Returns the current record's "ConvocatoriaEvaluaciones" collection
- * @method Doctrine_Collection getConvocatoriaRequerimientoEvaluaciones() Returns the current record's "ConvocatoriaRequerimientoEvaluaciones" collection
- * @method Doctrine_Collection getConvocatoriaCargos()                    Returns the current record's "ConvocatoriaCargos" collection
- * @method Doctrine_Collection getUsuarioGrupoConvocatoria()              Returns the current record's "UsuarioGrupoConvocatoria" collection
- * @method Doctrine_Collection getConvocatoria()                          Returns the current record's "Convocatoria" collection
- * @method Convocatoria        setId()                                    Sets the current record's "id" value
- * @method Convocatoria        setGestion()                               Sets the current record's "gestion" value
- * @method Convocatoria        setEstado()                                Sets the current record's "estado" value
- * @method Convocatoria        setPublicacion()                           Sets the current record's "publicacion" value
- * @method Convocatoria        setRedacciones()                           Sets the current record's "Redacciones" collection
- * @method Convocatoria        setRequerimientos()                        Sets the current record's "Requerimientos" collection
- * @method Convocatoria        setRequisitos()                            Sets the current record's "Requisitos" collection
- * @method Convocatoria        setDocumentos()                            Sets the current record's "Documentos" collection
- * @method Convocatoria        setEventos()                               Sets the current record's "Eventos" collection
- * @method Convocatoria        setEvaluaciones()                          Sets the current record's "Evaluaciones" collection
- * @method Convocatoria        setCargos()                                Sets the current record's "Cargos" collection
- * @method Convocatoria        setNotificaciones()                        Sets the current record's "Notificaciones" collection
- * @method Convocatoria        setConvocatoriaRequerimientos()            Sets the current record's "ConvocatoriaRequerimientos" collection
- * @method Convocatoria        setConvocatoriaRequisitos()                Sets the current record's "ConvocatoriaRequisitos" collection
- * @method Convocatoria        setConvocatoriaDocumentos()                Sets the current record's "ConvocatoriaDocumentos" collection
- * @method Convocatoria        setConvocatoriaEventos()                   Sets the current record's "ConvocatoriaEventos" collection
- * @method Convocatoria        setConvocatoriaEvaluaciones()              Sets the current record's "ConvocatoriaEvaluaciones" collection
- * @method Convocatoria        setConvocatoriaRequerimientoEvaluaciones() Sets the current record's "ConvocatoriaRequerimientoEvaluaciones" collection
- * @method Convocatoria        setConvocatoriaCargos()                    Sets the current record's "ConvocatoriaCargos" collection
- * @method Convocatoria        setUsuarioGrupoConvocatoria()              Sets the current record's "UsuarioGrupoConvocatoria" collection
- * @method Convocatoria        setConvocatoria()                          Sets the current record's "Convocatoria" collectionEventos
- * @property Doctrine_Collection $Convocatoria
- * 
- * @method integer             getId()                                    Returns the current record's "id" value
- * @method string              getGestion()                               Returns the current record's "gestion" value
- * @method enum                getEstado()                                Returns the current record's "estado" value
- * @method date                getPublicacion()                           Returns the current record's "publicacion" value
- * @method Doctrine_Collection getRedacciones()                           Returns the current record's "Redacciones" collection
- * @method Doctrine_Collection getRequerimientos()                        Returns the current record's "Requerimientos" collection
- * @method Doctrine_Collection getRequisitos()                            Returns the current record's "Requisitos" collection
- * @method Doctrine_Collection getDocumentos()                            Returns the current record's "Documentos" collection
- * @method Doctrine_Collection getEventos()                               Returns the current record's "Eventos" collection
- * @method Doctrine_Collection getEvaluaciones()                          Returns the current record's "Evaluaciones" collection
- * @method Doctrine_Collection getCargos()                                Returns the current record's "Cargos" collection
- * @method Doctrine_Collection getNotificaciones()                        Returns the current record's "Notificaciones" collection
- * @method Doctrine_Collection getConvocatoriaRequerimientos()            Returns the current record's "ConvocatoriaRequerimientos" collection
- * @method Doctrine_Collection getConvocatoriaRequisitos()                Returns the current record's "ConvocatoriaRequisitos" collection
- * @method Doctrine_Collection getConvocatoriaDocumentos()                Returns the current record's "ConvocatoriaDocumentos" collection
- * @method Doctrine_Collection getConvocatoriaEventos()                   Returns the current record's "ConvocatoriaEventos" collection
- * @method Doctrine_Collection getConvocatoriaEvaluaciones()              Returns the current record's "ConvocatoriaEvaluaciones" collection
- * @method Doctrine_Collection getConvocatoriaRequerimientoEvaluaciones() Returns the current record's "ConvocatoriaRequerimientoEvaluaciones" collection
- * @method Doctrine_Collection getConvocatoriaCargos()                    Returns the current record's "ConvocatoriaCargos" collection
- * @method Doctrine_Collection getUsuarioGrupoConvocatoria()              Returns the current record's "UsuarioGrupoConvocatoria" collection
- * @method Doctrine_Collection getConvocatoria()                          Returns the current record's "Convocatoria" collection
- * @method Convocatoria        setId()                                    Sets the current record's "id" value
- * @method Convocatoria        setGestion()                               Sets the current record's "gestion" value
- * @method Convocatoria        setEstado()                                Sets the current record's "estado" value
- * @method Convocatoria        setPublicacion()                           Sets the current record's "publicacion" value
- * @method Convocatoria        setRedacciones()                           Sets the current record's "Redacciones" collection
- * @method Convocatoria        setRequerimientos()                        Sets the current record's "Requerimientos" collection
- * @method Convocatoria        setRequisitos()                            Sets the current record's "Requisitos" collection
- * @method Convocatoria        setDocumentos()                            Sets the current record's "Documentos" collection
- * @method Convocatoria        setEventos()                               Sets the current record's "Eventos" collection
- * @method Convocatoria        setEvaluaciones()                          Sets the current record's "Evaluaciones" collection
- * @method Convocatoria        setCargos()                                Sets the current record's "Cargos" collection
- * @method Convocatoria        setNotificaciones()                        Sets the current record's "Notificaciones" collection
- * @method Convocatoria        setConvocatoriaRequerimientos()            Sets the current record's "ConvocatoriaRequerimientos" collection
- * @method Convocatoria        setConvocatoriaRequisitos()                Sets the current record's "ConvocatoriaRequisitos" collection
- * @method Convocatoria        setConvocatoriaDocumentos()                Sets the current record's "ConvocatoriaDocumentos" collection
- * @method Convocatoria        setConvocatoriaEventos()                   Sets the current record's "ConvocatoriaEventos" collection
- * @method Convocatoria        setConvocatoriaEvaluaciones()              Sets the current record's "ConvocatoriaEvaluaciones" collection
- * @method Convocatoria        setConvocatoriaRequerimientoEvaluaciones() Sets the current record's "ConvocatoriaRequerimientoEvaluaciones" collection
- * @method Convocatoria        setConvocatoriaCargos()                    Sets the current record's "ConvocatoriaCargos" collection
- * @method Convocatoria        setUsuarioGrupoConvocatoria()              Sets the current record's "UsuarioGrupoConvocatoria" collection
- * @method Convocatoria        setConvocatoria()                          Sets the current record's "Convocatoria" collectionEvaluaciones
- * @property Doctrine_Collection $Convocatoria
- * 
- * @method integer             getId()                                    Returns the current record's "id" value
- * @method string              getGestion()                               Returns the current record's "gestion" value
- * @method enum                getEstado()                                Returns the current record's "estado" value
- * @method date                getPublicacion()                           Returns the current record's "publicacion" value
- * @method Doctrine_Collection getRedacciones()                           Returns the current record's "Redacciones" collection
- * @method Doctrine_Collection getRequerimientos()                        Returns the current record's "Requerimientos" collection
- * @method Doctrine_Collection getRequisitos()                            Returns the current record's "Requisitos" collection
- * @method Doctrine_Collection getDocumentos()                            Returns the current record's "Documentos" collection
- * @method Doctrine_Collection getEventos()                               Returns the current record's "Eventos" collection
- * @method Doctrine_Collection getEvaluaciones()                          Returns the current record's "Evaluaciones" collection
- * @method Doctrine_Collection getCargos()                                Returns the current record's "Cargos" collection
- * @method Doctrine_Collection getNotificaciones()                        Returns the current record's "Notificaciones" collection
- * @method Doctrine_Collection getConvocatoriaRequerimientos()            Returns the current record's "ConvocatoriaRequerimientos" collection
- * @method Doctrine_Collection getConvocatoriaRequisitos()                Returns the current record's "ConvocatoriaRequisitos" collection
- * @method Doctrine_Collection getConvocatoriaDocumentos()                Returns the current record's "ConvocatoriaDocumentos" collection
- * @method Doctrine_Collection getConvocatoriaEventos()                   Returns the current record's "ConvocatoriaEventos" collection
- * @method Doctrine_Collection getConvocatoriaEvaluaciones()              Returns the current record's "ConvocatoriaEvaluaciones" collection
- * @method Doctrine_Collection getConvocatoriaRequerimientoEvaluaciones() Returns the current record's "ConvocatoriaRequerimientoEvaluaciones" collection
- * @method Doctrine_Collection getConvocatoriaCargos()                    Returns the current record's "ConvocatoriaCargos" collection
- * @method Doctrine_Collection getUsuarioGrupoConvocatoria()              Returns the current record's "UsuarioGrupoConvocatoria" collection
- * @method Doctrine_Collection getConvocatoria()                          Returns the current record's "Convocatoria" collection
- * @method Convocatoria        setId()                                    Sets the current record's "id" value
- * @method Convocatoria        setGestion()                               Sets the current record's "gestion" value
- * @method Convocatoria        setEstado()                                Sets the current record's "estado" value
- * @method Convocatoria        setPublicacion()                           Sets the current record's "publicacion" value
- * @method Convocatoria        setRedacciones()                           Sets the current record's "Redacciones" collection
- * @method Convocatoria        setRequerimientos()                        Sets the current record's "Requerimientos" collection
- * @method Convocatoria        setRequisitos()                            Sets the current record's "Requisitos" collection
- * @method Convocatoria        setDocumentos()                            Sets the current record's "Documentos" collection
- * @method Convocatoria        setEventos()                               Sets the current record's "Eventos" collection
- * @method Convocatoria        setEvaluaciones()                          Sets the current record's "Evaluaciones" collection
- * @method Convocatoria        setCargos()                                Sets the current record's "Cargos" collection
- * @method Convocatoria        setNotificaciones()                        Sets the current record's "Notificaciones" collection
- * @method Convocatoria        setConvocatoriaRequerimientos()            Sets the current record's "ConvocatoriaRequerimientos" collection
- * @method Convocatoria        setConvocatoriaRequisitos()                Sets the current record's "ConvocatoriaRequisitos" collection
- * @method Convocatoria        setConvocatoriaDocumentos()                Sets the current record's "ConvocatoriaDocumentos" collection
- * @method Convocatoria        setConvocatoriaEventos()                   Sets the current record's "ConvocatoriaEventos" collection
- * @method Convocatoria        setConvocatoriaEvaluaciones()              Sets the current record's "ConvocatoriaEvaluaciones" collection
- * @method Convocatoria        setConvocatoriaRequerimientoEvaluaciones() Sets the current record's "ConvocatoriaRequerimientoEvaluaciones" collection
- * @method Convocatoria        setConvocatoriaCargos()                    Sets the current record's "ConvocatoriaCargos" collection
- * @method Convocatoria        setUsuarioGrupoConvocatoria()              Sets the current record's "UsuarioGrupoConvocatoria" collection
- * @method Convocatoria        setConvocatoria()                          Sets the current record's "Convocatoria" collectionRequerimientoEvaluaciones
- * @property Doctrine_Collection $Convocatoria
- * 
- * @method integer             getId()                                    Returns the current record's "id" value
- * @method string              getGestion()                               Returns the current record's "gestion" value
- * @method enum                getEstado()                                Returns the current record's "estado" value
- * @method date                getPublicacion()                           Returns the current record's "publicacion" value
- * @method Doctrine_Collection getRedacciones()                           Returns the current record's "Redacciones" collection
- * @method Doctrine_Collection getRequerimientos()                        Returns the current record's "Requerimientos" collection
- * @method Doctrine_Collection getRequisitos()                            Returns the current record's "Requisitos" collection
- * @method Doctrine_Collection getDocumentos()                            Returns the current record's "Documentos" collection
- * @method Doctrine_Collection getEventos()                               Returns the current record's "Eventos" collection
- * @method Doctrine_Collection getEvaluaciones()                          Returns the current record's "Evaluaciones" collection
- * @method Doctrine_Collection getCargos()                                Returns the current record's "Cargos" collection
- * @method Doctrine_Collection getNotificaciones()                        Returns the current record's "Notificaciones" collection
- * @method Doctrine_Collection getConvocatoriaRequerimientos()            Returns the current record's "ConvocatoriaRequerimientos" collection
- * @method Doctrine_Collection getConvocatoriaRequisitos()                Returns the current record's "ConvocatoriaRequisitos" collection
- * @method Doctrine_Collection getConvocatoriaDocumentos()                Returns the current record's "ConvocatoriaDocumentos" collection
- * @method Doctrine_Collection getConvocatoriaEventos()                   Returns the current record's "ConvocatoriaEventos" collection
- * @method Doctrine_Collection getConvocatoriaEvaluaciones()              Returns the current record's "ConvocatoriaEvaluaciones" collection
- * @method Doctrine_Collection getConvocatoriaRequerimientoEvaluaciones() Returns the current record's "ConvocatoriaRequerimientoEvaluaciones" collection
- * @method Doctrine_Collection getConvocatoriaCargos()                    Returns the current record's "ConvocatoriaCargos" collection
- * @method Doctrine_Collection getUsuarioGrupoConvocatoria()              Returns the current record's "UsuarioGrupoConvocatoria" collection
- * @method Doctrine_Collection getConvocatoria()                          Returns the current record's "Convocatoria" collection
- * @method Convocatoria        setId()                                    Sets the current record's "id" value
- * @method Convocatoria        setGestion()                               Sets the current record's "gestion" value
- * @method Convocatoria        setEstado()                                Sets the current record's "estado" value
- * @method Convocatoria        setPublicacion()                           Sets the current record's "publicacion" value
- * @method Convocatoria        setRedacciones()                           Sets the current record's "Redacciones" collection
- * @method Convocatoria        setRequerimientos()                        Sets the current record's "Requerimientos" collection
- * @method Convocatoria        setRequisitos()                            Sets the current record's "Requisitos" collection
- * @method Convocatoria        setDocumentos()                            Sets the current record's "Documentos" collection
- * @method Convocatoria        setEventos()                               Sets the current record's "Eventos" collection
- * @method Convocatoria        setEvaluaciones()                          Sets the current record's "Evaluaciones" collection
- * @method Convocatoria        setCargos()                                Sets the current record's "Cargos" collection
- * @method Convocatoria        setNotificaciones()                        Sets the current record's "Notificaciones" collection
- * @method Convocatoria        setConvocatoriaRequerimientos()            Sets the current record's "ConvocatoriaRequerimientos" collection
- * @method Convocatoria        setConvocatoriaRequisitos()                Sets the current record's "ConvocatoriaRequisitos" collection
- * @method Convocatoria        setConvocatoriaDocumentos()                Sets the current record's "ConvocatoriaDocumentos" collection
- * @method Convocatoria        setConvocatoriaEventos()                   Sets the current record's "ConvocatoriaEventos" collection
- * @method Convocatoria        setConvocatoriaEvaluaciones()              Sets the current record's "ConvocatoriaEvaluaciones" collection
- * @method Convocatoria        setConvocatoriaRequerimientoEvaluaciones() Sets the current record's "ConvocatoriaRequerimientoEvaluaciones" collection
- * @method Convocatoria        setConvocatoriaCargos()                    Sets the current record's "ConvocatoriaCargos" collection
- * @method Convocatoria        setUsuarioGrupoConvocatoria()              Sets the current record's "UsuarioGrupoConvocatoria" collection
- * @method Convocatoria        setConvocatoria()                          Sets the current record's "Convocatoria" collectionCargos
+ * @property Doctrine_Collection $Postulantes
+ * @property Doctrine_Collection $ConvocatoriaRequerimientos
+ * @property Doctrine_Collection $ConvocatoriaRequisitos
+ * @property Doctrine_Collection $ConvocatoriaDocumentos
+ * @property Doctrine_Collection $ConvocatoriaEventos
+ * @property Doctrine_Collection $ConvocatoriaEvaluaciones
+ * @property Doctrine_Collection $ConvocatoriaRequerimientoEvaluaciones
+ * @property Doctrine_Collection $ConvocatoriaCargos
  * @property Doctrine_Collection $UsuarioGrupoConvocatoria
- * @property Doctrine_Collection $Convocatoria
  * 
  * @method integer             getId()                                    Returns the current record's "id" value
  * @method string              getGestion()                               Returns the current record's "gestion" value
@@ -342,6 +41,7 @@ Doctrine_Manager::getInstance()->bindComponent('Convocatoria', 'doctrine');
  * @method Doctrine_Collection getEvaluaciones()                          Returns the current record's "Evaluaciones" collection
  * @method Doctrine_Collection getCargos()                                Returns the current record's "Cargos" collection
  * @method Doctrine_Collection getNotificaciones()                        Returns the current record's "Notificaciones" collection
+ * @method Doctrine_Collection getPostulantes()                           Returns the current record's "Postulantes" collection
  * @method Doctrine_Collection getConvocatoriaRequerimientos()            Returns the current record's "ConvocatoriaRequerimientos" collection
  * @method Doctrine_Collection getConvocatoriaRequisitos()                Returns the current record's "ConvocatoriaRequisitos" collection
  * @method Doctrine_Collection getConvocatoriaDocumentos()                Returns the current record's "ConvocatoriaDocumentos" collection
@@ -350,7 +50,6 @@ Doctrine_Manager::getInstance()->bindComponent('Convocatoria', 'doctrine');
  * @method Doctrine_Collection getConvocatoriaRequerimientoEvaluaciones() Returns the current record's "ConvocatoriaRequerimientoEvaluaciones" collection
  * @method Doctrine_Collection getConvocatoriaCargos()                    Returns the current record's "ConvocatoriaCargos" collection
  * @method Doctrine_Collection getUsuarioGrupoConvocatoria()              Returns the current record's "UsuarioGrupoConvocatoria" collection
- * @method Doctrine_Collection getConvocatoria()                          Returns the current record's "Convocatoria" collection
  * @method Convocatoria        setId()                                    Sets the current record's "id" value
  * @method Convocatoria        setGestion()                               Sets the current record's "gestion" value
  * @method Convocatoria        setEstado()                                Sets the current record's "estado" value
@@ -363,6 +62,7 @@ Doctrine_Manager::getInstance()->bindComponent('Convocatoria', 'doctrine');
  * @method Convocatoria        setEvaluaciones()                          Sets the current record's "Evaluaciones" collection
  * @method Convocatoria        setCargos()                                Sets the current record's "Cargos" collection
  * @method Convocatoria        setNotificaciones()                        Sets the current record's "Notificaciones" collection
+ * @method Convocatoria        setPostulantes()                           Sets the current record's "Postulantes" collection
  * @method Convocatoria        setConvocatoriaRequerimientos()            Sets the current record's "ConvocatoriaRequerimientos" collection
  * @method Convocatoria        setConvocatoriaRequisitos()                Sets the current record's "ConvocatoriaRequisitos" collection
  * @method Convocatoria        setConvocatoriaDocumentos()                Sets the current record's "ConvocatoriaDocumentos" collection
@@ -371,7 +71,6 @@ Doctrine_Manager::getInstance()->bindComponent('Convocatoria', 'doctrine');
  * @method Convocatoria        setConvocatoriaRequerimientoEvaluaciones() Sets the current record's "ConvocatoriaRequerimientoEvaluaciones" collection
  * @method Convocatoria        setConvocatoriaCargos()                    Sets the current record's "ConvocatoriaCargos" collection
  * @method Convocatoria        setUsuarioGrupoConvocatoria()              Sets the current record's "UsuarioGrupoConvocatoria" collection
- * @method Convocatoria        setConvocatoria()                          Sets the current record's "Convocatoria" collection
  * 
  * @package    .
  * @subpackage model
@@ -461,6 +160,10 @@ abstract class BaseConvocatoria extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'convocatoria_id'));
 
+        $this->hasMany('Postulante as Postulantes', array(
+             'local' => 'id',
+             'foreign' => 'convocatoria_id'));
+
         $this->hasMany('ConvocatoriaRequerimiento as ConvocatoriaRequerimientos', array(
              'local' => 'id',
              'foreign' => 'convocatoria_id'));
@@ -490,10 +193,6 @@ abstract class BaseConvocatoria extends sfDoctrineRecord
              'foreign' => 'convocatoria_id'));
 
         $this->hasMany('UsuarioGrupoConvocatoria', array(
-             'local' => 'id',
-             'foreign' => 'convocatoria_id'));
-
-        $this->hasMany('Postulante as Convocatoria', array(
              'local' => 'id',
              'foreign' => 'convocatoria_id'));
 
