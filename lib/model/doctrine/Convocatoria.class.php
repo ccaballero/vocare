@@ -430,7 +430,7 @@ class Convocatoria extends BaseConvocatoria
             'message' => '',
         );
     }
-    
+
     public function esVigente() {
         return $this->getEstado() === 'vigente';
     }

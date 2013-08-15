@@ -66,13 +66,23 @@ EOF;
         $type = intval($matches['type']);
         switch($type) {
             case 'postulantes':
+                $this->logSection('vocare',
+                    'Registrando postulantes para una convocatoria');
                 $this->parseRegistration($csv, $convocatoria);
                 break;
             case 'reception':
+                $this->logSection('vocare',
+                    'Registrando un conjunto de recepciones');
                 $this->parseReception($csv, $convocatoria);
                 break;
             case 'habilitation':
+                $this->logSection('vocare',
+                    'Registrando un conjunto de habilitaciones');
                 $this->parseHabilitation($csv, $convocatoria);
+                break;
+            default:
+                $this->logSection('vocare',
+                    'Haciendo absolutamente nada!');
                 break;
         }
     }
@@ -82,47 +92,45 @@ EOF;
 
         // header of csv
         $headers = fgetcsv($fd, 0, ",");
-        var_dump($headers);
 
-        echo '>>  convocatorias cargando información de registro .... ' . PHP_EOL;
+        echo '>>  convocatorias cargando información de registro .... '
+            . PHP_EOL;
         echo 'APE_PATERNO     ';
         echo 'APE_MATERNO     ';
         echo 'NOMBRES             ';
         echo 'CI           ';
         echo 'SIS       ';
         echo 'EMAIL                                        ';
-        echo '1 2 3 4 5 6 7' . PHP_EOL;
+//        echo '1 2 3 4 5 6 7' . PHP_EOL;
 
         // content of csv
         while (($csv = fgetcsv($fd, 0, ",")) !== false) {
-            // get the data
-            echo str_pad($csv[ 0], 16);
-            echo str_pad($csv[ 1], 16);
-            echo str_pad($csv[ 2], 20);
-            echo str_pad($csv[ 3], 13);
-            echo str_pad($csv[ 4], 10);
-            echo str_pad($csv[ 5], 45);
-            echo str_pad($csv[ 8], 2);
-            echo str_pad($csv[ 9], 2);
-            echo str_pad($csv[10], 2);
-            echo str_pad($csv[11], 2);
-            echo str_pad($csv[12], 2);
-            echo str_pad($csv[13], 2);
-            echo str_pad($csv[14], 2);
-            echo PHP_EOL;
-
             $postulante = new Postulante();
-
             $postulante->Convocatoria = $convocatoria;
-            $postulante->apellido_paterno = trim($csv[0]);
-            $postulante->apellido_materno = trim($csv[1]);
-            $postulante->nombres = trim($csv[2]);
-            $postulante->ci = trim($csv[3]);
-            $postulante->sis = trim($csv[4]);
-            $postulante->correo_electronico = trim($csv[5]);
-            $postulante->telefono = trim($csv[6]);
-            $postulante->direccion = trim($csv[7]);
+
+            for ($i = 0; $i < count($headers); $i++) {
+                $parameter = strtolower($headers[$i]);
+                try {
+                    $postulante->$parameter = trim($csv[$i]);
+                } catch (Exception $e) {
+                    if (!empty($csv[$i])) {
+                        $parameter = strtoupper($parameter);
+                        $requerimiento = Doctrine::getTable('Requerimiento')
+                            ->findByCodigo($parameter);
+
+                        if (!empty($requerimiento)) {
+                            $postulante->PostulanteRequerimientos[]->Requerimiento = $requerimiento;
+//                            $postulante_req = new PostulanteRequerimiento();
+//                            $postulante_req->Requerimiento = $requerimiento;
+//                            $postulante_req->Postulante = $postulante;
+//                            $postulante_req->save();
+                        }
+                    }
+                }
+            }
+
             $postulante->save();
+            echo $postulante . PHP_EOL;
         }
 
         fclose($fd);

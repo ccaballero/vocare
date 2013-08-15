@@ -12,7 +12,11 @@
             <td class="text-right"><?php echo $key + 1 ?></td>
             <td><?php echo $postulante->getFullname() ?></td>
             <td><?php echo $postulante->getCorreoElectronico() ?></td>
-            <td></td>
+        <?php foreach ($requerimientos as $requerimiento): ?>
+            <td class="text-center">
+                <?php echo $postulante->isPostulant($requerimiento) ? 'x':'' ?>
+            </td>
+        <?php endforeach; ?>
         </tr>
     <?php endforeach; ?>
 </table>

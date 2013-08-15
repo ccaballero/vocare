@@ -23,8 +23,14 @@ Construir el esquema de la base de datos.
     sh shell/models.sh
 
 Paso 05:
-Rellenar la base de datos con la información de la base de datos.
+Rellenar la base de datos con la información de los fixtures de datos.
     sh shell/data.sh
+
+Paso 06 (opcional):
+Si se cuenta con los archivos csv (/data/csv/*), rellenar con la información de
+estos a la base de datos.
+    symfony vocare:loadCSV data/csv/01_postulantes.csv
+    symfony vocare:loadCSV data/csv/02_postulantes.csv
 
 Paso 06:
 Crear la carpeta de log.

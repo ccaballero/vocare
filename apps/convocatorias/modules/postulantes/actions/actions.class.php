@@ -38,7 +38,9 @@ class postulantesActions extends sfActions
 
     protected function _renderListPostulants($convocatoria) {
         return array(
-            'postulantes' => $convocatoria->getPostulantes(),
+            'postulantes' =>
+                Doctrine::getTable('Postulante')
+                    ->findByConvocatoria($convocatoria),
             'requerimientos' => $convocatoria->getConvocatoriaRequerimientos(),
         );
     }
