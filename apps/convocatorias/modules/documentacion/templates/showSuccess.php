@@ -39,3 +39,29 @@
         </div>
     </div>
 </div>
+<?php if (isset($tab_click)): ?>
+<script>
+$(document).ready(function(){
+    $('#tabber ul#tabs li a').click(function(){
+        var activeTab = $(this).attr('href')
+        $('#tabber ul li a').removeClass('active')
+        $(this).addClass('active')
+        $('#tabber .tab_details .tab_contents').hide()
+        $(activeTab).fadeIn()
+        $(window).scrollTop(0)
+        return false
+    })
+    $('.tab_contents').hide()
+    $('.tab_contents:first').fadeIn()
+    $('#tabber .tab a:first').addClass('active')
+
+    var tab_needed='#<?php echo $tab_click; ?>'
+    var hash=window.location.hash
+    if(hash!==''){
+        tab_needed=hash
+    }
+    $('a[href="'+tab_needed+'"]').click()
+    $(window).scrollTop(0)
+})
+</script>
+<?php endif; ?>

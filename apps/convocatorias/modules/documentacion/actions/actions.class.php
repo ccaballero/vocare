@@ -24,6 +24,7 @@ class documentacionActions extends PlantillasDefault {
         $this->object = $volumen;
         $this->documents = $volumen->getDocuments();
         $this->previews = $volumen->getPreview();
+        $this->tab_click = 'preview';
     }
 
     public function executeEditar(sfWebRequest $request) {

@@ -127,50 +127,50 @@
 }
 
 /* clases para la pestaña de redacción */
-#redactions .tree {
+#redaction .tree {
     float: left;
     margin: 10px 0px 0px 0px;
     width: 210px;
 }
 
-#redactions .tree h1 {
+#redaction .tree h1 {
     font-size: 18px;
 }
 
-#redactions .tree p {
+#redaction .tree p {
     margin: 0px 5px 0px 0px;
 }
 
-#redactions .tree ul {
+#redaction .tree ul {
     list-style-type: none;
     border-bottom: 1px solid #000000;
 }
 
-#redactions .tree ul li {
+#redaction .tree ul li {
     display: block;
     padding: 2px 0px;
     border-top: 1px solid #000000;
 }
 
-#redactions .tree ul li .title {
+#redaction .tree ul li .title {
     font-weight: bold;
     padding-left: 5px;
 }
 
-#redactions .tree ul li a {}
-#redactions .tree ul li a:hover {}
+#redaction .tree ul li a {}
+#redaction .tree ul li a:hover {}
 
-#redactions .tree ul li ul.options {
+#redaction .tree ul li ul.options {
     margin-left: 15px;
     border-bottom: none;
 }
 
-#redactions .tree ul li ul.options li {
+#redaction .tree ul li ul.options li {
     display: inline-block;
     border: none;
 }
 
-#redactions .tree ul li ul.options li a {
+#redaction .tree ul li ul.options li a {
     margin: 0px;
     padding: 0px 3px;
     line-height: normal;
@@ -180,6 +180,6 @@
     border: none;
 }
 
-#redactions .tree ul li ul.options li a:hover {
+#redaction .tree ul li ul.options li a:hover {
     color: #000000;
 }
