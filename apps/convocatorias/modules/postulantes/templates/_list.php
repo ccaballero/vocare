@@ -1,3 +1,4 @@
+<h1>Lista de postulantes</h1>
 <table>
     <tr class="header">
         <th>#</th>

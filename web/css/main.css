@@ -355,7 +355,7 @@ span {
 
 /* pestañas de las convocatorias */
 #tabber {
-    background: #f0f0f0;
+    /*background: #f0f0f0;*/
     border: 1px solid #ffffff;
     position: relative;
 }
@@ -382,6 +382,7 @@ span {
     padding: 0px 30px;
     text-decoration: none;
     text-transform: uppercase;
+    border-radius: 10px 10px 0px 0px;
 }
 
 #tabber li a:hover {
@@ -402,7 +403,7 @@ span {
 }
 
 #tabber .tab_details .tab_contents {
-    padding: 0px 20px 10px 20px;
+    padding: 10px 20px 10px 20px;
 }
 
 #main .buttons {

@@ -21,7 +21,7 @@ class postulantesActions extends sfActions
 
     public function executeIndex(sfWebRequest $request) {
         $this->convocatoria = $this->getConvocatoria($request);
-        
+
         // tabs renderization
         $this->tabs = array(
             'list' => true,
@@ -29,7 +29,7 @@ class postulantesActions extends sfActions
             'habilitation' => true,
         );
         $this->tab_click = 'list';
-        
+
         if ($this->tabs['list']) {
             $this->postulants =
                 $this->_renderListPostulants($this->convocatoria);
@@ -44,7 +44,7 @@ class postulantesActions extends sfActions
             'requerimientos' => $convocatoria->getConvocatoriaRequerimientos(),
         );
     }
-    
+
     public function _executeIndex(sfWebRequest $request) {
         $qCv = Doctrine_Query::create()
                 ->from('Convocatoria c')

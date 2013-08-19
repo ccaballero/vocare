@@ -8,7 +8,7 @@
     <?php endif; ?>
     <?php if ($tabs['redactions']): ?>
     	<li class="tab">
-            <a href="#redactions">
+            <a href="#redaction">
                 Redacción
                 <?php echo image_state($object->validateRedaction()) ?>
             </a>

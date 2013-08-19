@@ -53,7 +53,7 @@
         </div>
     <?php endif; ?>
     <?php if ($tabs['redactions']): ?>
-        <div id="redactions" class="tab_contents">
+        <div id="redaction" class="tab_contents">
             <a name="redactions"></a>
             <?php include_partial('convocatorias/redactions', array(
                 'object' => $object,
