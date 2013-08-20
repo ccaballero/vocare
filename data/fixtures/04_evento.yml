@@ -2,15 +2,19 @@ Evento:
   evento_1:
     nombre: publicacion
     descripcion: Publicación de convocatoria.
+    tasks: notification::publication
   evento_2:
     nombre: presentacion
     descripcion: Presentación de documentos.
+    tasks: notification::end-postulate
   evento_3:
     nombre: pruebas
     descripcion: Publicación de rol de pruebas practicas y de conocimientos.
+    tasks: notification::pub-schedule
   evento_4:
     nombre: resultados
     descripcion: Publicación de resultados.
+    tasks: notification::pub-results
   evento_5:
     nombre: envio
     descripcion: Fecha limite de envio de formularios de postulación.

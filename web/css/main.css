@@ -383,6 +383,7 @@ span {
     text-decoration: none;
     text-transform: uppercase;
     border-radius: 10px 10px 0px 0px;
+    box-shadow: 0px -2px 4px #333333 inset;
 }
 
 #tabber li a:hover {
@@ -393,6 +394,7 @@ span {
     background: #f5f5f5;
     line-height: 35px;
     color: #333333;
+    box-shadow: none;
 }
 
 /* contenedores dentro de las pestañas */
@@ -400,6 +402,7 @@ span {
     background: #f5f5f5;
     border-top: 1px solid #ffffff;
     margin-top: 34px;
+    box-shadow: 0px 0px 4px #333333;
 }
 
 #tabber .tab_details .tab_contents {

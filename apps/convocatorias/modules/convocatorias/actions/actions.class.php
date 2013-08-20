@@ -51,6 +51,7 @@ class convocatoriasActions extends PlantillasDefault
             'redactions' => ($state == 'borrador') || ($state == 'emitido'),
             'notifications' => ($state == 'borrador' || ($state == 'emitido')),
             'users' => ($state == 'emitido'),
+            'events' => ($state == 'emitido'),
             'postulants' => ($state == 'vigente'
                 && !$this->getUser()->isAuthenticated()),
             'results' => ($state == 'vigente') || ($state == 'finalizado'),
@@ -75,6 +76,9 @@ class convocatoriasActions extends PlantillasDefault
         }
         if ($this->tabs['users']) {
             $this->users = $this->_renderShowUsers($this->object);
+        }
+        if ($this->tabs['events']) {
+            $this->events = $this->_renderShowEvents($this->object);
         }
         if ($this->tabs['postulants']) {
             $this->postulants = $this->_renderShowPostulants($this->object);
@@ -144,6 +148,23 @@ class convocatoriasActions extends PlantillasDefault
             'users' => $users,
             'groups' => $groups,
             'roles' => $roles,
+        );
+    }
+
+    protected function _renderShowEvents($object) {
+        // This is the part when I generate the events for a convocatoria
+        $events = $object->getConvocatoriaEventos();
+
+        return array(
+            'events' => $events,
+            'tasks' => array(
+                'notification',
+                'publication',
+                'finalize',
+                'end-postulate',
+                'pub-results',
+                'pub-schedule',
+            ),
         );
     }
 

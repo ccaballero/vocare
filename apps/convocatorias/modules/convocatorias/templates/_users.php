@@ -36,7 +36,9 @@ correcto desempeño en el proceso de ejecución de su convocatoria.</p>
                             'roles[' . $group->getId() . '][]') ?></li>
                     <?php endforeach; ?>
                     </ul>
-                    <a onclick="return add_li(this,'.clone div.g_<?php echo $group->getId() ?>');">Agregar</a>
+                    <a onclick="return add_li(
+                        this,'.clone div.g_<?php echo $group->getId() ?>');">
+                        Agregar</a>
                 </td>
             </tr>
         <?php endforeach; ?>

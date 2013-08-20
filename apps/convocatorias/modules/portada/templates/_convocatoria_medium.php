@@ -19,7 +19,7 @@
         <p><label>Gestión:</label><?php echo $convocatoria->getGestion() ?></p>
         <p><label>Estado:</label><?php echo ucfirst($convocatoria->getEstado()) ?></p>
         <p><label>Publicación:</label><?php echo $convocatoria->getPublicacion() ?></p>
-    <?php if ($convocatoria->esVigente()): ?>
+    <?php if ($convocatoria->esVigente() && !$sf_user->isAuthenticated()): ?>
         <div class="buttons">
             <ul>
                 <li>

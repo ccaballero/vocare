@@ -30,6 +30,13 @@
             </a>
         </li>
     <?php endif; ?>
+    <?php if ($tabs['events']): ?>
+    	<li class="tab">
+            <a href="#events">
+                Eventos
+            </a>
+        </li>
+    <?php endif; ?>
     <?php if ($tabs['postulants']): ?>
         <li class="tab">
             <a href="#postulants">Postulaciones</a>

@@ -83,6 +83,16 @@
             )) ?>
         </div>
     <?php endif; ?>
+    <?php if ($tabs['events']): ?>
+        <div id="events" class="tab_contents">
+            <a name="events"></a>
+            <?php include_partial('convocatorias/events', array(
+                'object' => $object,
+                'events' => $events['events'],
+                'tasks'  => $events['tasks'],
+            )) ?>
+        </div>
+    <?php endif; ?>
     <?php if ($tabs['postulants']): ?>
         <div id="postulants" class="tab_contents">
             <a name="postulants"></a>

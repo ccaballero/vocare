@@ -10,17 +10,20 @@ Doctrine_Manager::getInstance()->bindComponent('Evento', 'doctrine');
  * @property integer $id
  * @property string $nombre
  * @property string $descripcion
+ * @property string $tasks
  * @property Doctrine_Collection $Convocatorias
  * @property Doctrine_Collection $ConvocatoriaEventos
  * 
  * @method integer             getId()                  Returns the current record's "id" value
  * @method string              getNombre()              Returns the current record's "nombre" value
  * @method string              getDescripcion()         Returns the current record's "descripcion" value
+ * @method string              getTasks()               Returns the current record's "tasks" value
  * @method Doctrine_Collection getConvocatorias()       Returns the current record's "Convocatorias" collection
  * @method Doctrine_Collection getConvocatoriaEventos() Returns the current record's "ConvocatoriaEventos" collection
  * @method Evento              setId()                  Sets the current record's "id" value
  * @method Evento              setNombre()              Sets the current record's "nombre" value
  * @method Evento              setDescripcion()         Sets the current record's "descripcion" value
+ * @method Evento              setTasks()               Sets the current record's "tasks" value
  * @method Evento              setConvocatorias()       Sets the current record's "Convocatorias" collection
  * @method Evento              setConvocatoriaEventos() Sets the current record's "ConvocatoriaEventos" collection
  * 
@@ -52,6 +55,14 @@ abstract class BaseEvento extends sfDoctrineRecord
              'type' => 'string',
              'fixed' => 0,
              'notnull' => true,
+             'default' => '',
+             'length' => '',
+             ));
+        $this->hasColumn('tasks', 'string', null, array(
+             'type' => 'string',
+             'fixed' => 0,
+             'notnull' => true,
+             'default' => '',
              'length' => '',
              ));
     }

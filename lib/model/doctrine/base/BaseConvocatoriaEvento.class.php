@@ -10,17 +10,20 @@ Doctrine_Manager::getInstance()->bindComponent('ConvocatoriaEvento', 'doctrine')
  * @property integer $convocatoria_id
  * @property integer $evento_id
  * @property date $fecha
+ * @property string $tasks
  * @property Convocatoria $Convocatoria
  * @property Evento $Evento
  * 
  * @method integer            getConvocatoriaId()  Returns the current record's "convocatoria_id" value
  * @method integer            getEventoId()        Returns the current record's "evento_id" value
  * @method date               getFecha()           Returns the current record's "fecha" value
+ * @method string             getTasks()           Returns the current record's "tasks" value
  * @method Convocatoria       getConvocatoria()    Returns the current record's "Convocatoria" value
  * @method Evento             getEvento()          Returns the current record's "Evento" value
  * @method ConvocatoriaEvento setConvocatoriaId()  Sets the current record's "convocatoria_id" value
  * @method ConvocatoriaEvento setEventoId()        Sets the current record's "evento_id" value
  * @method ConvocatoriaEvento setFecha()           Sets the current record's "fecha" value
+ * @method ConvocatoriaEvento setTasks()           Sets the current record's "tasks" value
  * @method ConvocatoriaEvento setConvocatoria()    Sets the current record's "Convocatoria" value
  * @method ConvocatoriaEvento setEvento()          Sets the current record's "Evento" value
  * 
@@ -52,6 +55,13 @@ abstract class BaseConvocatoriaEvento extends sfDoctrineRecord
              'type' => 'date',
              'fixed' => 0,
              'notnull' => true,
+             ));
+        $this->hasColumn('tasks', 'string', null, array(
+             'type' => 'string',
+             'fixed' => 0,
+             'notnull' => true,
+             'default' => '',
+             'length' => '',
              ));
 
         $this->option('symfony', array(

@@ -72,6 +72,7 @@ convocatorias:
       firmas: [post]
       notificaciones: [post]
       cargos: [post]
+      eventos: [post]
       # postulations tabs
       postular: [get, post]
 

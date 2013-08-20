@@ -17,3 +17,9 @@ Evento:
       type: string()
       fixed: false
       notnull: true
+      default: ''
+    tasks:
+      type: string()
+      fixed: false
+      notnull: true
+      default: ''

@@ -194,6 +194,11 @@ ConvocatoriaEvento:
       type: date
       fixed: false
       notnull: true
+    tasks:
+      type: string()
+      fixed: false
+      notnull: true
+      default: ''
   relations:
     Convocatoria:
       foreignAlias: ConvocatoriaEventos

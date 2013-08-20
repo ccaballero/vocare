@@ -33,7 +33,7 @@ all:
       - Partial
       - PrettyDate
       - I18N
-      - UserSelector
+      - Selectors
       - ImageState
       - SpecialEscape
       - StdClassPrint
