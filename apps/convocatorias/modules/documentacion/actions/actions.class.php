@@ -81,9 +81,10 @@ class documentacionActions extends PlantillasDefault {
 
         $volumen->save();
 
-        $this->getUser()->setFlash('success', 'La información de documentación ha sido registrada');
+        $this->getUser()->setFlash('success',
+            'La información de documentación ha sido registrada');
         $this->redirect($this->generateUrl('documentacion_show', array(
-                    'id' => $volumen->getId())));
+            'id' => $volumen->getId())));
     }
 
     public function executeTexto() {

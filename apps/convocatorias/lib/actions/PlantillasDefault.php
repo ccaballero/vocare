@@ -2,7 +2,7 @@
 
 class PlantillasDefault extends sfActions
 {
-    public function executeIndex() {
+    public function executeIndex(sfWebRequest $request) {
         $this->list = Doctrine_Core::getTable($this->_table)
             ->createQuery('r')
             ->execute();
@@ -26,7 +26,7 @@ class PlantillasDefault extends sfActions
         $this->setTemplate('form');
     }
 
-    public function executeEdit() {
+    public function executeEdit(sfWebRequest $request) {
         $this->object = $this->getRoute()->getObject();
         $this->title = $this->_messages['form']['edit'];
         $this->form = new $this->_form($this->object);

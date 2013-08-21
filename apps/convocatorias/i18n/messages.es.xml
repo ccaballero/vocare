@@ -75,7 +75,15 @@
             <!-- form validation -->
             <trans-unit>
                 <source>Required.</source>
-                <target>Campo requerido.</target>
+                <target>Este campo es requerido.</target>
+            </trans-unit>
+            <trans-unit>
+                <source>"%value%" is not an integer.</source>
+                <target>"%value%" debe ser contener solo números.</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Invalid.</source>
+                <target>Campo invalido.</target>
             </trans-unit>
             <trans-unit>
                 <source>The username and/or password is invalid.</source>

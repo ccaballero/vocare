@@ -41,6 +41,8 @@ class PostulanteForm extends BasePostulanteForm
                 'formatter' => array($this, 'rendererRequerimientos')
         ));
 
+        $this->validatorSchema['sis'] = new sfValidatorInteger();
+        $this->validatorSchema['correo_electronico'] = new sfValidatorEmail();
         $this->validatorSchema['requerimientos_list'] =
             new sfValidatorDoctrineChoice(
                 array(

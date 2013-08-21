@@ -21,8 +21,14 @@
         <?php endforeach; ?>
             <td class="text-center">
                 <ul>
-                    <li><a href="">Recepcionar</a></li>
-                    <li><a href="">Habilitaciones</a></li>
+                    <li>[<?php echo link_to('Editar',
+                        url_for('postulantes_edit',
+                            array(
+                                'convocatoria' => $convocatoria->getId(),
+                                'id' => $postulante->getId(),
+                            ))) ?>]</li>
+                    <li>[<a href="">Recepcionar</a>]</li>
+                    <li>[<a href="">Habilitaciones</a>]</li>
                 </ul>
             </td>
         </tr>

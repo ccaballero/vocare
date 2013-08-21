@@ -127,60 +127,21 @@ postulantes:
   class: sfDoctrineRoute
   options: { model: Postulante, type: list }
   param: { module: postulantes, action: index, sf_format: html }
-  requirements: { convocatoria: \d+, sf_method: get }
+  requirements: { convocatoria: \d+, sf_method: [get,head] }
 
-#postulantes_new                 GET, HEAD /postulantes/new.:sf_format
-#postulantes_create              POST      /postulantes.:sf_format
-#postulantes_edit                GET, HEAD /postulantes/:id/edit.:sf_format
-#postulantes_update              PUT       /postulantes/:id.:sf_format
-#postulantes_delete              DELETE    /postulantes/:id.:sf_format
-#postulantes_show                GET, HEAD /postulantes/:id.:sf_format
+postulantes_edit:
+  url: /convocatorias/:convocatoria/postulantes/:id/edit.:sf_format
+  class: sfDoctrineRoute
+  options: { model: Postulante, type: object }
+  param: { module: postulantes, action: edit, sf_format: html }
+  requirements: { convocatoria: \d+, id: \d+, sf_method: [get,head] }
 
-#postulantes_new:
-#  url: /convocatoria/:convocatoria/postular
-#  class: sfDoctrineRoute
-#  options:
-#    model: Postulante
-#    type: object
-#  param:
-#    module: postulantes
-#    action: new
-#  requirements:
-#    sf_method: [get]
-#
-#postulantes_list:
-#  url: /postulantes/list/:postulantes/
-#  class: sfDoctrineRoute
-#  options:
-#    model: Postulante
-#    type: object
-#  param:
-#    module: postulantes
-#    action: list
-#  requirements:
-#    sf_method: get
-#
-#postulantes_edit:
-#  url: /postulantes/edit/:id/
-#  class: sfDoctrineRoute
-#  options:
-#    model: Postulante
-#    type: object
-#  param:
-#    module: postulantes
-#    action: edit
-#  requirements:
-#    sf_method: get
-#
-#postulantes_buscar:
-#  url: /postulantes/:convocatoria/
-#  class: sfDoctrineRoute
-#  options:
-#    model: Postulante
-#    type: object
-#  param:
-#    module: postulantes
-#    action: buscar
+postulantes_update:
+  url: /convocatorias/:convocatoria/postulantes.:sf_format
+  class: sfDoctrineRoute
+  options: { model: Postulante, type: object }
+  param: { module: postulantes, action: update, sf_format: html }
+  requirements: { convocatoria: \d+, id: \d+, sf_method: [put] }
 
 homepage:
   url: /

@@ -246,10 +246,7 @@ class convocatoriasActions extends PlantillasDefault
             $cr->save();
 
             // notification of change in enmienda;
-            $this->emailNotification(
-              $this->emailTitle('enmendada'),
-                $this->emailContent('enmendada')
-            );
+            Mailer::sendChangeStateConvocatoria('enmendada', $this);
         }
 
         if ($estado == 'borrador') {
@@ -361,55 +358,9 @@ class convocatoriasActions extends PlantillasDefault
         $this->getUser()->setFlash('notice', $message);
     }
 
-    private function emailTitle($operation) {
-        $this->object = $this->getRoute()->getObject();
-        $tpl = 'Sistema de Convocatorias [convocatoria %s fue %s]';
-        return sprintf($tpl, $this->object->getGestion(), $operation);
-    }
-
-    private function emailContent($operation) {
-        $this->object = $this->getRoute()->getObject();
-        return $this->getPartial(
-            'convocatorias/email_notification',
-            array(
-                'convocatoria' => $this->object,
-                'user' => $this->getUser(),
-                'operation' => $operation,
-            ));
-    }
-
-    private function emailNotification($title, $content) {
-        $this->object = $this->getRoute()->getObject();
-
-        // notifications of subscribers
-        $subscribers = $this->object->getNotificaciones();
-        $to = array();
-        foreach ($subscribers as $subscriber) {
-            $to[$subscriber->getEmail()] = $subscriber->getEncargado();
-        }
-
-        if (!empty($to)) {
-            $message = Swift_Message::newInstance()
-                ->setFrom(
-                    sfConfig::get('app_sf_guard_plugin_default_from_email'))
-                ->setTo($to)
-                ->setSubject($title)
-                ->setBody($content)
-                ->setContentType('text/html');
-
-            try {
-                $this->getMailer()->send($message);
-            } catch (Exception $e) {}
-            // Transporm exception, who care
-        }
-    }
-
     // state transition (eliminar)
     public function executeEliminar() {
-        $this->emailNotification(
-            $this->emailTitle('eliminada'),
-            $this->emailContent('eliminada')
-        );
+        Mailer::sendChangeStateConvocatoria('eliminada', $this);
 
         $this->actionChange('eliminar');
         $this->redirect($this->_route_list);
@@ -424,10 +375,7 @@ class convocatoriasActions extends PlantillasDefault
             $title = 'publicada';
         }
 
-        $this->emailNotification(
-            $this->emailTitle($title),
-            $this->emailContent($title)
-        );
+        Mailer::sendChangeStateConvocatoria($title, $this);
 
         $this->actionChange('promover');
         $this->redirect($this->generateUrl('convocatorias_show', array(
@@ -435,10 +383,7 @@ class convocatoriasActions extends PlantillasDefault
     }
 
     public function executeAnular() {
-        $this->emailNotification(
-            $this->emailTitle('anulada'),
-            $this->emailContent('anulada')
-        );
+        Mailer::sendChangeStateConvocatoria('anulada', $this);
 
         $this->actionChange('anular');
         $this->redirect($this->_route_list);
@@ -446,10 +391,8 @@ class convocatoriasActions extends PlantillasDefault
 
     public function executeFinalizar() {
         $this->object = $this->getRoute()->getObject();
-        $this->emailNotification(
-            $this->emailTitle('finalizada'),
-            $this->emailContent('finalizada')
-        );
+        
+        Mailer::sendChangeStateConvocatoria('finalizada', $this);
 
         $this->actionChange('finalizar');
         $this->redirect($this->generateUrl('convocatorias_show', array(
@@ -469,6 +412,8 @@ class convocatoriasActions extends PlantillasDefault
             if ($form->isValid()) {
                 $form->setConvocatoria($this->object);
                 $form->save();
+                
+                // Send of email for confirmation.
 
                 $this->getUser()->setFlash('success', 'Postulación exitosa');
                 $this->redirect($this->generateUrl('convocatorias_show', array(

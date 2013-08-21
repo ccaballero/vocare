@@ -13,6 +13,7 @@
             <?php include_partial('postulantes/list', array(
                 'postulantes' => $postulants['postulantes'],
                 'requerimientos' => $postulants['requerimientos'],
+                'convocatoria' => $postulants['convocatoria'],
             )) ?>
         </div>
     <?php endif; ?>

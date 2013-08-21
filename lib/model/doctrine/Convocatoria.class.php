@@ -37,7 +37,8 @@ class Convocatoria extends BaseConvocatoria
     protected $_operaciones_disponibles = array();
 
     public function __toString() {
-        return '[' . $this->getEstado() . '] ' . $this->getGestion();
+        return $this->getId(); // watchout
+//        return '[' . $this->getEstado() . '] ' . $this->getGestion();
     }
 
     public function getTitle() {
