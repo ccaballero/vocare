@@ -16,7 +16,7 @@ class PostulanteForm extends BasePostulanteForm
         ));
 
         $this->widgetSchema->setLabels(array(
-            'apellido_paterno' => 'Apellido Paterno:',
+            'apellido_paterno' => 'Apellido Paterno (*):',
             'apellido_materno' => 'Apellido Materno:',
             'nombres' => 'Nombres (*):',
             'ci' => 'Nro. de carnet de Identidad (*):',
@@ -40,6 +40,14 @@ class PostulanteForm extends BasePostulanteForm
             'renderer_options', array(
                 'formatter' => array($this, 'rendererRequerimientos')
         ));
+
+        $this->validatorSchema['requerimientos_list'] =
+            new sfValidatorDoctrineChoice(
+                array(
+                    'multiple' => true,
+                    'model' => 'Requerimiento',
+                    'required' => true,
+                    'min' => 1));
     }
 
     public function rendererRequerimientos($widget, $inputs) {

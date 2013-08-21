@@ -106,6 +106,7 @@ abstract class BasePostulante extends sfDoctrineRecord
              'type' => 'string',
              'fixed' => 0,
              'notnull' => true,
+             'default' => '',
              'length' => 32,
              ));
         $this->hasColumn('nombres', 'string', 32, array(

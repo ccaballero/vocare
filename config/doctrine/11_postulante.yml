@@ -21,6 +21,7 @@ Postulante:
       type: string(32)
       fixed: false
       notnull: true
+      default: ''
     nombres:
       type: string(32)
       fixed: false

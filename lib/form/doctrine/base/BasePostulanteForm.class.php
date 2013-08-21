@@ -40,7 +40,7 @@ abstract class BasePostulanteForm extends BaseFormDoctrine
       'id'                  => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
       'convocatoria_id'     => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Convocatoria'), 'required' => false)),
       'apellido_paterno'    => new sfValidatorString(array('max_length' => 32)),
-      'apellido_materno'    => new sfValidatorString(array('max_length' => 32)),
+      'apellido_materno'    => new sfValidatorString(array('max_length' => 32, 'required' => false)),
       'nombres'             => new sfValidatorString(array('max_length' => 32)),
       'ci'                  => new sfValidatorString(array('max_length' => 16)),
       'sis'                 => new sfValidatorString(array('max_length' => 9)),
@@ -57,10 +57,6 @@ abstract class BasePostulanteForm extends BaseFormDoctrine
       'requisitos_list'     => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Requisito', 'required' => false)),
       'documentos_list'     => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Documento', 'required' => false)),
     ));
-
-    $this->validatorSchema->setPostValidator(
-      new sfValidatorDoctrineUnique(array('model' => 'Postulante', 'column' => array('correo_electronico')))
-    );
 
     $this->widgetSchema->setNameFormat('postulante[%s]');
 
