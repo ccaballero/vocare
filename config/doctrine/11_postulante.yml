@@ -59,9 +59,10 @@ Postulante:
       fixed: false
       notnull: false
     estado:
-      type: enum(12)
+      type: enum(16)
       fixed: false
       values:
+        - sin confirmación
         - pendiente
         - inscrito
         - inhabilitado

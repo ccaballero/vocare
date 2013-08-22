@@ -160,19 +160,20 @@ abstract class BasePostulante extends sfDoctrineRecord
              'fixed' => 0,
              'notnull' => false,
              ));
-        $this->hasColumn('estado', 'enum', 12, array(
+        $this->hasColumn('estado', 'enum', 16, array(
              'type' => 'enum',
              'fixed' => 0,
              'values' => 
              array(
-              0 => 'pendiente',
-              1 => 'inscrito',
-              2 => 'inhabilitado',
-              3 => 'habilitado',
+              0 => 'sin confirmación',
+              1 => 'pendiente',
+              2 => 'inscrito',
+              3 => 'inhabilitado',
+              4 => 'habilitado',
              ),
              'default' => 'pendiente',
              'notnull' => true,
-             'length' => 12,
+             'length' => 16,
              ));
         $this->hasColumn('observacion', 'string', null, array(
              'type' => 'string',

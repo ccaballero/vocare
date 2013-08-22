@@ -7,6 +7,7 @@
     <?php foreach ($requerimientos as $requerimiento): ?>
         <th><?php echo $requerimiento->getNumeroItem() ?></th>
     <?php endforeach; ?>
+        <th>Estado</th>
         <th>Operaciones</th>
     </tr>
     <?php foreach ($postulantes as $key => $postulante): ?>
@@ -19,6 +20,7 @@
                 <?php echo $postulante->isPostulant($requerimiento) ? 'x':'' ?>
             </td>
         <?php endforeach; ?>
+            <td class="text-center"><?php echo $postulante->getEstado() ?></td>
             <td class="text-center">
                 <ul>
                     <li>[<?php echo link_to('Editar',
@@ -27,8 +29,18 @@
                                 'convocatoria' => $convocatoria->getId(),
                                 'id' => $postulante->getId(),
                             ))) ?>]</li>
-                    <li>[<a href="">Recepcionar</a>]</li>
-                    <li>[<a href="">Habilitaciones</a>]</li>
+                    <li>[<?php echo link_to('Recepción',
+                        url_for('postulantes_reception',
+                            array(
+                                'convocatoria' => $convocatoria->getId(),
+                                'id' => $postulante->getId(),
+                            ))) ?>]</li>
+                    <li>[<?php echo link_to('Habilitación',
+                        url_for('postulantes_habilitation',
+                            array(
+                                'convocatoria' => $convocatoria->getId(),
+                                'id' => $postulante->getId(),
+                            ))) ?>]</li>
                 </ul>
             </td>
         </tr>

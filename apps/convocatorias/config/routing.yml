@@ -136,6 +136,20 @@ postulantes_edit:
   param: { module: postulantes, action: edit, sf_format: html }
   requirements: { convocatoria: \d+, id: \d+, sf_method: [get,head,post] }
 
+postulantes_reception:
+  url: /convocatorias/:convocatoria/postulantes/:id/reception.:sf_format
+  class: sfDoctrineRoute
+  options: { model: Postulante, type: object }
+  param: { module: postulantes, action: reception, sf_format: html }
+  requirements: { convocatoria: \d+, id: \d+, sf_method: [get,head,post] }
+
+postulantes_habilitation:
+  url: /convocatorias/:convocatoria/postulantes/:id/habilitation.:sf_format
+  class: sfDoctrineRoute
+  options: { model: Postulante, type: object }
+  param: { module: postulantes, action: habilitation, sf_format: html }
+  requirements: { convocatoria: \d+, id: \d+, sf_method: [get,head,post] }
+
 homepage:
   url: /
   param:

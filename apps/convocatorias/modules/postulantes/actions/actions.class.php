@@ -64,10 +64,31 @@ class postulantesActions extends PlantillasDefault
     public function executeEdit(sfWebRequest $request) {
         $this->convocatoria = $this->getConvocatoria($request);
         $this->object = $this->getRoute()->getObject();
+        $this->title = 'Modificación de los datos del postulante';
+
         $this->_route_list = $this->generateUrl('postulantes', array(
             'convocatoria' => $this->convocatoria));
 
         $this->form = new $this->_form($this->object);
+        if ($request->isMethod('post')) {
+            $this->form = $this->processForm(
+                $request,
+                $this->form,
+                $this->_messages['flash']['edit']
+            );
+        }
+        $this->setTemplate('form');
+    }
+
+    public function executeReception(sfWebRequest $request) {
+        $this->convocatoria = $this->getConvocatoria($request);
+        $this->object = $this->getRoute()->getObject();
+        $this->title = 'Formulario de recepción de postulación';
+        
+        $this->_route_list = $this->generateUrl('postulantes', array(
+            'convocatoria' => $this->convocatoria));
+
+        $this->form = new PostulanteReceptionForm($this->object);
         if ($request->isMethod('post')) {
             $this->form = $this->processForm(
                 $request,
