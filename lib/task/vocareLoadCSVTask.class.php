@@ -120,10 +120,6 @@ EOF;
 
                         if (!empty($requerimiento)) {
                             $postulante->PostulanteRequerimientos[]->Requerimiento = $requerimiento;
-//                            $postulante_req = new PostulanteRequerimiento();
-//                            $postulante_req->Requerimiento = $requerimiento;
-//                            $postulante_req->Postulante = $postulante;
-//                            $postulante_req->save();
                         }
                     }
                 }
