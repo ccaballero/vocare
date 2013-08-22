@@ -35,7 +35,8 @@ class PlantillasDefault extends sfActions
     }
 
     public function executeUpdate(sfWebRequest $request) {
-        $this->form = new $this->_form($this->getRoute()->getObject());
+        $this->object = $this->getRoute()->getObject();
+        $this->form = new $this->_form($this->object);
         $this->form = $this->processForm(
             $request,
             $this->form,

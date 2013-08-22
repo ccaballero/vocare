@@ -134,14 +134,7 @@ postulantes_edit:
   class: sfDoctrineRoute
   options: { model: Postulante, type: object }
   param: { module: postulantes, action: edit, sf_format: html }
-  requirements: { convocatoria: \d+, id: \d+, sf_method: [get,head] }
-
-postulantes_update:
-  url: /convocatorias/:convocatoria/postulantes.:sf_format
-  class: sfDoctrineRoute
-  options: { model: Postulante, type: object }
-  param: { module: postulantes, action: update, sf_format: html }
-  requirements: { convocatoria: \d+, id: \d+, sf_method: [put] }
+  requirements: { convocatoria: \d+, id: \d+, sf_method: [get,head,post] }
 
 homepage:
   url: /

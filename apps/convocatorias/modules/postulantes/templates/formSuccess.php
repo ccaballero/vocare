@@ -1,5 +1,8 @@
 <h1>Modificación de los datos del postulante</h1>
-<?php echo form_tag_for($form, '@postulantes') ?>
+<form method="post" action="<?php echo url_for('postulantes_edit', array(
+    'convocatoria' => $convocatoria->getId(),
+    'id' => $object->getId(),
+)) ?>">
     <?php echo $form ?>
     <p class="submit">
         <input type="submit"

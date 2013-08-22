@@ -63,14 +63,18 @@ class postulantesActions extends PlantillasDefault
 
     public function executeEdit(sfWebRequest $request) {
         $this->convocatoria = $this->getConvocatoria($request);
-        parent::executeEdit($request);
-    }
-
-    public function executeUpdate(\sfWebRequest $request) {
-        $this->convocatoria = $this->getConvocatoria($request);
+        $this->object = $this->getRoute()->getObject();
         $this->_route_list = $this->generateUrl('postulantes', array(
             'convocatoria' => $this->convocatoria));
 
-        parent::executeUpdate($request);
+        $this->form = new $this->_form($this->object);
+        if ($request->isMethod('post')) {
+            $this->form = $this->processForm(
+                $request,
+                $this->form,
+                $this->_messages['flash']['edit']
+            );
+        }
+        $this->setTemplate('form');
     }
 }
