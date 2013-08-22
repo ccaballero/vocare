@@ -6,7 +6,7 @@ class Mailer
     //     title -> title of email
     //     content -> content of email
     //     to -> set of containers of reception
-    public static function send($parameters) {
+    public static function send($parameters, $mailer) {
         if (!isset($parameters['title'])) {
             $parameters['title'] = '';
         }
@@ -27,9 +27,12 @@ class Mailer
                 ->setContentType('text/html');
 
             try {
-                $this->getMailer()->send($message);
-            } catch (Exception $e) {}
-            // Transport exception, who care!!
+                $mailer->send($message);
+                return true;
+            } catch (Exception $e) {
+                // Transport exception, who care!!
+                return false;
+            }
         }
     }
 
@@ -47,13 +50,34 @@ class Mailer
         return Mailer::send(array(
             'title' => sprintf($tpl_title, $convocatoria->getGestion(), $state),
             'content' => $controller->getPartial(
-                'convocatorias/email_notification',
+                'convocatorias/email_states',
                 array(
                     'convocatoria' => $convocatoria,
                     'user' => $controller->getUser(),
                     'operation' => $state,
                 )),
-            $to,
-        ));
+            'to' => $to,
+        ),
+            $controller->getMailer()
+        );
+    }
+
+    public static function sendPostulantConfirmation($hash, $form, $controller) {
+        $convocatoria = $controller->getRoute()->getObject();
+        $tpl_title = 'Confirmación de postulación a la convocatoria %s';
+
+        return Mailer::send(array(
+            'title' => sprintf($tpl_title, $convocatoria->getGestion()),
+            'content' => $controller->getPartial(
+                'convocatorias/email_postulants',
+                array(
+                    'convocatoria' => $convocatoria,
+                    'postulante' => $form->getId(),
+                    'hash' => $hash,
+                )),
+            'to' => array($form->getEmail()),
+        ),
+            $controller->getMailer()
+        );
     }
 }

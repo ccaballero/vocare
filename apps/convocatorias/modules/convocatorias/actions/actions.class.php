@@ -17,7 +17,7 @@ class convocatoriasActions extends PlantillasDefault
         ),
     );
 
-    public function executeIndex() {
+    public function executeIndex(sfWebRequest $request) {
         $model_convocatorias = new Convocatoria();
         $list = $model_convocatorias->listAll();
         $filtered_list = array();
@@ -246,7 +246,10 @@ class convocatoriasActions extends PlantillasDefault
             $cr->save();
 
             // notification of change in enmienda;
-            Mailer::sendChangeStateConvocatoria('enmendada', $this);
+            if (!Mailer::sendChangeStateConvocatoria('enmendada', $this)) {
+                $this->getUser()->setFlash('success',
+                    'No pudieron ser notificados los usuarios');
+            }
         }
 
         if ($estado == 'borrador') {
@@ -355,12 +358,15 @@ class convocatoriasActions extends PlantillasDefault
     private function actionChange($action) {
         $object = $this->getRoute()->getObject();
         $message = $object->executeTransform($action);
-        $this->getUser()->setFlash('notice', $message);
+        $this->getUser()->setFlash('success', $message);
     }
 
     // state transition (eliminar)
     public function executeEliminar() {
-        Mailer::sendChangeStateConvocatoria('eliminada', $this);
+        if (!Mailer::sendChangeStateConvocatoria('eliminada', $this)) {
+            $this->getUser()->setFlash('notice',
+                'No pudieron ser notificados los usuarios');
+        }
 
         $this->actionChange('eliminar');
         $this->redirect($this->_route_list);
@@ -375,7 +381,10 @@ class convocatoriasActions extends PlantillasDefault
             $title = 'publicada';
         }
 
-        Mailer::sendChangeStateConvocatoria($title, $this);
+        if (!Mailer::sendChangeStateConvocatoria($title, $this)) {
+            $this->getUser()->setFlash('notice',
+                'No pudieron ser notificados los usuarios');
+        }
 
         $this->actionChange('promover');
         $this->redirect($this->generateUrl('convocatorias_show', array(
@@ -383,7 +392,10 @@ class convocatoriasActions extends PlantillasDefault
     }
 
     public function executeAnular() {
-        Mailer::sendChangeStateConvocatoria('anulada', $this);
+        if (!Mailer::sendChangeStateConvocatoria('anulada', $this)) {
+            $this->getUser()->setFlash('notice',
+                'No pudieron ser notificados los usuarios');
+        }
 
         $this->actionChange('anular');
         $this->redirect($this->_route_list);
@@ -392,7 +404,10 @@ class convocatoriasActions extends PlantillasDefault
     public function executeFinalizar() {
         $this->object = $this->getRoute()->getObject();
         
-        Mailer::sendChangeStateConvocatoria('finalizada', $this);
+        if (!Mailer::sendChangeStateConvocatoria('finalizada', $this)) {
+            $this->getUser()->setFlash('notice',
+                'No pudieron ser notificados los usuarios');
+        }
 
         $this->actionChange('finalizar');
         $this->redirect($this->generateUrl('convocatorias_show', array(
@@ -410,14 +425,23 @@ class convocatoriasActions extends PlantillasDefault
             );
 
             if ($form->isValid()) {
+                $hash = Generator::code();
+                
                 $form->setConvocatoria($this->object);
+                $form->setConfirmacion(sha1($hash));
                 $form->save();
                 
                 // Send of email for confirmation.
-
-                $this->getUser()->setFlash('success', 'Postulación exitosa');
-                $this->redirect($this->generateUrl('convocatorias_show', array(
-                    'id' => $this->object->getId())));
+                if (Mailer::sendPostulantConfirmation($hash, $form, $this)) {
+                    $this->getUser()->setFlash('success',
+                        'Postulación exitosa, revisa tu correo electrónico');
+                    $this->redirect($this->generateUrl('convocatorias_show',
+                        array(
+                            'id' => $this->object->getId())));
+                } else {
+                    $this->getUser()->setFlash('notice',
+                        'No pudo enviarse el correo de confirmación');
+                }   
             }
 
             $this->getUser()->setFlash('error',

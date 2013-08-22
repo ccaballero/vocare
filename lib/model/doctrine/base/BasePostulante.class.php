@@ -21,6 +21,7 @@ Doctrine_Manager::getInstance()->bindComponent('Postulante', 'doctrine');
  * @property datetime $fecha_entrega
  * @property enum $estado
  * @property string $observacion
+ * @property string $confirmacion
  * @property Convocatoria $Convocatoria
  * @property Doctrine_Collection $Requerimientos
  * @property Doctrine_Collection $Requisitos
@@ -43,6 +44,7 @@ Doctrine_Manager::getInstance()->bindComponent('Postulante', 'doctrine');
  * @method datetime            getFechaEntrega()             Returns the current record's "fecha_entrega" value
  * @method enum                getEstado()                   Returns the current record's "estado" value
  * @method string              getObservacion()              Returns the current record's "observacion" value
+ * @method string              getConfirmacion()             Returns the current record's "confirmacion" value
  * @method Convocatoria        getConvocatoria()             Returns the current record's "Convocatoria" value
  * @method Doctrine_Collection getRequerimientos()           Returns the current record's "Requerimientos" collection
  * @method Doctrine_Collection getRequisitos()               Returns the current record's "Requisitos" collection
@@ -64,6 +66,7 @@ Doctrine_Manager::getInstance()->bindComponent('Postulante', 'doctrine');
  * @method Postulante          setFechaEntrega()             Sets the current record's "fecha_entrega" value
  * @method Postulante          setEstado()                   Sets the current record's "estado" value
  * @method Postulante          setObservacion()              Sets the current record's "observacion" value
+ * @method Postulante          setConfirmacion()             Sets the current record's "confirmacion" value
  * @method Postulante          setConvocatoria()             Sets the current record's "Convocatoria" value
  * @method Postulante          setRequerimientos()           Sets the current record's "Requerimientos" collection
  * @method Postulante          setRequisitos()               Sets the current record's "Requisitos" collection
@@ -165,13 +168,13 @@ abstract class BasePostulante extends sfDoctrineRecord
              'fixed' => 0,
              'values' => 
              array(
-              0 => 'sin confirmación',
+              0 => 'sin confirmacion',
               1 => 'pendiente',
               2 => 'inscrito',
               3 => 'inhabilitado',
               4 => 'habilitado',
              ),
-             'default' => 'pendiente',
+             'default' => 'sin confirmacion',
              'notnull' => true,
              'length' => 16,
              ));
@@ -181,6 +184,12 @@ abstract class BasePostulante extends sfDoctrineRecord
              'notnull' => true,
              'default' => '',
              'length' => '',
+             ));
+        $this->hasColumn('confirmacion', 'string', 40, array(
+             'type' => 'string',
+             'fixed' => 0,
+             'notnull' => true,
+             'length' => 40,
              ));
     }
 

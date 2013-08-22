@@ -129,6 +129,13 @@ postulantes:
   param: { module: postulantes, action: index, sf_format: html }
   requirements: { convocatoria: \d+, sf_method: [get,head] }
 
+postulantes_confirm:
+  url: /convocatorias/:convocatoria/postulantes/:id/:hash/confirm.:sf_format
+  class: sfDoctrineRoute
+  options: { model: Postulante, type: object }
+  param: { module: postulantes, action: confirm, sf_format: html }
+  requirements: { convocatoria: \d+, id: \d+, sf_method: [get,head,post] }
+
 postulantes_edit:
   url: /convocatorias/:convocatoria/postulantes/:id/edit.:sf_format
   class: sfDoctrineRoute

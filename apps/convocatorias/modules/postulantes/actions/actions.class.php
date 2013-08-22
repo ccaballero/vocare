@@ -26,12 +26,12 @@ class postulantesActions extends PlantillasDefault
         $this->forward404Unless($convocatoria);
 
         // State validation
-        if (!$this->getUser()->canView($convocatoria)
-            || !$convocatoria->esVigente()) {
-            $this->forward404();
+        if ($convocatoria->esVigente()
+                || $this->getUser()->canView($convocatoria)) {
+            return $convocatoria;
         }
-
-        return $convocatoria;
+        
+        $this->forward404();
     }
 
     public function executeIndex(sfWebRequest $request) {
@@ -59,6 +59,21 @@ class postulantesActions extends PlantillasDefault
             'requerimientos' => $convocatoria->getConvocatoriaRequerimientos(),
             'convocatoria' => $convocatoria,
         );
+    }
+    
+    public function executeConfirm(sfWebRequest $request) {
+        $this->convocatoria = $this->getConvocatoria($request);
+        
+        $id = $request->getParameter('id');
+        $hash = $request->getParameter('hash');
+
+        $this->postulante =
+            Doctrine::getTable('Postulante')->findByConfirmation($id, $hash);
+        
+        $this->postulante->setEstado('pendiente');
+        
+        // Existence validation
+        $this->forward404Unless($this->postulante);
     }
 
     public function executeEdit(sfWebRequest $request) {

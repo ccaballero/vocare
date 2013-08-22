@@ -62,18 +62,22 @@ Postulante:
       type: enum(16)
       fixed: false
       values:
-        - sin confirmación
+        - sin confirmacion
         - pendiente
         - inscrito
         - inhabilitado
         - habilitado
-      default: pendiente
+      default: sin confirmacion
       notnull: true
     observacion:
       type: string()
       fixed: false
       notnull: true
       default: ''
+    confirmacion:
+      type: string(40)
+      fixed: false
+      notnull: true
   relations:
     Convocatoria:
       class: Convocatoria

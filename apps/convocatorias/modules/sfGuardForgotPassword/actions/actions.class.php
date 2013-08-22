@@ -7,7 +7,7 @@ require_once(sfConfig::get('sf_plugins_dir')
 
 class sfGuardForgotPasswordActions extends BasesfGuardForgotPasswordActions
 {
-    public function executeIndex($request) {
+    public function executeIndex() {
         sfProjectConfiguration::getActive()->loadHelpers(array('I18N'));
 
         $this->form = new RequestPasswordForm();

@@ -47,4 +47,4 @@ all:
           host: www.cs.umss.edu.bo
           port: 25
           username: vocare
-          password: web-c0nv0c@70r145
+          password: mailvocare

@@ -2,7 +2,7 @@
 
 class portadaActions extends sfActions
 {
-    public function executeIndex(sfWebRequest $request) {
+    public function executeIndex() {
         $convocatoria = new Convocatoria();
         $this->vigentes = $convocatoria->listByState('vigente');
         $this->finalizadas = $convocatoria->listByState('finalizado', 3);
@@ -14,8 +14,8 @@ class portadaActions extends sfActions
         $this->finalizadas = $convocatoria->listByState('finalizado');
     }
 
-    public function executePlantillas(sfWebRequest $request) {}
-    public function executePersonal(sfWebRequest $request) {}
+    public function executePlantillas() {}
+    public function executePersonal() {}
 
     public function executePerfil(sfWebRequest $request) {
         $user = $this->getUser();
