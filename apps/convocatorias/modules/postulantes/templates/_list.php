@@ -4,10 +4,10 @@
         <th>#</th>
         <th>Nombre Completo</th>
         <th>Correo Electrónico</th>
+        <th>Estado</th>
     <?php foreach ($requerimientos as $requerimiento): ?>
         <th><?php echo $requerimiento->getNumeroItem() ?></th>
     <?php endforeach; ?>
-        <th>Estado</th>
         <th>Operaciones</th>
     </tr>
     <?php foreach ($postulantes as $key => $postulante): ?>
@@ -15,32 +15,43 @@
             <td class="text-right"><?php echo $key + 1 ?></td>
             <td><?php echo $postulante->getFullname() ?></td>
             <td><?php echo $postulante->getCorreoElectronico() ?></td>
+            <td><?php echo $postulante->getEstado() ?></td>
         <?php foreach ($requerimientos as $requerimiento): ?>
             <td class="text-center">
-                <?php echo $postulante->isPostulant($requerimiento) ? 'x':'' ?>
+                <?php echo $postulante->isPostulant($requerimiento) ? '&#10003;' :'' ?>
             </td>
         <?php endforeach; ?>
-            <td class="text-center"><?php echo $postulante->getEstado() ?></td>
             <td class="text-center">
                 <ul>
-                    <li>[<?php echo link_to('Editar',
+                    <li><?php echo link_to('Editar',
                         url_for('postulantes_edit',
                             array(
                                 'convocatoria' => $convocatoria->getId(),
                                 'id' => $postulante->getId(),
-                            ))) ?>]</li>
-                    <li>[<?php echo link_to('Recepción',
+                            ))) ?></li>
+                    <li><?php echo link_to('Eliminar',
+                        'postulantes_delete',
+                        array(
+                            'convocatoria' => $convocatoria->getId(),
+                            'id' => $postulante->getId(),
+                        ),
+                        array(
+                            'method' => 'delete',
+                            'confirm' => '¿Esta seguro que desea eliminar '
+                            . 'al postulante?',
+                        )) ?></li>
+                    <?php /*<li>[<?php echo link_to('Recepción',
                         url_for('postulantes_reception',
                             array(
                                 'convocatoria' => $convocatoria->getId(),
                                 'id' => $postulante->getId(),
-                            ))) ?>]</li>
-                    <li>[<?php echo link_to('Habilitación',
+                            ))) ?>]</li>*/ ?>
+                    <?php /*<li>[<?php echo link_to('Habilitación',
                         url_for('postulantes_habilitation',
                             array(
                                 'convocatoria' => $convocatoria->getId(),
                                 'id' => $postulante->getId(),
-                            ))) ?>]</li>
+                            ))) ?>]</li>*/ ?>
                 </ul>
             </td>
         </tr>

@@ -143,6 +143,13 @@ postulantes_edit:
   param: { module: postulantes, action: edit, sf_format: html }
   requirements: { convocatoria: \d+, id: \d+, sf_method: [get,head,post] }
 
+postulantes_delete:
+  url: /convocatorias/:convocatoria/postulantes/:id/delete.:sf_format
+  class: sfDoctrineRoute
+  options: { model: Postulante, type: object }
+  param:  { module: postulantes, action: delete, sf_format: html }
+  requirements: { convocatoria: \d+, id: \d+, sf_method: [delete] }
+
 postulantes_reception:
   url: /convocatorias/:convocatoria/postulantes/:id/reception.:sf_format
   class: sfDoctrineRoute

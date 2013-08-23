@@ -9,7 +9,7 @@ class Postulante extends BasePostulante
             $this->getNombres(),
         ));
     }
-    
+
     public function isPostulant($requerimiento) {
         $requerimientos = $this->getPostulanteRequerimientos();
         foreach ($requerimientos as $_requerimiento) {
@@ -20,7 +20,7 @@ class Postulante extends BasePostulante
         }
         return false;
     }
-    
+
     public function __toString() {
         return str_pad($this->getApellidoPaterno(), 16)
             . str_pad($this->getApellidoMaterno(), 16)

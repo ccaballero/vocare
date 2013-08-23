@@ -442,10 +442,10 @@ class convocatoriasActions extends PlantillasDefault
                     $this->getUser()->setFlash('notice',
                         'No pudo enviarse el correo de confirmación');
                 }   
+            } else {
+                $this->getUser()->setFlash('error',
+                    'Se encontraron algunos errores en el formulario');
             }
-
-            $this->getUser()->setFlash('error',
-                'Se encontraron algunos errores en el formulario');
         }
 
         $this->postulants = $form;

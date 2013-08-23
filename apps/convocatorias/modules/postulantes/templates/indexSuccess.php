@@ -7,13 +7,23 @@
     )) ?>
 
     <div class="tab_details">
+    <?php if ($tabs['all']): ?>
+        <div id="all" class="tab_contents">
+            <a name="all"></a>
+            <?php include_partial('postulantes/list', array(
+                'postulantes' => $all['postulantes'],
+                'requerimientos' => $all['requerimientos'],
+                'convocatoria' => $all['convocatoria'],
+            )) ?>
+        </div>
+    <?php endif; ?>
     <?php if ($tabs['list']): ?>
         <div id="list" class="tab_contents">
             <a name="list"></a>
             <?php include_partial('postulantes/list', array(
-                'postulantes' => $postulants['postulantes'],
-                'requerimientos' => $postulants['requerimientos'],
-                'convocatoria' => $postulants['convocatoria'],
+                'postulantes' => $list['postulantes'],
+                'requerimientos' => $list['requerimientos'],
+                'convocatoria' => $list['convocatoria'],
             )) ?>
         </div>
     <?php endif; ?>

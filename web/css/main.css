@@ -325,7 +325,7 @@ span {
     border: 1px solid #000000;
 }
 
-#main form table.form-table {
+#main form .form-table {
     margin-left: 210px;
     width: 600px;
 }
