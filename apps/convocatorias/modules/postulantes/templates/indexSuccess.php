@@ -14,6 +14,13 @@
                 'postulantes' => $all['postulantes'],
                 'requerimientos' => $all['requerimientos'],
                 'convocatoria' => $all['convocatoria'],
+                'shows' => array('state' => true, 'email' => true,),
+                'operations' => array(
+                    'edit' => true,
+                    'delete' => true,
+                    'reception' => false,
+                    'enabled' => false,
+                ),
             )) ?>
         </div>
     <?php endif; ?>
@@ -24,6 +31,13 @@
                 'postulantes' => $list['postulantes'],
                 'requerimientos' => $list['requerimientos'],
                 'convocatoria' => $list['convocatoria'],
+                'shows' => array('state' => false, 'email' => false,),
+                'operations' => array(
+                    'edit' => true,
+                    'delete' => false,
+                    'reception' => true,
+                    'enabled' => false,
+                ),
             )) ?>
         </div>
     <?php endif; ?>

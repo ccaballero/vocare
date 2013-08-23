@@ -126,6 +126,7 @@ EOF;
             }
 
             $postulante->confirmacion = sha1(Generator::code());
+            $postulante->estado = 'pendiente';
             $postulante->save();
             echo $postulante . PHP_EOL;
         }

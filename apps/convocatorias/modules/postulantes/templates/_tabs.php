@@ -1,11 +1,11 @@
 <ul id="tabs">
     <?php if ($tabs['all']): ?>
-    	<li class="tab"><a href="#all">Todos</a></li>
+    	<li class="tab"><a href="#all">Postulantes</a></li>
     <?php endif; ?>
     <?php if ($tabs['list']): ?>
-    	<li class="tab"><a href="#list">Postulantes</a></li>
+    	<li class="tab"><a href="#list">Recepción</a></li>
     <?php endif; ?>
-    <?php if ($tabs['reception']): ?>
+    <?php /*if ($tabs['reception']): ?>
     	<li class="tab"><a href="#reception">Recepción</a></li>
     <?php endif; ?>
     <?php if ($tabs['enabled']): ?>
@@ -13,5 +13,5 @@
     <?php endif; ?>
     <?php if ($tabs['disabled']): ?>
     	<li class="tab"><a href="#disabled">Inhabilitados</a></li>
-    <?php endif; ?>
+    <?php endif;*/ ?>
 </ul>

@@ -53,7 +53,7 @@ class postulantesActions extends PlantillasDefault
             'enabled' => true,
             'disabled' => true,
         );
-        $this->tab_click = 'all';
+        $this->tab_click = 'list';
 
         if ($this->tabs['all']) {
             $this->all =
