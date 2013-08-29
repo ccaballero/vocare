@@ -29,6 +29,16 @@ class PostulanteTable extends Doctrine_Table
         return $q->execute();
     }
 
+    public function findByConvocatoriaAndPostulante($convocatoria,
+            $apellido_paterno, $apellido_materno, $nombres) {
+        $q = $this->createQuery('p')
+                  ->where('p.convocatoria_id = ?', $convocatoria->getId())
+                  ->AndWhere('p.apellido_paterno = ?', $apellido_paterno)
+                  ->AndWhere('p.apellido_materno = ?', $apellido_materno)
+                  ->AndWhere('p.nombres = ?', $nombres);
+        return $q->fetchOne();
+    }
+
     public function findByConfirmation($id, $hash) {
         $q = $this->createQuery('p')
             ->where('p.id = ?', $id)

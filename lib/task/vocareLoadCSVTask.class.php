@@ -87,6 +87,25 @@ EOF;
         }
     }
 
+    private function getPostulante($convocatoria, $headers, $row) {
+        $ap = array_search('APELLIDO_PATERNO', $headers);
+        $am = array_search('APELLIDO_MATERNO', $headers);
+        $n = array_search('NOMBRES', $headers);
+
+
+        if ($ap !== false && $am !== false && $n !== false) {
+            $postulante = Doctrine::getTable('Postulante')
+                        ->findByConvocatoriaAndPostulante($convocatoria,
+                            $row[$ap], $row[$am], $row[$n]);
+
+            if (!empty($postulante)) {
+                return $postulante;
+            }
+        }
+
+        return new Postulante();
+    }
+
     private function parseRegistration($csv, $convocatoria) {
         $fd = fopen($csv, 'r');
 
@@ -101,11 +120,11 @@ EOF;
         echo 'CI           ';
         echo 'SIS       ';
         echo 'EMAIL                                        ';
-//        echo '1 2 3 4 5 6 7' . PHP_EOL;
+        echo 'TELEFONO' . PHP_EOL;
 
         // content of csv
         while (($csv = fgetcsv($fd, 0, ",")) !== false) {
-            $postulante = new Postulante();
+            $postulante = $this->getPostulante($convocatoria, $headers, $csv);
             $postulante->Convocatoria = $convocatoria;
 
             for ($i = 0; $i < count($headers); $i++) {
@@ -134,6 +153,9 @@ EOF;
         fclose($fd);
     }
 
-    private function parseReception($csv, $convocatoria) {}
+    private function parseReception($csv, $convocatoria) {
+
+    }
+
     private function parseHabilitation($csv, $convocatoria) {}
 }
