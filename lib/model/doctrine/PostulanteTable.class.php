@@ -21,7 +21,11 @@ class PostulanteTable extends Doctrine_Table
 
     public function findByConvocatoriaAndState($convocatoria, $estado) {
         $q = $this->_findByConvocatoria($convocatoria);
-        $q->AndWhere('p.estado = ?', $estado);
+        if (is_array($estado)) {
+            $q->WhereIn('p.estado', $estado);
+        } else {
+            $q->AndWhere('p.estado = ?', $estado);
+        }
         return $q->execute();
     }
 

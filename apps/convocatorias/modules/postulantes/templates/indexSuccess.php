@@ -14,29 +14,68 @@
                 'postulantes' => $all['postulantes'],
                 'requerimientos' => $all['requerimientos'],
                 'convocatoria' => $all['convocatoria'],
-                'shows' => array('state' => true, 'email' => true,),
+                'shows' => array(
+                    'email' => true,
+                    'state' => true,
+                    'items' => true,
+                    'reception' => false,
+                    'requisitos' => false,
+                    'documentos' => false,
+                ),
                 'operations' => array(
                     'edit' => true,
                     'delete' => true,
                     'reception' => false,
-                    'enabled' => false,
+                    'habilitation' => false,
                 ),
             )) ?>
         </div>
     <?php endif; ?>
-    <?php if ($tabs['list']): ?>
-        <div id="list" class="tab_contents">
-            <a name="list"></a>
+    <?php if ($tabs['reception']): ?>
+        <div id="reception" class="tab_contents">
+            <a name="reception"></a>
             <?php include_partial('postulantes/list', array(
-                'postulantes' => $list['postulantes'],
-                'requerimientos' => $list['requerimientos'],
-                'convocatoria' => $list['convocatoria'],
-                'shows' => array('state' => false, 'email' => false,),
+                'postulantes' => $reception['postulantes'],
+                'requerimientos' => $reception['requerimientos'],
+                'convocatoria' => $reception['convocatoria'],
+                'shows' => array(
+                    'email' => false,
+                    'state' => true,
+                    'items' => false,
+                    'reception' => true,
+                    'requisitos' => false,
+                    'documentos' => false,
+                ),
                 'operations' => array(
-                    'edit' => true,
+                    'edit' => false,
                     'delete' => false,
                     'reception' => true,
-                    'enabled' => false,
+                    'habilitation' => false,
+                ),
+            )) ?>
+        </div>
+    <?php endif; ?>
+    <?php if ($tabs['habilitation']): ?>
+        <div id="habilitation" class="tab_contents">
+            <a name="habilitation"></a>
+            <?php include_partial('postulantes/list', array(
+                'postulantes' => $habilitation['postulantes'],
+                'requisitos' => $habilitation['requisitos'],
+                'documentos' => $habilitation['documentos'],
+                'convocatoria' => $habilitation['convocatoria'],
+                'shows' => array(
+                    'email' => false,
+                    'state' => true,
+                    'items' => false,
+                    'reception' => false,
+                    'requisitos' => true,
+                    'documentos' => true,
+                ),
+                'operations' => array(
+                    'edit' => false,
+                    'delete' => false,
+                    'reception' => false,
+                    'habilitation' => true,
                 ),
             )) ?>
         </div>

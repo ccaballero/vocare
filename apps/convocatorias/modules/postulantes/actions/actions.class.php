@@ -48,36 +48,29 @@ class postulantesActions extends PlantillasDefault
         // tabs renderization
         $this->tabs = array(
             'all' => true,
-            'list' => true,
             'reception' => true,
-            'enabled' => true,
-            'disabled' => true,
+            'habilitation' => true,
         );
-        $this->tab_click = 'list';
+        $this->tab_click = 'habilitation';
 
         if ($this->tabs['all']) {
             $this->all =
                 $this->_renderListPostulants($this->convocatoria);
         }
-        if ($this->tabs['list']) {
-            $this->list =
-                $this->_renderListPostulants($this->convocatoria, 'pendiente');
-        }
         if ($this->tabs['reception']) {
             $this->reception =
-                $this->_renderListPostulants($this->convocatoria, 'inscrito');
+                $this->_renderListPostulants(
+                    $this->convocatoria, array('pendiente', 'inscrito'));
         }
-        if ($this->tabs['enabled']) {
-            $this->enabled =
-                $this->_renderListPostulants($this->convocatoria, 'habilitado');
-        }
-        if ($this->tabs['disabled']) {
-            $this->disabled =
-                $this->_renderListPostulants($this->convocatoria, 'inhabilitado');
+        if ($this->tabs['habilitation']) {
+            $this->habilitation =
+                $this->_renderListPostulants(
+                    $this->convocatoria,
+                    array('inscrito', 'habilitado', 'inhabilitado'));
         }
     }
 
-    protected function _renderListPostulants($convocatoria, $state = '') {
+    protected function _renderListPostulants($convocatoria, $state = array()) {
         if (empty($state)) {
             $postulantes = Doctrine::getTable('Postulante')
                 ->findByConvocatoria($convocatoria);
@@ -88,6 +81,8 @@ class postulantesActions extends PlantillasDefault
 
         return array(
             'requerimientos' => $convocatoria->getConvocatoriaRequerimientos(),
+            'requisitos' => $convocatoria->getConvocatoriaRequisitos(),
+            'documentos' => $convocatoria->getConvocatoriaDocumentos(),
             'convocatoria' => $convocatoria,
             'postulantes' => $postulantes,
         );
@@ -118,6 +113,9 @@ class postulantesActions extends PlantillasDefault
             'convocatoria' => $this->convocatoria));
 
         $this->form = new $this->_form($this->object);
+        $this->url = 'postulantes_edit';
+        $this->information = false;
+
         if ($request->isMethod('post')) {
             $this->form = $this->processForm(
                 $request,
@@ -125,6 +123,7 @@ class postulantesActions extends PlantillasDefault
                 $this->_messages['flash']['edit']
             );
         }
+
         $this->setTemplate('form');
     }
 
@@ -137,6 +136,9 @@ class postulantesActions extends PlantillasDefault
             'convocatoria' => $this->convocatoria));
 
         $this->form = new PostulanteReceptionForm($this->object);
+        $this->url = 'postulantes_reception';
+        $this->information = true;
+
         if ($request->isMethod('post')) {
             $this->form = $this->processForm(
                 $request,
@@ -144,6 +146,30 @@ class postulantesActions extends PlantillasDefault
                 $this->_messages['flash']['edit']
             );
         }
+
+        $this->setTemplate('form');
+    }
+
+    public function executeHabilitation(sfWebRequest $request) {
+        $this->convocatoria = $this->getConvocatoria($request);
+        $this->object = $this->getRoute()->getObject();
+        $this->title = 'Formulario de habilitación';
+
+        $this->_route_list = $this->generateUrl('postulantes', array(
+            'convocatoria' => $this->convocatoria));
+
+        $this->form = new PostulanteHabilitationForm($this->object);
+        $this->url = 'postulantes_habilitation';
+        $this->information = true;
+
+        if ($request->isMethod('post')) {
+            $this->form = $this->processForm(
+                $request,
+                $this->form,
+                $this->_messages['flash']['edit']
+            );
+        }
+
         $this->setTemplate('form');
     }
 }
