@@ -113,6 +113,7 @@ class postulantesActions extends PlantillasDefault
             'convocatoria' => $this->convocatoria));
 
         $this->form = new $this->_form($this->object);
+        $this->form->setConvocatoria($this->convocatoria);
         $this->url = 'postulantes_edit';
         $this->information = false;
 
@@ -136,6 +137,7 @@ class postulantesActions extends PlantillasDefault
             'convocatoria' => $this->convocatoria));
 
         $this->form = new PostulanteReceptionForm($this->object);
+        $this->form->setConvocatoria($this->convocatoria);
         $this->url = 'postulantes_reception';
         $this->information = true;
 
@@ -159,6 +161,7 @@ class postulantesActions extends PlantillasDefault
             'convocatoria' => $this->convocatoria));
 
         $this->form = new PostulanteHabilitationForm($this->object);
+        $this->form->setConvocatoria($this->convocatoria);
         $this->url = 'postulantes_habilitation';
         $this->information = true;
 

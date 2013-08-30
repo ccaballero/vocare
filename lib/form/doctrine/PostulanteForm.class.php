@@ -3,6 +3,7 @@
 class PostulanteForm extends BasePostulanteForm
 {
     public function configure() {
+echo 'configure';
         $this->useFields(array(
             'apellido_paterno',
             'apellido_materno',
@@ -76,20 +77,26 @@ class PostulanteForm extends BasePostulanteForm
 
     public function setConvocatoria($convocatoria) {
         $this->object->Convocatoria = $convocatoria;
+
+        $query = Doctrine_Query::create()
+               ->from('Requerimiento r')
+               ->leftJoin('r.ConvocatoriaRequerimientos cr')
+               ->where('cr.convocatoria_id = ?', $convocatoria->getId());
+        $this->widgetSchema['requerimientos_list']->setOption('query', $query);
     }
-    
+
     public function setConfirmacion($confirmacion) {
         $this->object->confirmacion = $confirmacion;
     }
-    
+
     public function getEmail() {
         return $this->object->correo_electronico;
     }
-    
+
     public function getConfirmacion() {
         return $this->object->confirmacion;
     }
-    
+
     public function getId() {
         return $this->object->getId();
     }

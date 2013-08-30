@@ -169,7 +169,9 @@ class convocatoriasActions extends PlantillasDefault
     }
 
     protected function _renderShowPostulants($object) {
-        return new PostulanteForm();
+        $form = new PostulanteForm();
+        $form->setConvocatoria($object);
+        return $form;
     }
 
     protected function processForm(sfWebRequest $request,
@@ -418,6 +420,8 @@ class convocatoriasActions extends PlantillasDefault
         $this->executeShow($request);
 
         $form = new PostulanteForm();
+        $form->setConvocatoria($this->object);
+
         if ($request->isMethod('post')) {
             $form->bind(
                 $request->getParameter($form->getName()),
@@ -427,7 +431,6 @@ class convocatoriasActions extends PlantillasDefault
             if ($form->isValid()) {
                 $hash = Generator::code();
                 
-                $form->setConvocatoria($this->object);
                 $form->setConfirmacion(sha1($hash));
                 $form->save();
                 

@@ -36,15 +36,15 @@ class PostulanteHabilitationForm extends BasePostulanteForm
                 array(
                     'multiple' => true,
                     'model' => 'Requisito',
-                    'required' => true,
-                    'min' => 1));
+                    'required' => false,
+                    'min' => 0));
         $this->validatorSchema['documentos_list'] =
             new sfValidatorDoctrineChoice(
                 array(
                     'multiple' => true,
                     'model' => 'Documento',
-                    'required' => true,
-                    'min' => 1));
+                    'required' => false,
+                    'min' => 0));
     }
 
     public function rendererRequisitos($widget, $inputs) {
@@ -93,5 +93,17 @@ class PostulanteHabilitationForm extends BasePostulanteForm
 
     public function setConvocatoria($convocatoria) {
         $this->object->Convocatoria = $convocatoria;
+
+        $query1 = Doctrine_Query::create()
+               ->from('Requisito r')
+               ->leftJoin('r.ConvocatoriaRequisitos cr')
+               ->where('cr.convocatoria_id = ?', $convocatoria->getId());
+        $this->widgetSchema['requisitos_list']->setOption('query', $query1);
+
+        $query2 = Doctrine_Query::create()
+                ->from('Documento r')
+                ->leftJoin('r.ConvocatoriaDocumentos cr')
+                ->where('cr.convocatoria_id = ?', $convocatoria->getId());
+        $this->widgetSchema['documentos_list']->setOption('query', $query2);
     }
 }

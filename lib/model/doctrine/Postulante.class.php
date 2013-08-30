@@ -49,11 +49,25 @@ class Postulante extends BasePostulante
     }
     
     public function hasRequisito($requisito) {
-        return true;
+        $requisitos = $this->getPostulanteRequisitos();
+        foreach ($requisitos as $_requisito) {
+            if ($requisito->requisito_id
+                    == $_requisito->requisito_id) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public function hasDocumento($documento) {
-        return true;
+        $documentos = $this->getPostulanteDocumentos();
+        foreach ($documentos as $_documento) {
+            if ($documento->documento_id
+                    == $_documento->documento_id) {
+                return true;
+            }
+        }
+        return false;
     }
     
     public function clearRequerimientos() {
