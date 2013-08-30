@@ -78,12 +78,9 @@ echo 'configure';
     public function setConvocatoria($convocatoria) {
         $this->object->Convocatoria = $convocatoria;
 
-        $query = Doctrine_Query::create()
-               ->from('Requerimiento r')
-               ->leftJoin('r.ConvocatoriaRequerimientos cr')
-               ->where('cr.convocatoria_id = ?', $convocatoria->getId())
-               ->orderBy('cr.numero_item ASC');
-        $this->widgetSchema['requerimientos_list']->setOption('query', $query);
+        $this->widgetSchema['requerimientos_list']->setOption('query',
+            Doctrine::getTable('Requerimiento')
+                ->queryRequerimientos($convocatoria));
     }
 
     public function setConfirmacion($confirmacion) {

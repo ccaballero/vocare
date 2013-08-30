@@ -12,4 +12,12 @@ class RequerimientoTable extends Doctrine_Table
 
         return $q->fetchOne();
     }
+    
+    public function queryRequerimientos($convocatoria) {
+        return Doctrine_Query::create()
+               ->from('Requerimiento r')
+               ->leftJoin('r.ConvocatoriaRequerimientos cr')
+               ->where('cr.convocatoria_id = ?', $convocatoria->getId())
+               ->orderBy('cr.numero_item ASC');
+    }
 }

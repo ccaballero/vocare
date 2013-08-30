@@ -23,7 +23,7 @@
         <th colspan="<?php echo count($documentos) ?>">Documentos</th>
     <?php endif; ?>
     <?php if ($shows['observacion']): ?>
-        <th rowspan="2">Observacion</th>
+        <th rowspan="2" style="width: 160px;">Observacion</th>
     <?php endif; ?>
         <th rowspan="2">Operaciones</th>
     </tr>
@@ -76,7 +76,7 @@
         <?php foreach ($requisitos as $requisito): ?>
             <td class="text-center">
                 <?php echo $postulante->hasRequisito($requisito) ?
-                        '&#10003;' :'' ?>
+                        '&#10003;' : '<span class="bad">&#10007;</span>' ?>
             </td>
         <?php endforeach; ?>
     <?php endif; ?>
@@ -84,7 +84,7 @@
         <?php foreach ($documentos as $documento): ?>
             <td class="text-center">
                 <?php echo $postulante->hasDocumento($documento) ?
-                        '&#10003;' :'' ?>
+                        '&#10003;' : '&#10007;' ?>
             </td>
         <?php endforeach; ?>
     <?php endif; ?>

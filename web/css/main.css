@@ -519,3 +519,7 @@ select {
 option {
     padding: 0px 5px;
 }
+
+.bad {
+    color: #ff0000;
+}

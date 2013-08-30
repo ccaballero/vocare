@@ -98,7 +98,6 @@ EOF;
                             $row[$ap], $row[$am], $row[$n]);
 
             if (!empty($postulante)) {
-                $postulante->clearRequerimientos();
                 return $postulante;
             }
         }
@@ -127,6 +126,7 @@ EOF;
         // content of csv
         while (($csv = fgetcsv($fd, 0, ",")) !== false) {
             $postulante = $this->getPostulante($convocatoria, $headers, $csv);
+            $postulante->clearRequerimientos();
 
             for ($i = 0; $i < count($headers); $i++) {
                 $parameter = strtolower($headers[$i]);
@@ -145,7 +145,6 @@ EOF;
                 }
             }
 
-//            $postulante->confirmacion = sha1(Generator::code());
             $postulante->estado = 'pendiente';
             $postulante->save();
 
@@ -202,5 +201,74 @@ EOF;
         fclose($fd);
     }
 
-    private function parseHabilitation($csv, $convocatoria) {}
+    private function parseHabilitation($csv, $convocatoria) {
+        $fd = fopen($csv, 'r');
+
+        // header of csv
+        $headers = fgetcsv($fd, 0, ",");
+
+        echo '>>  convocatorias cargando información de habilitación .... '
+            . PHP_EOL;
+        echo 'APE_PATERNO     ';
+        echo 'APE_MATERNO     ';
+        echo 'NOMBRES             ';
+        echo 'OBSERVACIONES            ' . PHP_EOL;
+
+        // content of csv
+        while (($csv = fgetcsv($fd, 0, ",")) !== false) {
+            $postulante = $this->getPostulante($convocatoria, $headers, $csv);
+            $postulante->clearRequisitos();
+            $postulante->clearDocumentos();
+
+            $list = array();
+            $count = 0;
+
+            $requisitos = Doctrine::getTable('Requisito')
+                        ->getRequisitos($convocatoria);
+            $documentos = Doctrine::getTable('Documento')
+                        ->getDocumentos($convocatoria);
+
+            foreach ($requisitos as $requisito) {
+                $list[chr($count + 97)] = array('requisito', $requisito);
+                $count++;
+            }
+            foreach ($documentos as $documento) {
+                $list[chr($count + 97)] = array('documento', $documento);
+                $count++;
+            }
+
+            for ($i = 0; $i < count($headers); $i++) {
+                $parameter = strtolower($headers[$i]);
+                try {
+                    $postulante->$parameter = trim($csv[$i]);
+                } catch (Exception $e) {
+                    if (!empty($csv[$i])) {
+                        $parameter = strtolower($parameter);
+                        $row = $list[$parameter];
+
+                        switch ($row[0]) {
+                            case 'requisito':
+                                $postulante->PostulanteRequisitos[]
+                                           ->Requisito = $row[1];
+                                break;
+                            case 'documento':
+                                $postulante->PostulanteDocumentos[]
+                                           ->Documento = $row[1];
+                                break;
+                        }
+                    }
+                }
+            }
+
+            $postulante->save();
+
+            echo str_pad($postulante->getApellidoPaterno(), 16)
+               . str_pad($postulante->getApellidoMaterno(), 16)
+               . str_pad($postulante->getNombres(), 20)
+               . str_pad($postulante->getObservacion(), 25)
+               . PHP_EOL;
+        }
+
+        fclose($fd);
+    }
 }

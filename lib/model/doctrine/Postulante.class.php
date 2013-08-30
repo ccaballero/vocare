@@ -76,6 +76,20 @@ class Postulante extends BasePostulante
             ->where('pr.postulante_id = ?', $this->getId())
             ->execute();
     }
+    
+    public function clearRequisitos() {
+        Doctrine_Query::create()
+            ->delete('PostulanteRequisito pr')
+            ->where('pr.postulante_id = ?', $this->getId())
+            ->execute();
+    }
+    
+    public function clearDocumentos() {
+        Doctrine_Query::create()
+            ->delete('PostulanteDocumento pd')
+            ->where('pd.postulante_id = ?', $this->getId())
+            ->execute();
+    }
 
 //    public function __toString() {
 //        return str_pad($this->getApellidoPaterno(), 16)

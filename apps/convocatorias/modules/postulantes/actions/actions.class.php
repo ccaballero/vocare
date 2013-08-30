@@ -60,7 +60,8 @@ class postulantesActions extends PlantillasDefault
         if ($this->tabs['reception']) {
             $this->reception =
                 $this->_renderListPostulants(
-                    $this->convocatoria, array('pendiente', 'inscrito'));
+                    $this->convocatoria, array(
+                        'pendiente', 'inscrito', 'habilitado', 'inhabilitado'));
         }
         if ($this->tabs['habilitation']) {
             $this->habilitation =
