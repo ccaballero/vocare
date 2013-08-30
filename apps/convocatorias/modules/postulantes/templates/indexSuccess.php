@@ -82,6 +82,10 @@
                 ),
             )) ?>
         </div>
+        <div id="reports" class="tab_contents">
+            <a name="reports"></a>
+            <?php include_partial('postulantes/reports') ?>
+        </div>
     <?php endif; ?>
 </div>
 <?php if (isset($tab_click)): ?>

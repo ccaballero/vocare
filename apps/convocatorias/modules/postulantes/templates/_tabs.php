@@ -8,4 +8,7 @@
     <?php if ($tabs['habilitation']): ?>
     	<li class="tab"><a href="#habilitation">Habilitación</a></li>
     <?php endif; ?>
+    <?php if ($tabs['reports']): ?>
+    	<li class="tab"><a href="#reports">Reportes</a></li>
+    <?php endif; ?>
 </ul>

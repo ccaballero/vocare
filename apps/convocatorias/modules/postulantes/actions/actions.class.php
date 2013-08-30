@@ -50,8 +50,9 @@ class postulantesActions extends PlantillasDefault
             'all' => true,
             'reception' => true,
             'habilitation' => true,
+            'reports' => true,
         );
-        $this->tab_click = 'habilitation';
+        $this->tab_click = 'all';
 
         if ($this->tabs['all']) {
             $this->all =
@@ -68,6 +69,9 @@ class postulantesActions extends PlantillasDefault
                 $this->_renderListPostulants(
                     $this->convocatoria,
                     array('inscrito', 'habilitado', 'inhabilitado'));
+        }
+        if ($this->tabs['reports']) {
+            $this->reports = true;
         }
     }
 
