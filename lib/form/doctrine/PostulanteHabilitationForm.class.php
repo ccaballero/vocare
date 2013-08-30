@@ -97,13 +97,15 @@ class PostulanteHabilitationForm extends BasePostulanteForm
         $query1 = Doctrine_Query::create()
                ->from('Requisito r')
                ->leftJoin('r.ConvocatoriaRequisitos cr')
-               ->where('cr.convocatoria_id = ?', $convocatoria->getId());
+               ->where('cr.convocatoria_id = ?', $convocatoria->getId())
+               ->orderBy('cr.numero_orden ASC');
         $this->widgetSchema['requisitos_list']->setOption('query', $query1);
 
         $query2 = Doctrine_Query::create()
                 ->from('Documento r')
                 ->leftJoin('r.ConvocatoriaDocumentos cr')
-                ->where('cr.convocatoria_id = ?', $convocatoria->getId());
+                ->where('cr.convocatoria_id = ?', $convocatoria->getId())
+               ->orderBy('cr.numero_orden ASC');
         $this->widgetSchema['documentos_list']->setOption('query', $query2);
     }
 }

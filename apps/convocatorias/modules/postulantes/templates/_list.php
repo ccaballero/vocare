@@ -31,13 +31,13 @@
         <?php endforeach; ?>
     <?php endif; ?>
     <?php if ($shows['requisitos']): ?>
-        <?php foreach ($requisitos as $requisito): ?>
-            <th><?php echo $requisito->getRequisitoId() ?></th>
+        <?php foreach ($requisitos as $key => $requisito): ?>
+            <th><?php echo literals($key) ?></th>
         <?php endforeach; ?>
     <?php endif; ?>
     <?php if ($shows['documentos']): ?>
-        <?php foreach ($documentos as $documento): ?>
-            <th><?php echo $documento->getDocumentoId() ?></th>
+        <?php foreach ($documentos as $key => $documento): ?>
+            <th><?php echo literals($key) ?></th>
         <?php endforeach; ?>
     <?php endif; ?>
     </tr>
