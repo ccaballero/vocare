@@ -56,7 +56,7 @@
     <?php if ($shows['items']): ?>
         <?php foreach ($requerimientos as $requerimiento): ?>
             <td class="text-center">
-                <?php echo $postulante->isPostulant($requerimiento) ?
+                <?php echo $postulante->hasRequerimiento($requerimiento) ?
                         '&#10003;' :'' ?>
             </td>
         <?php endforeach; ?>

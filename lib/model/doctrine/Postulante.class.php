@@ -37,7 +37,7 @@ class Postulante extends BasePostulante
         return substr($fecha_entrega, -8);
     }
 
-    public function isPostulant($requerimiento) {
+    public function hasRequerimiento($requerimiento) {
         $requerimientos = $this->getPostulanteRequerimientos();
         foreach ($requerimientos as $_requerimiento) {
             if ($requerimiento->requerimiento_id
@@ -55,15 +55,22 @@ class Postulante extends BasePostulante
     public function hasDocumento($documento) {
         return true;
     }
-
-    public function __toString() {
-        return str_pad($this->getApellidoPaterno(), 16)
-            . str_pad($this->getApellidoMaterno(), 16)
-            . str_pad($this->getNombres(), 20)
-            . str_pad($this->getCi(), 13)
-            . str_pad($this->getSis(), 10)
-            . str_pad($this->getCorreoElectronico(), 45)
-            . str_pad($this->getTelefono(), 2)
-            . str_pad($this->getDireccion(), 2);
+    
+    public function clearRequerimientos() {
+        Doctrine_Query::create()
+            ->delete('PostulanteRequerimiento pr')
+            ->where('pr.postulante_id = ?', $this->getId())
+            ->execute();
     }
+
+//    public function __toString() {
+//        return str_pad($this->getApellidoPaterno(), 16)
+//            . str_pad($this->getApellidoMaterno(), 16)
+//            . str_pad($this->getNombres(), 20)
+//            . str_pad($this->getCi(), 13)
+//            . str_pad($this->getSis(), 10)
+//            . str_pad($this->getCorreoElectronico(), 45)
+//            . str_pad($this->getTelefono(), 2)
+//            . str_pad($this->getDireccion(), 2);
+//    }
 }

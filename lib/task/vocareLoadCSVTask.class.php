@@ -63,19 +63,19 @@ EOF;
             return;
         }
 
-        $type = intval($matches['type']);
+        $type = strtolower($matches['type']);
         switch($type) {
             case 'postulantes':
                 $this->logSection('vocare',
                     'Registrando postulantes para una convocatoria');
                 $this->parseRegistration($csv, $convocatoria);
                 break;
-            case 'reception':
+            case 'recepcion':
                 $this->logSection('vocare',
                     'Registrando un conjunto de recepciones');
                 $this->parseReception($csv, $convocatoria);
                 break;
-            case 'habilitation':
+            case 'habilitacion':
                 $this->logSection('vocare',
                     'Registrando un conjunto de habilitaciones');
                 $this->parseHabilitation($csv, $convocatoria);
@@ -92,18 +92,20 @@ EOF;
         $am = array_search('APELLIDO_MATERNO', $headers);
         $n = array_search('NOMBRES', $headers);
 
-
         if ($ap !== false && $am !== false && $n !== false) {
             $postulante = Doctrine::getTable('Postulante')
                         ->findByConvocatoriaAndPostulante($convocatoria,
                             $row[$ap], $row[$am], $row[$n]);
 
             if (!empty($postulante)) {
+                $postulante->clearRequerimientos();
                 return $postulante;
             }
         }
 
-        return new Postulante();
+        $postulante = new Postulante();
+        $postulante->Convocatoria = $convocatoria;
+        return $postulante;
     }
 
     private function parseRegistration($csv, $convocatoria) {
@@ -125,7 +127,6 @@ EOF;
         // content of csv
         while (($csv = fgetcsv($fd, 0, ",")) !== false) {
             $postulante = $this->getPostulante($convocatoria, $headers, $csv);
-            $postulante->Convocatoria = $convocatoria;
 
             for ($i = 0; $i < count($headers); $i++) {
                 $parameter = strtolower($headers[$i]);
@@ -144,17 +145,61 @@ EOF;
                 }
             }
 
-            $postulante->confirmacion = sha1(Generator::code());
+//            $postulante->confirmacion = sha1(Generator::code());
             $postulante->estado = 'pendiente';
             $postulante->save();
-            echo $postulante . PHP_EOL;
+
+            echo str_pad($postulante->getApellidoPaterno(), 16)
+               . str_pad($postulante->getApellidoMaterno(), 16)
+               . str_pad($postulante->getNombres(), 20)
+               . str_pad($postulante->getCi(), 13)
+               . str_pad($postulante->getSis(), 10)
+               . str_pad($postulante->getCorreoElectronico(), 45)
+               . str_pad($postulante->getTelefono(), 2)
+               . str_pad($postulante->getDireccion(), 2)
+               . PHP_EOL;
         }
 
         fclose($fd);
     }
 
     private function parseReception($csv, $convocatoria) {
+        $fd = fopen($csv, 'r');
 
+        // header of csv
+        $headers = fgetcsv($fd, 0, ",");
+
+        echo '>>  convocatorias cargando información de recepción .... '
+            . PHP_EOL;
+        echo 'APE_PATERNO     ';
+        echo 'APE_MATERNO     ';
+        echo 'NOMBRES             ';
+        echo 'FECHA_ENTREGA            ';
+        echo 'NUMERO_HOJAS' . PHP_EOL;
+
+        // content of csv
+        while (($csv = fgetcsv($fd, 0, ",")) !== false) {
+            $postulante = $this->getPostulante($convocatoria, $headers, $csv);
+
+            for ($i = 0; $i < count($headers); $i++) {
+                $parameter = strtolower($headers[$i]);
+                try {
+                    $postulante->$parameter = trim($csv[$i]);
+                } catch (Exception $e) {}
+            }
+
+            $postulante->estado = 'inscrito';
+            $postulante->save();
+
+            echo str_pad($postulante->getApellidoPaterno(), 16)
+               . str_pad($postulante->getApellidoMaterno(), 16)
+               . str_pad($postulante->getNombres(), 20)
+               . str_pad($postulante->getFechaEntrega(), 25)
+               . str_pad($postulante->getNumeroHojas(), 12)
+               . PHP_EOL;
+        }
+
+        fclose($fd);
     }
 
     private function parseHabilitation($csv, $convocatoria) {}
