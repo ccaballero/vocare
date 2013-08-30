@@ -21,6 +21,7 @@
                     'reception' => false,
                     'requisitos' => false,
                     'documentos' => false,
+                    'observacion' => false,
                 ),
                 'operations' => array(
                     'edit' => true,
@@ -45,6 +46,7 @@
                     'reception' => true,
                     'requisitos' => false,
                     'documentos' => false,
+                    'observacion' => false,
                 ),
                 'operations' => array(
                     'edit' => false,
@@ -70,6 +72,7 @@
                     'reception' => false,
                     'requisitos' => true,
                     'documentos' => true,
+                    'observacion' => true,
                 ),
                 'operations' => array(
                     'edit' => false,

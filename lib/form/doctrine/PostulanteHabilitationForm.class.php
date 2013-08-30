@@ -6,17 +6,26 @@ class PostulanteHabilitationForm extends BasePostulanteForm
         $this->useFields(array(
             'requisitos_list',
             'documentos_list',
+            'estado',
+            'observacion',
         ));
 
         $this->widgetSchema->setLabels(array(
             'requisitos_list' => 'Requisitos:',
             'documentos_list' => 'Documentos:',
+            'estado' => 'Estado:',
+            'observacion' => 'Observación:',
         ));
 
         $this->widgetSchema['requisitos_list']->setOption(
             'renderer_class', 'sfWidgetFormSelectCheckbox');
         $this->widgetSchema['documentos_list']->setOption(
             'renderer_class', 'sfWidgetFormSelectCheckbox');
+
+        $this->widgetSchema['estado']->setOption('choices', array(
+            'inscrito' => 'inscrito',
+            'inhabilitado' => 'inhabilitado',
+            'habilitado' => 'habilitado'));
 
         $decorator = new FormDecoratorDefault($this->getWidgetSchema());
         $this->widgetSchema->addFormFormatter('custom', $decorator);

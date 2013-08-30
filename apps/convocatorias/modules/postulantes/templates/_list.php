@@ -22,6 +22,9 @@
     <?php if ($shows['documentos']): ?>
         <th colspan="<?php echo count($documentos) ?>">Documentos</th>
     <?php endif; ?>
+    <?php if ($shows['observacion']): ?>
+        <th rowspan="2">Observacion</th>
+    <?php endif; ?>
         <th rowspan="2">Operaciones</th>
     </tr>
     <tr class="header">
@@ -84,6 +87,9 @@
                         '&#10003;' :'' ?>
             </td>
         <?php endforeach; ?>
+    <?php endif; ?>
+    <?php if ($shows['observacion']): ?>
+        <td><?php echo $postulante->getObservacion() ?></td>
     <?php endif; ?>
         <td class="text-center">
             <ul>
