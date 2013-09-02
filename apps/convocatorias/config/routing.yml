@@ -164,6 +164,13 @@ postulantes_habilitation:
   param: { module: postulantes, action: habilitation, sf_format: html }
   requirements: { convocatoria: \d+, id: \d+, sf_method: [get,head,post] }
 
+postulantes_report:
+  url: /convocatorias/:convocatoria/postulantes/report.:sf_format
+  class: sfDoctrineRoute
+  options: { model: Postulante, type: list }
+  param: { module: postulantes, action: report, sf_format: html }
+  requirements: { convocatoria: \d+, sf_method: [post] }
+
 homepage:
   url: /
   param:

@@ -52,7 +52,7 @@ class postulantesActions extends PlantillasDefault
             'habilitation' => true,
             'reports' => true,
         );
-        $this->tab_click = 'all';
+        $this->tab_click = 'reports';
 
         if ($this->tabs['all']) {
             $this->all =
@@ -71,7 +71,8 @@ class postulantesActions extends PlantillasDefault
                     array('inscrito', 'habilitado', 'inhabilitado'));
         }
         if ($this->tabs['reports']) {
-            $this->reports = true;
+            $this->reports =
+                $this->_renderReports($this->convocatoria);
         }
     }
 
@@ -90,6 +91,32 @@ class postulantesActions extends PlantillasDefault
             'documentos' => $convocatoria->getConvocatoriaDocumentos(),
             'convocatoria' => $convocatoria,
             'postulantes' => $postulantes,
+        );
+    }
+
+    public function _renderReports($convocatoria) {
+        $columns = array(
+            'count' => array('Nro', ''),
+            'fullname' => array('Nombre Completo', 'getFullname'),
+            'email' => array('Correo Electrónico', 'getCorreoElectronico'),
+            'status' => array('Estado', 'getEstado'),
+            'numero_hojas' => array('Numero de Hojas', ''),
+            'fecha_entrega' => array('Fecha de Entrega', ''),
+            'hora_entrega' => array('Hora de Entrega', ''),
+            'requerimientos' => array('Requerimientos', ''),
+            'requisitos' => array('Requisitos', ''),
+            'documentos' => array('Documentos', ''),
+            'observaciones' => array('Observaciones', ''),
+        );
+
+        $filters = array(
+            'all' => array('Todos', ''),
+        );
+
+        return array(
+            'convocatoria' => $convocatoria,
+            'columns' => $columns,
+            'filters' => $filters,
         );
     }
 
@@ -179,5 +206,55 @@ class postulantesActions extends PlantillasDefault
         }
 
         $this->setTemplate('form');
+    }
+
+    public function executeReport(sfWebRequest $request) {
+        $convocatoria = $this->getConvocatoria($request);
+        $postulantes = Doctrine::getTable('Postulante')
+                     ->findByConvocatoria($convocatoria);
+
+        $pdf = new TCPDF('L', 'cm', 'LETTER', true, 'UTF-8');
+        $pdf->setMargins(1, 2, 1, true);
+        $pdf->setHeaderMargin(2);
+        $pdf->setFooterMargin(1);
+
+        $pdf->setAutoPageBreak(true, 1.25);
+        $pdf->setPrintHeader(false);
+        $pdf->setPrintFooter(false);
+
+        $pdf->addPage();
+
+        $pdf->setFont('times', 'B', 13);
+        $pdf->write(0, 'Postulantes ' . $convocatoria->getGestion(), '', 0, 'C', true, 0, false, false, 0);
+        $pdf->ln();
+
+        $pdf->setTextColor(0, 0, 0);
+
+        $header = array('Nro.', 'Nombre Completo', 'Correo electrónico', 'Estado', 'Observaciones');
+        $w = array(1.0, 7, 4.5, 2.5, 5);
+
+        for($i = 0; $i < count($header); ++$i) {
+            $pdf->cell($w[$i], 0, $header[$i], 'B', 0, 'C', false);
+        }
+        $pdf->ln();
+
+        $pdf->setFont('times', '', 12);
+
+        foreach ($postulantes as $key => $postulante) {
+            $pdf->multiCell($w[0], 0, ($key + 1),
+                0, 'R', false, 0, '', '', true, 0, false, true, 0, 'T', true);
+            $pdf->multiCell($w[1], 0, $postulante->getFullname(),
+                0, 'L', false, 0, '', '', true, 0, false, true, 0, 'T', true);
+            $pdf->multiCell($w[2], 0, $postulante->getCorreoElectronico(),
+                0, 'C', false, 0, '', '', false);
+            $pdf->multiCell($w[3], 0, $postulante->getEstado(),
+                0, 'C', false, 0, '', '', false);
+            $pdf->multiCell($w[3], 0, $postulante->getObservacion(),
+                0, 'L', false, 1, '', '', false);
+        }
+
+        $pdf->output();
+
+        return sfView::NONE;
     }
 }

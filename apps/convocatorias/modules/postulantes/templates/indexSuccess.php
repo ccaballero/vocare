@@ -84,7 +84,11 @@
         </div>
         <div id="reports" class="tab_contents">
             <a name="reports"></a>
-            <?php include_partial('postulantes/reports') ?>
+            <?php include_partial('postulantes/reports', array(
+                'convocatoria' => $reports['convocatoria'],
+                'columns' => $reports['columns'],
+                'filters' => $reports['filters'],
+            )) ?>
         </div>
     <?php endif; ?>
 </div>
