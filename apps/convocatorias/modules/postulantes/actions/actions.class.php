@@ -213,12 +213,9 @@ class postulantesActions extends PlantillasDefault
         $postulantes = Doctrine::getTable('Postulante')
                      ->findByConvocatoria($convocatoria);
 
-        $pdf = new TCPDF('L', 'cm', 'LETTER', true, 'UTF-8');
-        $pdf->setMargins(1, 2, 1, true);
-        $pdf->setHeaderMargin(2);
-        $pdf->setFooterMargin(1);
-
-        $pdf->setAutoPageBreak(true, 1.25);
+        $pdf = new TCPDF('L', 'mm', 'LETTER', true, 'UTF-8');
+        $pdf->setMargins(10, 20, 10, true);
+        $pdf->setAutoPageBreak(true, 10);
         $pdf->setPrintHeader(false);
         $pdf->setPrintFooter(false);
 
@@ -231,25 +228,26 @@ class postulantesActions extends PlantillasDefault
         $pdf->setTextColor(0, 0, 0);
 
         $header = array('Nro.', 'Nombre Completo', 'Correo electrónico', 'Estado', 'Observaciones');
-        $w = array(1.0, 7, 4.5, 2.5, 5);
+        $w = array(5, 40, 20, 15, 20);
+        $_w = 249.4;
 
         for($i = 0; $i < count($header); ++$i) {
-            $pdf->cell($w[$i], 0, $header[$i], 'B', 0, 'C', false);
+            $pdf->cell($_w * ($w[$i] / 100.0), 0, $header[$i], 'B', 0, 'C', false);
         }
         $pdf->ln();
 
         $pdf->setFont('times', '', 12);
 
         foreach ($postulantes as $key => $postulante) {
-            $pdf->multiCell($w[0], 0, ($key + 1),
+            $pdf->multiCell($w[0] * ($_w / 100.0), 0, ($key + 1),
                 0, 'R', false, 0, '', '', true, 0, false, true, 0, 'T', true);
-            $pdf->multiCell($w[1], 0, $postulante->getFullname(),
+            $pdf->multiCell($w[1] * ($_w / 100.0), 0, $postulante->getFullname(),
                 0, 'L', false, 0, '', '', true, 0, false, true, 0, 'T', true);
-            $pdf->multiCell($w[2], 0, $postulante->getCorreoElectronico(),
+            $pdf->multiCell($w[2] * ($_w / 100.0), 0, $postulante->getCorreoElectronico(),
                 0, 'C', false, 0, '', '', false);
-            $pdf->multiCell($w[3], 0, $postulante->getEstado(),
+            $pdf->multiCell($w[3] * ($_w / 100.0), 0, $postulante->getEstado(),
                 0, 'C', false, 0, '', '', false);
-            $pdf->multiCell($w[3], 0, $postulante->getObservacion(),
+            $pdf->multiCell($w[4] * ($_w / 100.0), 0, $postulante->getObservacion(),
                 0, 'L', false, 1, '', '', false);
         }
 
