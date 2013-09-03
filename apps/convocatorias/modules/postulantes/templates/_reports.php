@@ -6,6 +6,12 @@ requiera para su reporte.</p>
 <?php echo form_tag(
     url_for('postulantes_report',
     array('convocatoria' => $convocatoria->getId()))) ?>
+    <p><label>Orientación del papel:</label>
+        <select name="orientation">
+            <option value="L">Paisaje</option>
+            <option value="P">Retrato</option>
+        </select>
+    </p>
     <p><label>Selección de columnas:</label></p>
     <table class="form-table">
     <?php foreach ($columns as $key => $column): ?>
@@ -14,7 +20,7 @@ requiera para su reporte.</p>
                 <input type="checkbox"
                        name="columns[]" value="<?php echo $key ?>" />
             </td>
-            <td><?php echo $column[0] ?></td>
+            <td><?php echo $column ?></td>
         </tr>
     <?php endforeach; ?>
     </table>
@@ -26,7 +32,7 @@ requiera para su reporte.</p>
                 <input type="checkbox"
                        name="columns[]" value="<?php echo $key ?>" />
             </td>
-            <td><?php echo $column[0] ?></td>
+            <td><?php echo $column ?></td>
         </tr>
     <?php endforeach; ?>
     </table>

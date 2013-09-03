@@ -25,7 +25,9 @@
     <?php if ($shows['observacion']): ?>
         <th rowspan="2" style="width: 160px;">Observacion</th>
     <?php endif; ?>
+    <?php if ($shows['actions']): ?>
         <th rowspan="2">Operaciones</th>
+    <?php endif; ?>
     </tr>
     <tr class="header">
     <?php if ($shows['items']): ?>
@@ -60,7 +62,7 @@
         <?php foreach ($requerimientos as $requerimiento): ?>
             <td class="text-center">
                 <?php echo $postulante->hasRequerimiento($requerimiento) ?
-                        '&#10003;' :'' ?>
+                        '&#10003;' : '' ?>
             </td>
         <?php endforeach; ?>
     <?php endif; ?>
@@ -91,6 +93,7 @@
     <?php if ($shows['observacion']): ?>
         <td><?php echo $postulante->getObservacion() ?></td>
     <?php endif; ?>
+    <?php if ($shows['actions']): ?>
         <td class="text-center">
             <ul>
             <?php if ($operations['edit']): ?>
@@ -132,6 +135,7 @@
             <?php endif; ?>
             </ul>
         </td>
+    <?php endif; ?>
     </tr>
 <?php endforeach; ?>
 </table>

@@ -17,6 +17,23 @@ class postulantesActions extends PlantillasDefault
         ),
     );
 
+    public $columns = array(
+        'number' => 'Nro',
+        'fullname' => 'Nombre Completo',
+        'email' => 'Correo Electrónico',
+        'status' => 'Estado',
+        'numero_hojas' => 'Numero de Hojas',
+        'fecha_entrega' => 'Fecha de Entrega',
+        'hora_entrega' => 'Hora de Entrega',
+        'requerimientos' => 'Requerimientos',
+        'requisitos' => 'Requisitos',
+        'documentos' => 'Documentos',
+        'observaciones' => 'Observaciones',
+    );
+    public $filters = array(
+        'all' => 'Todos',
+    );
+
     protected function getConvocatoria(sfWebRequest $request) {
         $id_convocatoria = $request->getParameter('convocatoria');
         $convocatoria =
@@ -95,28 +112,10 @@ class postulantesActions extends PlantillasDefault
     }
 
     public function _renderReports($convocatoria) {
-        $columns = array(
-            'count' => array('Nro', ''),
-            'fullname' => array('Nombre Completo', 'getFullname'),
-            'email' => array('Correo Electrónico', 'getCorreoElectronico'),
-            'status' => array('Estado', 'getEstado'),
-            'numero_hojas' => array('Numero de Hojas', ''),
-            'fecha_entrega' => array('Fecha de Entrega', ''),
-            'hora_entrega' => array('Hora de Entrega', ''),
-            'requerimientos' => array('Requerimientos', ''),
-            'requisitos' => array('Requisitos', ''),
-            'documentos' => array('Documentos', ''),
-            'observaciones' => array('Observaciones', ''),
-        );
-
-        $filters = array(
-            'all' => array('Todos', ''),
-        );
-
         return array(
             'convocatoria' => $convocatoria,
-            'columns' => $columns,
-            'filters' => $filters,
+            'columns' => $this->columns,
+            'filters' => $this->filters,
         );
     }
 
@@ -209,48 +208,47 @@ class postulantesActions extends PlantillasDefault
     }
 
     public function executeReport(sfWebRequest $request) {
+        $columns = $request->getParameter('columns');
+        $_columns = $this->columns;
+        foreach ($_columns as $key => $column) {
+            $_columns[$key] =
+                (array_search($key, $columns) === false) ? false : true;
+        }
+
+        $orientation = $request->getParameter('orientation');
+
         $convocatoria = $this->getConvocatoria($request);
         $postulantes = Doctrine::getTable('Postulante')
                      ->findByConvocatoria($convocatoria);
 
-        $pdf = new TCPDF('L', 'mm', 'LETTER', true, 'UTF-8');
+        $pdf = new TCPDF($orientation, 'mm', 'LETTER', true, 'UTF-8');
         $pdf->setMargins(10, 20, 10, true);
-        $pdf->setAutoPageBreak(true, 10);
+        $pdf->setAutoPageBreak(true, 13);
         $pdf->setPrintHeader(false);
         $pdf->setPrintFooter(false);
 
+        $pdf->setFont('times', '', '11');
         $pdf->addPage();
 
-        $pdf->setFont('times', 'B', 13);
-        $pdf->write(0, 'Postulantes ' . $convocatoria->getGestion(), '', 0, 'C', true, 0, false, false, 0);
-        $pdf->ln();
+        $content = $this->getPartial('table',
+            array(
+                'convocatoria' => $convocatoria,
+                'postulantes' => $postulantes,
+                'requerimientos' => $convocatoria
+                                 ->getConvocatoriaRequerimientos(),
+                'requisitos' => $convocatoria->getConvocatoriaRequisitos(),
+                'documentos' => $convocatoria->getConvocatoriaDocumentos(),
+                'columns' => $_columns,
+                'second' => $_columns['requerimientos']
+                         || $_columns['requisitos']
+                         || $_columns['documentos'],
+            )
+        );
 
-        $pdf->setTextColor(0, 0, 0);
+//        echo $content;
+//        die;
 
-        $header = array('Nro.', 'Nombre Completo', 'Correo electrónico', 'Estado', 'Observaciones');
-        $w = array(5, 40, 20, 15, 20);
-        $_w = 249.4;
-
-        for($i = 0; $i < count($header); ++$i) {
-            $pdf->cell($_w * ($w[$i] / 100.0), 0, $header[$i], 'B', 0, 'C', false);
-        }
-        $pdf->ln();
-
-        $pdf->setFont('times', '', 12);
-
-        foreach ($postulantes as $key => $postulante) {
-            $pdf->multiCell($w[0] * ($_w / 100.0), 0, ($key + 1),
-                0, 'R', false, 0, '', '', true, 0, false, true, 0, 'T', true);
-            $pdf->multiCell($w[1] * ($_w / 100.0), 0, $postulante->getFullname(),
-                0, 'L', false, 0, '', '', true, 0, false, true, 0, 'T', true);
-            $pdf->multiCell($w[2] * ($_w / 100.0), 0, $postulante->getCorreoElectronico(),
-                0, 'C', false, 0, '', '', false);
-            $pdf->multiCell($w[3] * ($_w / 100.0), 0, $postulante->getEstado(),
-                0, 'C', false, 0, '', '', false);
-            $pdf->multiCell($w[4] * ($_w / 100.0), 0, $postulante->getObservacion(),
-                0, 'L', false, 1, '', '', false);
-        }
-
+        $pdf->writeHTML($content);
         $pdf->output();
 
         return sfView::NONE;
