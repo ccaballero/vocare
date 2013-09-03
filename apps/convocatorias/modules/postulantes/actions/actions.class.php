@@ -32,6 +32,9 @@ class postulantesActions extends PlantillasDefault
     );
     public $filters = array(
         'all' => 'Todos',
+        'items' => 'Requerimientos',
+//        'evaluation' => 'Evaluaciones',
+        'status' => 'Estados',
     );
 
     protected function getConvocatoria(sfWebRequest $request) {

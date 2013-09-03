@@ -30,9 +30,12 @@ requiera para su reporte.</p>
         <tr>
             <td style="width: 10px;">
                 <input type="checkbox"
-                       name="columns[]" value="<?php echo $key ?>" />
+                       name="filters[]" value="<?php echo $key ?>" />
             </td>
-            <td><?php echo $column ?></td>
+            <td>
+                <?php echo $column ?><br/>
+                <?php echo filters($key, $convocatoria) ?>
+            </td>
         </tr>
     <?php endforeach; ?>
     </table>

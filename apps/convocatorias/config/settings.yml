@@ -30,11 +30,12 @@ all:
     use_database:           true
     # Helpers used by system
     standard_helpers:
+      - Filters
+      - I18N
+      - ImageState
       - Partial
       - PrettyDate
-      - I18N
       - Selectors
-      - ImageState
       - SpecialEscape
       - StdClassPrint
       - StdRender
