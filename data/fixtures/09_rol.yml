@@ -1,34 +1,41 @@
 Permiso:
-  registro:
-    nombre: registro
-    descripcion: Registro de un postulante para una convocatoria
-  recepcion:
-    nombre: recepcion
-    descripcion: Recepción de sobres por parte de los postulantes
-  edicion_habilitados:
-    nombre: habilitados
-    descripcion: Edición de la lista de habilitados en una convocatoria
-  publicacion_habilitados:
-    nombre: publicacion_habilitados
-    descripcion: Publicación final de la lista de habilitados
+  edicion_postulante:
+    nombre: edicion_postulante
+    descripcion: Edición de los datos del postulante.
+  eliminar_postulante:
+    nombre: eliminar_postulante
+    descripcion: Eliminación del registro del postulante.
+  recepcion_postulante:
+    nombre: recepcion_postulante
+    descripcion: Llenado de la información de recepción y compulsa de sobres de postulación.
+  evaluacion_postulante:
+    nombre: evalucion_postulante
+    descripcion: Evaluación de postulantes, para la determinación de su estado (habilitado o inhabilitado).
+  reporte_postulante:
+    nombre: reporte_postulante
+    descripcion: Generación de reportes a partir de la información de las postulaciones.
 
 Grupo:
   administrador:
     nombre: Administrador
     descripcion: Encargado de la administracion de todas las funciones para una convocatoria
     Permisos:
-      - publicacion_habilitados
+      - edicion_postulante
+      - eliminar_postulante
+      - reporte_postulante
   secretaria:
     nombre: Secretaria
     descripcion: Encargada de las funciones de apoyo para una convocatoria determinada.
     Permisos:
-      - registro
-      - recepcion
+      - edicion_postulante
+      - recepcion_postulante
+      - reporte_postulante
   comision_meritos:
     nombre: Comisión de meritos
     descripcion: Integrante de la comisión de meritos para una convocatoria determinada
     Permisos:
-      - edicion_habilitados
+      - evaluacion_postulante
+      - reporte_postulante
   comision_conocimientos:
     nombre: Comisión de conocimientos
     descripcion: Integrante de la comisión de conocimientos para una convocatoria determinada.

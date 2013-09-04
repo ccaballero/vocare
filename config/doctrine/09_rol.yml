@@ -67,7 +67,7 @@ UsuarioGrupoConvocatoria:
        class: sfGuardUser
        local: user_id
        foreign: id
-       foreignType: one
+       foreignType: many
        onDelete: CASCADE
     Grupo:
       class: Grupo
