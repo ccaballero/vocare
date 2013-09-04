@@ -21,6 +21,7 @@ class UsuarioGrupoConvocatoriaTable extends Doctrine_Table
 
         $list_users = implode(',', $users);
         if (!empty($list_users)) {
+            // TODO: Cambiar por método WhereIn
             $q2 = Doctrine_Core::getTable('sfGuardUser')
               ->createQuery('u')
               ->where('u.id IN (' . $list_users . ')');

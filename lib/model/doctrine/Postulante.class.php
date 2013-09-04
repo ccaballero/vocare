@@ -90,10 +90,6 @@ class Postulante extends BasePostulante
             ->where('pd.postulante_id = ?', $this->getId())
             ->execute();
     }
-    
-    public function listStatus() {
-        
-    }
 
 //    public function __toString() {
 //        return str_pad($this->getApellidoPaterno(), 16)

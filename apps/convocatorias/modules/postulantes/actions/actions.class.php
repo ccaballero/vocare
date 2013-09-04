@@ -31,9 +31,8 @@ class postulantesActions extends PlantillasDefault
         'observaciones' => 'Observaciones',
     );
     public $filters = array(
-        'all' => 'Todos',
         'items' => 'Requerimientos',
-//        'evaluation' => 'Evaluaciones',
+//        'evaluations' => 'Evaluaciones',
         'status' => 'Estados',
     );
 
@@ -211,49 +210,68 @@ class postulantesActions extends PlantillasDefault
     }
 
     public function executeReport(sfWebRequest $request) {
-        $columns = $request->getParameter('columns');
-        $_columns = $this->columns;
-        foreach ($_columns as $key => $column) {
-            $_columns[$key] =
-                (array_search($key, $columns) === false) ? false : true;
+        $this->executeIndex($request);
+
+        if ($request->isMethod('post')) {
+            $convocatoria = $this->getConvocatoria($request);
+            $orientation = $request->getParameter('orientation', 'L');
+
+            $columns = $request->getParameter(
+                'columns', array('number', 'fullname'));
+            $_columns = $this->columns;
+            foreach ($_columns as $key => $column) {
+                $_columns[$key] =
+                    (array_search($key, $columns) === false) ? false : true;
+            }
+
+            $filters = $request->getParameter('filters', array());
+            $f_items = isset($filters['items']) ? $filters['items'] : array();
+            $f_evaluations =
+                isset($filters['evaluations']) ?
+                    $filters['evaluations'] : array();
+            $f_status =
+                isset($filters['status']) ? $filters['status'] : array();
+            $postulantes = Doctrine::getTable('Postulante')->selectByFilters(
+                $convocatoria, $f_items, $f_evaluations, $f_status);
+
+            if (count($postulantes) == 0) {
+                $this->getUser()->setFlash('error',
+                    'No existen postulantes bajo las condiciones de filtraje');
+                $this->redirect($this->generateUrl('postulantes', array(
+                    'convocatoria' => $convocatoria->getId())) . '#reports');
+            }
+
+            $pdf = new TCPDF($orientation, 'mm', 'LETTER', true, 'UTF-8');
+            $pdf->setMargins(10, 20, 10, true);
+            $pdf->setAutoPageBreak(true, 13);
+            $pdf->setPrintHeader(false);
+            $pdf->setPrintFooter(false);
+
+            $pdf->setFont('times', '', '11');
+            $pdf->addPage();
+
+            $content = $this->getPartial('table',
+                array(
+                    'convocatoria' => $convocatoria,
+                    'postulantes' => $postulantes,
+                    'requerimientos' => $convocatoria
+                                     ->getConvocatoriaRequerimientos(),
+                    'requisitos' => $convocatoria->getConvocatoriaRequisitos(),
+                    'documentos' => $convocatoria->getConvocatoriaDocumentos(),
+                    'columns' => $_columns,
+                    'second' => $_columns['requerimientos']
+                             || $_columns['requisitos']
+                             || $_columns['documentos'],
+                )
+            );
+
+            $pdf->writeHTML($content);
+            $pdf->output();
+
+            return sfView::NONE;
         }
 
-        $orientation = $request->getParameter('orientation');
-
-        $convocatoria = $this->getConvocatoria($request);
-        $postulantes = Doctrine::getTable('Postulante')
-                     ->findByConvocatoria($convocatoria);
-
-        $pdf = new TCPDF($orientation, 'mm', 'LETTER', true, 'UTF-8');
-        $pdf->setMargins(10, 20, 10, true);
-        $pdf->setAutoPageBreak(true, 13);
-        $pdf->setPrintHeader(false);
-        $pdf->setPrintFooter(false);
-
-        $pdf->setFont('times', '', '11');
-        $pdf->addPage();
-
-        $content = $this->getPartial('table',
-            array(
-                'convocatoria' => $convocatoria,
-                'postulantes' => $postulantes,
-                'requerimientos' => $convocatoria
-                                 ->getConvocatoriaRequerimientos(),
-                'requisitos' => $convocatoria->getConvocatoriaRequisitos(),
-                'documentos' => $convocatoria->getConvocatoriaDocumentos(),
-                'columns' => $_columns,
-                'second' => $_columns['requerimientos']
-                         || $_columns['requisitos']
-                         || $_columns['documentos'],
-            )
-        );
-
-//        echo $content;
-//        die;
-
-        $pdf->writeHTML($content);
-        $pdf->output();
-
-        return sfView::NONE;
+        $this->tab_click = 'reports';
+        $this->setTemplate('index');
     }
 }

@@ -405,7 +405,7 @@ class convocatoriasActions extends PlantillasDefault
 
     public function executeFinalizar() {
         $this->object = $this->getRoute()->getObject();
-        
+
         if (!Mailer::sendChangeStateConvocatoria('finalizada', $this)) {
             $this->getUser()->setFlash('notice',
                 'No pudieron ser notificados los usuarios');
@@ -430,10 +430,10 @@ class convocatoriasActions extends PlantillasDefault
 
             if ($form->isValid()) {
                 $hash = Generator::code();
-                
+
                 $form->setConfirmacion(sha1($hash));
                 $form->save();
-                
+
                 // Send of email for confirmation.
                 if (Mailer::sendPostulantConfirmation($hash, $form, $this)) {
                     $this->getUser()->setFlash('success',
@@ -444,7 +444,7 @@ class convocatoriasActions extends PlantillasDefault
                 } else {
                     $this->getUser()->setFlash('notice',
                         'No pudo enviarse el correo de confirmación');
-                }   
+                }
             } else {
                 $this->getUser()->setFlash('error',
                     'Se encontraron algunos errores en el formulario');

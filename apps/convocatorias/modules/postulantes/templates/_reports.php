@@ -3,6 +3,12 @@
 <p>En esta página usted puede seleccionar los campos y los filtros que usted
 requiera para su reporte.</p>
 
+<p>Para la utilización de filtros, recuerde que si marca varios del mismo tipo
+estos estarán conectados por una relación disyuntiva (ALGO O ALGO MAS). En
+cambio si marca varios de diferentes categorias, estos se agregarán en modo
+conjuntivo (ALGO Y ALGO MAS). Lo mas probable es que probando la generación,
+usted señor usuario entienda mejor, que solo leyendo mis explicaciones.</p>
+
 <?php echo form_tag(
     url_for('postulantes_report',
     array('convocatoria' => $convocatoria->getId()))) ?>
@@ -28,13 +34,10 @@ requiera para su reporte.</p>
     <table class="form-table">
     <?php foreach ($filters as $key => $column): ?>
         <tr>
-            <td style="width: 10px;">
-                <input type="checkbox"
-                       name="filters[]" value="<?php echo $key ?>" />
-            </td>
             <td>
                 <?php echo $column ?><br/>
-                <?php echo filters($key, $convocatoria) ?>
+                <?php echo filters(
+                    $key, 'filters[' . $key . '][]', $convocatoria) ?>
             </td>
         </tr>
     <?php endforeach; ?>

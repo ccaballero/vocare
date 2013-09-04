@@ -167,9 +167,9 @@ postulantes_habilitation:
 postulantes_report:
   url: /convocatorias/:convocatoria/postulantes/report.:sf_format
   class: sfDoctrineRoute
-  options: { model: Postulante, type: list }
+  options: { model: Postulante, type: object }
   param: { module: postulantes, action: report, sf_format: html }
-  requirements: { convocatoria: \d+, sf_method: [post] }
+  requirements: { convocatoria: \d+, sf_method: [get,head,post] }
 
 homepage:
   url: /
