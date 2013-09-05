@@ -5,7 +5,7 @@ convocatoria.</p>
 <div class="clone" style="display: none;">
     <div class="tasks">
         <?php echo task_selector($tasks, null,
-            'tasks[][]') ?>
+            'tasks[]') ?>
     </div>
 </div>
 
@@ -36,7 +36,7 @@ convocatoria.</p>
                     <ul class="list">
                     <?php foreach (explode('::', $event->tasks) as $task): ?>
                         <li><?php echo task_selector($tasks, $task,
-                            'tasks[' . $task . '][]') ?></li>
+                            'tasks[' . $event->evento_id . ']') ?></li>
                     <?php endforeach; ?>
                     </ul>
                     <a onclick="return add_li(this,'.clone div.tasks');">

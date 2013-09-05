@@ -51,7 +51,7 @@ class convocatoriasActions extends PlantillasDefault
             'redactions' => ($state == 'borrador') || ($state == 'emitido'),
             'notifications' => ($state == 'borrador' || ($state == 'emitido')),
             'users' => ($state == 'emitido'),
-            'events' => ($state == 'emitido'),
+            'events' => ($state == 'emitido') || ($state == 'vigente'),
             'postulants' => ($state == 'vigente'
                 && !$this->getUser()->isAuthenticated()),
             'results' => ($state == 'vigente') || ($state == 'finalizado'),
@@ -159,11 +159,13 @@ class convocatoriasActions extends PlantillasDefault
             'events' => $events,
             'tasks' => array(
                 'notification',
-                'publication',
+                'initialize',
                 'finalize',
-                'end-postulate',
+                'end-postulations',
+                'end-documents',
+                'pub-habilitations',
+                'pub-tests',
                 'pub-results',
-                'pub-schedule',
             ),
         );
     }
@@ -354,6 +356,38 @@ class convocatoriasActions extends PlantillasDefault
             ' cargos ha sido registrada.');
         $this->redirect($this->generateUrl('convocatorias_show', array(
             'id' => $this->object->getId())) . '#users');
+    }
+
+    public function executeEventos(sfWebRequest $request) {
+        $this->object = $this->getRoute()->getObject();
+        $tasks = $request->getParameter('tasks');
+
+        foreach ($tasks as $event => $_t1) {
+            $convocatoria_evento = Doctrine::getTable('ConvocatoriaEvento')
+                ->findByConvocatoriaAndEvento($this->object, $event);
+
+            if (!empty($convocatoria_evento)) {
+                $result = array();
+                $buffer = '';
+
+                foreach ($_t1 as $_t2) {
+                    if (isset($_t2['time'])) {
+                        $buffer = '[' . $_t2['time'] . ']';
+                    } else if (isset($_t2['task'])) {
+                        $result[] = $buffer . $_t2['task'];
+                    }
+                }
+
+
+                $convocatoria_evento->tasks = implode('::', $result);
+                $convocatoria_evento->save();
+            }
+        }
+
+        $this->getUser()->setFlash('success', 'La configuración de los' .
+            ' eventos ha sido registrada.');
+        $this->redirect($this->generateUrl('convocatorias_show', array(
+            'id' => $this->object->getId())) . '#events');
     }
 
     // method for generalization of actions over convocatorias or whatever.

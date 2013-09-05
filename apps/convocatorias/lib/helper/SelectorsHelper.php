@@ -20,22 +20,30 @@ function user_selector($users, $select_user = null, $name = '') {
         . '<a onclick="return remove_li(this);">Remover</a>';
 }
 
-function task_selector($notifications, $select_task = null, $name = '') {
+function task_selector($tasks, $select_task = null, $name = '') {
     $result = '';
-
-    foreach ($notifications as $notification) {
+    
+    preg_match('/\[(?P<time>.*)\](?P<task>.*)/', $select_task, $matches);
+    $time = '9000';
+    if (isset($matches['time'])) {
+        $time = $matches['time'];
+    }
+    
+    foreach ($tasks as $_task) {
         $selected = '';
-        if (!empty($select_task) && $select_task == $notification) {
+        if (!empty($matches['task']) && $matches['task'] == $_task) {
             $selected = ' selected="selected"';
         }
 
-        $value = ' value="' . $notification . '"';
+        $value = ' value="' . $_task . '"';
         $result .= '<option ' . $value . $selected . '>'
-                . $notification . '</option>';
+                . $_task . '</option>';
     }
 
-    $name = ' name="' . $name . '"';
+    $name = ' name="' . $name . '[]';
 
-    return '<select' . $name . '>' . $result . '</select>'
+    return '<input style="width:45px;padding:1px;" class="text-right" '
+        . 'type="text"' . $name . '[time]" value="' . $time . '" />&nbsp;'
+        . '<select' . $name . '[task]" >' . $result . '</select>'
         . '<a onclick="return remove_li(this);">Remover</a>';
 }

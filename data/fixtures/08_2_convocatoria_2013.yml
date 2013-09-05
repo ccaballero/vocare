@@ -95,22 +95,22 @@ ConvocatoriaEvento:
     Convocatoria: convocatoria_2
     Evento: evento_1
     fecha: '2012-11-12'
-    tasks: notification::publication
+    tasks: '[900]initialize'
   convocatoria_evento_2_2:
     Convocatoria: convocatoria_2
     Evento: evento_2
     fecha: '2012-11-27'
-    tasks: notification::end-postulate
+    tasks: '[1600]end-postulations::[1800]end-documents'
   convocatoria_evento_2_3:
     Convocatoria: convocatoria_2
     Evento: evento_3
     fecha: '2012-11-30'
-    tasks: notification::pub-schedule
+    tasks: '[9000]pub-habilitations::[9000]pub-tests'
   convocatoria_evento_2_4:
     Convocatoria: convocatoria_2
     Evento: evento_4
     fecha: '2012-12-07'
-    tasks: notification::pub-results
+    tasks: '[1600]pub-results::[1800]finalize'
 
 ConvocatoriaEvaluacion:
   convocatoria_evaluacion_2_1:
