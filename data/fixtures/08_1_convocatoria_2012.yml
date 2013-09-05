@@ -135,15 +135,16 @@ ConvocatoriaRedaccion:
   convocatoria_redaccion_1_1:
     numero_enmienda: 1
     redaccion: |
-      <h1>CONVOCATORIA A CONCURSO DE MÉRITOS Y PRUEBAS DE CONOCIMIENTOS PARA OPTAR A
-      AUXILIATURAS EN LABORATORIO DE COMPUTACIÓN, DE MANTENIMIENTO Y DESARROLLO</h1>
+      <h1>CONVOCATORIA A CONCURSO DE MÉRITOS Y PRUEBAS DE CONOCIMIENTOS PARA
+      OPTAR A AUXILIATURAS EN LABORATORIO DE COMPUTACIÓN, DE MANTENIMIENTO Y
+      DESARROLLO</h1>
       <h1>GESTIÓN [[ gestion ]]</h1>
 
       <p>El Departamento de Informática y Sistemas junto a las Carreras de Ing.
-      Informática e Ing. de Sistemas, de la Facultad de Ciencias y Tecnología, convoca
-      al concurso de meritos y examen de competencia para la provisión de Auxiliares
-      del Departamento, tomando como base los requerimientos que se tienen programados
-      para la gestión [[ gestion ]].</p>
+      Informática e Ing. de Sistemas, de la Facultad de Ciencias y Tecnología,
+      convoca al concurso de meritos y examen de competencia para la provisión
+      de Auxiliares del Departamento, tomando como base los requerimientos que
+      se tienen programados para la gestión [[ gestion ]].</p>
 
       <h2>REQUERIMIENTOS</h2>
       <table latex="{|c|c|p{2.8cm}|p{5.2cm}|p{2.8cm}|}">
@@ -178,8 +179,8 @@ ConvocatoriaRedaccion:
       </ol>
 
       <p>NOTA: Se considera conclusión del plan de materias, el haber cursado el
-      número de las materias requeridas en la curricula de la Carrera respectiva,
-      exceptuando la materia titulación.</p>
+      número de las materias requeridas en la curricula de la Carrera
+      respectiva, exceptuando la materia titulación.</p>
 
       <h2>DOCUMENTOS REQUISITOS A PRESENTAR</h2>
       <ol>
@@ -188,30 +189,33 @@ ConvocatoriaRedaccion:
       [[ endforeach ]]
       </ol>
 
-      <p>NOTA: La documentación y las fotocopias de certificados, deben ser validadas
-      gratuitamente en Secretaria del Departamento de Informática y Sistemas.
-      (Presentar original y fotocopia). Se deberá presentar documentación separada por
-      CADA UNA de las postulaciones, debidamente FOLIADA. La documentación no será
-      devuelta.</p>
+      <p>NOTA: La documentación y las fotocopias de certificados, deben ser
+      validadas gratuitamente en Secretaria del Departamento de Informática y
+      Sistemas. (Presentar original y fotocopia). Se deberá presentar
+      documentación separada por CADA UNA de las postulaciones, debidamente
+      FOLIADA. La documentación no será devuelta.</p>
 
       <h2>FECHA Y LUGAR DE PRESENTACIÓN DE DOCUMENTOS</h2>
 
       <h3>DE LA FORMA</h3>
-      <p>Presentación de la documentación en sobre manila cerrado y rotulado con:</p>
+      <p>Presentación de la documentación en sobre manila cerrado y rotulado
+      con:</p>
       <ul>
-          <li><p>Nombre y apellidos completos, dirección, teléfono(s) y e-mail del postulante.</p></li>
+          <li><p>Nombre y apellidos completos, dirección, teléfono(s) y e-mail
+          del postulante.</p></li>
           <li><p>Código de ítem de la auxiliatura a la que se postula.</p></li>
           <li><p>Nombre de la auxiliatura a la que se presenta.</p></li>
       </ul>
 
       <h3>DE LA FECHA Y LUGAR</h3>
-      <p>La documentación deberá ser presentada hasta horas 11:30 del día 5 de Julio
-      del 2012, en Secretaria del Departamento con la Sra. Fabiola Rojas Caballero.</p>
+      <p>La documentación deberá ser presentada hasta horas 11:30 del día 5 de
+      Julio del 2012, en Secretaria del Departamento con la Sra. Fabiola Rojas
+      Caballero.</p>
 
       <h2>CALIFICACIÓN DE MERITOS</h2>
-      <p>La calificación de méritos se basará en los documentos presentados por el
-      postulante y se realizará sobre la base de 100 puntos que representa el 20% del
-      puntaje final y se pondera de la siguiente manera.</p>
+      <p>La calificación de méritos se basará en los documentos presentados por
+      el postulante y se realizará sobre la base de 100 puntos que representa el
+      20% del puntaje final y se pondera de la siguiente manera.</p>
 
       <table latex="{|p{14cm}|c|}">
           <tr>
@@ -231,12 +235,13 @@ ConvocatoriaRedaccion:
               <td>35</td>
           </tr>
           <tr>
-              <td><strong>Documentos de experiencia en laboratorios</strong></td>
+              <td><strong>Documentos de experiencia en laboratorios</strong>
+              </td>
               <td>20</td>
           </tr>
           <tr>
-              <td>Auxiliar de Laboratorio Departamento de Informática - Sistemas del
-              ítem respectivo:</td>
+              <td>Auxiliar de Laboratorio Departamento de Informática - Sistemas
+              del ítem respectivo:</td>
               <td>12</td>
           </tr>
           <tr>
@@ -248,7 +253,8 @@ ConvocatoriaRedaccion:
               <td>&nbsp;</td>
           </tr>
           <tr>
-              <td>Auxiliares AdHonorem Laboratorio Departamento de Informática - Sistemas:</td>
+              <td>Auxiliares AdHonorem Laboratorio Departamento de Informática -
+              Sistemas:</td>
               <td>6</td>
           </tr>
           <tr>
@@ -276,12 +282,13 @@ ConvocatoriaRedaccion:
               <td>&nbsp;</td>
           </tr>
           <tr>
-              <td><strong>Documentos de experiencia extrauniversitaria y de capacitación</strong></td>
+              <td><strong>Documentos de experiencia extrauniversitaria y de
+              capacitación</strong></td>
               <td>10</td>
           </tr>
           <tr>
-              <td>Experiencia como operador, programador, analista de sistemas, cargo directivo
-              en centro de cómputo:</td>
+              <td>Experiencia como operador, programador, analista de sistemas,
+              cargo directivo en centro de cómputo:</td>
               <td>6</td>
           </tr>
           <tr>
@@ -289,8 +296,8 @@ ConvocatoriaRedaccion:
               <td>&nbsp;</td>
           </tr>
           <tr>
-              <td>Certificación de capacitación en el área especifica expedidos por el sistema
-              universitario</td>
+              <td>Certificación de capacitación en el área especifica expedidos
+              por el sistema universitario</td>
               <td>4</td>
           </tr>
           <tr>
@@ -302,20 +309,20 @@ ConvocatoriaRedaccion:
               <td>&nbsp;</td>
           </tr>
       </table>
-      <p>NOTA: Todo certificado será ponderado hasta el valor del puntaje especificado
-      en la tabla.</p>
+      <p>NOTA: Todo certificado será ponderado hasta el valor del puntaje
+      especificado en la tabla.</p>
 
       <h2>CALIFICACION DE CONOCIMIENTOS</h2>
-      <p>La calificación de conocimientos se realiza sobre la base de 100 puntos,
-      equivalentes al 80% de la calificación final.</p>
-      <p>Las pruebas para los auxiliares sobre conocimientos se realizaran de acuerdo
-      al temario y tabla siguiente.</p>
+      <p>La calificación de conocimientos se realiza sobre la base de 100
+      puntos, equivalentes al 80% de la calificación final.</p>
+      <p>Las pruebas para los auxiliares sobre conocimientos se realizaran de
+      acuerdo al temario y tabla siguiente.</p>
 
       <h3>PORCENTAJES DE CALIFICACION PARA CADA TIPO DE AUXILIAR</h3>
 
       <h4>PRUEBAS ESCRITAS</h4>
-      <p>Los postulantes deben de forma obligatoria rendir todas las pruebas escritas
-      en el (los) ítem(es) a los que se postulan.</p>
+      <p>Los postulantes deben de forma obligatoria rendir todas las pruebas
+      escritas en el (los) ítem(es) a los que se postulan.</p>
 
       <table latex="{|c|p{5.8cm}|p{0.8cm}|p{0.8cm}|p{0.8cm}|p{0.8cm}|p{0.8cm}|p{0.8cm}|p{0.8cm}|}">
           <tr>
@@ -369,7 +376,8 @@ ConvocatoriaRedaccion:
           </tr>
           <tr>
               <td>4</td>
-              <td>PROGRAMACION PARA INTERNET, LENGUAJES DE PROGRAMACION (JSP, JAVASCRIPT, CSS, HTML, PHP, DELPHI)</td>
+              <td>PROGRAMACION PARA INTERNET, LENGUAJES DE PROGRAMACION (JSP,
+              JAVASCRIPT, CSS, HTML, PHP, DELPHI)</td>
               <td class="text-center">&nbsp;</td>
               <td class="text-center">40</td>
               <td class="text-center">40</td>
@@ -380,7 +388,8 @@ ConvocatoriaRedaccion:
           </tr>
           <tr>
               <td>5</td>
-              <td>MODELAJE DE APLICACIONES WEB (UML),PROCESO UNIFICADO ESTRUCTURADO</td>
+              <td>MODELAJE DE APLICACIONES WEB (UML),PROCESO UNIFICADO
+              ESTRUCTURADO</td>
               <td class="text-center">&nbsp;</td>
               <td class="text-center">20</td>
               <td class="text-center">20</td>
@@ -391,7 +400,8 @@ ConvocatoriaRedaccion:
           </tr>
           <tr>
               <td>6</td>
-              <td>ENSAMBLAJE Y MANTENIMIENTO DE COMPUTADORA EN HARDWARE Y SOFTWARE</td>
+              <td>ENSAMBLAJE Y MANTENIMIENTO DE COMPUTADORA EN HARDWARE Y
+              SOFTWARE</td>
               <td class="text-center">20</td>
               <td class="text-center">&nbsp;</td>
               <td class="text-center">&nbsp;</td>
@@ -443,8 +453,8 @@ ConvocatoriaRedaccion:
       <h2>DE LOS TRIBUNALES</h2>
       <p>Los Honorables Consejos de Carrera de Informática y Sistemas designarán
       respectivamente; para la calificación de méritos 1 docente y 1 delegado
-      estudiante, de la misma manera para la comisión de conocimientos cada consejo
-      designará 1 docente y un estudiante veedor por cada temática.</p>
+      estudiante, de la misma manera para la comisión de conocimientos cada
+      consejo designará 1 docente y un estudiante veedor por cada temática.</p>
 
       <h2>CRONOGRAMA GENERAL</h2>
       <table latex="{|l|l|}">

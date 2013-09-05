@@ -60,7 +60,7 @@ class myUser extends sfGuardSecurityUser
             $permisos = $grupo->getPermisos();
             $_permisos = array();
             foreach ($permisos as $permiso) {
-                $_permisos[] = $permiso;
+                $_permisos[] = $permiso->getNombre();
             }
 
             if (isset($convocatorias[$convocatoria->getId()])) {
@@ -70,8 +70,10 @@ class myUser extends sfGuardSecurityUser
             }
         }
 
-        var_dump($convocatorias);
-        die;
         $this->_convocatoria_permisos = $convocatorias;
+    }
+
+    public function hasPermissionConvocatoria($convocatoria, $name) {
+        
     }
 }

@@ -14,6 +14,9 @@ class postulantesActions extends PlantillasDefault
             'new' => 'Postulante agregado exitosamente',
             'edit' => 'Postulante editado exitosamente',
             'delete' => 'Postulante eliminado exitosamente',
+            'permission' => 'No se tienen los permisos suficientes',
+            'filter' =>
+                'No existen postulantes bajo las condiciones de filtraje',
         ),
     );
 
@@ -53,14 +56,6 @@ class postulantesActions extends PlantillasDefault
         $this->forward404();
     }
 
-    public function executeDelete(sfWebRequest $request) {
-        $this->convocatoria = $this->getConvocatoria($request);
-        $this->_route_list = $this->generateUrl('postulantes', array(
-            'convocatoria' => $this->convocatoria->getId()));
-
-        parent::executeDelete($request);
-    }
-
     public function executeIndex(sfWebRequest $request) {
         $this->convocatoria = $this->getConvocatoria($request);
 
@@ -71,7 +66,7 @@ class postulantesActions extends PlantillasDefault
             'habilitation' => true,
             'reports' => true,
         );
-        $this->tab_click = 'reports';
+        $this->tab_click = 'all';
 
         if ($this->tabs['all']) {
             $this->all =
@@ -121,6 +116,7 @@ class postulantesActions extends PlantillasDefault
         );
     }
 
+    // TODO: hacer algo con los hashes invalidos, algo menos rudo que un 404
     public function executeConfirm(sfWebRequest $request) {
         $this->convocatoria = $this->getConvocatoria($request);
 
@@ -137,6 +133,22 @@ class postulantesActions extends PlantillasDefault
         $this->postulante->save();
     }
 
+    public function executeDelete(sfWebRequest $request) {
+        $this->convocatoria = $this->getConvocatoria($request);
+        $this->_route_list = $this->generateUrl('postulantes', array(
+            'convocatoria' => $this->convocatoria->getId()));
+
+        if ($this->getUser()
+                 ->hasPermission(
+                     $this->convocatoria, 'eliminar_postulante')) {
+            parent::executeDelete($request);
+        } else {
+            $this->getUser()->setFlash('error',
+                $this->_messages['flash']['permission']);
+            $this->redirect($this->_route_list);
+        }
+    }
+
     public function executeEdit(sfWebRequest $request) {
         $this->convocatoria = $this->getConvocatoria($request);
         $this->object = $this->getRoute()->getObject();
@@ -145,20 +157,28 @@ class postulantesActions extends PlantillasDefault
         $this->_route_list = $this->generateUrl('postulantes', array(
             'convocatoria' => $this->convocatoria));
 
-        $this->form = new $this->_form($this->object);
-        $this->form->setConvocatoria($this->convocatoria);
-        $this->url = 'postulantes_edit';
-        $this->information = false;
+        if ($this->getUser()
+                 ->hasPermission(
+                     $this->convocatoria, 'edicion_postulante')) {
+            $this->form = new $this->_form($this->object);
+            $this->form->setConvocatoria($this->convocatoria);
+            $this->url = 'postulantes_edit';
+            $this->information = false;
 
-        if ($request->isMethod('post')) {
-            $this->form = $this->processForm(
-                $request,
-                $this->form,
-                $this->_messages['flash']['edit']
-            );
+            if ($request->isMethod('post')) {
+                $this->form = $this->processForm(
+                    $request,
+                    $this->form,
+                    $this->_messages['flash']['edit']
+                );
+            }
+
+            $this->setTemplate('form');
+        } else {
+            $this->getUser()->setFlash('error',
+                $this->_messages['flash']['permission']);
+            $this->redirect($this->_route_list);
         }
-
-        $this->setTemplate('form');
     }
 
     public function executeReception(sfWebRequest $request) {
@@ -169,20 +189,28 @@ class postulantesActions extends PlantillasDefault
         $this->_route_list = $this->generateUrl('postulantes', array(
             'convocatoria' => $this->convocatoria));
 
-        $this->form = new PostulanteReceptionForm($this->object);
-        $this->form->setConvocatoria($this->convocatoria);
-        $this->url = 'postulantes_reception';
-        $this->information = true;
+        if ($this->getUser()
+                 ->hasPermission(
+                     $this->convocatoria, 'recepcion_postulante')) {
+            $this->form = new PostulanteReceptionForm($this->object);
+            $this->form->setConvocatoria($this->convocatoria);
+            $this->url = 'postulantes_reception';
+            $this->information = true;
 
-        if ($request->isMethod('post')) {
-            $this->form = $this->processForm(
-                $request,
-                $this->form,
-                $this->_messages['flash']['edit']
-            );
+            if ($request->isMethod('post')) {
+                $this->form = $this->processForm(
+                    $request,
+                    $this->form,
+                    $this->_messages['flash']['edit']
+                );
+            }
+
+            $this->setTemplate('form');
+        } else {
+            $this->getUser()->setFlash('error',
+                $this->_messages['flash']['permission']);
+            $this->redirect($this->_route_list);
         }
-
-        $this->setTemplate('form');
     }
 
     public function executeHabilitation(sfWebRequest $request) {
@@ -193,82 +221,104 @@ class postulantesActions extends PlantillasDefault
         $this->_route_list = $this->generateUrl('postulantes', array(
             'convocatoria' => $this->convocatoria));
 
-        $this->form = new PostulanteHabilitationForm($this->object);
-        $this->form->setConvocatoria($this->convocatoria);
-        $this->url = 'postulantes_habilitation';
-        $this->information = true;
+        if ($this->getUser()
+                 ->hasPermission(
+                     $this->convocatoria, 'evaluacion_postulante')) {
+            $this->form = new PostulanteHabilitationForm($this->object);
+            $this->form->setConvocatoria($this->convocatoria);
+            $this->url = 'postulantes_habilitation';
+            $this->information = true;
 
-        if ($request->isMethod('post')) {
-            $this->form = $this->processForm(
-                $request,
-                $this->form,
-                $this->_messages['flash']['edit']
-            );
+            if ($request->isMethod('post')) {
+                $this->form = $this->processForm(
+                    $request,
+                    $this->form,
+                    $this->_messages['flash']['edit']
+                );
+            }
+
+            $this->setTemplate('form');
+        } else {
+            $this->getUser()->setFlash('error',
+                $this->_messages['flash']['permission']);
+            $this->redirect($this->_route_list);
         }
-
-        $this->setTemplate('form');
     }
 
     public function executeReport(sfWebRequest $request) {
         $this->executeIndex($request);
+        $convocatoria = $this->getConvocatoria($request);
 
-        if ($request->isMethod('post')) {
-            $convocatoria = $this->getConvocatoria($request);
-            $orientation = $request->getParameter('orientation', 'L');
+        if ($this->getUser()
+                 ->hasPermission(
+                     $this->convocatoria, 'reporte_postulante')) {
+            if ($request->isMethod('post')) {
+                $orientation = $request->getParameter('orientation', 'L');
 
-            $columns = $request->getParameter(
-                'columns', array('number', 'fullname'));
-            $_columns = $this->columns;
-            foreach ($_columns as $key => $column) {
-                $_columns[$key] =
-                    (array_search($key, $columns) === false) ? false : true;
+                $columns = $request->getParameter(
+                    'columns', array('number', 'fullname'));
+                $_columns = $this->columns;
+                foreach ($_columns as $key => $column) {
+                    $_columns[$key] =
+                        (array_search($key, $columns) === false) ? false : true;
+                }
+
+                $filters = $request->getParameter('filters', array());
+                $f_items =
+                    isset($filters['items']) ? $filters['items'] : array();
+                $f_evaluations =
+                    isset($filters['evaluations']) ?
+                        $filters['evaluations'] : array();
+                $f_status =
+                    isset($filters['status']) ? $filters['status'] : array();
+                $postulantes = Doctrine::getTable('Postulante')
+                    ->selectByFilters($convocatoria,
+                        $f_items, $f_evaluations, $f_status);
+
+                if (count($postulantes) == 0) {
+                    $this->getUser()->setFlash('error',
+                        $this->_messages['flash']['filter']);
+                    $this->redirect($this->generateUrl(
+                        'postulantes', array(
+                            'convocatoria' => $convocatoria->getId()
+                        )) . '#reports');
+                }
+
+                $pdf = new TCPDF($orientation, 'mm', 'LETTER', true, 'UTF-8');
+                $pdf->setMargins(10, 20, 10, true);
+                $pdf->setAutoPageBreak(true, 13);
+                $pdf->setPrintHeader(false);
+                $pdf->setPrintFooter(false);
+
+                $pdf->setFont('times', '', '11');
+                $pdf->addPage();
+
+                $content = $this->getPartial('table',
+                    array(
+                        'convocatoria' => $convocatoria,
+                        'postulantes' => $postulantes,
+                        'requerimientos' => $convocatoria
+                                         ->getConvocatoriaRequerimientos(),
+                        'requisitos' => $convocatoria
+                                     ->getConvocatoriaRequisitos(),
+                        'documentos' => $convocatoria
+                                     ->getConvocatoriaDocumentos(),
+                        'columns' => $_columns,
+                        'second' => $_columns['requerimientos']
+                                 || $_columns['requisitos']
+                                 || $_columns['documentos'],
+                    )
+                );
+
+                $pdf->writeHTML($content);
+                $pdf->output();
+
+                return sfView::NONE;
             }
-
-            $filters = $request->getParameter('filters', array());
-            $f_items = isset($filters['items']) ? $filters['items'] : array();
-            $f_evaluations =
-                isset($filters['evaluations']) ?
-                    $filters['evaluations'] : array();
-            $f_status =
-                isset($filters['status']) ? $filters['status'] : array();
-            $postulantes = Doctrine::getTable('Postulante')->selectByFilters(
-                $convocatoria, $f_items, $f_evaluations, $f_status);
-
-            if (count($postulantes) == 0) {
-                $this->getUser()->setFlash('error',
-                    'No existen postulantes bajo las condiciones de filtraje');
-                $this->redirect($this->generateUrl('postulantes', array(
-                    'convocatoria' => $convocatoria->getId())) . '#reports');
-            }
-
-            $pdf = new TCPDF($orientation, 'mm', 'LETTER', true, 'UTF-8');
-            $pdf->setMargins(10, 20, 10, true);
-            $pdf->setAutoPageBreak(true, 13);
-            $pdf->setPrintHeader(false);
-            $pdf->setPrintFooter(false);
-
-            $pdf->setFont('times', '', '11');
-            $pdf->addPage();
-
-            $content = $this->getPartial('table',
-                array(
-                    'convocatoria' => $convocatoria,
-                    'postulantes' => $postulantes,
-                    'requerimientos' => $convocatoria
-                                     ->getConvocatoriaRequerimientos(),
-                    'requisitos' => $convocatoria->getConvocatoriaRequisitos(),
-                    'documentos' => $convocatoria->getConvocatoriaDocumentos(),
-                    'columns' => $_columns,
-                    'second' => $_columns['requerimientos']
-                             || $_columns['requisitos']
-                             || $_columns['documentos'],
-                )
-            );
-
-            $pdf->writeHTML($content);
-            $pdf->output();
-
-            return sfView::NONE;
+        } else {
+            $this->getUser()->setFlash('error',
+                $this->_messages['flash']['permission']);
+            $this->redirect($this->_route_list);
         }
 
         $this->tab_click = 'reports';
