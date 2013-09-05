@@ -25,7 +25,9 @@
     <?php if ($shows['observacion']): ?>
         <th rowspan="2" style="width: 160px;">Observacion</th>
     <?php endif; ?>
-    <?php if ($shows['actions']): ?>
+    <?php if ($shows['actions']
+            && ($operations['edit'] || $operations['delete']
+                || $operations['reception'] || $operations['habilitation'])): ?>
         <th rowspan="2">Operaciones</th>
     <?php endif; ?>
     </tr>
@@ -93,7 +95,9 @@
     <?php if ($shows['observacion']): ?>
         <td><?php echo $postulante->getObservacion() ?></td>
     <?php endif; ?>
-    <?php if ($shows['actions']): ?>
+    <?php if ($shows['actions']
+            && ($operations['edit'] || $operations['delete']
+                || $operations['reception'] || $operations['habilitation'])): ?>
         <td class="text-center">
             <ul>
             <?php if ($operations['edit']): ?>
@@ -117,7 +121,9 @@
                         . 'al postulante?',
                     )) ?></li>
             <?php endif; ?>
-            <?php if ($operations['reception']): ?>
+            <?php if ($operations['reception']
+                    && $sf_user->hasPermissionConvocatoria(
+                        $convocatoria, 'recepcion_postulante')): ?>
                 <li><?php echo link_to('Recepcionar',
                     url_for('postulantes_reception',
                         array(
@@ -125,7 +131,9 @@
                             'id' => $postulante->getId(),
                         ))) ?></li>
             <?php endif; ?>
-            <?php if ($operations['habilitation']): ?>
+            <?php if ($operations['habilitation']
+                    && $sf_user->hasPermissionConvocatoria(
+                        $convocatoria, 'evaluacion_postulante')): ?>
                 <li><?php echo link_to('Evaluar',
                     url_for('postulantes_habilitation',
                         array(

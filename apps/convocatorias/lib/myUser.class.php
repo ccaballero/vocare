@@ -46,34 +46,45 @@ class myUser extends sfGuardSecurityUser
             || $this->hasCredential('convocatorias_anular');
     }
 
-    public function signIn($user, $remember = false, $con = null) {
-        parent::signIn($user, $remember, $con);
+    public function getConvocatoriaPermisos() {
+        if (empty($this->_convocatoria_permisos)) {
+            // captura de permisos para una convocatoria especifica
+            $convocatorias_grupos = $this->getGuard()->getUsuarioGrupoConvocatoria();
+            $convocatorias = array();
 
-        // captura de permisos para una convocatoria especifica
-        $convocatorias_grupos = $user->getUsuarioGrupoConvocatoria();
-        $convocatorias = array();
+            foreach ($convocatorias_grupos as $convocatoria_grupo) {
+                $convocatoria = $convocatoria_grupo->getConvocatoria();
+                $grupo = $convocatoria_grupo->getGrupo();
 
-        foreach ($convocatorias_grupos as $convocatoria_grupo) {
-            $convocatoria = $convocatoria_grupo->getConvocatoria();
-            $grupo = $convocatoria_grupo->getGrupo();
+                $permisos = $grupo->getPermisos();
+                foreach ($permisos as $permiso) {
+                    if (!isset($convocatorias[$convocatoria->getId()])) {
+                        $convocatorias[$convocatoria->getId()] = array();
+                    }
 
-            $permisos = $grupo->getPermisos();
-            $_permisos = array();
-            foreach ($permisos as $permiso) {
-                $_permisos[] = $permiso->getNombre();
+                    $convocatorias[$convocatoria->getId()][] =
+                        $permiso->getNombre();
+                }
             }
 
-            if (isset($convocatorias[$convocatoria->getId()])) {
-                $convocatorias[$convocatoria->getId()][$grupo->getId()] = $_permisos;
-            } else {
-                $convocatorias[$convocatoria->getId()] = array($grupo->getId() => $_permisos);
-            }
+            $this->_convocatoria_permisos = $convocatorias;
         }
 
-        $this->_convocatoria_permisos = $convocatorias;
+        return $this->_convocatoria_permisos;
     }
 
     public function hasPermissionConvocatoria($convocatoria, $name) {
-        
+        if ($this->getGuard()->getIsSuperAdmin()) {
+            return true;
+        }
+    
+        $permisos = $this->getConvocatoriaPermisos();
+
+        if (!isset($permisos[$convocatoria->getId()])) {
+            return false;
+        }
+
+        return (array_search($name,
+            $permisos[$convocatoria->getId()]) !== false);
     }
 }

@@ -62,10 +62,14 @@ class postulantesActions extends PlantillasDefault
         // tabs renderization
         $this->tabs = array(
             'all' => true,
-            'reception' => true,
-            'habilitation' => true,
-            'reports' => true,
+            'reception' => $this->getUser()->hasPermissionConvocatoria(
+                $this->convocatoria, 'recepcion_postulante'),
+            'habilitation' => $this->getUser()->hasPermissionConvocatoria(
+                $this->convocatoria, 'evaluacion_postulante'),
+            'reports' => $this->getUser()->hasPermissionConvocatoria(
+                $this->convocatoria, 'reporte_postulante'),
         );
+
         $this->tab_click = 'all';
 
         if ($this->tabs['all']) {
@@ -139,7 +143,7 @@ class postulantesActions extends PlantillasDefault
             'convocatoria' => $this->convocatoria->getId()));
 
         if ($this->getUser()
-                 ->hasPermission(
+                 ->hasPermissionConvocatoria(
                      $this->convocatoria, 'eliminar_postulante')) {
             parent::executeDelete($request);
         } else {
@@ -158,7 +162,7 @@ class postulantesActions extends PlantillasDefault
             'convocatoria' => $this->convocatoria));
 
         if ($this->getUser()
-                 ->hasPermission(
+                 ->hasPermissionConvocatoria(
                      $this->convocatoria, 'edicion_postulante')) {
             $this->form = new $this->_form($this->object);
             $this->form->setConvocatoria($this->convocatoria);
@@ -190,7 +194,7 @@ class postulantesActions extends PlantillasDefault
             'convocatoria' => $this->convocatoria));
 
         if ($this->getUser()
-                 ->hasPermission(
+                 ->hasPermissionConvocatoria(
                      $this->convocatoria, 'recepcion_postulante')) {
             $this->form = new PostulanteReceptionForm($this->object);
             $this->form->setConvocatoria($this->convocatoria);
@@ -222,7 +226,7 @@ class postulantesActions extends PlantillasDefault
             'convocatoria' => $this->convocatoria));
 
         if ($this->getUser()
-                 ->hasPermission(
+                 ->hasPermissionConvocatoria(
                      $this->convocatoria, 'evaluacion_postulante')) {
             $this->form = new PostulanteHabilitationForm($this->object);
             $this->form->setConvocatoria($this->convocatoria);
@@ -250,7 +254,7 @@ class postulantesActions extends PlantillasDefault
         $convocatoria = $this->getConvocatoria($request);
 
         if ($this->getUser()
-                 ->hasPermission(
+                 ->hasPermissionConvocatoria(
                      $this->convocatoria, 'reporte_postulante')) {
             if ($request->isMethod('post')) {
                 $orientation = $request->getParameter('orientation', 'L');

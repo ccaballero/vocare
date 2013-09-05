@@ -25,8 +25,10 @@
                     'actions' => true,
                 ),
                 'operations' => array(
-                    'edit' => true,
-                    'delete' => true,
+                    'edit' => $sf_user->hasPermissionConvocatoria(
+                        $convocatoria, 'edicion_postulante'),
+                    'delete' => $sf_user->hasPermissionConvocatoria(
+                        $convocatoria, 'eliminar_postulante'),
                     'reception' => false,
                     'habilitation' => false,
                 ),
@@ -53,7 +55,8 @@
                 'operations' => array(
                     'edit' => false,
                     'delete' => false,
-                    'reception' => true,
+                    'reception' => $sf_user->hasPermissionConvocatoria(
+                        $convocatoria, 'recepcion_postulante'),
                     'habilitation' => false,
                 ),
             )) ?>
@@ -81,10 +84,13 @@
                     'edit' => false,
                     'delete' => false,
                     'reception' => false,
-                    'habilitation' => true,
+                    'habilitation' => $sf_user->hasPermissionConvocatoria(
+                        $convocatoria, 'evaluacion_postulante'),
                 ),
             )) ?>
         </div>
+    <?php endif; ?>
+    <?php if ($tabs['reports']): ?>
         <div id="reports" class="tab_contents">
             <a name="reports"></a>
             <?php include_partial('postulantes/reports', array(
