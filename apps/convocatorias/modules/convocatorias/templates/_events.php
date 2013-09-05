@@ -2,13 +2,6 @@
 realizarse bajo los cambios de fechas en los eventos que usted definió para su
 convocatoria.</p>
 
-<div class="clone" style="display: none;">
-    <div class="tasks">
-        <?php echo task_selector($tasks, null,
-            'tasks[]') ?>
-    </div>
-</div>
-
 <?php echo form_tag(
     url_for('convocatorias_eventos',
     array('id' => $object->getId()))) ?>
@@ -28,6 +21,12 @@ convocatoria.</p>
                     <span><?php echo $event->getEvento()->getNombre() ?></span>
                     <br />
                     <?php echo $event->getEvento()->getDescripcion() ?>
+                    <div class="clone" style="display: none;">
+                        <div class="tasks event-<?php echo $event->evento_id ?>">
+                            <?php echo task_selector($tasks, null,
+                                'tasks[' . $event->evento_id . ']') ?>
+                        </div>
+                    </div>
                 </td>
                 <td class="text-center">
                     <?php echo pretty_date($event->getFecha()) ?>
@@ -39,7 +38,7 @@ convocatoria.</p>
                             'tasks[' . $event->evento_id . ']') ?></li>
                     <?php endforeach; ?>
                     </ul>
-                    <a onclick="return add_li(this,'.clone div.tasks');">
+                    <a onclick="return add_li(this,'.clone div.tasks.event-<?php echo $event->evento_id ?>');">
                         Agregar</a>
                 </td>
             </tr>

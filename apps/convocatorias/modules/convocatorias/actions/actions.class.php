@@ -158,6 +158,7 @@ class convocatoriasActions extends PlantillasDefault
         return array(
             'events' => $events,
             'tasks' => array(
+                '----------',
                 'notification',
                 'initialize',
                 'finalize',
@@ -372,9 +373,11 @@ class convocatoriasActions extends PlantillasDefault
 
                 foreach ($_t1 as $_t2) {
                     if (isset($_t2['time'])) {
-                        $buffer = '[' . $_t2['time'] . ']';
+                        $buffer = '[' . intval($_t2['time']) . ']';
                     } else if (isset($_t2['task'])) {
-                        $result[] = $buffer . $_t2['task'];
+                        if ($_t2['task'] != '----------') {
+                            $result[] = $buffer . $_t2['task'];
+                        }
                     }
                 }
 

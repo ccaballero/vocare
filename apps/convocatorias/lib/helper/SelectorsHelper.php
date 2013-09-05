@@ -24,7 +24,7 @@ function task_selector($tasks, $select_task = null, $name = '') {
     $result = '';
     
     preg_match('/\[(?P<time>.*)\](?P<task>.*)/', $select_task, $matches);
-    $time = '9000';
+    $time = '900';
     if (isset($matches['time'])) {
         $time = $matches['time'];
     }
