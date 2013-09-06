@@ -47,11 +47,16 @@ class convocatoriasActions extends PlantillasDefault
         // tabs renderization
         $this->tabs = array(
             'preview' => true,
-            'editor' => ($state == 'borrador') || ($state == 'emitido'),
-            'redactions' => ($state == 'borrador') || ($state == 'emitido'),
-            'notifications' => ($state == 'borrador' || ($state == 'emitido')),
-            'users' => ($state == 'emitido'),
-            'events' => ($state == 'emitido') || ($state == 'vigente'),
+            'editor' => (($state == 'borrador') || ($state == 'emitido'))
+                && $this->getUser()->hasCredential('convocatorias_edit'),
+            'redactions' => ($state == 'borrador') || ($state == 'emitido')
+                && $this->getUser()->hasCredential('convocatorias_edit'),
+            'notifications' => ($state == 'borrador' || ($state == 'emitido'))
+                && $this->getUser()->hasCredential('convocatorias_edit'),
+            'users' => ($state == 'emitido')
+                && $this->getUser()->hasCredential('convocatorias_role'),
+            'events' => ($state == 'emitido') || ($state == 'vigente')
+                && $this->getUser()->hasCredential('convocatorias_event'),
             'postulants' => ($state == 'vigente'
                 && !$this->getUser()->isAuthenticated()),
             'results' => ($state == 'vigente') || ($state == 'finalizado'),
@@ -159,7 +164,6 @@ class convocatoriasActions extends PlantillasDefault
             'events' => $events,
             'tasks' => array(
                 '----------',
-                'notification',
                 'initialize',
                 'finalize',
                 'end-postulations',
@@ -251,7 +255,9 @@ class convocatoriasActions extends PlantillasDefault
             $cr->save();
 
             // notification of change in enmienda;
-            if (!Mailer::sendChangeStateConvocatoria('enmendada', $this)) {
+            $result = Mailer::getInstance()
+                    ->sendChangeStateConvocatoria('enmendada', $this->object);
+            if (!$result) {
                 $this->getUser()->setFlash('success',
                     'No pudieron ser notificados los usuarios');
             }
@@ -402,7 +408,11 @@ class convocatoriasActions extends PlantillasDefault
 
     // state transition (eliminar)
     public function executeEliminar() {
-        if (!Mailer::sendChangeStateConvocatoria('eliminada', $this)) {
+        $this->object = $this->getRoute()->getObject();
+
+        $result = Mailer::getInstance()
+                ->sendChangeStateConvocatoria('eliminada', $this->object);
+        if (!$result) {
             $this->getUser()->setFlash('notice',
                 'No pudieron ser notificados los usuarios');
         }
@@ -420,7 +430,9 @@ class convocatoriasActions extends PlantillasDefault
             $title = 'publicada';
         }
 
-        if (!Mailer::sendChangeStateConvocatoria($title, $this)) {
+        $result = Mailer::getInstance()
+                ->sendChangeStateConvocatoria($title, $this->object);
+        if (!$result) {
             $this->getUser()->setFlash('notice',
                 'No pudieron ser notificados los usuarios');
         }
@@ -431,7 +443,11 @@ class convocatoriasActions extends PlantillasDefault
     }
 
     public function executeAnular() {
-        if (!Mailer::sendChangeStateConvocatoria('anulada', $this)) {
+        $this->object = $this->getRoute()->getObject();
+
+        $result = Mailer::getInstance()
+                ->sendChangeStateConvocatoria('anulada', $this->object);
+        if (!$result) {
             $this->getUser()->setFlash('notice',
                 'No pudieron ser notificados los usuarios');
         }
@@ -443,7 +459,9 @@ class convocatoriasActions extends PlantillasDefault
     public function executeFinalizar() {
         $this->object = $this->getRoute()->getObject();
 
-        if (!Mailer::sendChangeStateConvocatoria('finalizada', $this)) {
+        $result = Mailer::getInstance()
+                ->sendChangeStateConvocatoria('finalizada', $this->object);
+        if (!$result) {
             $this->getUser()->setFlash('notice',
                 'No pudieron ser notificados los usuarios');
         }
@@ -454,6 +472,7 @@ class convocatoriasActions extends PlantillasDefault
     }
 
     public function executePostular($request) {
+        $this->object = $this->getRoute()->getObject();
         $this->executeShow($request);
 
         $form = new PostulanteForm();
@@ -472,7 +491,9 @@ class convocatoriasActions extends PlantillasDefault
                 $form->save();
 
                 // Send of email for confirmation.
-                if (Mailer::sendPostulantConfirmation($hash, $form, $this)) {
+                $result = Mailer::getInstance()
+                        ->sendPostulantConfirmation($hash, $form, $this->object);
+                if (!$result) {
                     $this->getUser()->setFlash('success',
                         'Postulación exitosa, revisa tu correo electrónico');
                     $this->redirect($this->generateUrl('convocatorias_show',

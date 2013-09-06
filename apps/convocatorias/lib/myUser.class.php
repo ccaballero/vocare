@@ -77,7 +77,7 @@ class myUser extends sfGuardSecurityUser
         if ($this->getGuard()->getIsSuperAdmin()) {
             return true;
         }
-    
+
         $permisos = $this->getConvocatoriaPermisos();
 
         if (!isset($permisos[$convocatoria->getId()])) {

@@ -90,22 +90,23 @@ ConvocatoriaEvento:
     Convocatoria: convocatoria_1
     Evento: evento_1
     fecha: '2012-06-19'
-    tasks: notification::publication
+    tasks: '[900]initialize'
   convocatoria_evento_1_2:
     Convocatoria: convocatoria_1
     Evento: evento_2
     fecha: '2012-07-05'
-    tasks: notification::end-postulate
+    tasks: '[1600]end-postulations::[1800]end-documents'
   convocatoria_evento_1_3:
     Convocatoria: convocatoria_1
     Evento: evento_3
     fecha: '2012-07-06'
     tasks: notification::pub-schedule
+    tasks: '[9000]pub-habilitations::[9000]pub-tests'
   convocatoria_evento_1_4:
     Convocatoria: convocatoria_1
     Evento: evento_4
     fecha: '2012-07-17'
-    tasks: notification::pub-results
+    tasks: '[1600]pub-results::[1800]finalize'
 
 ConvocatoriaCargo:
   convocatoria_cargo_1_1:

@@ -12,23 +12,20 @@ create:
 edit:
   credentials:
     - convocatorias_edit
+show:
+  is_secure: false
 update:
   credentials:
     - convocatorias_edit
 delete:
   credentials:
     - convocatorias_delete
-show:
-  is_secure: false
 texto:
   is_secure: false
 latex:
   is_secure: false
 pdf:
   is_secure: false
-redaccion:
-  credentials:
-    - convocatorias_edit
 eliminar:
   credentials:
     - convocatorias_eliminar
@@ -41,5 +38,20 @@ anular:
 finalizar:
   credentials:
     - convocatorias_finalizar
+redaccion:
+  credentials:
+    - convocatorias_edit
+firmas:
+  credentials:
+    - convocatorias_edit
+notificaciones:
+  credentials:
+    - convocatorias_edit
+cargos:
+  credentials:
+    - convocatorias_role
+eventos:
+  credentials:
+    - convocatorias_event
 postular:
   is_secure: false

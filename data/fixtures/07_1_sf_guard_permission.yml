@@ -36,6 +36,9 @@ sfGuardPermission:
   convocatorias_role:
     name: convocatorias_role
     description: Asignar responsabilidades a usuarios en una convocatoria.
+  convocatorias_event:
+    name: convocatorias_event
+    description: Asignar tareas automaticas a eventos de una convocatoria.
   # permission in states of a convocatoria
   convocatorias_eliminar:
     name: convocatorias_eliminar

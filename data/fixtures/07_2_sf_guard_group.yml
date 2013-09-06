@@ -12,6 +12,7 @@ sfGuardGroup:
       - convocatorias_edit
       - convocatorias_create
       - convocatorias_role
+      - convocatorias_event
       - convocatorias_eliminar
       - convocatorias_promover
       - convocatorias_finalizar

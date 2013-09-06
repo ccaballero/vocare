@@ -1,4 +1,5 @@
+<h1><?php echo $convocatoria->getGestion() ?></h1>
 <p>
     La convocatoria <?php echo $convocatoria->getGestion() ?> acaba de ser
-    <?php echo $operation ?> por el usuario <?php echo $user->getFullname() ?>.
+    <?php echo $operation ?>.
 </p>

@@ -52,7 +52,7 @@ Agregar una linea mas o menos parecida a esta:
     127.0.0.1       vocare.local            vocare
 
 Paso 09:
-Comprobar la resolucion de dominio:
+Comprobar la resolución de dominio:
     ping vocare.local
 
 Ejemplo de una salida correcta:
@@ -100,5 +100,32 @@ Paso 11:
 Si todingo esta correcto, probar en el navegador.
     links2 http://vocare.local
 
-// configuracion de correo electronico
-// configuracion de latex
+Configuración de correo electronico
+-----------------------------------
+
+
+Configuración de latex
+----------------------
+
+Para la configuración del administrador de volumenes de documentación, se
+requiere tener instalado en el sistema operativo un paquete de compilación
+de archivos .tex a archivos .pdf. Para un sistema operativo GNU/Linux
+directamente se requiere que el programa pueda ejecutar el comando pdflatex.
+
+Según las distribuciones de se estan usando se citan las que son necesarias:
+
+* Debian/Ubuntu y afines:
+    - texlive-base.
+    - texlive-common.
+    - texlive-latex-base.
+    - texlive-latex-recommended.
+    - texlive-fonts-recommended.
+
+* CentOS:
+    - tetex-latex.
+    - tetex-fonts.
+
+
+Configuración de crontab
+------------------------
+

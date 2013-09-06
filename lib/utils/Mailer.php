@@ -2,11 +2,38 @@
 
 class Mailer
 {
+    private static $instance = null;
+
+    private $mailer = null;
+
+    private function __construct() {}
+
+    public static function getInstance() {
+        if (self::$instance == null) {
+            self::$instance = new self();
+        }
+        return self::$instance;
+    }
+
+    public function setMailer($mailer) {
+        $this->mailer = $mailer;
+
+        return self::$instance;
+    }
+
+    public function getMailer() {
+        if (empty($this->mailer)) {
+            $this->mailer = sfContext::getInstance()->getMailer();
+        }
+
+        return $this->mailer;
+    }
+
     // definition of parameters
     //     title -> title of email
     //     content -> content of email
     //     to -> set of containers of reception
-    public static function send($parameters, $mailer) {
+    public function send($parameters) {
         if (!isset($parameters['title'])) {
             $parameters['title'] = '';
         }
@@ -27,7 +54,7 @@ class Mailer
                 ->setContentType('text/html');
 
             try {
-                $mailer->send($message);
+                $this->getMailer()->send($message);
                 return true;
             } catch (Exception $e) {
                 // Transport exception, who care!!
@@ -36,8 +63,7 @@ class Mailer
         }
     }
 
-    public static function sendChangeStateConvocatoria($state, $controller) {
-        $convocatoria = $controller->getRoute()->getObject();
+    public function sendChangeStateConvocatoria($state, $convocatoria) {
         $tpl_title = 'Sistema de Convocatorias [convocatoria %s fue %s]';
 
         // extract of subscribers
@@ -47,28 +73,32 @@ class Mailer
             $to[$subscriber->getEmail()] = $subscriber->getEncargado();
         }
 
-        return Mailer::send(array(
+        sfContext::getInstance()
+            ->getConfiguration()
+            ->loadHelpers(array('Partial'));
+
+        return $this->send(array(
             'title' => sprintf($tpl_title, $convocatoria->getGestion(), $state),
-            'content' => $controller->getPartial(
+            'content' => get_partial(
                 'convocatorias/email_states',
                 array(
                     'convocatoria' => $convocatoria,
-                    'user' => $controller->getUser(),
                     'operation' => $state,
                 )),
             'to' => $to,
-        ),
-            $controller->getMailer()
-        );
+        ));
     }
 
-    public static function sendPostulantConfirmation($hash, $form, $controller) {
-        $convocatoria = $controller->getRoute()->getObject();
+    public function sendPostulantConfirmation($hash, $form, $convocatoria) {
         $tpl_title = 'Confirmación de postulación a la convocatoria %s';
 
-        return Mailer::send(array(
+        sfContext::getInstance()
+            ->getConfiguration()
+            ->loadHelpers(array('Partial'));
+
+        return $this->send(array(
             'title' => sprintf($tpl_title, $convocatoria->getGestion()),
-            'content' => $controller->getPartial(
+            'content' => get_partial(
                 'convocatorias/email_postulants',
                 array(
                     'convocatoria' => $convocatoria,
@@ -76,8 +106,6 @@ class Mailer
                     'hash' => $hash,
                 )),
             'to' => array($form->getEmail()),
-        ),
-            $controller->getMailer()
-        );
+        ));
     }
 }

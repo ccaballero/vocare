@@ -22,13 +22,13 @@ function user_selector($users, $select_user = null, $name = '') {
 
 function task_selector($tasks, $select_task = null, $name = '') {
     $result = '';
-    
+
     preg_match('/\[(?P<time>.*)\](?P<task>.*)/', $select_task, $matches);
     $time = '900';
     if (isset($matches['time'])) {
         $time = $matches['time'];
     }
-    
+
     foreach ($tasks as $_task) {
         $selected = '';
         if (!empty($matches['task']) && $matches['task'] == $_task) {

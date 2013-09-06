@@ -12,4 +12,10 @@ class ConvocatoriaEventoTable extends Doctrine_Table
             ->AndWhere('ce.evento_id = ?', $evento);
         return $q->fetchOne();
     }
+    
+    public function selectByDate($date) {
+        $q = $this->createQuery('ce')
+            ->where('ce.fecha = ?', $date);
+        return $q->execute();
+    }
 }
