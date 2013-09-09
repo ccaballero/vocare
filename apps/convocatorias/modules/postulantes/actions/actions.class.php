@@ -315,7 +315,8 @@ class postulantesActions extends PlantillasDefault
                 );
 
                 $pdf->writeHTML($content);
-                $pdf->output();
+                $pdf->output('postulantes-'
+                    . $convocatoria->getGestion() . '.pdf');
 
                 return sfView::NONE;
             }
