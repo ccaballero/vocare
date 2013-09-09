@@ -1,6 +1,25 @@
 #!/usr/bin/env php
 <?php
 
+define('APPLICATION_PATH', realpath(dirname(__FILE__) . '/..'));
+
+$symfony_libraries = APPLICATION_PATH . '/symfony/lib';
+$configuration_file = '/config/ProjectConfiguration.class.php';
+$deploy_possibilities = array(
+    'production' => APPLICATION_PATH . '/vocare' . $configuration_file,
+    'development' => APPLICATION_PATH . $configuration_file,
+);
+
+if (file_exists($symfony_libraries)) {
+    ini_set('include_path', ini_get('include_path') . PATH_SEPARATOR . $symfony_libraries);
+}
+
+foreach ($deploy_possibilities as $possibility) {
+    if (file_exists($possibility)) {
+        require_once($possibility);
+    }
+}
+
 /*
  * This file is part of the symfony package.
  * (c) Fabien Potencier <fabien.potencier@symfony-project.com>

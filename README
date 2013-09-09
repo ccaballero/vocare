@@ -100,13 +100,14 @@ Paso 11:
 Si todingo esta correcto, probar en el navegador.
     links2 http://vocare.local
 
-Configuración de correo electronico
------------------------------------
+Configuración de latex:
+-----------------------
 
+Para el modulo de documentacion, se requieren algunas configuraciones
+adicionales, a continuación detallo los pasos necesarios para la configuración
+optima de esta funcionalidad.
 
-Configuración de latex
-----------------------
-
+Paso 01:
 Para la configuración del administrador de volumenes de documentación, se
 requiere tener instalado en el sistema operativo un paquete de compilación
 de archivos .tex a archivos .pdf. Para un sistema operativo GNU/Linux
@@ -125,7 +126,68 @@ Según las distribuciones de se estan usando se citan las que son necesarias:
     - tetex-latex.
     - tetex-fonts.
 
+Paso 02:
+Se debe configurar el archivo apps/convocatorias/config/app.yml
 
-Configuración de crontab
-------------------------
+Ejemplo de archivo app.yml bien configurado:
+
+all:
+  sf_guard_plugin:
+    routes_register: false
+    allow_login_with_email: true
+    signin_form: sfGuardCustomFormSignin
+    success_signout_url: /acceder # do something in (development environment)
+    remember_key_expiration_age: 2592000   # 30 days in seconds
+    remember_cookie_name: myAppRememberMe
+    default_from_email: vocare@cs.umss.edu.bo
+  dir_generation: %SF_ROOT_DIR%/data/convocatorias
+  xslt_transforms: %SF_ROOT_DIR%/data/xslt
+  pdflatex: /usr/bin/pdflatex
+
+Las variables imprescindibles para la generación de documentos son:
+    * dir_generation -> Lugar donde se generan los archivos, debe tener los
+                        permisos necesarios para poder crear y sobre-escribir
+                        archivos.
+    * xslt_transforms -> Archivo donde se encuentran los transformadores XSLT,
+                         de preferencia no tocar este lugar.
+    * pdflatex -> El path absoluto al comando pdflatex, dependiendo de la
+                  distribucion puede ser diferente.
+
+      ¿Como saber si tengo y donde esta instalado pdflatex?
+      Facil, la clave es ejecutar lo siguiente:
+
+        burbuja!carlos ~ $ whereis pdflatex
+        pdflatex: /usr/bin/pdflatex /usr/bin/X11/pdflatex /usr/share/man/man1/pdflatex.1.gz
+        burbuja!carlos ~ $ 
+
+      El primero apunta al archivo binario que se necesita establecer.
+
+Configuración de crontab:
+-------------------------
+
+El sistema tambien tiene la capacidad de automatizar ciertas tareas, para que
+esta funcionalidad trabaje adecuadamente, se deben realizar configuraciones
+adicionales, las que se detallan a continuación.
+
+Para la automatización se ha diseñado un `task` de symfony, este se llama:
+
+    vocare:crontab
+
+Y esta diseñado para ser ejecutado desde el script crontab.sh.
+
+Paso 01:
+Verificar los paths del proyecto en el archivo crontab.sh (linea 3).
+
+Paso 02:
+Agregar una linea al fichero de ejecución en el demonio crontab.
+
+Ejemplo de archivo para el demonio crontab:
+
+0 * * * * sh /var/www/vocare.local/crontab.sh.
+
+Si aún tiene dudas sobre la automatización de tareas, consulte a su proveedor de
+información local.
+
+Configuración de correo electrónico:
+------------------------------------
 

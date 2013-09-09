@@ -31,23 +31,17 @@ EOF;
         $databaseManager = new sfDatabaseManager($this->configuration);
         $debug = $options['debug'];
 
-        $log_file = realpath(__DIR__ . '/../../log') . '/crontab.log';
-        if ($debug) { echo 'Abriendo archivo de log: ' . $log_file . PHP_EOL; }
-
-        $fd = fopen($log_file, 'a');
-
-        $date = date('[Y:m:d H:i:s]');
-        $now = date('Y-m-d');
+        echo date('Y-m-d H:i:s') . PHP_EOL;
 
         $timeI = intval(date('H') . '00');
         $interval = 100;
 
-        $line1 = str_repeat('-', 80 - strlen($date));
         $filler1 = str_repeat(' ', 14);
         $triggered_tasks = '';
 
         // Fetch the events in today
-        $events = Doctrine::getTable('ConvocatoriaEvento')->selectByDate($now);
+        $events = Doctrine::getTable('ConvocatoriaEvento')
+                ->selectByDate(date('Y-m-d'));
         if (count($events) <> 0) {
             foreach ($events as $event) {
                 if ($debug) { echo 'Evento: ' . $event . PHP_EOL; }
@@ -88,13 +82,5 @@ EOF;
         } else if ($debug) {
             echo 'No existen eventos el dia de hoy' . PHP_EOL;
         }
-
-        $return =<<<EOF
-$date $line1
-$triggered_tasks
-EOF;
-
-        fwrite($fd, $return . PHP_EOL);
-        fclose($fd);
     }
 }
