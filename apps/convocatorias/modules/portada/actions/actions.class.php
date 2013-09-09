@@ -7,6 +7,8 @@ class portadaActions extends sfActions
         $this->vigentes = $convocatoria->listByState('vigente');
         $this->finalizadas = $convocatoria->listByState('finalizado', 3);
     }
+    
+    public function executeError404() {}
 
     public function executeConvocatorias() {
         $convocatoria = new Convocatoria();

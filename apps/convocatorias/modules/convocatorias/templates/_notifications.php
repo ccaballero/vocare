@@ -3,6 +3,7 @@ supervisar el proceso de ejecución de su convocatoria. Estas personas no poseen
 una cuenta en el sistema, y su rol es mas de ver documentos, y recepción de
 notificaciones.</p>
 
+<?php if ($object->getEstado() <> 'vigente'): ?>
 <h2>Firmas</h2>
 <p>Esta tabla define el orden en el que los campos de firmas aparecerán en los
 documentos oficiales generados, si el cargo no esta marcado, entonces este no
@@ -46,8 +47,10 @@ reflejará un orden de izquierda hacia derecha.</p>
         <input type="submit" value="Registrar">
     </p>
 </form>
+<?php endif; ?>
 
 <h2>Notificaciones</h2>
+
 <p>En esta sección usted puede configurar el conjunto de notificaciones que han
 de realizarse hacia los encargados, en el transcurso de esta convocatoria. Para
 esto usted debe definir a la persona, su cargo y su correo electrónico. Estas
@@ -116,7 +119,7 @@ casos informan sobre cambios importantes durante el proceso.</p>
         </tbody>
     </table>
     <p class="submit">
-        <input type="submit" value="Registrar">
+        <input type="submit" value="Registrar">&nbsp;
         <a onclick="return add_row('#notifications');">Agregar nuevo</a>
     </p>
 </form>

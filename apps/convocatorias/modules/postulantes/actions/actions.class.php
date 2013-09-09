@@ -188,8 +188,12 @@ class postulantesActions extends PlantillasDefault
     public function executeReception(sfWebRequest $request) {
         $this->convocatoria = $this->getConvocatoria($request);
         $this->object = $this->getRoute()->getObject();
-        $this->title = 'Formulario de recepción de postulación';
 
+        if (!$this->object->checkTrigger('end-documents')) {
+            $this->forward404();
+        }
+
+        $this->title = 'Formulario de recepción de postulación';
         $this->_route_list = $this->generateUrl('postulantes', array(
             'convocatoria' => $this->convocatoria));
 
@@ -220,6 +224,11 @@ class postulantesActions extends PlantillasDefault
     public function executeHabilitation(sfWebRequest $request) {
         $this->convocatoria = $this->getConvocatoria($request);
         $this->object = $this->getRoute()->getObject();
+
+        if (!$this->object->checkTrigger('end-postulations')) {
+            $this->forward404();
+        }
+
         $this->title = 'Formulario de habilitación';
 
         $this->_route_list = $this->generateUrl('postulantes', array(

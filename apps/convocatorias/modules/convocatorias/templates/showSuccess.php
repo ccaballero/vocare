@@ -96,10 +96,20 @@
     <?php if ($tabs['postulants']): ?>
         <div id="postulants" class="tab_contents">
             <a name="postulants"></a>
+        <?php if ($object->checkTrigger('end-postulations')): ?>
             <?php include_partial('postulantes/form', array(
                 'object' => $object,
-                'form' => $postulants,
+                'form' => $postulants['form'],
             )) ?>
+        <?php else: ?>
+            <?php include_partial('convocatorias/postulants', array(
+                'convocatoria' => $postulants['convocatoria'],
+                'postulantes' => $postulants['postulantes'],
+                'requerimientos' => $postulants['requerimientos'],
+                'requisitos' => $postulants['requisitos'],
+                'documentos' => $postulants['documentos'],
+            )) ?>
+        <?php endif; ?>
         </div>
     <?php endif; ?>
     <?php if ($tabs['results']): ?>

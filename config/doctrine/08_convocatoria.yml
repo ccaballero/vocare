@@ -26,9 +26,9 @@ Convocatoria:
       default: borrador
       notnull: true
     publicacion:
-      type: date
+      type: datetime
       fixed: false
-      notnull: true
+      notnull: false
   relations:
     Redacciones:
       class: ConvocatoriaRedaccion

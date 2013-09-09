@@ -74,7 +74,13 @@ class myUser extends sfGuardSecurityUser
     }
 
     public function hasPermissionConvocatoria($convocatoria, $name) {
-        if ($this->getGuard()->getIsSuperAdmin()) {
+        $guard = $this->getGuard();
+
+        if (empty($guard)) {
+            return false;
+        }
+            
+        if ($guard->getIsSuperAdmin()) {
             return true;
         }
 

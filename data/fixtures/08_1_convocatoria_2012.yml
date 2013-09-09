@@ -2,7 +2,7 @@ Convocatoria:
   convocatoria_1:
     gestion: I/2012 - II/2012
     estado: finalizado
-    publicacion: '2012-06-19'
+    publicacion: '2012-06-19 09:00:00'
     Redacciones:
       - convocatoria_redaccion_1_1
     Notificaciones:

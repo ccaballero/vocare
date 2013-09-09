@@ -91,7 +91,7 @@ class Convocatoria extends BaseConvocatoria
             case 'promover':
                 if ($this->estado == 'emitido') {
                     $this->estado = 'vigente';
-                    $this->publicacion = date('Y-m-d');
+                    $this->publicacion = date('Y-m-d H:i:s');
                 } else if ($this->estado == 'borrador') {
                     $this->estado = 'emitido';
                 }
@@ -183,9 +183,10 @@ class Convocatoria extends BaseConvocatoria
             return 'aún sin publicar';
         }
 
+        // I suggest a corrections
         include_once realpath(dirname(__FILE__)
             . '/../../../apps/convocatorias/lib/helper/PrettyDateHelper.php');
-        $publicacion = $this->_get('publicacion');
+        $publicacion = substr($this->_get('publicacion'), 0, 10);
         return pretty_date($publicacion);
     }
 
@@ -434,6 +435,43 @@ class Convocatoria extends BaseConvocatoria
 
     public function esVigente() {
         return $this->getEstado() === 'vigente';
+    }
+
+    private function findTask($taskname) {
+        $eventos = $this->getConvocatoriaEventos();
+        foreach ($eventos as $evento) {
+            $tasks = explode('::', $evento->getTasks());
+
+            foreach ($tasks as $task) {
+                preg_match('/\[(?P<time>.*)\](?P<task>.*)/',
+                    $task, $matches);
+
+                if ($matches['task'] === $taskname) {
+                    return $evento->getFecha() . ' '
+                        . substr($matches['time'], 0, 2) . ':'
+                        . substr($matches['time'], 2, 4) . ':00';
+                }
+            }
+        }
+
+        return null;
+    }
+
+    // true -> granted
+    // false -> fordiben
+    public function checkTrigger($matter) {
+        $current_time = time();
+        $selected_time = strtotime($this->findTask($matter));
+
+        if (empty($selected_time)) {
+            return true;
+        } else {
+            if ($current_time <= $selected_time) {
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
 }
 

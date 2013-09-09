@@ -3,10 +3,16 @@
 class vocareCrontabTask extends sfBaseTask
 {
     protected function configure() {
+        $this->addArguments(array(
+            new sfCommandArgument('interval',
+                sfCommandArgument::OPTIONAL,
+                'The interval of time between triggers', 100),
+        ));
+
         $this->addOptions(array(
             new sfCommandOption('application', null,
-                sfCommandOption::PARAMETER_OPTIONAL,
-                    'The application name', null),
+                sfCommandOption::PARAMETER_REQUIRED,
+                    'The application name', 'convocatorias'),
             new sfCommandOption('env', null,
                 sfCommandOption::PARAMETER_REQUIRED,
                     'The environment', 'dev'),
@@ -27,17 +33,21 @@ EOF;
     }
 
     protected function execute($arguments = array(), $options = array()) {
+        // Viewers loading
+        sfContext::createInstance($this->configuration);
+        sfContext::getInstance()->getConfiguration()->loadHelpers('Partial');
+
         // initialize the database connection
         $databaseManager = new sfDatabaseManager($this->configuration);
+
         $debug = $options['debug'];
 
-        echo date('Y-m-d H:i:s') . PHP_EOL;
+        $interval = intval($arguments['interval']);
 
-        $timeI = intval(date('H') . '00');
-        $interval = 100;
+        $timeI = intval(date('Hi'));
 
-        $filler1 = str_repeat(' ', 14);
-        $triggered_tasks = '';
+        echo date('Y-m-d H:i:s') . ' ' . str_repeat('-', 10). '> ' . $timeI
+            . '{' . $interval . '}' . PHP_EOL;
 
         // Fetch the events in today
         $events = Doctrine::getTable('ConvocatoriaEvento')
@@ -67,12 +77,14 @@ EOF;
 
                             if ($debug) {
                                 echo '    Invocando el metodo '
-                                    . $method . PHP_EOL;
+                                    . $method;
                             }
 
-                            $event->$method();
-                            $triggered_tasks .= $event . PHP_EOL
-                                              . $filler1 . $trigger . PHP_EOL;
+                            $return = $event->$method();
+
+                            if ($debug) {
+                                echo ' => ' . $return . PHP_EOL;
+                            }
                         }
                     }
                 } else if ($debug) {

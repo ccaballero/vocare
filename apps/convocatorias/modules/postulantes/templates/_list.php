@@ -12,9 +12,9 @@
         <th colspan="<?php echo count($requerimientos) ?>">Requerimientos</th>
     <?php endif; ?>
     <?php if ($shows['reception']): ?>
-        <th>Nº de hojas</th>
-        <th>Fecha de entrega</th>
-        <th>Hora de entrega</th>
+        <th rowspan="2">Nº de hojas</th>
+        <th rowspan="2">Fecha de entrega</th>
+        <th rowspan="2">Hora de entrega</th>
     <?php endif; ?>
     <?php if ($shows['requisitos']): ?>
         <th colspan="<?php echo count($requisitos) ?>">Requisitos</th>

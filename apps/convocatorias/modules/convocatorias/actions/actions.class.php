@@ -51,7 +51,8 @@ class convocatoriasActions extends PlantillasDefault
                 && $this->getUser()->hasCredential('convocatorias_edit'),
             'redactions' => ($state == 'borrador') || ($state == 'emitido')
                 && $this->getUser()->hasCredential('convocatorias_edit'),
-            'notifications' => ($state == 'borrador' || ($state == 'emitido'))
+            'notifications' => ($state == 'borrador' || ($state == 'emitido')
+                    || ($state == 'vigente'))
                 && $this->getUser()->hasCredential('convocatorias_edit'),
             'users' => ($state == 'emitido')
                 && $this->getUser()->hasCredential('convocatorias_role'),
@@ -163,22 +164,36 @@ class convocatoriasActions extends PlantillasDefault
         return array(
             'events' => $events,
             'tasks' => array(
-                '----------',
-                'initialize',
-                'finalize',
-                'end-postulations',
-                'end-documents',
-                'pub-habilitations',
-                'pub-tests',
-                'pub-results',
+                '----------' => '----------',
+                'initialize' => 'Publicación de convocatoria',
+                'finalize' => 'Finalización de convocatoria',
+                'end-postulations' => 'Finalización de postulaciones',
+                'end-documents' => 'Finalización de entrega de documentos',
+                'pub-habilitations' => 'Publicación de habilitados',
+                'pub-tests' => 'Publicación del rol de examenes',
+                'pub-results' => 'Publicación de resultados',
             ),
         );
     }
 
     protected function _renderShowPostulants($object) {
-        $form = new PostulanteForm();
-        $form->setConvocatoria($object);
-        return $form;
+        if ($object->checkTrigger('end-postulations')) {
+            $form = new PostulanteForm();
+            $form->setConvocatoria($object);
+
+            return array(
+                'form' => $form,
+            );
+        } else {
+            return array(
+                'convocatoria' => $object,
+                'postulantes' => Doctrine::getTable('Postulante')
+                    ->findByConvocatoria($object),
+                'requerimientos' => $object->getConvocatoriaRequerimientos(),
+                'requisitos' => $object->getConvocatoriaRequisitos(),
+                'documentos' => $object->getConvocatoriaDocumentos(),
+            );
+        }
     }
 
     protected function processForm(sfWebRequest $request,
@@ -193,6 +208,8 @@ class convocatoriasActions extends PlantillasDefault
 
     public function executeTexto() {
         $this->object = $this->getRoute()->getObject();
+        $this->forward404Unless($this->object);
+
         return $this->sendContent(
             Xslt::render(
                 'transform-txt',
@@ -203,6 +220,8 @@ class convocatoriasActions extends PlantillasDefault
 
     public function executeLatex() {
         $this->object = $this->getRoute()->getObject();
+        $this->forward404Unless($this->object);
+
         return $this->sendContent(
             Xslt::render(
                 'transform-latex',
@@ -213,6 +232,8 @@ class convocatoriasActions extends PlantillasDefault
 
     public function executePdf() {
         $this->object = $this->getRoute()->getObject();
+        $this->forward404Unless($this->object);
+
         $filename = '/' . $this->object->getId() . '_'
             . $this->object->getMaxEnmienda();
 
@@ -237,6 +258,8 @@ class convocatoriasActions extends PlantillasDefault
     // questions related by redaction of text in convocatorias
     public function executeRedaccion(sfWebRequest $request) {
         $this->object = $this->getRoute()->getObject();
+        $this->forward404Unless($this->object);
+
         $estado = $this->object->getEstado();
         $redacciones = $this->object->getRedacciones();
 
@@ -285,6 +308,8 @@ class convocatoriasActions extends PlantillasDefault
 
     public function executeFirmas(sfWebRequest $request) {
         $this->object = $this->getRoute()->getObject();
+        $this->forward404Unless($this->object);
+
         $cargos = $request->getParameter('cargos');
 
         // sort by numero_orden
@@ -314,6 +339,7 @@ class convocatoriasActions extends PlantillasDefault
 
     public function executeNotificaciones(sfWebRequest $request) {
         $this->object = $this->getRoute()->getObject();
+        $this->forward404Unless($this->object);
 
         $notifications = $request->getParameter('notifications');
 
@@ -344,6 +370,8 @@ class convocatoriasActions extends PlantillasDefault
 
     public function executeCargos(sfWebRequest $request) {
         $this->object = $this->getRoute()->getObject();
+        $this->forward404Unless($this->object);
+
         $roles = $request->getParameter('roles');
 
         $this->object->removeRoles();
@@ -367,6 +395,8 @@ class convocatoriasActions extends PlantillasDefault
 
     public function executeEventos(sfWebRequest $request) {
         $this->object = $this->getRoute()->getObject();
+        $this->forward404Unless($this->object);
+
         $tasks = $request->getParameter('tasks');
 
         foreach ($tasks as $event => $_t1) {
@@ -402,6 +432,8 @@ class convocatoriasActions extends PlantillasDefault
     // method for generalization of actions over convocatorias or whatever.
     private function actionChange($action) {
         $object = $this->getRoute()->getObject();
+        $this->forward404Unless($this->object);
+
         $message = $object->executeTransform($action);
         $this->getUser()->setFlash('success', $message);
     }
@@ -409,6 +441,7 @@ class convocatoriasActions extends PlantillasDefault
     // state transition (eliminar)
     public function executeEliminar() {
         $this->object = $this->getRoute()->getObject();
+        $this->forward404Unless($this->object);
 
         $result = Mailer::getInstance()
                 ->sendChangeStateConvocatoria('eliminada', $this->object);
@@ -424,6 +457,8 @@ class convocatoriasActions extends PlantillasDefault
     // state transition (promover)
     public function executePromover() {
         $this->object = $this->getRoute()->getObject();
+        $this->forward404Unless($this->object);
+
         if ($this->object->getEstado() == 'borrador') {
             $title = 'emitida';
         } else {
@@ -444,6 +479,7 @@ class convocatoriasActions extends PlantillasDefault
 
     public function executeAnular() {
         $this->object = $this->getRoute()->getObject();
+        $this->forward404Unless($this->object);
 
         $result = Mailer::getInstance()
                 ->sendChangeStateConvocatoria('anulada', $this->object);
@@ -458,6 +494,7 @@ class convocatoriasActions extends PlantillasDefault
 
     public function executeFinalizar() {
         $this->object = $this->getRoute()->getObject();
+        $this->forward404Unless($this->object);
 
         $result = Mailer::getInstance()
                 ->sendChangeStateConvocatoria('finalizada', $this->object);
@@ -473,6 +510,12 @@ class convocatoriasActions extends PlantillasDefault
 
     public function executePostular($request) {
         $this->object = $this->getRoute()->getObject();
+        $this->forward404Unless($this->object);
+
+        if (!$this->object->checkTrigger('end-postulations')) {
+            $this->forward404();
+        }
+
         $this->executeShow($request);
 
         $form = new PostulanteForm();
@@ -493,7 +536,7 @@ class convocatoriasActions extends PlantillasDefault
                 // Send of email for confirmation.
                 $result = Mailer::getInstance()
                         ->sendPostulantConfirmation($hash, $form, $this->object);
-                if (!$result) {
+                if ($result) {
                     $this->getUser()->setFlash('success',
                         'Postulación exitosa, revisa tu correo electrónico');
                     $this->redirect($this->generateUrl('convocatorias_show',

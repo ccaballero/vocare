@@ -52,8 +52,9 @@ all:
       - sfGuardGroup
       - sfGuardPermission
       - sfGuardForgotPassword
-      #- sfGuardRegister
-    # Settings for sfDoctrineGuardPlugin
+    # Default pages
+    error_404_module: portada
+    error_404_action: error404
     login_module: sfGuardAuth
     login_action: signin
     secure_module: sfGuardAuth

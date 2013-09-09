@@ -5,6 +5,7 @@ class Mailer
     private static $instance = null;
 
     private $mailer = null;
+    private $context = null;
 
     private function __construct() {}
 
@@ -27,6 +28,12 @@ class Mailer
         }
 
         return $this->mailer;
+    }
+
+    public function initPartials() {
+        sfContext::getInstance()
+            ->getConfiguration()
+            ->loadHelpers(array('Partial'));
     }
 
     // definition of parameters
@@ -57,15 +64,14 @@ class Mailer
                 $this->getMailer()->send($message);
                 return true;
             } catch (Exception $e) {
+//                echo $e->getTraceAsString();
                 // Transport exception, who care!!
                 return false;
             }
         }
     }
-
-    public function sendChangeStateConvocatoria($state, $convocatoria) {
-        $tpl_title = 'Sistema de Convocatorias [convocatoria %s fue %s]';
-
+    
+    public function _getNotifiers($convocatoria) {
         // extract of subscribers
         $subscribers = $convocatoria->getNotificaciones();
         $to = array();
@@ -73,10 +79,13 @@ class Mailer
             $to[$subscriber->getEmail()] = $subscriber->getEncargado();
         }
 
-        sfContext::getInstance()
-            ->getConfiguration()
-            ->loadHelpers(array('Partial'));
+        return $to;
+    }
 
+    public function sendChangeStateConvocatoria($state, $convocatoria) {
+        $this->initPartials();
+
+        $tpl_title = 'Sistema de Convocatorias [convocatoria %s fue %s]';
         return $this->send(array(
             'title' => sprintf($tpl_title, $convocatoria->getGestion(), $state),
             'content' => get_partial(
@@ -85,17 +94,14 @@ class Mailer
                     'convocatoria' => $convocatoria,
                     'operation' => $state,
                 )),
-            'to' => $to,
+            'to' => $this->_getNotifiers($convocatoria),
         ));
     }
 
     public function sendPostulantConfirmation($hash, $form, $convocatoria) {
+        $this->initPartials();
+
         $tpl_title = 'Confirmación de postulación a la convocatoria %s';
-
-        sfContext::getInstance()
-            ->getConfiguration()
-            ->loadHelpers(array('Partial'));
-
         return $this->send(array(
             'title' => sprintf($tpl_title, $convocatoria->getGestion()),
             'content' => get_partial(
@@ -106,6 +112,36 @@ class Mailer
                     'hash' => $hash,
                 )),
             'to' => array($form->getEmail()),
+        ));
+    }
+
+    public function sendEndPostulation($convocatoria) {
+        $this->initPartials();
+
+        $tpl_title = 'Cierre de postulaciones para convocatoria %s';
+        return $this->send(array(
+            'title' => sprintf($tpl_title, $convocatoria->getGestion()),
+            'content' => get_partial(
+                'convocatorias/email_endpostulant',
+                array(
+                    'convocatoria' => $convocatoria,
+                )),
+            'to' => $this->_getNotifiers($convocatoria),
+        ));
+    }
+    
+    public function sendEndDocuments($convocatoria) {
+        $this->initPartials();
+
+        $tpl_title = 'Cierre de registro de documentos de postulación';
+        return $this->send(array(
+            'title' => sprintf($tpl_title, $convocatoria->getGestion()),
+            'content' => get_partial(
+                'convocatorias/email_enddocuments',
+                array(
+                    'convocatoria' => $convocatoria,
+                )),
+            'to' => $this->_getNotifiers($convocatoria),
         ));
     }
 }

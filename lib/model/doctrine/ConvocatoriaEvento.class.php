@@ -18,7 +18,7 @@ class ConvocatoriaEvento extends BaseConvocatoriaEvento
         $convocatoria->executeTransform('promover');
 
         // notification
-        Mailer::getInstance()
+        return Mailer::getInstance()
             ->sendChangeStateConvocatoria('publicada', $convocatoria);
     }
 
@@ -28,27 +28,38 @@ class ConvocatoriaEvento extends BaseConvocatoriaEvento
         $convocatoria->executeTransform('finalizar');
 
         // notification
-        Mailer::getInstance()
+        return Mailer::getInstance()
             ->sendChangeStateConvocatoria('finalizada', $convocatoria);
     }
 
     public function triggerEndPostulations() {
-        
+        $convocatoria = $this->getConvocatoria();
+
+        return Mailer::getInstance()
+            ->sendEndPostulation($convocatoria);
     }
 
     public function triggerEndDocuments() {
-        
+        $convocatoria = $this->getConvocatoria();
+
+        return Mailer::getInstance()
+            ->sendEndDocuments($convocatoria);
     }
-    
+
     public function triggerPubHabilitations() {
-        
+        $convocatoria = $this->getConvocatoria();
+
+        return Mailer::getInstance()
+            ->sendPubHabilitations($convocatoria);
     }
 
     public function triggerPubTests() {
         // TODO
+        return true;
     }
 
     public function triggerPubResults() {
         // TODO
+        return true;
     }
 }

@@ -29,13 +29,13 @@ function task_selector($tasks, $select_task = null, $name = '') {
         $time = $matches['time'];
     }
 
-    foreach ($tasks as $_task) {
+    foreach ($tasks as $key => $_task) {
         $selected = '';
-        if (!empty($matches['task']) && $matches['task'] == $_task) {
+        if (!empty($matches['task']) && $matches['task'] == $key) {
             $selected = ' selected="selected"';
         }
 
-        $value = ' value="' . $_task . '"';
+        $value = ' value="' . $key . '"';
         $result .= '<option ' . $value . $selected . '>'
                 . $_task . '</option>';
     }
