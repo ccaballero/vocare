@@ -53,6 +53,8 @@ EOF;
         $events = Doctrine::getTable('ConvocatoriaEvento')
                 ->selectByDate(date('Y-m-d'));
         if (count($events) <> 0) {
+            $task_manager = VocareTask::getInstance();
+
             foreach ($events as $event) {
                 if ($debug) { echo 'Evento: ' . $event . PHP_EOL; }
 
@@ -65,25 +67,29 @@ EOF;
                         preg_match('/\[(?P<time>.*)\](?P<task>.*)/',
                             $_task, $matches);
 
-                        $_time = $matches['time'];
-                        $trigger = $matches['task'];
+                        if (isset($matches['time'])
+                                && isset($matches['task'])) {
+                            $_time = $matches['time'];
+                            $trigger = $matches['task'];
 
-                        if ($timeI <= $_time && $_time < ($timeI + $interval)) {
-                            $parts = explode('-', $trigger);
-                            foreach ($parts as $key => $part) {
-                                $parts[$key] = ucfirst($part);
-                            }
-                            $method = 'trigger' . implode('', $parts);
+                            if ($timeI <= $_time && $_time < ($timeI + $interval)) {
+                                $parts = explode('-', $trigger);
+                                foreach ($parts as $key => $part) {
+                                    $parts[$key] = ucfirst($part);
+                                }
+                                $method = 'trigger' . implode('', $parts);
 
-                            if ($debug) {
-                                echo '    Invocando el metodo '
-                                    . $method;
-                            }
+                                if ($debug) {
+                                    echo '    Invocando el metodo '
+                                        . $method;
+                                }
 
-                            $return = $event->$method();
+                                $return = $task_manager
+                                        ->$method($event->getConvocatoria());
 
-                            if ($debug) {
-                                echo ' => ' . $return . PHP_EOL;
+                                if ($debug) {
+                                    echo ' => ' . $return . PHP_EOL;
+                                }
                             }
                         }
                     }

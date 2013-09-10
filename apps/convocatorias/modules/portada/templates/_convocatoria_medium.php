@@ -16,10 +16,15 @@
                 'preview' => true,
                 'flags' => array(true, true, false, true),
             )) ?>
-        <p><label>Gestión:</label><?php echo $convocatoria->getGestion() ?></p>
-        <p><label>Estado:</label><?php echo ucfirst($convocatoria->getEstado()) ?></p>
-        <p><label>Publicación:</label><?php echo $convocatoria->getPublicacion() ?></p>
-    <?php if ($convocatoria->esVigente() && !$sf_user->isAuthenticated()): ?>
+        <p><label>Gestión:</label>
+            <?php echo $convocatoria->getGestion() ?></p>
+        <p><label>Estado:</label>
+            <?php echo ucfirst($convocatoria->getEstado()) ?></p>
+        <p><label>Publicación:</label>
+            <?php echo $convocatoria->getPublicacion() ?></p>
+    <?php if ($convocatoria->esVigente()
+            && $convocatoria->checkEvent('end-postulations')
+            && !$sf_user->isAuthenticated()): ?>
         <div class="buttons">
             <ul>
                 <li>

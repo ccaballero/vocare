@@ -96,7 +96,7 @@
     <?php if ($tabs['postulants']): ?>
         <div id="postulants" class="tab_contents">
             <a name="postulants"></a>
-        <?php if ($object->checkTrigger('end-postulations')): ?>
+        <?php if ($object->checkEvent('end-postulations')): ?>
             <?php include_partial('postulantes/form', array(
                 'object' => $object,
                 'form' => $postulants['form'],

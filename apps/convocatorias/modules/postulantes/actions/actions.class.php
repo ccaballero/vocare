@@ -15,6 +15,7 @@ class postulantesActions extends PlantillasDefault
             'edit' => 'Postulante editado exitosamente',
             'delete' => 'Postulante eliminado exitosamente',
             'permission' => 'No se tienen los permisos suficientes',
+            'expired' => 'El tiempo establecido para esta función ha expirado',
             'filter' =>
                 'No existen postulantes bajo las condiciones de filtraje',
         ),
@@ -189,73 +190,75 @@ class postulantesActions extends PlantillasDefault
         $this->convocatoria = $this->getConvocatoria($request);
         $this->object = $this->getRoute()->getObject();
 
-        if (!$this->object->checkTrigger('end-documents')) {
-            $this->forward404();
-        }
-
-        $this->title = 'Formulario de recepción de postulación';
         $this->_route_list = $this->generateUrl('postulantes', array(
             'convocatoria' => $this->convocatoria));
 
-        if ($this->getUser()
-                 ->hasPermissionConvocatoria(
-                     $this->convocatoria, 'recepcion_postulante')) {
-            $this->form = new PostulanteReceptionForm($this->object);
-            $this->form->setConvocatoria($this->convocatoria);
-            $this->url = 'postulantes_reception';
-            $this->information = true;
-
-            if ($request->isMethod('post')) {
-                $this->form = $this->processForm(
-                    $request,
-                    $this->form,
-                    $this->_messages['flash']['edit']
-                );
-            }
-
-            $this->setTemplate('form');
-        } else {
+        if (!$this->getUser()->hasPermissionConvocatoria(
+                $this->convocatoria, 'recepcion_postulante')) {
             $this->getUser()->setFlash('error',
                 $this->_messages['flash']['permission']);
             $this->redirect($this->_route_list);
         }
+
+        if (!$this->convocatoria->checkEvent('end-documents')) {
+            $this->getUser()->setFlash('error',
+                $this->_messages['flash']['expired']);
+            $this->redirect($this->_route_list);
+        }
+
+        $this->title = 'Formulario de recepción de postulación';
+        $this->form = new PostulanteReceptionForm($this->object);
+        $this->form->setConvocatoria($this->convocatoria);
+        $this->url = 'postulantes_reception';
+        $this->information = true;
+
+        if ($request->isMethod('post')) {
+            $this->form = $this->processForm(
+                $request,
+                $this->form,
+                $this->_messages['flash']['edit']
+            );
+        }
+
+        $this->setTemplate('form');
     }
 
     public function executeHabilitation(sfWebRequest $request) {
         $this->convocatoria = $this->getConvocatoria($request);
         $this->object = $this->getRoute()->getObject();
 
-        if (!$this->object->checkTrigger('end-postulations')) {
-            $this->forward404();
-        }
-
-        $this->title = 'Formulario de habilitación';
-
         $this->_route_list = $this->generateUrl('postulantes', array(
             'convocatoria' => $this->convocatoria));
 
-        if ($this->getUser()
+        if (!$this->getUser()
                  ->hasPermissionConvocatoria(
                      $this->convocatoria, 'evaluacion_postulante')) {
-            $this->form = new PostulanteHabilitationForm($this->object);
-            $this->form->setConvocatoria($this->convocatoria);
-            $this->url = 'postulantes_habilitation';
-            $this->information = true;
-
-            if ($request->isMethod('post')) {
-                $this->form = $this->processForm(
-                    $request,
-                    $this->form,
-                    $this->_messages['flash']['edit']
-                );
-            }
-
-            $this->setTemplate('form');
-        } else {
             $this->getUser()->setFlash('error',
                 $this->_messages['flash']['permission']);
             $this->redirect($this->_route_list);
         }
+
+        if (!$this->convocatoria->checkEvent('end-habilitations')) {
+            $this->getUser()->setFlash('error',
+                $this->_messages['flash']['expired']);
+            $this->redirect($this->_route_list);
+        }
+
+        $this->title = 'Formulario de habilitación';
+        $this->form = new PostulanteHabilitationForm($this->object);
+        $this->form->setConvocatoria($this->convocatoria);
+        $this->url = 'postulantes_habilitation';
+        $this->information = true;
+
+        if ($request->isMethod('post')) {
+            $this->form = $this->processForm(
+                $request,
+                $this->form,
+                $this->_messages['flash']['edit']
+            );
+        }
+
+        $this->setTemplate('form');
     }
 
     public function executeReport(sfWebRequest $request) {

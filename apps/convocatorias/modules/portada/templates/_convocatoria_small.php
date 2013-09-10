@@ -5,10 +5,14 @@
     'object' => $convocatoria,
     'flags' => array(true, true, false, true),
 )) ?>
-<ul>
-    <li><a href="<?php echo url_for(
-        'convocatorias_show', array(
-            'id' => $convocatoria->getId()
-        )) ?>#postulants">Postularse ahora!!</a>
-    </li>
-</ul>
+<?php if ($convocatoria->esVigente()
+            && $convocatoria->checkEvent('end-postulations')
+            && !$sf_user->isAuthenticated()): ?>
+    <ul>
+        <li><a href="<?php echo url_for(
+            'convocatorias_show', array(
+                'id' => $convocatoria->getId()
+            )) ?>#postulants">Postularse ahora</a>
+        </li>
+    </ul>
+<?php endif; ?>

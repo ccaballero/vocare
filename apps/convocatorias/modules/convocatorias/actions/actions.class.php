@@ -163,21 +163,12 @@ class convocatoriasActions extends PlantillasDefault
 
         return array(
             'events' => $events,
-            'tasks' => array(
-                '----------' => '----------',
-                'initialize' => 'Publicación de convocatoria',
-                'finalize' => 'Finalización de convocatoria',
-                'end-postulations' => 'Finalización de postulaciones',
-                'end-documents' => 'Finalización de entrega de documentos',
-                'pub-habilitations' => 'Publicación de habilitados',
-                'pub-tests' => 'Publicación del rol de examenes',
-                'pub-results' => 'Publicación de resultados',
-            ),
+            'tasks' => VocareTask::getInstance()->getTasklist(),
         );
     }
 
     protected function _renderShowPostulants($object) {
-        if ($object->checkTrigger('end-postulations')) {
+        if ($object->checkEvent('end-postulations')) {
             $form = new PostulanteForm();
             $form->setConvocatoria($object);
 
@@ -512,7 +503,7 @@ class convocatoriasActions extends PlantillasDefault
         $this->object = $this->getRoute()->getObject();
         $this->forward404Unless($this->object);
 
-        if (!$this->object->checkTrigger('end-postulations')) {
+        if (!$this->object->checkEvent('end-postulations')) {
             $this->forward404();
         }
 

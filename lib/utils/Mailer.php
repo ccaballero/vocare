@@ -70,7 +70,7 @@ class Mailer
             }
         }
     }
-    
+
     public function _getNotifiers($convocatoria) {
         // extract of subscribers
         $subscribers = $convocatoria->getNotificaciones();
@@ -89,7 +89,7 @@ class Mailer
         return $this->send(array(
             'title' => sprintf($tpl_title, $convocatoria->getGestion(), $state),
             'content' => get_partial(
-                'convocatorias/email_states',
+                'convocatorias/email/changeState',
                 array(
                     'convocatoria' => $convocatoria,
                     'operation' => $state,
@@ -105,7 +105,7 @@ class Mailer
         return $this->send(array(
             'title' => sprintf($tpl_title, $convocatoria->getGestion()),
             'content' => get_partial(
-                'convocatorias/email_postulants',
+                'convocatorias/email/postulation',
                 array(
                     'convocatoria' => $convocatoria,
                     'postulante' => $form->getId(),
@@ -122,14 +122,14 @@ class Mailer
         return $this->send(array(
             'title' => sprintf($tpl_title, $convocatoria->getGestion()),
             'content' => get_partial(
-                'convocatorias/email_endpostulant',
+                'convocatorias/email/endPostulants',
                 array(
                     'convocatoria' => $convocatoria,
                 )),
             'to' => $this->_getNotifiers($convocatoria),
         ));
     }
-    
+
     public function sendEndDocuments($convocatoria) {
         $this->initPartials();
 
@@ -137,7 +137,37 @@ class Mailer
         return $this->send(array(
             'title' => sprintf($tpl_title, $convocatoria->getGestion()),
             'content' => get_partial(
-                'convocatorias/email_enddocuments',
+                'convocatorias/email/endDocuments',
+                array(
+                    'convocatoria' => $convocatoria,
+                )),
+            'to' => $this->_getNotifiers($convocatoria),
+        ));
+    }
+
+    public function sendEndHabilitations($convocatoria) {
+        $this->initPartials();
+
+        $tpl_title = 'Finalización del proceso de habilitación';
+        return $this->send(array(
+            'title' => sprintf($tpl_title, $convocatoria->getGestion()),
+            'content' => get_partial(
+                'convocatorias/email/endHabilitations',
+                array(
+                    'convocatoria' => $convocatoria,
+                )),
+            'to' => $this->_getNotifiers($convocatoria),
+        ));
+    }
+
+    public function sendPubHabilitations($convocatoria) {
+        $this->initPartials();
+
+        $tpl_title = 'Publicación de la tabla de habilitados';
+        return $this->send(array(
+            'title' => sprintf($tpl_title, $convocatoria->getGestion()),
+            'content' => get_partial(
+                'convocatorias/email/pubHabilitations',
                 array(
                     'convocatoria' => $convocatoria,
                 )),

@@ -448,8 +448,8 @@ class Convocatoria extends BaseConvocatoria
 
                 if ($matches['task'] === $taskname) {
                     return $evento->getFecha() . ' '
-                        . substr($matches['time'], 0, 2) . ':'
-                        . substr($matches['time'], 2, 4) . ':00';
+                        . substr($matches['time'], -4, -2) . ':'
+                        . substr($matches['time'], -2, 2) . ':00';
                 }
             }
         }
@@ -457,9 +457,9 @@ class Convocatoria extends BaseConvocatoria
         return null;
     }
 
-    // true -> granted
-    // false -> fordiben
-    public function checkTrigger($matter) {
+    // true -> granted -> still can use the function
+    // false -> fordiben -> the function is prohibited
+    public function checkEvent($matter) {
         $current_time = time();
         $selected_time = strtotime($this->findTask($matter));
 
