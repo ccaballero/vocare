@@ -473,6 +473,47 @@ class Convocatoria extends BaseConvocatoria
             }
         }
     }
+
+    public function findCurrentEvent() {
+        $current_time = time();
+
+        $current_event = array(
+            'time' => 0,
+            'task' => '',
+            'interval' => null,
+        );
+
+        $eventos = $this->getConvocatoriaEventos();
+        foreach ($eventos as $evento) {
+            $tasks = explode('::', $evento->getTasks());
+
+            foreach ($tasks as $task) {
+                preg_match('/\[(?P<time>.*)\](?P<task>.*)/',
+                    $task, $matches);
+
+                $event_time = strtotime($evento->getFecha() . ' '
+                            . substr($matches['time'], -4, -2) . ':'
+                            . substr($matches['time'], -2, 2) . ':00');
+
+                if ($current_time >= $event_time
+                    && ($current_event['interval'] == null
+                        || $current_time - $event_time
+                            < $current_event['interval'])) {
+                    $current_event = array(
+                        'time' => $event_time,
+                        'task' => $matches['task'],
+                        'interval' => $current_time - $event_time,
+                    );
+                }
+            }
+        }
+
+        if (!empty($current_event['task'])) {
+            return $current_event['task'];
+        }
+
+        return '';
+    }
 }
 
 class Firma {

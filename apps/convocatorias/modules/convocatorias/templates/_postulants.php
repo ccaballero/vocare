@@ -7,21 +7,86 @@ inmersos todos los postulantes.</p>
 secretaria del departamento de Informática-Sistemas para la verificación de la
 informacion.</p>
 
-<?php include_partial('postulantes/list', array(
-    'postulantes' => $postulantes,
-    'requerimientos' => $requerimientos,
-    'requisitos' => $requisitos,
-    'documentos' => $documentos,
-    'convocatoria' => $convocatoria,
-    'shows' => array(
-        'email' => false,
-        'state' => true,
-        'items' => true,
-        'reception' => true,
-        'requisitos' => true,
-        'documentos' => true,
-        'observacion' => true,
-        'actions' => false,
-    ),
-    'operations' => array(),
-)) ?>
+<?php switch ($convocatoria->findCurrentEvent()): ?>
+<?php case 'end-postulations': ?>
+    <?php include_partial('postulantes/list', array(
+        'postulantes' => $postulantes,
+        'requerimientos' => $requerimientos,
+        'requisitos' => $requisitos,
+        'documentos' => $documentos,
+        'convocatoria' => $convocatoria,
+        'shows' => array(
+            'email' => false,
+            'state' => true,
+            'items' => true,
+            'reception' => false,
+            'requisitos' => false,
+            'documentos' => false,
+            'observacion' => false,
+            'actions' => false,
+        ),
+        'operations' => array(),
+    )) ?>
+<?php break; ?>
+<?php case 'end-documents': ?>
+    <?php include_partial('postulantes/list', array(
+        'postulantes' => $postulantes,
+        'requerimientos' => $requerimientos,
+        'requisitos' => $requisitos,
+        'documentos' => $documentos,
+        'convocatoria' => $convocatoria,
+        'shows' => array(
+            'email' => false,
+            'state' => true,
+            'items' => true,
+            'reception' => true,
+            'requisitos' => false,
+            'documentos' => false,
+            'observacion' => false,
+            'actions' => false,
+        ),
+        'operations' => array(),
+    )) ?>
+<?php break; ?>
+<?php case 'end-habilitations': ?>
+    <?php include_partial('postulantes/list', array(
+        'postulantes' => $postulantes,
+        'requerimientos' => $requerimientos,
+        'requisitos' => $requisitos,
+        'documentos' => $documentos,
+        'convocatoria' => $convocatoria,
+        'shows' => array(
+            'email' => false,
+            'state' => true,
+            'items' => true,
+            'reception' => false,
+            'requisitos' => true,
+            'documentos' => true,
+            'observacion' => true,
+            'actions' => false,
+        ),
+        'operations' => array(),
+    )) ?>
+<?php break; ?>
+<?php default: ?>
+    <?php include_partial('postulantes/list', array(
+        'postulantes' => $postulantes,
+        'requerimientos' => $requerimientos,
+        'requisitos' => $requisitos,
+        'documentos' => $documentos,
+        'convocatoria' => $convocatoria,
+        'shows' => array(
+            'email' => false,
+            'state' => true,
+            'items' => true,
+            'reception' => false,
+            'requisitos' => false,
+            'documentos' => false,
+            'observacion' => false,
+            'actions' => false,
+        ),
+        'operations' => array(),
+    )) ?>
+<?php break; ?>
+<?php endswitch; ?>
+

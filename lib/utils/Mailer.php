@@ -148,26 +148,11 @@ class Mailer
     public function sendEndHabilitations($convocatoria) {
         $this->initPartials();
 
-        $tpl_title = 'Finalización del proceso de habilitación';
-        return $this->send(array(
-            'title' => sprintf($tpl_title, $convocatoria->getGestion()),
-            'content' => get_partial(
-                'convocatorias/email/endHabilitations',
-                array(
-                    'convocatoria' => $convocatoria,
-                )),
-            'to' => $this->_getNotifiers($convocatoria),
-        ));
-    }
-
-    public function sendPubHabilitations($convocatoria) {
-        $this->initPartials();
-
         $tpl_title = 'Publicación de la tabla de habilitados';
         return $this->send(array(
             'title' => sprintf($tpl_title, $convocatoria->getGestion()),
             'content' => get_partial(
-                'convocatorias/email/pubHabilitations',
+                'convocatorias/email/endHabilitations',
                 array(
                     'convocatoria' => $convocatoria,
                 )),

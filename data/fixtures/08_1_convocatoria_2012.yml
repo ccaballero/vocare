@@ -101,7 +101,7 @@ ConvocatoriaEvento:
     Evento: evento_3
     fecha: '2012-07-06'
     tasks: notification::pub-schedule
-    tasks: '[9000]pub-habilitations::[9000]pub-tests'
+    tasks: '[9000]end-habilitations::[9000]pub-tests'
   convocatoria_evento_1_4:
     Convocatoria: convocatoria_1
     Evento: evento_4

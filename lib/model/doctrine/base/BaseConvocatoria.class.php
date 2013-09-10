@@ -11,7 +11,6 @@ Doctrine_Manager::getInstance()->bindComponent('Convocatoria', 'doctrine');
  * @property string $gestion
  * @property enum $estado
  * @property datetime $publicacion
- * @property datetime $postulacion
  * @property Doctrine_Collection $Redacciones
  * @property Doctrine_Collection $Requerimientos
  * @property Doctrine_Collection $Requisitos
@@ -34,7 +33,6 @@ Doctrine_Manager::getInstance()->bindComponent('Convocatoria', 'doctrine');
  * @method string              getGestion()                               Returns the current record's "gestion" value
  * @method enum                getEstado()                                Returns the current record's "estado" value
  * @method datetime            getPublicacion()                           Returns the current record's "publicacion" value
- * @method datetime            getPostulacion()                           Returns the current record's "postulacion" value
  * @method Doctrine_Collection getRedacciones()                           Returns the current record's "Redacciones" collection
  * @method Doctrine_Collection getRequerimientos()                        Returns the current record's "Requerimientos" collection
  * @method Doctrine_Collection getRequisitos()                            Returns the current record's "Requisitos" collection
@@ -56,7 +54,6 @@ Doctrine_Manager::getInstance()->bindComponent('Convocatoria', 'doctrine');
  * @method Convocatoria        setGestion()                               Sets the current record's "gestion" value
  * @method Convocatoria        setEstado()                                Sets the current record's "estado" value
  * @method Convocatoria        setPublicacion()                           Sets the current record's "publicacion" value
- * @method Convocatoria        setPostulacion()                           Sets the current record's "postulacion" value
  * @method Convocatoria        setRedacciones()                           Sets the current record's "Redacciones" collection
  * @method Convocatoria        setRequerimientos()                        Sets the current record's "Requerimientos" collection
  * @method Convocatoria        setRequisitos()                            Sets the current record's "Requisitos" collection
@@ -116,11 +113,6 @@ abstract class BaseConvocatoria extends sfDoctrineRecord
              'length' => 10,
              ));
         $this->hasColumn('publicacion', 'datetime', null, array(
-             'type' => 'datetime',
-             'fixed' => 0,
-             'notnull' => false,
-             ));
-        $this->hasColumn('postulacion', 'datetime', null, array(
              'type' => 'datetime',
              'fixed' => 0,
              'notnull' => false,

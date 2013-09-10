@@ -8,7 +8,6 @@ class VocareTask {
         'end-postulations' => 'Finalización de postulaciones',
         'end-documents' => 'Finalización de entrega de documentos',
         'end-habilitations' => 'Finalización del proceso de habilitación',
-        'pub-habilitations' => 'Publicación de habilitados',
         'pub-tests' => 'Publicación del rol de examenes',
         'pub-results' => 'Publicación de resultados',
         'finalize' => 'Finalización de convocatoria',
@@ -49,11 +48,6 @@ class VocareTask {
     public function triggerEndHabilitations($convocatoria) {
         return Mailer::getInstance()
             ->sendEndHabilitations($convocatoria);
-    }
-
-    public function triggerPubHabilitations($convocatoria) {
-        return Mailer::getInstance()
-            ->sendPubHabilitations($convocatoria);
     }
 
     public function triggerPubTests($convocatoria) {

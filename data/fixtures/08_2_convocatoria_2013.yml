@@ -107,7 +107,7 @@ ConvocatoriaEvento:
     Convocatoria: convocatoria_2
     Evento: evento_3
     fecha: '2012-11-30'
-    tasks: '[9000]pub-habilitations::[9000]pub-tests'
+    tasks: '[9000]end-habilitations::[9000]pub-tests'
   convocatoria_evento_2_4:
     Convocatoria: convocatoria_2
     Evento: evento_4
