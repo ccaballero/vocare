@@ -11,7 +11,7 @@
         <xsl:text>&#xA;</xsl:text>
         <xsl:text>\usepackage[utf8]{inputenc}</xsl:text>
         <xsl:text>&#xA;</xsl:text>
-        <xsl:text>\usepackage[left=2.5cm,top=2cm,right=2.5cm,bottom=2cm]{geometry}</xsl:text>
+        <xsl:text>\usepackage[left=3cm,top=4cm,right=3cm,bottom=4cm]{geometry}</xsl:text>
         <xsl:text>&#xA;</xsl:text>
         <xsl:text>\usepackage{enumerate}</xsl:text>
         <xsl:text>&#xA;</xsl:text>
